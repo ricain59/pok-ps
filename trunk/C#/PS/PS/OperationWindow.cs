@@ -11,6 +11,7 @@ namespace PS
     {
         List<Tuple<String, int>> list;
         int numbertable = 1;
+        String login;
 
         [DllImport("user32.dll")]
         public static extern int FindWindow(string lpClassName, string lpWindowName);
@@ -39,6 +40,33 @@ namespace PS
         const int VK_RETURN = 0x0D; //enter key
         const int VK_ENTER = 13;
 
+        /// <summary>
+        /// /////
+        /// </summary>
+        /// private delegate bool EnumDelegate(IntPtr hWnd, int lParam);
+        /// 
+        const int MAXTITLE = 255;
+        private delegate bool EnumDelegate(IntPtr hWnd, int lParam);
+        private List<string> lstTitles = new List<string>();
+
+        [DllImport("user32.dll", EntryPoint = "EnumDesktopWindows",
+        ExactSpelling = false, CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern bool EnumDesktopWindows(IntPtr hDesktop,
+        EnumDelegate lpEnumCallbackFunction, IntPtr lParam);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowText",
+        ExactSpelling = false, CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern int _GetWindowText(IntPtr hWnd,
+        StringBuilder lpWindowText, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool IsWindowVisible(IntPtr hWnd);
+
+        /// <summary>
+        /// ///
+        /// </summary>
+
         
         public void getAllWindow()
         {
@@ -46,21 +74,30 @@ namespace PS
             {
                 list = new List<Tuple<String, int>>();
             }
+                        
+            EnumDelegate delEnumfunc = new EnumDelegate(EnumWindowsProc);
+            bool bSuccessful = EnumDesktopWindows(IntPtr.Zero, delEnumfunc, IntPtr.Zero); //for current desktop
 
-            Process[] processlist = Process.GetProcesses();
-            foreach (Process process in processlist)
+        }
+
+        private bool EnumWindowsProc(IntPtr hWnd, int lParam)
+        {
+            string strTitle = GetWindowText(hWnd);
+            //if (strTitle != "" & IsWindowVisible(hWnd)) //
+            if (strTitle != "" & IsWindowVisible(hWnd) && strTitle.Contains("No Limit Hold")) //
             {
-                if (!String.IsNullOrEmpty(process.MainWindowTitle))
-                {
-                    if (process.MainWindowTitle.Contains("No Limit Hold"))
-                    {
-                        //Console.WriteLine("Process: {0} ID: {1} Window title: {2}", process.ProcessName, process.Id, process.MainWindowTitle);
-                        //Adria III - $0.05/$0.10 USD - No Limit Hold'em
-                        //numbertable = numbertable + 1;
-                        addToList(process.MainWindowTitle, true);
-                    }
-                }
+                //lstTitles.Add(strTitle);
+                addToList(strTitle, true);
             }
+            return true;
+        }
+
+        public static string GetWindowText(IntPtr hWnd)
+        {
+            StringBuilder strbTitle = new StringBuilder(MAXTITLE);
+            int nLength = _GetWindowText(hWnd, strbTitle, strbTitle.Capacity + 1);
+            strbTitle.Length = nLength;
+            return strbTitle.ToString();
         }
 
         public void addToList(String table, Boolean origin)
@@ -76,13 +113,16 @@ namespace PS
                 
                 for (int i = 0; i < list.Count; i++)
                 {
+                    Boolean fim = false;
                     if (list[i].Item1.Contains(tablearray[2]))
                     {
                         int j = list[i].Item2;
                         String nametable = list[i].Item1;
                         list.RemoveAll(item => item.Item1 == nametable);
                         list.Add(Tuple.Create(nametable, (j + 1)));
+                        fim = true;
                     }
+                    if (fim) break;
                 }
                 
             }  
@@ -99,37 +139,50 @@ namespace PS
                     numbertable = numbertable - 1;
                 }                
             }
-            selectLobby();
+            selectLobby(login);
         }
 
-        public void selectLobby()
+        public void selectLobby(String login2)
         {
+            login = login2;
             //to activate an application
             list = new List<Tuple<String, int>>();
             
             Boolean first = true;
             for (numbertable = numbertable + 0; numbertable < 19; numbertable++)
             {
-                int hWnd = FindWindow(null, "PokerStars Lobby - Logged in as tgt_59100");
+                int hWnd = FindWindow(null, "PokerStars Lobby - Logged in as "+login);
+                //int hWnd = FindWindow(null, "PokerStars Lobby");
                 SetForegroundWindow(hWnd);
                 if (first)
                 {
-                    for (int i = 0; i < 30; i++)
+                    //ici c'est pour remonter dans le lobby
+                    for (int i = 0; i < 19; i++)
                     {
                         keybd_event(VK_UP, 0, 0, 0);
                         keybd_event(VK_UP, 0, KEYEVENTF_KEYUP, 0);
+                        System.Threading.Thread.Sleep(1000);
                     }
                     first = false;
                 }
-                keybd_event(VK_DOWN, 0, 0, 0);
-                keybd_event(VK_DOWN, 0, KEYEVENTF_KEYUP, 0);
-                keybd_event(VK_RETURN, 0, 0, 0);
-                keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
-                System.Threading.Thread.Sleep(1000);
-                //System.Windows.Forms.MessageBox.Show(""+numbertable);
+                getAllWindow();
+                if (list.Count == 19)
+                {
+                    numbertable = 19;
+                }
+                else
+                {
+                    numbertable = 19 - (19 - list.Count);
+                    keybd_event(VK_DOWN, 0, 0, 0);
+                    keybd_event(VK_DOWN, 0, KEYEVENTF_KEYUP, 0);
+                    keybd_event(VK_RETURN, 0, 0, 0);
+                    keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
+                    System.Threading.Thread.Sleep(1000);
+                }
+                //System.Windows.Forms.MessageBox.Show(""+list.Count);
 
             }
-            numbertable = 19;
+            //numbertable = 19;
             getAllWindow();
             
             int hWndhh = FindWindow(null, "Instant Hand History");

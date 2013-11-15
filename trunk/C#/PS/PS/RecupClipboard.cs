@@ -37,7 +37,6 @@ namespace PS
                             file = new AppendToFile();
                             file.AppendToFileDT(newcopyhand, date);
                             ow.addToList(newcopyhand, false);
-                            //getTable(newcopyhand);
                             oldcopyhand = newcopyhand;
                         }
                     }
