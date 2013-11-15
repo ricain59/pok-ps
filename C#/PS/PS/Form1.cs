@@ -19,6 +19,7 @@ namespace PS
         public int hand_x = 187;
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
+        String loginsend = "";
 
         public FormInicial()
         {
@@ -73,7 +74,14 @@ namespace PS
         {
             RecupClipboard handcopy = new RecupClipboard();
             OperationWindow ow = new OperationWindow();
-            String loginsend = textBoxLogin.Text.ToString();
+            if (checkBoxLogin.Checked)
+            {
+                loginsend = "PokerStars Lobby - Logged in as " + textBoxLogin.Text.ToString();
+            }
+            else
+            {
+                loginsend = "PokerStars Lobby";
+            }            
             ow.selectLobby(loginsend);            
             int cincominuto = 0;
             while (true)
@@ -125,6 +133,18 @@ namespace PS
         private void buttonStop_Click(object sender, EventArgs e)
         {
             continueDt = false;
+        }
+
+        private void checkBoxLogin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxLogin.Checked)
+            {
+                textBoxLogin.Visible = true;
+            }
+            else
+            {
+                textBoxLogin.Visible = false;
+            }
         }      
 
     }
