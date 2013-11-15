@@ -40,33 +40,41 @@ namespace PS
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            Boolean contar = true;
-            int n = 5;
-
-            while (contar)
+            if (textBoxLogin.Text == "")
             {
-                if (n != 0)
-                {
-                    System.Threading.Thread.Sleep(500);
-                    n = n - 1;
-                }
-                else
-                {
-                    contar = false;
-                }
+                textBoxLogin.Text = "Login here first";
             }
+            else
+            {
+                Boolean contar = true;
+                int n = 5;
 
-            continueDt = true;
-            //méthode async
-            MethodInvoker startdt = new MethodInvoker(Dt);
-            startdt.BeginInvoke(null, null);
+                while (contar)
+                {
+                    if (n != 0)
+                    {
+                        System.Threading.Thread.Sleep(500);
+                        n = n - 1;
+                    }
+                    else
+                    {
+                        contar = false;
+                    }
+                }
+
+                continueDt = true;
+                //méthode async
+                MethodInvoker startdt = new MethodInvoker(Dt);
+                startdt.BeginInvoke(null, null);
+            }
         }
 
         public void Dt()
         {
             RecupClipboard handcopy = new RecupClipboard();
             OperationWindow ow = new OperationWindow();
-            ow.selectLobby();            
+            String loginsend = textBoxLogin.Text.ToString();
+            ow.selectLobby(loginsend);            
             int cincominuto = 0;
             while (true)
             {
@@ -78,23 +86,17 @@ namespace PS
                     {
                         //depois ao fim de 5 minutos fazer uma pausa fechar essas janelas e abrir outras
                         //aqui vou ver as mesas com 0 de contagem
-                        ow.closetable();                            
+                        ow.closetable();
+                        cincominuto = 0;   
                     }
-                    
-                    cincominuto++;
-                    
-                    //ici pour mettre la souris ou je veux apres avoir sélectionner la main ou pour sélectionner le contenu de la main          
-                    //robot.mouseMove(initial_x, initial_y);
+
+                    cincominuto = cincominuto + 1;
+
                     Cursor.Position = new Point(initial_x, initial_y);
 
-                    ////ici pour apres sélectionner la premiere ligne de mon 
-                    //// Simulate a mouse click
                     mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, initial_x, initial_y, 0, 0);
 
-
-                    //////ici c'est pour copier la main
-                    //////d'abord bouger la souris
                     Cursor.Position = new Point(hand_x, hand_y);
                     mouse_event(MOUSEEVENTF_LEFTDOWN, hand_x, hand_y, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, hand_x, hand_y, 0, 0);
@@ -111,8 +113,8 @@ namespace PS
                     keybd_event(C, 0, KEYEVENTF_KEYUP, 0);
                     keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
 
-                    ////coller
-                     handcopy.getClipboard(ow);
+                    //coller
+                    handcopy.getClipboard(ow);
 
                     System.Threading.Thread.Sleep(500);
                     //System.Threading.Thread.Sleep(1500);

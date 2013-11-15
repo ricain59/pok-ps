@@ -30,6 +30,7 @@
         {
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
+            this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -54,16 +55,25 @@
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
+            // textBoxLogin
+            // 
+            this.textBoxLogin.Location = new System.Drawing.Point(18, 106);
+            this.textBoxLogin.Name = "textBoxLogin";
+            this.textBoxLogin.Size = new System.Drawing.Size(159, 20);
+            this.textBoxLogin.TabIndex = 2;
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(186, 114);
+            this.ClientSize = new System.Drawing.Size(186, 145);
+            this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
             this.Name = "FormInicial";
             this.Text = "StartDT";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -71,6 +81,7 @@
 
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.TextBox textBoxLogin;
     }
 }
 
