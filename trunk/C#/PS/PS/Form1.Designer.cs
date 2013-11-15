@@ -31,6 +31,7 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
+            this.checkBoxLogin = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -57,16 +58,29 @@
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(18, 106);
+            this.textBoxLogin.Location = new System.Drawing.Point(15, 140);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(159, 20);
             this.textBoxLogin.TabIndex = 2;
+            this.textBoxLogin.Visible = false;
+            // 
+            // checkBoxLogin
+            // 
+            this.checkBoxLogin.AutoSize = true;
+            this.checkBoxLogin.Location = new System.Drawing.Point(55, 106);
+            this.checkBoxLogin.Name = "checkBoxLogin";
+            this.checkBoxLogin.Size = new System.Drawing.Size(77, 17);
+            this.checkBoxLogin.TabIndex = 3;
+            this.checkBoxLogin.Text = "With Login";
+            this.checkBoxLogin.UseVisualStyleBackColor = true;
+            this.checkBoxLogin.CheckedChanged += new System.EventHandler(this.checkBoxLogin_CheckedChanged);
             // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(186, 145);
+            this.ClientSize = new System.Drawing.Size(186, 170);
+            this.Controls.Add(this.checkBoxLogin);
             this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
@@ -82,6 +96,7 @@
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.TextBox textBoxLogin;
+        private System.Windows.Forms.CheckBox checkBoxLogin;
     }
 }
 

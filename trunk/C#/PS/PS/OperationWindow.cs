@@ -12,6 +12,7 @@ namespace PS
         List<Tuple<String, int>> list;
         int numbertable = 1;
         String login;
+        int tablewhlogin;
 
         [DllImport("user32.dll")]
         public static extern int FindWindow(string lpClassName, string lpWindowName);
@@ -147,17 +148,26 @@ namespace PS
             login = login2;
             //to activate an application
             list = new List<Tuple<String, int>>();
-            
-            Boolean first = true;
-            for (numbertable = numbertable + 0; numbertable < 19; numbertable++)
+
+            if (login.Contains("Logged"))
             {
-                int hWnd = FindWindow(null, "PokerStars Lobby - Logged in as "+login);
+                tablewhlogin = 19;
+            }
+            else
+            {
+                tablewhlogin = 5;
+            }
+
+            Boolean first = true;
+            for (numbertable = numbertable + 0; numbertable < tablewhlogin; numbertable++)
+            {
+                int hWnd = FindWindow(null, login);
                 //int hWnd = FindWindow(null, "PokerStars Lobby");
                 SetForegroundWindow(hWnd);
                 if (first)
                 {
                     //ici c'est pour remonter dans le lobby
-                    for (int i = 0; i < 19; i++)
+                    for (int i = 0; i < tablewhlogin; i++)
                     {
                         keybd_event(VK_UP, 0, 0, 0);
                         keybd_event(VK_UP, 0, KEYEVENTF_KEYUP, 0);
@@ -166,13 +176,13 @@ namespace PS
                     first = false;
                 }
                 getAllWindow();
-                if (list.Count == 19)
+                if (list.Count == tablewhlogin)
                 {
-                    numbertable = 19;
+                    numbertable = tablewhlogin;
                 }
                 else
                 {
-                    numbertable = 19 - (19 - list.Count);
+                    numbertable = tablewhlogin - (tablewhlogin - list.Count);
                     keybd_event(VK_DOWN, 0, 0, 0);
                     keybd_event(VK_DOWN, 0, KEYEVENTF_KEYUP, 0);
                     keybd_event(VK_RETURN, 0, 0, 0);
