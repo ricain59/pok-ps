@@ -25,7 +25,7 @@ namespace PS
             w.WriteLine();
             w.Close();
             
-            if (ndt == 100)
+            if (ndt == 500)
             {
                 fdt = fdt + 1;
                 ndt = 0;

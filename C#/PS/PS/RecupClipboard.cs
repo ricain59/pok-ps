@@ -12,7 +12,7 @@ namespace PS
 {
     class RecupClipboard
     {
-        AppendToFile file;
+        AppendToFile file = new AppendToFile();
         String oldcopyhand = "";
         String newcopyhand = "";
         ArrayList handarray = new ArrayList();
@@ -34,7 +34,6 @@ namespace PS
                         {
                             handarray.Add(newcopyhand);
                             String date = getDate();
-                            file = new AppendToFile();
                             file.AppendToFileDT(newcopyhand, date);
                             ow.addToList(newcopyhand, false);
                             oldcopyhand = newcopyhand;

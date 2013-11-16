@@ -97,8 +97,8 @@ namespace PS
                         Cursor.Position = new Point(initial_x, initial_y);
                         mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
                         mouse_event(MOUSEEVENTF_LEFTUP, initial_x, initial_y, 0, 0);
-                        
-                        for (int i = 0; i < 80; i++)
+
+                        for (int i = 0; i < 100; i++)
                         {
                             keybd_event(VK_UP, 0, 0, 0);
                             keybd_event(VK_UP, 0, KEYEVENTF_KEYUP, 0);
