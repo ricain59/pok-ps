@@ -94,25 +94,24 @@ namespace PS
                     if (cincominuto == 600)
                     //if (cincominuto == 1)
                     {
-                        for (int i = 0; i < 50; i++)
+                        Cursor.Position = new Point(initial_x, initial_y);
+                        mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
+                        mouse_event(MOUSEEVENTF_LEFTUP, initial_x, initial_y, 0, 0);
+                        
+                        for (int i = 0; i < 80; i++)
                         {
                             keybd_event(VK_UP, 0, 0, 0);
                             keybd_event(VK_UP, 0, KEYEVENTF_KEYUP, 0);
-                            System.Threading.Thread.Sleep(500);
-                            cincominuto = 0;
-                        }                           
+                            System.Threading.Thread.Sleep(400);                            
+                        }
+
+                        ow.closetable();
+                        cincominuto = 0;   
                     }                   
 
                     Cursor.Position = new Point(initial_x, initial_y);
                     mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, initial_x, initial_y, 0, 0);
-
-                    if (cincominuto == 600)
-                    {
-                        //depois ao fim de 5 minutos fazer uma pausa fechar essas janelas e abrir outras
-                        //aqui vou ver as mesas com 0 de contagem
-                        ow.closetable();
-                    }                   
 
                     Cursor.Position = new Point(hand_x, hand_y);
                     mouse_event(MOUSEEVENTF_LEFTDOWN, hand_x, hand_y, 0, 0);
