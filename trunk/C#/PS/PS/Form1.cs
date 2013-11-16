@@ -91,7 +91,7 @@ namespace PS
                 while (continueDt)
                 {
 
-                    if (cincominuto == 600)
+                    if (cincominuto == 700)
                     //if (cincominuto == 1)
                     {
                         Cursor.Position = new Point(initial_x, initial_y);
@@ -134,7 +134,7 @@ namespace PS
 
                     cincominuto = cincominuto + 1;
 
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(400);
                     //System.Threading.Thread.Sleep(1500);
                 }
             }
