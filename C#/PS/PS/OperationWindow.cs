@@ -187,7 +187,7 @@ namespace PS
                     keybd_event(VK_DOWN, 0, KEYEVENTF_KEYUP, 0);
                     keybd_event(VK_RETURN, 0, 0, 0);
                     keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(3000);
                 }
                 //System.Windows.Forms.MessageBox.Show(""+list.Count);
 
