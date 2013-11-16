@@ -159,7 +159,7 @@ namespace PS
             }
 
             Boolean first = true;
-            for (numbertable = numbertable + 0; numbertable < tablewhlogin; numbertable++)
+            while (numbertable < tablewhlogin)
             {
                 int hWnd = FindWindow(null, login);
                 //int hWnd = FindWindow(null, "PokerStars Lobby");
