@@ -32,6 +32,7 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.checkBoxLogin = new System.Windows.Forms.CheckBox();
+            this.checkBoxDown = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -58,7 +59,7 @@
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(15, 140);
+            this.textBoxLogin.Location = new System.Drawing.Point(15, 182);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(159, 20);
             this.textBoxLogin.TabIndex = 2;
@@ -67,7 +68,7 @@
             // checkBoxLogin
             // 
             this.checkBoxLogin.AutoSize = true;
-            this.checkBoxLogin.Location = new System.Drawing.Point(55, 106);
+            this.checkBoxLogin.Location = new System.Drawing.Point(55, 145);
             this.checkBoxLogin.Name = "checkBoxLogin";
             this.checkBoxLogin.Size = new System.Drawing.Size(77, 17);
             this.checkBoxLogin.TabIndex = 3;
@@ -75,11 +76,22 @@
             this.checkBoxLogin.UseVisualStyleBackColor = true;
             this.checkBoxLogin.CheckedChanged += new System.EventHandler(this.checkBoxLogin_CheckedChanged);
             // 
+            // checkBoxDown
+            // 
+            this.checkBoxDown.AutoSize = true;
+            this.checkBoxDown.Location = new System.Drawing.Point(55, 110);
+            this.checkBoxDown.Name = "checkBoxDown";
+            this.checkBoxDown.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxDown.TabIndex = 4;
+            this.checkBoxDown.Text = "down to up";
+            this.checkBoxDown.UseVisualStyleBackColor = true;
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(186, 170);
+            this.ClientSize = new System.Drawing.Size(186, 214);
+            this.Controls.Add(this.checkBoxDown);
             this.Controls.Add(this.checkBoxLogin);
             this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.buttonStop);
@@ -97,6 +109,7 @@
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.TextBox textBoxLogin;
         private System.Windows.Forms.CheckBox checkBoxLogin;
+        private System.Windows.Forms.CheckBox checkBoxDown;
     }
 }
 

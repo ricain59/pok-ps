@@ -20,6 +20,7 @@ namespace PS
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         String loginsend = "";
+        Boolean down = false;
 
         const int VK_UP = 0x26; //key up
 
@@ -83,8 +84,12 @@ namespace PS
             else
             {
                 loginsend = "PokerStars Lobby";
-            }            
-            ow.selectLobby(loginsend);            
+            }
+            if (checkBoxDown.Checked)
+            {
+                down = true;
+            }
+            ow.selectLobby(loginsend, down);            
             int cincominuto = 0;
             while (true)
             {
