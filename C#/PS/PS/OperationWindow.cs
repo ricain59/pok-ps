@@ -13,6 +13,7 @@ namespace PS
         int numbertable = 1;
         String login;
         int tablewhlogin;
+        Boolean downtoup;
 
         [DllImport("user32.dll")]
         public static extern int FindWindow(string lpClassName, string lpWindowName);
@@ -140,15 +141,27 @@ namespace PS
                     numbertable = numbertable - 1;
                 }                
             }
-            selectLobby(login);
+            IntPtr winnews = FindWindowByCaption(IntPtr.Zero, "News");
+            if (winnews != IntPtr.Zero)
+            {
+                SendMessage(winnews, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+            }
+            IntPtr winmynews = FindWindowByCaption(IntPtr.Zero, "My News");
+            if (winnews != IntPtr.Zero)
+            {
+                SendMessage(winmynews, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+            }
+            selectLobby(login, downtoup);
         }
 
-        public void selectLobby(String login2)
+        public void selectLobby(String login2, Boolean down)
         {
+            downtoup = down;
             login = login2;
             //to activate an application
             list = new List<Tuple<String, int>>();
 
+            //aqui para saber se tem login ou não
             if (login.Contains("Logged"))
             {
                 tablewhlogin = 19;
@@ -156,6 +169,21 @@ namespace PS
             else
             {
                 tablewhlogin = 5;
+            }
+
+            //aqui se começa do inicio o do fim
+            Byte directioninit;
+            Byte directionend;
+
+            if (downtoup)
+            {
+                directioninit = VK_DOWN;
+                directionend = VK_UP;
+            }
+            else
+            {
+                directioninit = VK_UP;
+                directionend = VK_DOWN;
             }
 
             Boolean first = true;
@@ -169,8 +197,8 @@ namespace PS
                     //ici c'est pour remonter dans le lobby
                     for (int i = 0; i < tablewhlogin; i++)
                     {
-                        keybd_event(VK_UP, 0, 0, 0);
-                        keybd_event(VK_UP, 0, KEYEVENTF_KEYUP, 0);
+                        keybd_event(directioninit, 0, 0, 0);
+                        keybd_event(directioninit, 0, KEYEVENTF_KEYUP, 0);
                         System.Threading.Thread.Sleep(1000);
                     }
                     first = false;
@@ -183,8 +211,8 @@ namespace PS
                 else
                 {
                     numbertable = tablewhlogin - (tablewhlogin - list.Count);
-                    keybd_event(VK_DOWN, 0, 0, 0);
-                    keybd_event(VK_DOWN, 0, KEYEVENTF_KEYUP, 0);
+                    keybd_event(directionend, 0, 0, 0);
+                    keybd_event(directionend, 0, KEYEVENTF_KEYUP, 0);
                     keybd_event(VK_RETURN, 0, 0, 0);
                     keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
                     System.Threading.Thread.Sleep(3000);
