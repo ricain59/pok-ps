@@ -11,10 +11,19 @@ namespace PS
         public int ndt = 0;
         public int fdt = 0;
 
-        public void AppendToFileDT(String handcopy, String date)
+        public void AppendToFileDT(String handcopy, String date, Boolean down)
         {
             String nl = getNL(handcopy);
-            String path = "E:/HH" + fdt + "_" + date + "_" + nl + ".txt";
+            String path = "";
+            if (down)
+            {
+                path = "E:/HH" + fdt + "_" + date + "_" + nl + "_up.txt";
+            }
+            else
+            {
+                path = "E:/HH" + fdt + "_" + date + "_" + nl + "_down.txt";
+            }
+            
             //File file = new File("E:/HH" + fdt + "_" + date + ".txt");
             ndt = ndt + 1;
 

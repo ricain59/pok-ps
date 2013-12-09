@@ -141,13 +141,18 @@ namespace PS
                     numbertable = numbertable - 1;
                 }                
             }
-            IntPtr winnews = FindWindowByCaption(IntPtr.Zero, "News");
+            IntPtr winNews = FindWindowByCaption(IntPtr.Zero, "News");
+            if (winNews != IntPtr.Zero)
+            {
+                SendMessage(winNews, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+            }
+            IntPtr winnews = FindWindowByCaption(IntPtr.Zero, "news");
             if (winnews != IntPtr.Zero)
             {
                 SendMessage(winnews, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
             }
             IntPtr winmynews = FindWindowByCaption(IntPtr.Zero, "My News");
-            if (winnews != IntPtr.Zero)
+            if (winmynews != IntPtr.Zero)
             {
                 SendMessage(winmynews, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
             }
