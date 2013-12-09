@@ -98,6 +98,8 @@
             this.Controls.Add(this.buttonStart);
             this.Name = "FormInicial";
             this.Text = "StartDT";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormInicial_FormClosed);
+            //this.Load += new System.EventHandler(this.FormInicial_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

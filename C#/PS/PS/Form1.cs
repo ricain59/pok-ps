@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace PS
 {
@@ -21,13 +22,14 @@ namespace PS
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         String loginsend = "";
         Boolean down = false;
+        Boolean firststart = true;
 
         const int VK_UP = 0x26; //key up
 
         public FormInicial()
         {
             InitializeComponent();
-
+            loadconfig();
         }
 
         [DllImport("user32.dll")]
@@ -67,9 +69,14 @@ namespace PS
                 }
 
                 continueDt = true;
-                //méthode async
-                MethodInvoker startdt = new MethodInvoker(Dt);
-                startdt.BeginInvoke(null, null);
+                if (firststart)
+                {
+                    //méthode async
+                    MethodInvoker startdt = new MethodInvoker(Dt);
+                    startdt.BeginInvoke(null, null);
+                    firststart = false;
+                }
+                
             }
         }
 
@@ -135,7 +142,7 @@ namespace PS
                     keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
 
                     //coller
-                    handcopy.getClipboard(ow);
+                    handcopy.getClipboard(ow, down);
 
                     cincominuto = cincominuto + 1;
 
@@ -160,7 +167,37 @@ namespace PS
             {
                 textBoxLogin.Visible = false;
             }
-        }      
+        }
 
+        private void FormInicial_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            String location = this.Location.X.ToString()+','+this.Location.Y.ToString();
+            String path = Directory.GetCurrentDirectory();
+            StreamWriter w = new StreamWriter(path + "/config.txt", false);
+            w.Write("Location ="+location);
+            w.Close();
+        }
+
+        private void loadconfig()
+        {
+            String path = Directory.GetCurrentDirectory();
+            String filepath = path + "/config.txt";
+            if (File.Exists(filepath))
+            {
+                string line;
+                // Read the file and display it line by line.
+                System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+                while ((line = file.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                    String[] array = line.Split('=');
+                    String[] loc = array[1].Split(',');
+
+                    this.StartPosition = FormStartPosition.Manual;
+                    this.Location = new Point(int.Parse(loc[0]), int.Parse(loc[1]));                    
+                }
+                file.Close();
+            }
+        }
     }
 }
