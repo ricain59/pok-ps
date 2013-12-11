@@ -174,7 +174,18 @@ namespace PS
             String location = this.Location.X.ToString()+','+this.Location.Y.ToString();
             String path = Directory.GetCurrentDirectory();
             StreamWriter w = new StreamWriter(path + "/config.txt", false);
-            w.Write("Location ="+location);
+            w.Write("Location="+location);
+            w.WriteLine();
+            if (checkBoxDown.Checked)
+            {
+                w.Write("Checkbox_down=true");
+                w.WriteLine();
+            }
+            if (checkBoxLogin.Checked)
+            {
+                w.Write("checkBox_Login=" + textBoxLogin.Text.ToString());
+                w.WriteLine();
+            }
             w.Close();
         }
 
@@ -189,14 +200,31 @@ namespace PS
                 System.IO.StreamReader file = new System.IO.StreamReader(filepath);
                 while ((line = file.ReadLine()) != null)
                 {
-                    Console.WriteLine(line);
                     String[] array = line.Split('=');
-                    String[] loc = array[1].Split(',');
-
-                    this.StartPosition = FormStartPosition.Manual;
-                    this.Location = new Point(int.Parse(loc[0]), int.Parse(loc[1]));                    
+                    configframe(array);                                      
                 }
                 file.Close();
+            }
+        }
+
+        private void configframe(String[] line)
+        {
+            switch (line[0])
+            {
+                case "Location":
+                    String[] loc = line[1].Split(',');
+                    this.StartPosition = FormStartPosition.Manual;
+                    this.Location = new Point(int.Parse(loc[0]), int.Parse(loc[1]));
+                    break;
+                case "Checkbox_down":
+                    checkBoxDown.Checked = true;
+                    break;
+                case "checkBox_Login":
+                    checkBoxLogin.Checked = true;
+                    textBoxLogin.Text = line[1].ToString();
+                    break;
+                default:
+                    break;
             }
         }
     }
