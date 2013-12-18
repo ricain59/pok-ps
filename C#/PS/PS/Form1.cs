@@ -33,6 +33,11 @@ namespace PS
         }
 
         [DllImport("user32.dll")]
+        public static extern int FindWindow(string lpClassName, string lpWindowName);
+        [DllImportAttribute("User32.dll")]
+        private static extern int SetForegroundWindow(int hWnd);
+        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
+        
         public static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
         public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key down flag
@@ -40,7 +45,7 @@ namespace PS
         public const int VK_LCONTROL = 0xA2; //Left Control key code
         public const int A = 0x41; //A Control key code
         public const int C = 0x43; //A Control key code
-
+        
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
@@ -75,8 +80,7 @@ namespace PS
                     MethodInvoker startdt = new MethodInvoker(Dt);
                     startdt.BeginInvoke(null, null);
                     firststart = false;
-                }
-                
+                }                
             }
         }
 
@@ -106,6 +110,7 @@ namespace PS
                     if (cincominuto == 700)
                     //if (cincominuto == 1)
                     {
+                        //aqui serve para subir no hand history para recuperar hand não vistas
                         Cursor.Position = new Point(initial_x, initial_y);
                         mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
                         mouse_event(MOUSEEVENTF_LEFTUP, initial_x, initial_y, 0, 0);
@@ -116,10 +121,18 @@ namespace PS
                             keybd_event(VK_UP, 0, KEYEVENTF_KEYUP, 0);
                             System.Threading.Thread.Sleep(400);                            
                         }
-
+                        //aqui fecho as mesas que não dão hands
                         ow.closetable();
                         cincominuto = 0;   
-                    }                   
+                    }
+
+                    //l'ideal serait de ramener la fenetre devant a chaque fois
+                    int hWndhh = FindWindow(null, "Instant Hand History");
+                    if (hWndhh > 0)
+                    {
+                        SetForegroundWindow(hWndhh);
+                    }
+
 
                     Cursor.Position = new Point(initial_x, initial_y);
                     mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
