@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace PS
 {
@@ -28,6 +29,8 @@ namespace PS
         private static extern bool SetForegroundWindow(IntPtr hWnd);
         [DllImportAttribute("User32.dll")]
         private static extern int SetForegroundWindow(int hWnd);
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr SetActiveWindow(IntPtr hWnd);
 
         [DllImport("user32.dll")]
         public static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
@@ -36,6 +39,7 @@ namespace PS
         public const int WM_SYSCOMMAND = 0x0112;
         public const int SC_CLOSE = 0xF060;
         const UInt32 WM_CLOSE = 0x0010;
+        
         const int VK_UP = 0x26; //key up
         const int VK_DOWN = 0x28; //key down
         public const int KEYEVENTF_KEYUP = 0x0002; //Key up flag
@@ -64,6 +68,7 @@ namespace PS
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool IsWindowVisible(IntPtr hWnd);
+               
 
         /// <summary>
         /// ///
@@ -132,6 +137,10 @@ namespace PS
 
         public void closetable()
         {
+            //aqui vou fechar caso existe a janela de não poder abrir mais mesas
+            EnumDelegate delEnumfunc = new EnumDelegate(EnumWindowsProc_MT);
+            bool bSuccessful = EnumDesktopWindows(IntPtr.Zero, delEnumfunc, IntPtr.Zero);
+
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].Item2 == 0)
@@ -139,7 +148,7 @@ namespace PS
                     IntPtr windowPtr = FindWindowByCaption(IntPtr.Zero, list[i].Item1);
                     SendMessage(windowPtr, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
                     numbertable = numbertable - 1;
-                }                
+                }
             }
             IntPtr winNews = FindWindowByCaption(IntPtr.Zero, "News");
             if (winNews != IntPtr.Zero)
@@ -156,7 +165,25 @@ namespace PS
             {
                 SendMessage(winmynews, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
             }
+            //aqui vou abrir mesas
             selectLobby(login, downtoup);
+            
+        }
+
+        private bool EnumWindowsProc_MT(IntPtr hWnd, int lParam)
+        {
+            string strTitle = GetWindowText(hWnd);
+            if (strTitle != "" & IsWindowVisible(hWnd) && strTitle.Equals("PokerStars")) //
+            {
+                int ass = FindWindow(null, "PokerStars");
+                if (ass > 0)
+                {
+                    SetForegroundWindow(ass);
+                    SetActiveWindow((IntPtr)ass);
+                    SendMessage(ass, WM_SYSCOMMAND, SC_CLOSE, 0);                    
+                }
+            }
+            return true;
         }
 
         public void selectLobby(String login2, Boolean down)
@@ -197,6 +224,7 @@ namespace PS
                 int hWnd = FindWindow(null, login);
                 //int hWnd = FindWindow(null, "PokerStars Lobby");
                 SetForegroundWindow(hWnd);
+
                 if (first)
                 {
                     //ici c'est pour remonter dans le lobby
@@ -220,7 +248,7 @@ namespace PS
                     keybd_event(directionend, 0, KEYEVENTF_KEYUP, 0);
                     keybd_event(VK_RETURN, 0, 0, 0);
                     keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
-                    System.Threading.Thread.Sleep(3000);
+                    System.Threading.Thread.Sleep(3500);
                 }
                 //System.Windows.Forms.MessageBox.Show(""+list.Count);
 
