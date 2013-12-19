@@ -246,7 +246,7 @@ namespace PS
                     numbertable = tablewhlogin - (tablewhlogin - list.Count);
                     keybd_event(directionend, 0, 0, 0);
                     keybd_event(directionend, 0, KEYEVENTF_KEYUP, 0);
-                    keybd_event(VK_RETURN, 0, 0, 0);
+                    keybd_event(VK_RETURN, 0, 0, 0);                    
                     keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
                     System.Threading.Thread.Sleep(3500);
                 }
