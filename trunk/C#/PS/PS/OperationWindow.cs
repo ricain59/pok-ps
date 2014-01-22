@@ -15,6 +15,7 @@ namespace PS
         String login;
         int tablewhlogin;
         Boolean downtoup;
+        Boolean zoom;
 
         [DllImport("user32.dll")]
         public static extern int FindWindow(string lpClassName, string lpWindowName);
@@ -166,7 +167,7 @@ namespace PS
                 SendMessage(winmynews, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
             }
             //aqui vou abrir mesas
-            selectLobby(login, downtoup);
+            selectLobby(login, downtoup, zoom);
             
         }
 
@@ -186,76 +187,80 @@ namespace PS
             return true;
         }
 
-        public void selectLobby(String login2, Boolean down)
+        public void selectLobby(String login2, Boolean down, Boolean zoom)
         {
             downtoup = down;
             login = login2;
+            this.zoom = zoom;
             //to activate an application
             list = new List<Tuple<String, int>>();
 
             //aqui para saber se tem login ou não
-            if (login.Contains("Logged"))
+            if (!zoom)
             {
-                tablewhlogin = 19;
-            }
-            else
-            {
-                tablewhlogin = 5;
-            }
-
-            //aqui se começa do inicio o do fim
-            Byte directioninit;
-            Byte directionend;
-
-            if (downtoup)
-            {
-                directioninit = VK_DOWN;
-                directionend = VK_UP;
-            }
-            else
-            {
-                directioninit = VK_UP;
-                directionend = VK_DOWN;
-            }
-
-            Boolean first = true;
-            while (numbertable < tablewhlogin)
-            {
-                int hWnd = FindWindow(null, login);
-                //int hWnd = FindWindow(null, "PokerStars Lobby");
-                SetForegroundWindow(hWnd);
-
-                if (first)
+                if (login.Contains("Logged"))
                 {
-                    //ici c'est pour remonter dans le lobby
-                    for (int i = 0; i < tablewhlogin; i++)
-                    {
-                        keybd_event(directioninit, 0, 0, 0);
-                        keybd_event(directioninit, 0, KEYEVENTF_KEYUP, 0);
-                        System.Threading.Thread.Sleep(1000);
-                    }
-                    first = false;
-                }
-                getAllWindow();
-                if (list.Count == tablewhlogin)
-                {
-                    numbertable = tablewhlogin;
+                    tablewhlogin = 19;
                 }
                 else
                 {
-                    numbertable = tablewhlogin - (tablewhlogin - list.Count);
-                    keybd_event(directionend, 0, 0, 0);
-                    keybd_event(directionend, 0, KEYEVENTF_KEYUP, 0);
-                    keybd_event(VK_RETURN, 0, 0, 0);                    
-                    keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
-                    System.Threading.Thread.Sleep(3500);
+                    tablewhlogin = 5;
                 }
-                //System.Windows.Forms.MessageBox.Show(""+list.Count);
 
+                //aqui se começa do inicio o do fim
+                Byte directioninit;
+                Byte directionend;
+
+                if (downtoup)
+                {
+                    directioninit = VK_DOWN;
+                    directionend = VK_UP;
+                }
+                else
+                {
+                    directioninit = VK_UP;
+                    directionend = VK_DOWN;
+                }
+
+                Boolean first = true;
+                while (numbertable < tablewhlogin)
+                {
+                    int hWnd = FindWindow(null, login);
+                    //int hWnd = FindWindow(null, "PokerStars Lobby");
+                    SetForegroundWindow(hWnd);
+
+                    if (first)
+                    {
+                        //ici c'est pour remonter dans le lobby
+                        for (int i = 0; i < tablewhlogin; i++)
+                        {
+                            keybd_event(directioninit, 0, 0, 0);
+                            keybd_event(directioninit, 0, KEYEVENTF_KEYUP, 0);
+                            System.Threading.Thread.Sleep(1000);
+                        }
+                        first = false;
+                    }
+                    getAllWindow();
+                    if (list.Count == tablewhlogin)
+                    {
+                        numbertable = tablewhlogin;
+                    }
+                    else
+                    {
+                        numbertable = tablewhlogin - (tablewhlogin - list.Count);
+                        keybd_event(directionend, 0, 0, 0);
+                        keybd_event(directionend, 0, KEYEVENTF_KEYUP, 0);
+                        keybd_event(VK_RETURN, 0, 0, 0);
+                        keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
+                        System.Threading.Thread.Sleep(3500);
+                    }
+                    //System.Windows.Forms.MessageBox.Show(""+list.Count);
+
+                }
+                //numbertable = 19;
+                getAllWindow();
+                
             }
-            //numbertable = 19;
-            getAllWindow();
-            
             int hWndhh = FindWindow(null, "Instant Hand History");
             if (hWndhh > 0)
             {

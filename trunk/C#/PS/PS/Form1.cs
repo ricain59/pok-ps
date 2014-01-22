@@ -23,6 +23,7 @@ namespace PS
         String loginsend = "";
         Boolean down = false;
         Boolean firststart = true;
+        Boolean zoom = false;
 
         const int VK_UP = 0x26; //key up
 
@@ -33,11 +34,6 @@ namespace PS
         }
 
         [DllImport("user32.dll")]
-        public static extern int FindWindow(string lpClassName, string lpWindowName);
-        [DllImportAttribute("User32.dll")]
-        private static extern int SetForegroundWindow(int hWnd);
-        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
-        
         public static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
         public const int KEYEVENTF_EXTENDEDKEY = 0x0001; //Key down flag
@@ -45,7 +41,7 @@ namespace PS
         public const int VK_LCONTROL = 0xA2; //Left Control key code
         public const int A = 0x41; //A Control key code
         public const int C = 0x43; //A Control key code
-        
+
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
@@ -80,7 +76,8 @@ namespace PS
                     MethodInvoker startdt = new MethodInvoker(Dt);
                     startdt.BeginInvoke(null, null);
                     firststart = false;
-                }                
+                }
+                
             }
         }
 
@@ -100,67 +97,74 @@ namespace PS
             {
                 down = true;
             }
-            ow.selectLobby(loginsend, down);            
+            if (checkBoxZoom.Checked)
+            {
+                zoom = true;
+            }
+            ow.selectLobby(loginsend, down, zoom);            
             int cincominuto = 0;
             while (true)
             {
                 while (continueDt)
                 {
 
-                    if (cincominuto == 700)
-                    //if (cincominuto == 1)
+                    try
                     {
-                        //aqui serve para subir no hand history para recuperar hand não vistas
+                        if (!zoom)
+                        {
+                            if (cincominuto == 700)
+                            //if (cincominuto == 1)
+                            {
+                                Cursor.Position = new Point(initial_x, initial_y);
+                                mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
+                                mouse_event(MOUSEEVENTF_LEFTUP, initial_x, initial_y, 0, 0);
+
+                                for (int i = 0; i < 100; i++)
+                                {
+                                    keybd_event(VK_UP, 0, 0, 0);
+                                    keybd_event(VK_UP, 0, KEYEVENTF_KEYUP, 0);
+                                    System.Threading.Thread.Sleep(400);
+                                }
+
+                                ow.closetable();
+                                cincominuto = 0;
+                            }
+                        }
+
                         Cursor.Position = new Point(initial_x, initial_y);
                         mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
                         mouse_event(MOUSEEVENTF_LEFTUP, initial_x, initial_y, 0, 0);
 
-                        for (int i = 0; i < 100; i++)
-                        {
-                            keybd_event(VK_UP, 0, 0, 0);
-                            keybd_event(VK_UP, 0, KEYEVENTF_KEYUP, 0);
-                            System.Threading.Thread.Sleep(400);                            
-                        }
-                        //aqui fecho as mesas que não dão hands
-                        ow.closetable();
-                        cincominuto = 0;   
-                    }
+                        Cursor.Position = new Point(hand_x, hand_y);
+                        mouse_event(MOUSEEVENTF_LEFTDOWN, hand_x, hand_y, 0, 0);
+                        mouse_event(MOUSEEVENTF_LEFTUP, hand_x, hand_y, 0, 0);
 
-                    //l'ideal serait de ramener la fenetre devant a chaque fois
-                    int hWndhh = FindWindow(null, "Instant Hand History");
-                    if (hWndhh > 0)
+                        // Hold Control down and press A
+                        keybd_event(VK_LCONTROL, 0, 0, 0);
+                        keybd_event(A, 0, 0, 0);
+                        keybd_event(A, 0, KEYEVENTF_KEYUP, 0);
+                        keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
+
+                        // Hold Control down and press C
+                        keybd_event(VK_LCONTROL, 0, 0, 0);
+                        keybd_event(C, 0, 0, 0);
+                        keybd_event(C, 0, KEYEVENTF_KEYUP, 0);
+                        keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
+
+                        //coller
+                        handcopy.getClipboard(ow, down);
+
+                        cincominuto = cincominuto + 1;
+
+                        System.Threading.Thread.Sleep(400);
+                        //System.Threading.Thread.Sleep(1500);
+
+                        //ici je vais mettre une exception au cas ou
+                    }
+                    catch (Exception ex)
                     {
-                        SetForegroundWindow(hWndhh);
+                        new Debug().LogMessage(ex.ToString());
                     }
-
-
-                    Cursor.Position = new Point(initial_x, initial_y);
-                    mouse_event(MOUSEEVENTF_LEFTDOWN, initial_x, initial_y, 0, 0);
-                    mouse_event(MOUSEEVENTF_LEFTUP, initial_x, initial_y, 0, 0);
-
-                    Cursor.Position = new Point(hand_x, hand_y);
-                    mouse_event(MOUSEEVENTF_LEFTDOWN, hand_x, hand_y, 0, 0);
-                    mouse_event(MOUSEEVENTF_LEFTUP, hand_x, hand_y, 0, 0);
-
-                    // Hold Control down and press A
-                    keybd_event(VK_LCONTROL, 0, 0, 0);
-                    keybd_event(A, 0, 0, 0);
-                    keybd_event(A, 0, KEYEVENTF_KEYUP, 0);
-                    keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
-
-                    // Hold Control down and press C
-                    keybd_event(VK_LCONTROL, 0, 0, 0);
-                    keybd_event(C, 0, 0, 0);
-                    keybd_event(C, 0, KEYEVENTF_KEYUP, 0);
-                    keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
-
-                    //coller
-                    handcopy.getClipboard(ow, down);
-
-                    cincominuto = cincominuto + 1;
-
-                    System.Threading.Thread.Sleep(400);
-                    //System.Threading.Thread.Sleep(1500);
                 }
             }
         }
@@ -199,6 +203,11 @@ namespace PS
                 w.Write("checkBox_Login=" + textBoxLogin.Text.ToString());
                 w.WriteLine();
             }
+            if (checkBoxZoom.Checked)
+            {
+                w.Write("Checkbox_zoom=true");
+                w.WriteLine();
+            }
             w.Close();
         }
 
@@ -235,6 +244,9 @@ namespace PS
                 case "checkBox_Login":
                     checkBoxLogin.Checked = true;
                     textBoxLogin.Text = line[1].ToString();
+                    break;
+                case "Checkbox_zoom":
+                    checkBoxZoom.Checked = true;
                     break;
                 default:
                     break;
