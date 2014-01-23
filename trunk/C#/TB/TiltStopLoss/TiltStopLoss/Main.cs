@@ -11,22 +11,20 @@ namespace TiltStopLoss
 {
     public partial class Main : Form
     {
-        Db db;
+        private Db db = new Db();
         
         public Main()
         {
-            InitializeComponent();
-            db = new Db();
+            InitializeComponent();            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTestDb_Click(object sender, EventArgs e)
         {
-            db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text);
+            db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text, textBoxPlayer.Text);
             String testconnect = db.testconnectDb();
             if (testconnect.Equals(""))
             {
@@ -38,26 +36,27 @@ namespace TiltStopLoss
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonStart_Click(object sender, EventArgs e)
         {
-            HandPs ps = new HandPs();
+            Boolean stop = false;
             //ligo me a DB para ir buscar o ultimo id inserido
             String con = db.connectDb();
             if (!con.Equals(""))
             {
                 MessageBox.Show(con.ToString());
+                stop = true;
             }
-
-            //DEPOIS de recuperar o ultimo id pego na mão importado e tenho de verificar se 
-            //o meu nome de jogador esta la
-
-            //se sim tratou a mão
-
-            //aqui vou tratar a mão e devolve me os BB perdido ou ganhos
-
-            
+            //se dá erro a me ligar a DB não faço mais nada
+            //aqui tenho de abrir a outra janela que vai ficar a funcar em paralela dessa
+            if (!stop)
+            {
+                this.Visible = false;
+                Stoploss sl = new Stoploss(this, textBoxPlayer.Text, db);
+                sl.Show();
+                //sl.beginBB(this, textBoxPlayer.Text, db);
+            }
         }
 
-
+        
     }
 }
