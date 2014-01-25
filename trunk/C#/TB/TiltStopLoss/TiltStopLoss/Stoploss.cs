@@ -62,13 +62,16 @@ namespace TiltStopLoss
         private void calculateBB()
         {
             //DEPOIS de recuperar o ultimo id
-            Int64 lastid = dbase.getLastValue("handhistories", "handhistory_id");
+            //Int64 lastid = dbase.getLastValue("handhistories", "handhistory_id");
+            Int64 lastid = 4998341;
+
             //com esse ultimo id sei que tenho que ir daqui para frente para as mãos.
             //CRIO O MEU OBJECTO da class handps
             hps = new HandPs();
             //verifico se tem mais mãos importadas
             Int64 id = lastid;
             int numberhand = 0;
+            Double winloss = 0.0;
             while (true)
             {
                 String hand = dbase.getHand(id);
@@ -79,8 +82,10 @@ namespace TiltStopLoss
                         numberhand++;
                         id++;
                         //tratar a mão agora
-                        hps.getBb(hand, player);
+                        winloss += hps.getBb(hand, player);
+                        labelBb.Text = winloss.ToString();
                     }
+                    id++;
                 }
             }                        
         }

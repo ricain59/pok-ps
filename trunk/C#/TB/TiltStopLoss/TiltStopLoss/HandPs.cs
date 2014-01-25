@@ -10,8 +10,11 @@ namespace TiltStopLoss
         public Double getBb(String hand, String player)
         {
             Double limit = getNL(hand);
+            String money = getMoney(hand);
             string[] stringSeparators = new string[] { "SUMMARY" };
             string[] splithand = hand.Split(stringSeparators, StringSplitOptions.None);
+            stringSeparators = new string[] { "\r\n" };
+            string[] allhand = hand.Split(stringSeparators, StringSplitOptions.None);
             //caso folda a mão fora das blinds
             if (splithand[1].Contains(player + " folded before Flop (didn't bet)"))
             {
@@ -20,15 +23,33 @@ namespace TiltStopLoss
             //caso esta na SB e folda
             if (splithand[1].Contains(player + " (small blind) folded before Flop"))
             {
-                return (getSB(limit)/limit);
+                return 0.5;
             }
             //caso esta na BB e folda
             if (splithand[1].Contains(player + " (big blind) folded before Flop"))
             {
-                return (getSB(limit)/limit);
+                return 1.0;
             }
-
-            
+            //ler a mão completa se não acontece nenhum dos casos anteriores
+            foreach (String handar in allhand)
+            {
+                Double invest = 0.0;
+                if(handar.Contains(player+": posts small blind"))
+                {
+                    invest += getSB(limit)/limit;
+                }
+                if(handar.Contains(player+": posts big blind"))
+                {
+                    invest += limit;
+                }
+                if (handar.Contains(player) && handar.Contains("raises"))
+                {
+                    stringSeparators = new string[] { "to "+money };
+                    String[] newsplitvalue = handar.Split(stringSeparators, StringSplitOptions.None);
+                    invest += Convert.ToDouble(newsplitvalue[1]);
+                }
+                return invest;
+            }            
             return 0.0;
         }
         
@@ -91,6 +112,22 @@ namespace TiltStopLoss
                 return 0.50;
             }
             return 0;
+        }
+
+        private String getMoney(String hand)
+        {
+            if (hand.Contains("$"))
+            {
+                return "$";
+            }
+            if (hand.Contains("€"))
+            {
+                return "€";
+            } if (hand.Contains("£"))
+            {
+                return "£";
+            }
+            return "$";
         }
 
     }
