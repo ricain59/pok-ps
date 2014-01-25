@@ -137,7 +137,6 @@
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.Size = new System.Drawing.Size(100, 20);
             this.textBoxPass.TabIndex = 8;
-            this.textBoxPass.Text = "postgrespass";
             // 
             // textBoxUser
             // 
@@ -145,7 +144,6 @@
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(100, 20);
             this.textBoxUser.TabIndex = 7;
-            this.textBoxUser.Text = "postgres";
             // 
             // textBoxDb
             // 
@@ -153,7 +151,6 @@
             this.textBoxDb.Name = "textBoxDb";
             this.textBoxDb.Size = new System.Drawing.Size(100, 20);
             this.textBoxDb.TabIndex = 6;
-            this.textBoxDb.Text = "08_01_14";
             // 
             // textBoxPort
             // 
@@ -161,7 +158,6 @@
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(100, 20);
             this.textBoxPort.TabIndex = 5;
-            this.textBoxPort.Text = "5432";
             // 
             // textBoxServer
             // 
@@ -169,7 +165,6 @@
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(100, 20);
             this.textBoxServer.TabIndex = 4;
-            this.textBoxServer.Text = "127.0.0.1";
             // 
             // label3
             // 
@@ -234,6 +229,7 @@
             this.Controls.Add(this.tabControlMain);
             this.Name = "Main";
             this.Text = "Stop Loss";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

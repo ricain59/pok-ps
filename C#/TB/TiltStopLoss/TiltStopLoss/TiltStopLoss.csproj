@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Db.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="HandPs.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
