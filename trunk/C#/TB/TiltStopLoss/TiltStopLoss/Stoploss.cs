@@ -16,18 +16,24 @@ namespace TiltStopLoss
     public partial class Stoploss : Form
     {
         private Form wmain;
-        private String player;
+        private String playerid;
         private Db dbase;
-        private HandPs hps;
+        //private HandPs hps;
         private Thread startcrono;
         private Thread startbb;
+        //private Thread starthand;
+        private Boolean continu = true;
+        private String playername;
+        private String stoploss;
 
-        public Stoploss(Form wmain, String player, Db db)
+        public Stoploss(Form wmain, String playerid, Db db, String playername, String stoploss)
         {
             InitializeComponent();
             this.wmain = wmain;
-            this.player = player;
+            this.playerid = playerid;
+            this.playername = playername;
             dbase = db;
+            this.stoploss = stoploss;
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
             startcrono.Start();
@@ -35,59 +41,114 @@ namespace TiltStopLoss
             startbb = new Thread(new ThreadStart(this.calculateBB));
             startbb.Start();
             //calculateBB();
+            //calculo de hands jogadas
+            //starthand = new Thread(new ThreadStart(this.calculateHands));
+            //starthand.Start();
+            
         }
 
-        private void Stoploss_Load(object sender, EventArgs e)
-        {
-        }
 
         private void Stoploss_FormClosed(object sender, FormClosedEventArgs e)
         {
+            String con = dbase.closeconDb();
+            continu = false;
+            //Thread.Sleep(2000);
+            startbb.Abort();
+            startcrono.Abort();
+            //starthand.Abort();
+            if (!con.Equals(""))
+            {
+                MessageBox.Show(con.ToString());
+            }
             wmain.Visible = true;
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
-            String con = dbase.closeconDb();
-            startbb.Abort();
-            startcrono.Abort();
-            if (!con.Equals(""))
-            {
-                MessageBox.Show(con.ToString());                
-            }
-            this.Close();
-            wmain.Visible = true;
+            this.Close();            
         }
 
         private void calculateBB()
         {
             //DEPOIS de recuperar o ultimo id
-            //Int64 lastid = dbase.getLastValue("handhistories", "handhistory_id");
-            Int64 lastid = 4998341;
+            String yearmonth = new Utils().yearmonth();
+            Double lastid = dbase.getSumBB(playerid, yearmonth);
+            Int64 lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
+            //Int64 lastidhand = 5063100;
+            Int64 handnumber = 0;
 
-            //com esse ultimo id sei que tenho que ir daqui para frente para as mãos.
-            //CRIO O MEU OBJECTO da class handps
-            hps = new HandPs();
-            //verifico se tem mais mãos importadas
-            Int64 id = lastid;
-            int numberhand = 0;
-            Double winloss = 0.0;
-            while (true)
+            while (continu)
             {
-                String hand = dbase.getHand(id);
+                //bb
+                Double bb = dbase.getSumBB(playerid, yearmonth);
+                bb = Math.Round((bb - lastid), 2);
+                if (this.labelBb.InvokeRequired)
+                {
+                    SetTextCallback d = new SetTextCallback(SetTextBb);
+                    this.Invoke(d, new object[] { bb.ToString() });
+                }
+                else
+                {
+                    // It's on the same thread, no need for Invoke
+                    this.labelBb.Text = bb.ToString();
+                }
+                if (bb > Convert.ToDouble(stoploss.ToString()))
+                {
+                    MessageBox.Show("!!!! Stoploss !!!!");
+
+                }
+                //hand
+                String hand = dbase.getHand(lastidhand);
                 if (!hand.Equals(""))
                 {
-                    if (hand.Contains(player))
+                    if (hand.Contains(playername))
                     {
-                        numberhand++;
-                        id++;
-                        //tratar a mão agora
-                        winloss += hps.getBb(hand, player);
-                        labelBb.Text = winloss.ToString();
+                        handnumber++;
+                        lastidhand++;
+                        if (this.labelBb.InvokeRequired)
+                        {
+                            SetTextCallback d = new SetTextCallback(SetTextHands);
+                            this.Invoke(d, new object[] { handnumber.ToString() });
+                        }
+                        else
+                        {
+                            // It's on the same thread, no need for Invoke
+                            this.labelHands.Text = handnumber.ToString();
+                        }
                     }
-                    id++;
                 }
-            }                        
+                Thread.Sleep(3000);
+            }
+        }
+
+        private void calculateHands()
+        {
+            //pour calculer les hands
+            Int64 lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
+            Int64 handnumber = 0;
+            while (continu)
+            {
+                String hand = dbase.getHand(lastidhand);
+                if (!hand.Equals(""))
+                {
+                    if (hand.Contains(playername))
+                    {
+                        handnumber++;
+                        lastidhand++;
+                        if (this.labelBb.InvokeRequired)
+                        {
+                            SetTextCallback d = new SetTextCallback(SetTextBb);
+                            this.Invoke(d, new object[] { handnumber.ToString() });
+                        }
+                        else
+                        {
+                            // It's on the same thread, no need for Invoke
+                            this.labelHands.Text = handnumber.ToString();
+                        }
+                     }
+                }
+                Thread.Sleep(3000);
+            }
         }
 
         private void stoptimer()
@@ -96,7 +157,7 @@ namespace TiltStopLoss
             int minute = 0;
             int seconde = 0;
 
-            while (true)
+            while (continu)
             {
                 Thread.Sleep(1000);
                 seconde++;
@@ -149,6 +210,31 @@ namespace TiltStopLoss
         private void SetTextBb(string text)
         {
             this.labelBb.Text = text;
+        }
+        private void SetTextHands(string text)
+        {
+            this.labelHands.Text = text;
+        }
+
+        private void labelBb_MouseHover(object sender, EventArgs e)
+        {
+            Double value = Convert.ToDouble(labelBb.Text.ToString());
+            if (value > 0)
+            {
+                //labelBb.BackColor = Color.Green;
+                labelBb.ForeColor = Color.Green;
+            }
+            else
+            {
+                //labelBb.BackColor = Color.Red;
+                labelBb.ForeColor = Color.Red;
+            }
+            labelBb.Visible = true;
+        }
+
+        private void labelBb_MouseLeave(object sender, EventArgs e)
+        {
+            labelBb.ForeColor = Color.White;
         }
     }
 }

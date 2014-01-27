@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SearchPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchPlayer.Designer.cs">
+      <DependentUpon>SearchPlayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Db.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="HandPs.cs" />
@@ -69,6 +75,10 @@
     <Compile Include="Stoploss.Designer.cs">
       <DependentUpon>Stoploss.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="SearchPlayer.resx">
+      <DependentUpon>SearchPlayer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

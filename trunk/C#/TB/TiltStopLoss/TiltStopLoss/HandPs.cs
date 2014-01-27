@@ -23,34 +23,35 @@ namespace TiltStopLoss
             //caso esta na SB e folda
             if (splithand[1].Contains(player + " (small blind) folded before Flop"))
             {
-                return 0.5;
+                return -0.5;
             }
             //caso esta na BB e folda
             if (splithand[1].Contains(player + " (big blind) folded before Flop"))
             {
-                return 1.0;
+                return -1.0;
             }
             //ler a mão completa se não acontece nenhum dos casos anteriores
+            Double invest = 0.0;
             foreach (String handar in allhand)
             {
-                Double invest = 0.0;
+                
                 if(handar.Contains(player+": posts small blind"))
                 {
-                    invest += getSB(limit)/limit;
+                    invest += 0.5;
                 }
                 if(handar.Contains(player+": posts big blind"))
                 {
-                    invest += limit;
+                    invest += 1;
                 }
                 if (handar.Contains(player) && handar.Contains("raises"))
                 {
                     stringSeparators = new string[] { "to "+money };
                     String[] newsplitvalue = handar.Split(stringSeparators, StringSplitOptions.None);
-                    invest += Convert.ToDouble(newsplitvalue[1]);
+                    invest += Convert.ToDouble(newsplitvalue[1].ToString().Replace(".",","));
                 }
-                return invest;
-            }            
-            return 0.0;
+                
+            }
+            return invest;
         }
         
         
