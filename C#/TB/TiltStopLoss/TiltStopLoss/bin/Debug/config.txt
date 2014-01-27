@@ -5,3 +5,5 @@ Port=5432
 Database=08_01_14
 UserDb=postgres
 PasswordDB=postgrespass
+PlayerID=4
+Stoploss=250

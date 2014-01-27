@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using Npgsql;
 
 namespace TiltStopLoss
 {
@@ -19,6 +20,28 @@ namespace TiltStopLoss
             InitializeComponent();
             loadconfig();
             db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text, textBoxPlayer.Text);
+            try
+            {
+                textBoxPlayer.AutoCompleteMode = AutoCompleteMode.Suggest;
+                textBoxPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                AutoCompleteStringCollection col = new AutoCompleteStringCollection();
+                string query = "select player_id, playername from players ";
+                db.connectDb();
+                NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
+                NpgsqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    col.Add(dr[1].ToString());
+
+                }
+                dr.Close();
+                textBoxPlayer.AutoCompleteCustomSource = col;
+                db.closeconDb();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("exception==" + ex);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,6 +50,7 @@ namespace TiltStopLoss
 
         private void buttonTestDb_Click(object sender, EventArgs e)
         {
+            db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text, textBoxPlayer.Text);
             String testconnect = db.testconnectDb();
             if (testconnect.Equals(""))
             {
@@ -55,7 +79,7 @@ namespace TiltStopLoss
                 if (!stop)
                 {
                     this.Visible = false;
-                    Stoploss sl = new Stoploss(this, textBoxPlayer.Text, db);
+                    Stoploss sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text);
                     sl.Show();
                     //sl.beginBB(this, textBoxPlayer.Text, db);
                 }
@@ -111,6 +135,12 @@ namespace TiltStopLoss
                 case "PasswordDB":
                     textBoxPass.Text = line[1].ToString();
                     break;
+                case "PlayerID":
+                    textBoxPlayerID.Text = line[1].ToString();
+                    break;
+                case "Stoploss":
+                    textBoxStopLoss.Text = line[1].ToString();
+                    break;
                 default:
                     break;
             }
@@ -135,8 +165,26 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("PasswordDB=" + textBoxPass.Text.ToString());
             w.WriteLine();
+            w.Write("PlayerID=" + textBoxPlayerID.Text.ToString());
+            w.WriteLine();
+            w.Write("Stoploss=" + textBoxStopLoss.Text.ToString());
+            w.WriteLine();
             
             w.Close();
+        }
+
+        private void textBoxPlayer_Leave(object sender, EventArgs e)
+        {
+            string query = "select player_id from players where playername = '"+textBoxPlayer.Text.ToString()+"'";
+            db.connectDb();
+            NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            while (dr.Read())
+            {
+                textBoxPlayerID.Text = dr[0].ToString();
+            }
+            dr.Close();
+            db.closeconDb();
         }
 
     }
