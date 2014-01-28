@@ -1,4 +1,4 @@
-Location=208,208
+Location=26,26
 Player=hulkric59
 Server=127.0.0.1
 Port=5432
@@ -7,3 +7,4 @@ UserDb=postgres
 PasswordDB=postgrespass
 PlayerID=4
 Stoploss=250
+StopHands=

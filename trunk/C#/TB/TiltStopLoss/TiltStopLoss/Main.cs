@@ -20,27 +20,32 @@ namespace TiltStopLoss
             InitializeComponent();
             loadconfig();
             db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text, textBoxPlayer.Text);
-            try
+            textBoxPlayer.Enabled = false;
+            if (!textBoxServer.Text.Equals(""))
             {
-                textBoxPlayer.AutoCompleteMode = AutoCompleteMode.Suggest;
-                textBoxPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                AutoCompleteStringCollection col = new AutoCompleteStringCollection();
-                string query = "select player_id, playername from players ";
-                db.connectDb();
-                NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
-                NpgsqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
+                textBoxPlayer.Enabled = true;
+                try
                 {
-                    col.Add(dr[1].ToString());
+                    textBoxPlayer.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    textBoxPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                    AutoCompleteStringCollection col = new AutoCompleteStringCollection();
+                    string query = "select player_id, playername from players ";
+                    db.connectDb();
+                    NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
+                    NpgsqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        col.Add(dr[1].ToString());
 
+                    }
+                    dr.Close();
+                    textBoxPlayer.AutoCompleteCustomSource = col;
+                    db.closeconDb();
                 }
-                dr.Close();
-                textBoxPlayer.AutoCompleteCustomSource = col;
-                db.closeconDb();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("exception==" + ex);
+                catch (Exception ex)
+                {
+                    Console.WriteLine("exception==" + ex);
+                }
             }
         }
 
@@ -54,7 +59,8 @@ namespace TiltStopLoss
             String testconnect = db.testconnectDb();
             if (testconnect.Equals(""))
             {
-                MessageBox.Show("Test connection OK");
+                MessageBox.Show("Test connection OK.\r\n This windows is closed, open it for selected player.");
+                this.Close();              
             }
             else
             {
@@ -79,7 +85,7 @@ namespace TiltStopLoss
                 if (!stop)
                 {
                     this.Visible = false;
-                    Stoploss sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text);
+                    Stoploss sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text.ToString());
                     sl.Show();
                     //sl.beginBB(this, textBoxPlayer.Text, db);
                 }
@@ -141,6 +147,9 @@ namespace TiltStopLoss
                 case "Stoploss":
                     textBoxStopLoss.Text = line[1].ToString();
                     break;
+                case "StopHands":
+                    textBoxStopHand.Text = line[1].ToString();
+                    break;
                 default:
                     break;
             }
@@ -169,7 +178,8 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("Stoploss=" + textBoxStopLoss.Text.ToString());
             w.WriteLine();
-            
+            w.Write("StopHands=" + textBoxStopHand.Text.ToString());
+            w.WriteLine();            
             w.Close();
         }
 

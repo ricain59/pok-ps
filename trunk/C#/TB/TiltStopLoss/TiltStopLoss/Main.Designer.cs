@@ -52,6 +52,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxStopHand = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -66,7 +69,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(12, 12);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(417, 318);
+            this.tabControlMain.Size = new System.Drawing.Size(320, 318);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPage1
@@ -90,7 +93,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(409, 292);
+            this.tabPage1.Size = new System.Drawing.Size(312, 292);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Database";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -233,12 +236,15 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.textBoxStopHand);
+            this.tabPage3.Controls.Add(this.label8);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.textBoxStopLoss);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(409, 292);
+            this.tabPage3.Size = new System.Drawing.Size(312, 292);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Configuration";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -282,26 +288,53 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(409, 292);
+            this.tabPage2.Size = new System.Drawing.Size(312, 292);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Start";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(160, 117);
+            this.buttonStart.Location = new System.Drawing.Point(97, 108);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.Size = new System.Drawing.Size(117, 59);
             this.buttonStart.TabIndex = 0;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(21, 70);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "StopHands";
+            // 
+            // textBoxStopHand
+            // 
+            this.textBoxStopHand.Location = new System.Drawing.Point(94, 63);
+            this.textBoxStopHand.Name = "textBoxStopHand";
+            this.textBoxStopHand.Size = new System.Drawing.Size(71, 20);
+            this.textBoxStopHand.TabIndex = 7;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(175, 70);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "Hands";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 334);
+            this.ClientSize = new System.Drawing.Size(341, 334);
             this.Controls.Add(this.tabControlMain);
             this.Name = "Main";
             this.Text = "Stop Loss";
@@ -343,6 +376,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBoxStopLoss;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBoxStopHand;
+        private System.Windows.Forms.Label label8;
     }
 }
 
