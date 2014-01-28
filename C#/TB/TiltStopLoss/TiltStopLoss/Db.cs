@@ -86,13 +86,12 @@ namespace TiltStopLoss
             Int64 lastline = 0;
             while (dr.Read())
             {
-                lastline = Convert.ToInt64(dr[0]);
-                dr.Close();
+                lastline = Convert.ToInt64(dr[0]);                
                 break;
             }
             //NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql, conn);
             //String TEST = da.ToString();
-
+            dr.Close();
             return lastline;
         }
 
@@ -128,15 +127,16 @@ namespace TiltStopLoss
             while (dr.Read())
             {
                 hand = dr[0].ToString();
-                dr.Close();
                 break;
             }
+            dr.Close();
             return hand;
         }
 
         public Double getSumBB(String playerid, String yearmonth)
         {
             string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = "+playerid+" and playedyearandmonth = "+yearmonth;
+            //string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = " + playerid + " and playedyearandmonth = 201402";
             NpgsqlCommand command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
             Double bb = 0.0;
@@ -149,11 +149,11 @@ namespace TiltStopLoss
                 }
                 else
                 {
-                    bb = Convert.ToDouble(dr[0].ToString());
-                    dr.Close();
+                    bb = Convert.ToDouble(dr[0].ToString());                    
                 }
                 break;
             }
+            dr.Close();
             return bb/100;
         }
     }

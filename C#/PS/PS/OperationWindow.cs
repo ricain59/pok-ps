@@ -262,6 +262,7 @@ namespace PS
                 
             }
             int hWndhh = FindWindow(null, "Instant Hand History");
+            //int hWndhh = FindWindow(null, "Historique instantané des mains");
             if (hWndhh > 0)
             {
                 SetForegroundWindow(hWndhh);

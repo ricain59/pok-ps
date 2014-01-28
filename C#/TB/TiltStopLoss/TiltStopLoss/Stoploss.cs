@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
 
 namespace TiltStopLoss
 {
@@ -25,8 +26,9 @@ namespace TiltStopLoss
         private Boolean continu = true;
         private String playername;
         private String stoploss;
+        private Int64 handstop;
 
-        public Stoploss(Form wmain, String playerid, Db db, String playername, String stoploss)
+        public Stoploss(Form wmain, String playerid, Db db, String playername, String stoploss, String hand)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -34,6 +36,15 @@ namespace TiltStopLoss
             this.playername = playername;
             dbase = db;
             this.stoploss = stoploss;
+            if (hand.Equals(""))
+            {
+                handstop = 0;
+            }
+            else
+            {
+                handstop = Convert.ToInt64(hand.ToString());
+            }            
+            loadconfig();
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
             startcrono.Start();
@@ -43,15 +54,20 @@ namespace TiltStopLoss
             //calculateBB();
             //calculo de hands jogadas
             //starthand = new Thread(new ThreadStart(this.calculateHands));
-            //starthand.Start();
-            
+            //starthand.Start();            
         }
-
 
         private void Stoploss_FormClosed(object sender, FormClosedEventArgs e)
         {
             String con = dbase.closeconDb();
             continu = false;
+            //guarda as config
+            String location = this.Location.X.ToString() + ',' + this.Location.Y.ToString();
+            String path = Directory.GetCurrentDirectory();
+            StreamWriter w = new StreamWriter(path + "/config2.txt", false);
+            w.Write("Location=" + location);
+            w.WriteLine();
+            w.Close();
             //Thread.Sleep(2000);
             startbb.Abort();
             startcrono.Abort();
@@ -74,7 +90,7 @@ namespace TiltStopLoss
             String yearmonth = new Utils().yearmonth();
             Double lastid = dbase.getSumBB(playerid, yearmonth);
             Int64 lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
-            //Int64 lastidhand = 5063100;
+            //Int64 lastidhand = 5083943;
             Int64 handnumber = 0;
 
             while (continu)
@@ -92,19 +108,22 @@ namespace TiltStopLoss
                     // It's on the same thread, no need for Invoke
                     this.labelBb.Text = bb.ToString();
                 }
-                if (bb > Convert.ToDouble(stoploss.ToString()))
+                if (!stoploss.Equals(""))
                 {
-                    MessageBox.Show("!!!! Stoploss !!!!");
-
+                    if (bb < (0 - Convert.ToDouble(stoploss)))
+                    {
+                        MessageBox.Show("!!!! Stoploss !!!!");
+                        new Utils().playsound();
+                    }
                 }
                 //hand
                 String hand = dbase.getHand(lastidhand);
                 if (!hand.Equals(""))
                 {
+                    lastidhand++;
                     if (hand.Contains(playername))
                     {
                         handnumber++;
-                        lastidhand++;
                         if (this.labelBb.InvokeRequired)
                         {
                             SetTextCallback d = new SetTextCallback(SetTextHands);
@@ -115,9 +134,17 @@ namespace TiltStopLoss
                             // It's on the same thread, no need for Invoke
                             this.labelHands.Text = handnumber.ToString();
                         }
+                        if (handstop != 0)
+                        {
+                            if (handstop < handnumber)
+                            {
+                                MessageBox.Show("!!!! StopHand !!!!");
+                                new Utils().playsound();
+                            }
+                        }
                     }
                 }
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
             }
         }
 
@@ -235,6 +262,37 @@ namespace TiltStopLoss
         private void labelBb_MouseLeave(object sender, EventArgs e)
         {
             labelBb.ForeColor = Color.White;
+        }
+
+
+        private void loadconfig()
+        {
+            String path = Directory.GetCurrentDirectory();
+            String filepath = path + "/config2.txt";
+            if (File.Exists(filepath))
+            {
+                string line;
+                // Read the file and display it line by line.
+                System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+                while ((line = file.ReadLine()) != null)
+                {
+                    String[] array = line.Split('=');
+                    configframe(array);
+                }
+                file.Close();
+            }
+        }
+
+        private void configframe(String[] line)
+        {
+            switch (line[0])
+            {
+                case "Location":
+                    String[] loc = line[1].Split(',');
+                    this.StartPosition = FormStartPosition.Manual;
+                    this.Location = new Point(int.Parse(loc[0]), int.Parse(loc[1]));
+                    break;               
+            }
         }
     }
 }

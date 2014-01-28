@@ -5,6 +5,8 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 using System.Configuration;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace TiltStopLoss
 {
@@ -14,6 +16,14 @@ namespace TiltStopLoss
         {
             return DateTime.Now.ToString("yyyyMM");
         }
+
+        public void playsound()
+        {
+            String path = Directory.GetCurrentDirectory();
+            String filepath = path + "/alarm.wav";
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(filepath);
+            player.PlayLooping();         
+        }        
         
     }
 }
