@@ -8,4 +8,4 @@ PasswordDB=postgrespass
 PlayerID=4
 Stoploss=250
 StopHands=
-StopTime=
+StopTime=60

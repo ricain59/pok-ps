@@ -8,8 +8,8 @@
     <ProjectGuid>{0AC3B679-4361-4D15-B089-90B6AB785065}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TiltStopLoss</RootNamespace>
-    <AssemblyName>TiltStopLoss</AssemblyName>
+    <RootNamespace>StopLoss</RootNamespace>
+    <AssemblyName>StopLoss</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -93,6 +93,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Stoploss.resx">
       <DependentUpon>Stoploss.cs</DependentUpon>
