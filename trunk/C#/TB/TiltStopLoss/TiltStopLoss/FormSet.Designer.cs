@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSet));
             this.textBoxStopTime = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -162,8 +163,10 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBoxStopLoss);
             this.Controls.Add(this.label9);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSet";
-            this.Text = "FormSet";
+            this.Text = "Set New Value";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSet_FormClosed);
             this.Load += new System.EventHandler(this.FormSet_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

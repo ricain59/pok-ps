@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using TiltStopLoss;
+using System.IO;
 
 namespace StopLoss
 {
@@ -21,6 +22,7 @@ namespace StopLoss
             textBoxStopHand.Text = hand.ToString();
             textBoxStopLoss.Text = loss.ToString();
             textBoxStopTime.Text = time.ToString();
+            loadconfig();
         }
 
         private void textBoxStopLoss_KeyPress(object sender, KeyPressEventArgs e)
@@ -70,6 +72,46 @@ namespace StopLoss
             }
             sl.setNewValue(hand, loss, time);
             this.Close();
+        }
+
+        private void loadconfig()
+        {
+            String path = Directory.GetCurrentDirectory();
+            String filepath = path + "/config3.txt";
+            if (File.Exists(filepath))
+            {
+                string line;
+                // Read the file and display it line by line.
+                System.IO.StreamReader file = new System.IO.StreamReader(filepath);
+                while ((line = file.ReadLine()) != null)
+                {
+                    String[] array = line.Split('=');
+                    configframe(array);
+                }
+                file.Close();
+            }
+        }
+
+        private void configframe(String[] line)
+        {
+            switch (line[0])
+            {
+                case "Location":
+                    String[] loc = line[1].Split(',');
+                    this.StartPosition = FormStartPosition.Manual;
+                    this.Location = new Point(int.Parse(loc[0]), int.Parse(loc[1]));
+                    break;
+            }
+        }
+
+        private void FormSet_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            String location = this.Location.X.ToString() + ',' + this.Location.Y.ToString();
+            String path = Directory.GetCurrentDirectory();
+            StreamWriter w = new StreamWriter(path + "/config3.txt", false);
+            w.Write("Location=" + location);
+            w.WriteLine();
+            w.Close();
         }
         
     }
