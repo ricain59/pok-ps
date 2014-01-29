@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 using System.IO;
+using TiltStopLoss;
 
 namespace TiltStopLoss
 {
@@ -16,7 +17,7 @@ namespace TiltStopLoss
     
     public partial class Stoploss : Form
     {
-        private Form wmain;
+        private Main wmain;
         private String playerid;
         private Db dbase;
         //private HandPs hps;
@@ -25,18 +26,25 @@ namespace TiltStopLoss
         //private Thread starthand;
         private Boolean continu = true;
         private String playername;
-        private String stoploss;
+        private Double stoploss;
         private Int64 handstop;
         private Int32 timestop;
 
-        public Stoploss(Form wmain, String playerid, Db db, String playername, String stoploss, String hand, String time)
+        public Stoploss(Main wmain, String playerid, Db db, String playername, String stoploss, String hand, String time)
         {
             InitializeComponent();
             this.wmain = wmain;
             this.playerid = playerid;
             this.playername = playername;
             dbase = db;
-            this.stoploss = stoploss;
+            if (stoploss.Equals(""))
+            {
+                this.stoploss = 0.0;
+            }
+            else
+            {
+                this.stoploss = Convert.ToDouble(stoploss.ToString());
+            }
             if (hand.Equals(""))
             {
                 handstop = 0;
@@ -85,7 +93,8 @@ namespace TiltStopLoss
             {
                 MessageBox.Show(con.ToString());
             }
-            wmain.Visible = true;
+            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString());
+            wmain.Visible = true;            
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
@@ -119,10 +128,10 @@ namespace TiltStopLoss
                 }
                 if (!stoploss.Equals(""))
                 {
-                    if (bb < (0 - Convert.ToDouble(stoploss)))
+                    if (bb < (0 - stoploss))
                     {
-                        MessageBox.Show("!!!! Stoploss !!!!");
                         new Utils().playsound();
+                        MessageBox.Show("!!!! Stoploss !!!!");                        
                     }
                 }
                 //hand
@@ -147,8 +156,8 @@ namespace TiltStopLoss
                         {
                             if (handstop < handnumber)
                             {
-                                MessageBox.Show("!!!! StopHand !!!!");
                                 new Utils().playsound();
+                                MessageBox.Show("!!!! StopHand !!!!");                                
                             }
                         }
                     }
@@ -212,8 +221,8 @@ namespace TiltStopLoss
                 {
                     if (timestop < minutetostop)
                     {
-                        MessageBox.Show("!!!! StopTime !!!!");
                         new Utils().playsound();
+                        MessageBox.Show("!!!! StopTime !!!!");                        
                     }
                 }
             }
@@ -282,6 +291,19 @@ namespace TiltStopLoss
                     this.Location = new Point(int.Parse(loc[0]), int.Parse(loc[1]));
                     break;               
             }
+        }
+
+        private void buttonSet_Click(object sender, EventArgs e)
+        {
+            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop);
+            fs.Show();
+        }
+
+        public void setNewValue(Int64 hand, Double loss, Int32 time)
+        {
+            this.timestop = time;
+            this.handstop = hand;
+            this.stoploss = loss;
         }
     }
 }

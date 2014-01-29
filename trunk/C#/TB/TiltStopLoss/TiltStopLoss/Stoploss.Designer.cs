@@ -34,13 +34,14 @@
             this.labelBb = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.labelHands = new System.Windows.Forms.Label();
+            this.buttonSet = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(101, 36);
+            this.buttonStop.Location = new System.Drawing.Point(138, 36);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.Size = new System.Drawing.Size(38, 23);
             this.buttonStop.TabIndex = 0;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -50,7 +51,7 @@
             // 
             this.labelTimer.AutoSize = true;
             this.labelTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimer.Location = new System.Drawing.Point(120, 8);
+            this.labelTimer.Location = new System.Drawing.Point(120, 9);
             this.labelTimer.Name = "labelTimer";
             this.labelTimer.Size = new System.Drawing.Size(56, 16);
             this.labelTimer.TabIndex = 1;
@@ -93,12 +94,23 @@
             this.labelHands.TabIndex = 4;
             this.labelHands.Text = "0";
             // 
+            // buttonSet
+            // 
+            this.buttonSet.Location = new System.Drawing.Point(101, 36);
+            this.buttonSet.Name = "buttonSet";
+            this.buttonSet.Size = new System.Drawing.Size(31, 23);
+            this.buttonSet.TabIndex = 5;
+            this.buttonSet.Text = "Set";
+            this.buttonSet.UseVisualStyleBackColor = true;
+            this.buttonSet.Click += new System.EventHandler(this.buttonSet_Click);
+            // 
             // Stoploss
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(188, 64);
+            this.Controls.Add(this.buttonSet);
             this.Controls.Add(this.labelHands);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelBb);
@@ -120,5 +132,6 @@
         private System.Windows.Forms.Label labelBb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelHands;
+        private System.Windows.Forms.Button buttonSet;
     }
 }
