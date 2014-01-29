@@ -27,8 +27,9 @@ namespace TiltStopLoss
         private String playername;
         private String stoploss;
         private Int64 handstop;
+        private Int32 timestop;
 
-        public Stoploss(Form wmain, String playerid, Db db, String playername, String stoploss, String hand)
+        public Stoploss(Form wmain, String playerid, Db db, String playername, String stoploss, String hand, String time)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -43,7 +44,16 @@ namespace TiltStopLoss
             else
             {
                 handstop = Convert.ToInt64(hand.ToString());
-            }            
+            }
+            if (time.Equals(""))
+            {
+                timestop = 0;
+            }
+            else
+            {
+                Int32 minutetime  = Convert.ToInt32(time);
+                timestop = minutetime * 60;
+            }
             loadconfig();
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
@@ -146,37 +156,7 @@ namespace TiltStopLoss
                 }
                 Thread.Sleep(2000);
             }
-        }
-
-        private void calculateHands()
-        {
-            //pour calculer les hands
-            Int64 lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
-            Int64 handnumber = 0;
-            while (continu)
-            {
-                String hand = dbase.getHand(lastidhand);
-                if (!hand.Equals(""))
-                {
-                    if (hand.Contains(playername))
-                    {
-                        handnumber++;
-                        lastidhand++;
-                        if (this.labelBb.InvokeRequired)
-                        {
-                            SetTextCallback d = new SetTextCallback(SetTextBb);
-                            this.Invoke(d, new object[] { handnumber.ToString() });
-                        }
-                        else
-                        {
-                            // It's on the same thread, no need for Invoke
-                            this.labelHands.Text = handnumber.ToString();
-                        }
-                     }
-                }
-                Thread.Sleep(3000);
-            }
-        }
+        }        
 
         private void stoptimer()
         {
@@ -198,25 +178,25 @@ namespace TiltStopLoss
                         hour++;
                     }
                 }
-                String minutes;
+                String minutest;
                 if (minute < 10)
                 {
-                    minutes = "0" + minute;
+                    minutest = "0" + minute;
                 }
                 else
                 {
-                    minutes = "" + minute;
+                    minutest = "" + minute;
                 }
-                String secondes;
+                String secondest;
                 if (seconde < 10)
                 {
-                    secondes = "0" + seconde;
+                    secondest = "0" + seconde;
                 }
                 else
                 {
-                    secondes = "" + seconde;
+                    secondest = "" + seconde;
                 }
-                String time = "0" + hour + ":" + minutes + ":" + secondes;
+                String time = "0" + hour + ":" + minutest + ":" + secondest;
                 if (this.labelTimer.InvokeRequired)
                 {
                     SetTextCallback d = new SetTextCallback(SetTextTimer);
@@ -226,6 +206,14 @@ namespace TiltStopLoss
                 {
                     // It's on the same thread, no need for Invoke
                     this.labelTimer.Text = time;
+                }
+                if (timestop != 0)
+                {
+                    if (timestop < seconde)
+                    {
+                        MessageBox.Show("!!!! StopTime !!!!");
+                        new Utils().playsound();
+                    }
                 }
             }
         }
