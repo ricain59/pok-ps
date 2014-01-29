@@ -204,33 +204,24 @@ namespace TiltStopLoss
 
         private void textBoxStopLoss_KeyPress(object sender, KeyPressEventArgs e)
         {
-            onlyNumeric(e);
-        }
-
-        private void onlyNumeric(KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar)
-                    && !char.IsDigit(e.KeyChar)
-                    && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
-            // only allow one decimal point
-            //if (e.KeyChar == '.'
-            //    && (sender as TextBox).Text.IndexOf('.') > -1)
-            //{
-            //    e.Handled = true;
-            //}
+            new Utils().onlynumeric(e);
         }
 
         private void textBoxStopHand_KeyPress(object sender, KeyPressEventArgs e)
         {
-            onlyNumeric(e);
+            new Utils().onlynumeric(e);
         }
 
         private void textBoxStopTime_KeyPress(object sender, KeyPressEventArgs e)
         {
-            onlyNumeric(e);
+            new Utils().onlynumeric(e);
+        }
+
+        public void setNewValue(String hand, String loss, String time)
+        {
+            textBoxStopLoss.Text = loss;
+            textBoxStopHand.Text = hand;
+            textBoxStopTime.Text = time;
         }
 
     }
