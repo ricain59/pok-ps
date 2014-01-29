@@ -51,8 +51,7 @@ namespace TiltStopLoss
             }
             else
             {
-                Int32 minutetime  = Convert.ToInt32(time);
-                timestop = minutetime * 60;
+                timestop = Convert.ToInt32(time);                
             }
             loadconfig();
             //cronometro
@@ -163,6 +162,7 @@ namespace TiltStopLoss
             int hour = 0;
             int minute = 0;
             int seconde = 0;
+            int minutetostop = 0;
 
             while (continu)
             {
@@ -171,6 +171,7 @@ namespace TiltStopLoss
                 if (seconde == 60)
                 {
                     seconde = 0;
+                    minutetostop++;
                     minute++;
                     if (minute == 60)
                     {
@@ -209,7 +210,7 @@ namespace TiltStopLoss
                 }
                 if (timestop != 0)
                 {
-                    if (timestop < seconde)
+                    if (timestop < minutetostop)
                     {
                         MessageBox.Show("!!!! StopTime !!!!");
                         new Utils().playsound();
