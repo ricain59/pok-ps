@@ -9,3 +9,4 @@ PlayerID=4
 Stoploss=250
 StopHands=0
 StopTime=0
+StopWin=0

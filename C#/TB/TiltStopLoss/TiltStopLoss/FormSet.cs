@@ -15,13 +15,14 @@ namespace StopLoss
     {
         private Stoploss sl;
         
-        public FormSet(Stoploss formsl, Double loss, Int64 hand, Int32 time)
+        public FormSet(Stoploss formsl, Double loss, Int64 hand, Int32 time, Double win)
         {
             InitializeComponent();
             sl = formsl;
             textBoxStopHand.Text = hand.ToString();
             textBoxStopLoss.Text = loss.ToString();
             textBoxStopTime.Text = time.ToString();
+            textBoxStopWin.Text = win.ToString();
             loadconfig();
         }
 
@@ -36,6 +37,11 @@ namespace StopLoss
         }
 
         private void textBoxStopTime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopWin_KeyPress(object sender, KeyPressEventArgs e)
         {
             new Utils().onlynumeric(e);
         }
@@ -55,7 +61,8 @@ namespace StopLoss
             Int64 hand = new Utils().stringtoInt64(textBoxStopHand.Text);
             Double loss = new Utils().stringtoDouble(textBoxStopLoss.Text);
             Int32 time = new Utils().stringtoInt32(textBoxStopTime.Text);
-            sl.setNewValue(hand, loss, time);
+            Double win = new Utils().stringtoDouble(textBoxStopWin.Text);
+            sl.setNewValue(hand, loss, time, win);
             this.Close();
         }
 
@@ -100,7 +107,7 @@ namespace StopLoss
             w.Write("Location=" + location);
             w.WriteLine();
             w.Close();
-        }
+        }     
         
     }
 }
