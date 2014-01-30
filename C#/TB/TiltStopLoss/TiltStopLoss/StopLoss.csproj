@@ -61,15 +61,9 @@
     <Compile Include="FormSet.Designer.cs">
       <DependentUpon>FormSet.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchPlayer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SearchPlayer.Designer.cs">
-      <DependentUpon>SearchPlayer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Db.cs" />
     <Compile Include="Debug.cs" />
-    <Compile Include="HandPs.cs" />
+    <Compile Include="HandPs_obsolete.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,9 +81,6 @@
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="FormSet.resx">
       <DependentUpon>FormSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SearchPlayer.resx">
-      <DependentUpon>SearchPlayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

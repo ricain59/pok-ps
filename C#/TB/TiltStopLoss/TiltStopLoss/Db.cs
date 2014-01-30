@@ -18,6 +18,15 @@ namespace TiltStopLoss
         public NpgsqlConnection conn;
         private String player;
 
+        /// <summary>
+        /// Aqui obtenho os dados de connexão a DB
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="server"></param>
+        /// <param name="port"></param>
+        /// <param name="password"></param>
+        /// <param name="Db"></param>
+        /// <param name="player"></param>
         public void getData(String user, String server, String port, String password, String Db, String player)
         {
             this.player = player;
@@ -31,6 +40,10 @@ namespace TiltStopLoss
                             server, port, user, password, database);
         }
         
+        /// <summary>
+        /// Para testat a connexão a DB
+        /// </summary>
+        /// <returns></returns>
         public String testconnectDb()
         {
             try
@@ -48,6 +61,10 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// Ligo me a DB
+        /// </summary>
+        /// <returns></returns>
         public String connectDb()
         {
             try
@@ -62,6 +79,10 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// Fecho a ligação a DB
+        /// </summary>
+        /// <returns></returns>
         public String closeconDb()
         {
             try
@@ -75,6 +96,12 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// Ir buscar o ultimo id de uma coluna de uma tabela
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
         public Int64 getLastValue(String table, String column)
         {
             string sql = "select * from " + table + " order by " + column + " desc limit 1;";
@@ -89,35 +116,15 @@ namespace TiltStopLoss
                 lastline = Convert.ToInt64(dr[0]);                
                 break;
             }
-            //NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql, conn);
-            //String TEST = da.ToString();
             dr.Close();
             return lastline;
         }
 
-        //public Double getLastValue()
-        //{
-        //    string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = 4 and playedyearandmonth = 201401";
-        //    NpgsqlCommand command = new NpgsqlCommand(sql, conn);
-        //    NpgsqlDataReader dr = command.ExecuteReader();
-        //    Double bb = 0.0;
-        //    while (dr.Read())
-        //    {
-        //        if (dr[0].ToString().Equals(""))
-        //        {
-        //            dr.Close();
-        //            return 0.0;
-        //        }
-        //        else
-        //        {
-        //            bb = Convert.ToDouble(dr[0].ToString());
-        //            dr.Close();
-        //        }
-        //        break;
-        //    }
-        //    return bb / 100;
-        //}
-
+        /// <summary>
+        /// Permite ir buscar uma mão
+        /// </summary>
+        /// <param name="hhid"></param>
+        /// <returns></returns>
         public String getHand(Int64 hhid)
         {
             string sql = "select handhistory from handhistories where handhistory_id = " + hhid + ";";
@@ -133,6 +140,12 @@ namespace TiltStopLoss
             return hand;
         }
 
+        /// <summary>
+        /// Vou buscar a soma total da BBs de um mês.
+        /// </summary>
+        /// <param name="playerid"></param>
+        /// <param name="yearmonth"></param>
+        /// <returns></returns>
         public Double getSumBB(String playerid, String yearmonth)
         {
             string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = "+playerid+" and playedyearandmonth = "+yearmonth;

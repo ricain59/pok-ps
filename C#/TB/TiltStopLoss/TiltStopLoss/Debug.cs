@@ -12,7 +12,7 @@ namespace TiltStopLoss
         public String getFileName()
         {
             //var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-            string startupPath = System.IO.Directory.GetCurrentDirectory();
+            String startupPath = System.IO.Directory.GetCurrentDirectory();
             //string startupPath2 = Environment.CurrentDirectory;
             //var iconPath = Path.Combine(outPutDirectory, "");
             String icon_path = new Uri(startupPath).LocalPath;
