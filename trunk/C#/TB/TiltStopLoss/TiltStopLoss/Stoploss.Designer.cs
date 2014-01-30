@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelHands = new System.Windows.Forms.Label();
             this.buttonSet = new System.Windows.Forms.Button();
+            this.labelStop = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonStop
@@ -63,7 +64,7 @@
             this.labelBb.AutoSize = true;
             this.labelBb.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBb.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelBb.Location = new System.Drawing.Point(9, 8);
+            this.labelBb.Location = new System.Drawing.Point(9, 17);
             this.labelBb.Name = "labelBb";
             this.labelBb.Size = new System.Drawing.Size(71, 24);
             this.labelBb.TabIndex = 2;
@@ -104,12 +105,23 @@
             this.buttonSet.UseVisualStyleBackColor = true;
             this.buttonSet.Click += new System.EventHandler(this.buttonSet_Click);
             // 
+            // labelStop
+            // 
+            this.labelStop.AutoSize = true;
+            this.labelStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStop.Location = new System.Drawing.Point(39, 62);
+            this.labelStop.Name = "labelStop";
+            this.labelStop.Size = new System.Drawing.Size(20, 16);
+            this.labelStop.TabIndex = 6;
+            this.labelStop.Text = "   ";
+            // 
             // Stoploss
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(188, 64);
+            this.ClientSize = new System.Drawing.Size(188, 82);
+            this.Controls.Add(this.labelStop);
             this.Controls.Add(this.buttonSet);
             this.Controls.Add(this.labelHands);
             this.Controls.Add(this.label1);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelHands;
         private System.Windows.Forms.Button buttonSet;
+        private System.Windows.Forms.Label labelStop;
     }
 }

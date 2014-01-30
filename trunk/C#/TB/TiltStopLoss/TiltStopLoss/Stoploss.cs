@@ -14,6 +14,7 @@ using TiltStopLoss;
 namespace TiltStopLoss
 {
     delegate void SetTextCallback(string text);
+    delegate void SetTextCallbacks(String text, Color cor);
     
     public partial class Stoploss : Form
     {
@@ -87,6 +88,7 @@ namespace TiltStopLoss
         /// </summary>
         private void calculateBB()
         {
+            Boolean stop = false;
             //DEPOIS de recuperar o ultimo id
             String yearmonth = new Utils().yearmonth();
             Double lastid = dbase.getSumBB(playerid, yearmonth);
@@ -112,16 +114,24 @@ namespace TiltStopLoss
                 {
                     if (bb < (0 - stoploss))
                     {
-                        new Utils().playsound();
-                        MessageBox.Show("!!!! StopLoss !!!!");                        
+                        if (!stop)
+                        {
+                            new Utils().playsound();
+                        }
+                        stop = true;
+                        labelStopSet("!!!! StopLoss !!!!", Color.Red);
                     }
                 }
                 if (stopwin > 0.0)
                 {
                     if (bb > stopwin)
                     {
-                        new Utils().playsound();
-                        MessageBox.Show("!!!! StopWin !!!!");
+                        if (!stop)
+                        {
+                            new Utils().playsound();
+                        }
+                        stop = true;
+                        labelStopSet("!!!! StopWin !!!!", Color.Green);
                     }
                 }
                 //hand
@@ -146,8 +156,12 @@ namespace TiltStopLoss
                         {
                             if (handstop < handnumber)
                             {
-                                new Utils().playsound();
-                                MessageBox.Show("!!!! StopHand !!!!");                                
+                                if (!stop)
+                                {
+                                    new Utils().playsound();
+                                }
+                                stop = true;
+                                labelStopSet("!!!! StopHand !!!!", Color.Blue);                                                             
                             }
                         }
                     }
@@ -165,6 +179,7 @@ namespace TiltStopLoss
             int minute = 0;
             int seconde = 0;
             int minutetostop = 0;
+            Boolean stop = false;
 
             while (continu)
             {
@@ -214,8 +229,12 @@ namespace TiltStopLoss
                 {
                     if (timestop < minutetostop)
                     {
-                        new Utils().playsound();
-                        MessageBox.Show("!!!! StopTime !!!!");                        
+                        if (!stop)
+                        {
+                            new Utils().playsound();
+                        }
+                        stop = true;
+                        labelStopSet("!!!! StopTime !!!!", Color.Black);                                               
                     }
                 }
             }
@@ -232,6 +251,26 @@ namespace TiltStopLoss
         private void SetTextHands(string text)
         {
             this.labelHands.Text = text;
+        }
+        private void setLabelStop(String text, Color cor)
+        {
+            this.labelStop.Text = text;
+            this.labelStop.ForeColor = cor;
+        }
+
+        private void labelStopSet(String text, Color cor)
+        {
+            if (this.labelBb.InvokeRequired)
+            {
+                SetTextCallbacks d = new SetTextCallbacks(setLabelStop);
+                this.Invoke(d, new object[] { text, cor });
+            }
+            else
+            {
+                // It's on the same thread, no need for Invoke
+                this.labelStop.Text = text;
+                this.labelStop.ForeColor = cor;
+            }
         }
 
         /// <summary>
