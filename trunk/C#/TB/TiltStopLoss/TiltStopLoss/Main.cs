@@ -59,7 +59,7 @@ namespace TiltStopLoss
                 if (!stop)
                 {
                     this.Visible = false;
-                    Stoploss sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text);
+                    Stoploss sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text);
                     sl.Show();
                     //sl.beginBB(this, textBoxPlayer.Text, db);
                 }
@@ -130,6 +130,9 @@ namespace TiltStopLoss
                 case "StopTime":
                     textBoxStopTime.Text = line[1].ToString();
                     break;
+                case "StopWin":
+                    textBoxStopWin.Text = line[1].ToString();
+                    break;
                 default:
                     break;
             }
@@ -161,7 +164,9 @@ namespace TiltStopLoss
             w.Write("StopHands=" + textBoxStopHand.Text.ToString());
             w.WriteLine();
             w.Write("StopTime=" + textBoxStopTime.Text.ToString());
-            w.WriteLine();            
+            w.WriteLine();
+            w.Write("StopWin=" + textBoxStopWin.Text.ToString());
+            w.WriteLine();
             w.Close();
         }
 
@@ -199,6 +204,11 @@ namespace TiltStopLoss
             new Utils().onlynumeric(e);
         }
 
+        private void textBoxStopWin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
         /// <summary>
         /// Se quando estamos a jogar alteramos os valores inseridos anteriomente
         /// Altero tambem aqui
@@ -206,11 +216,12 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(String hand, String loss, String time)
+        public void setNewValue(String hand, String loss, String time, String win)
         {
             textBoxStopLoss.Text = loss;
             textBoxStopHand.Text = hand;
             textBoxStopTime.Text = time;
+            textBoxStopWin.Text = win;
         }
 
         /// <summary>
@@ -240,7 +251,7 @@ namespace TiltStopLoss
             {
                 Console.WriteLine("exception==" + ex);
             }
-        }
+        }     
 
     }
 }

@@ -59,6 +59,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.textBoxStopWin = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -240,6 +243,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.textBoxStopWin);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.label15);
             this.tabPage3.Controls.Add(this.textBoxStopTime);
             this.tabPage3.Controls.Add(this.label13);
             this.tabPage3.Controls.Add(this.label12);
@@ -374,6 +380,39 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // textBoxStopWin
+            // 
+            this.textBoxStopWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxStopWin.ForeColor = System.Drawing.Color.Green;
+            this.textBoxStopWin.Location = new System.Drawing.Point(94, 132);
+            this.textBoxStopWin.Name = "textBoxStopWin";
+            this.textBoxStopWin.Size = new System.Drawing.Size(71, 20);
+            this.textBoxStopWin.TabIndex = 14;
+            this.textBoxStopWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxStopWin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopWin_KeyPress);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Green;
+            this.label14.Location = new System.Drawing.Point(175, 139);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 13);
+            this.label14.TabIndex = 13;
+            this.label14.Text = "BBs";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Green;
+            this.label15.Location = new System.Drawing.Point(21, 139);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(55, 13);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "StopWin";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,6 +465,9 @@
         private System.Windows.Forms.TextBox textBoxStopTime;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxStopWin;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
     }
 }
 

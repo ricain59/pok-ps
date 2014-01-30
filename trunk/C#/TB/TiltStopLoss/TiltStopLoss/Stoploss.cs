@@ -27,8 +27,9 @@ namespace TiltStopLoss
         private Double stoploss;
         private Int64 handstop;
         private Int32 timestop;
+        private Double stopwin;
 
-        public Stoploss(Main wmain, String playerid, Db db, String playername, String stoploss, String hand, String time)
+        public Stoploss(Main wmain, String playerid, Db db, String playername, String stoploss, String hand, String time, String win)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -38,7 +39,8 @@ namespace TiltStopLoss
             this.stoploss = new Utils().stringtoDouble(stoploss);
             handstop = new Utils().stringtoInt64(hand);
             timestop = new Utils().stringtoInt32(time);
-            
+            stopwin = new Utils().stringtoDouble(win);
+
             loadconfig();
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
@@ -71,7 +73,7 @@ namespace TiltStopLoss
             startbb.Abort();
             startcrono.Abort();
             
-            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString());
+            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString());
             wmain.Visible = true;            
         }
 
@@ -111,7 +113,15 @@ namespace TiltStopLoss
                     if (bb < (0 - stoploss))
                     {
                         new Utils().playsound();
-                        MessageBox.Show("!!!! Stoploss !!!!");                        
+                        MessageBox.Show("!!!! StopLoss !!!!");                        
+                    }
+                }
+                if (stopwin > 0.0)
+                {
+                    if (bb > stopwin)
+                    {
+                        new Utils().playsound();
+                        MessageBox.Show("!!!! StopWin !!!!");
                     }
                 }
                 //hand
@@ -295,7 +305,7 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void buttonSet_Click(object sender, EventArgs e)
         {
-            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop);
+            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop, stopwin);
             fs.Show();
         }
 
@@ -305,11 +315,12 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(Int64 hand, Double loss, Int32 time)
+        public void setNewValue(Int64 hand, Double loss, Int32 time, Double win)
         {
             this.timestop = time;
             this.handstop = hand;
             this.stoploss = loss;
+            this.stopwin = win;
         }
     }
 }
