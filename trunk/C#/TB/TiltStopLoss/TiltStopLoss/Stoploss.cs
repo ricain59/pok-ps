@@ -20,10 +20,8 @@ namespace TiltStopLoss
         private Main wmain;
         private String playerid;
         private Db dbase;
-        //private HandPs hps;
         private Thread startcrono;
         private Thread startbb;
-        //private Thread starthand;
         private Boolean continu = true;
         private String playername;
         private Double stoploss;
@@ -37,35 +35,15 @@ namespace TiltStopLoss
             this.playerid = playerid;
             this.playername = playername;
             dbase = db;
-            if (stoploss.Equals(""))
-            {
-                this.stoploss = 0.0;
-            }
-            else
-            {
-                this.stoploss = Convert.ToDouble(stoploss.ToString());
-            }
-            if (hand.Equals(""))
-            {
-                handstop = 0;
-            }
-            else
-            {
-                handstop = Convert.ToInt64(hand.ToString());
-            }
-            if (time.Equals(""))
-            {
-                timestop = 0;
-            }
-            else
-            {
-                timestop = Convert.ToInt32(time);                
-            }
+            this.stoploss = new Utils().stringtoDouble(stoploss);
+            handstop = new Utils().stringtoInt64(hand);
+            timestop = new Utils().stringtoInt32(time);
+            
             loadconfig();
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
             startcrono.Start();
-            //calculo dos BB
+            //calculo dos BB e hands
             startbb = new Thread(new ThreadStart(this.calculateBB));
             startbb.Start();
             //calculateBB();
@@ -76,8 +54,12 @@ namespace TiltStopLoss
 
         private void Stoploss_FormClosed(object sender, FormClosedEventArgs e)
         {
-            String con = dbase.closeconDb();
             continu = false;
+            String con = dbase.closeconDb();
+            if (!con.Equals(""))
+            {
+                MessageBox.Show(con.ToString());
+            }
             //guarda as config
             String location = this.Location.X.ToString() + ',' + this.Location.Y.ToString();
             String path = Directory.GetCurrentDirectory();
@@ -85,14 +67,10 @@ namespace TiltStopLoss
             w.Write("Location=" + location);
             w.WriteLine();
             w.Close();
-            //Thread.Sleep(2000);
+            
             startbb.Abort();
             startcrono.Abort();
-            //starthand.Abort();
-            if (!con.Equals(""))
-            {
-                MessageBox.Show(con.ToString());
-            }
+            
             wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString());
             wmain.Visible = true;            
         }
@@ -102,13 +80,15 @@ namespace TiltStopLoss
             this.Close();            
         }
 
+        /// <summary>
+        /// Calcula os bb e hand para o stop
+        /// </summary>
         private void calculateBB()
         {
             //DEPOIS de recuperar o ultimo id
             String yearmonth = new Utils().yearmonth();
             Double lastid = dbase.getSumBB(playerid, yearmonth);
             Int64 lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
-            //Int64 lastidhand = 5083943;
             Int64 handnumber = 0;
 
             while (continu)
@@ -126,7 +106,7 @@ namespace TiltStopLoss
                     // It's on the same thread, no need for Invoke
                     this.labelBb.Text = bb.ToString();
                 }
-                if (!stoploss.Equals(""))
+                if (stoploss > 0.0)
                 {
                     if (bb < (0 - stoploss))
                     {
@@ -166,6 +146,9 @@ namespace TiltStopLoss
             }
         }        
 
+        /// <summary>
+        /// cronometro do tempo da sessão e para o stop time
+        /// </summary>
         private void stoptimer()
         {
             int hour = 0;
@@ -241,6 +224,11 @@ namespace TiltStopLoss
             this.labelHands.Text = text;
         }
 
+        /// <summary>
+        /// mudar o texto das bb e po-lo visível ao passsar o rato por cima.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void labelBb_MouseHover(object sender, EventArgs e)
         {
             Double value = Convert.ToDouble(labelBb.Text.ToString());
@@ -257,12 +245,19 @@ namespace TiltStopLoss
             labelBb.Visible = true;
         }
 
+        /// <summary>
+        /// põe o label das BBs novmaente invisível.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void labelBb_MouseLeave(object sender, EventArgs e)
         {
             labelBb.ForeColor = Color.White;
         }
 
-
+        /// <summary>
+        /// carregas as configs
+        /// </summary>
         private void loadconfig()
         {
             String path = Directory.GetCurrentDirectory();
@@ -293,12 +288,23 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// Permite ajustar os valores depois de arrancar com o programa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSet_Click(object sender, EventArgs e)
         {
             StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop);
             fs.Show();
         }
 
+        /// <summary>
+        /// recebe os novos valores
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <param name="loss"></param>
+        /// <param name="time"></param>
         public void setNewValue(Int64 hand, Double loss, Int32 time)
         {
             this.timestop = time;

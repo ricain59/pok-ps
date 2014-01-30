@@ -24,33 +24,8 @@ namespace TiltStopLoss
             if (!textBoxServer.Text.Equals(""))
             {
                 textBoxPlayer.Enabled = true;
-                try
-                {
-                    textBoxPlayer.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    textBoxPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                    AutoCompleteStringCollection col = new AutoCompleteStringCollection();
-                    string query = "select player_id, playername from players ";
-                    db.connectDb();
-                    NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
-                    NpgsqlDataReader dr = command.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        col.Add(dr[1].ToString());
-
-                    }
-                    dr.Close();
-                    textBoxPlayer.AutoCompleteCustomSource = col;
-                    db.closeconDb();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("exception==" + ex);
-                }
+                fillTextboxPlayer();
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
         }
 
         private void buttonTestDb_Click(object sender, EventArgs e)
@@ -71,7 +46,6 @@ namespace TiltStopLoss
         private void buttonStart_Click(object sender, EventArgs e)
         {
             Boolean stop = false;
-            //ligo me a DB para ir buscar o ultimo id inserido
             String con = db.connectDb();
             if (!con.Equals(""))
             {
@@ -96,6 +70,9 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// Permite guardar os dados inseridos no software
+        /// </summary>
         private void loadconfig()
         {
             String path = Directory.GetCurrentDirectory();
@@ -188,6 +165,11 @@ namespace TiltStopLoss
             w.Close();
         }
 
+        /// <summary>
+        /// Vou procurar o id do nome inserido no textbox do player
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxPlayer_Leave(object sender, EventArgs e)
         {
             string query = "select player_id from players where playername = '"+textBoxPlayer.Text.ToString()+"'";
@@ -217,11 +199,47 @@ namespace TiltStopLoss
             new Utils().onlynumeric(e);
         }
 
+        /// <summary>
+        /// Se quando estamos a jogar alteramos os valores inseridos anteriomente
+        /// Altero tambem aqui
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <param name="loss"></param>
+        /// <param name="time"></param>
         public void setNewValue(String hand, String loss, String time)
         {
             textBoxStopLoss.Text = loss;
             textBoxStopHand.Text = hand;
             textBoxStopTime.Text = time;
+        }
+
+        /// <summary>
+        /// Fill textbox player from databse
+        /// </summary>
+        private void fillTextboxPlayer()
+        {
+            try
+            {
+                textBoxPlayer.AutoCompleteMode = AutoCompleteMode.Suggest;
+                textBoxPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                AutoCompleteStringCollection col = new AutoCompleteStringCollection();
+                string query = "select player_id, playername from players ";
+                db.connectDb();
+                NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
+                NpgsqlDataReader dr = command.ExecuteReader();
+                while (dr.Read())
+                {
+                    col.Add(dr[1].ToString());
+
+                }
+                dr.Close();
+                textBoxPlayer.AutoCompleteCustomSource = col;
+                db.closeconDb();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("exception==" + ex);
+            }
         }
 
     }

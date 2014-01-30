@@ -45,35 +45,23 @@ namespace StopLoss
 
         }
 
+        /// <summary>
+        /// Ao clicar no botão ok mando a informação para o form stoploss
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            Int64 hand;
-            Double loss;
-            Int32 time;
-            if(textBoxStopHand.Text.Equals(""))
-            {
-                hand = 0;
-            }
-            else
-            {
-                hand = Convert.ToInt64(textBoxStopHand.Text.ToString());
-            }
-            if(textBoxStopLoss.Text.Equals(""))
-            {
-                loss = 0.0;
-            }else{
-                loss = Convert.ToDouble(textBoxStopLoss.Text.ToString());
-            }
-            if(textBoxStopTime.Text.Equals(""))
-            {
-                time = 0;
-            }else{
-                time = Convert.ToInt32(textBoxStopTime.Text.ToString());
-            }
+            Int64 hand = new Utils().stringtoInt64(textBoxStopHand.Text);
+            Double loss = new Utils().stringtoDouble(textBoxStopLoss.Text);
+            Int32 time = new Utils().stringtoInt32(textBoxStopTime.Text);
             sl.setNewValue(hand, loss, time);
             this.Close();
         }
 
+        /// <summary>
+        /// Permite guardar as configurações da janela
+        /// </summary>
         private void loadconfig()
         {
             String path = Directory.GetCurrentDirectory();
