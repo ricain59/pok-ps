@@ -112,7 +112,7 @@ namespace TiltStopLoss
                 }
                 if (stoploss > 0.0)
                 {
-                    if (bb < (0 - stoploss))
+                    if (bb <= (0 - stoploss))
                     {
                         if (!stop)
                         {
@@ -124,7 +124,7 @@ namespace TiltStopLoss
                 }
                 if (stopwin > 0.0)
                 {
-                    if (bb > stopwin)
+                    if (bb >= stopwin)
                     {
                         if (!stop)
                         {
@@ -154,7 +154,7 @@ namespace TiltStopLoss
                         }
                         if (handstop != 0)
                         {
-                            if (handstop < handnumber)
+                            if (handstop <= handnumber)
                             {
                                 if (!stop)
                                 {
@@ -227,7 +227,7 @@ namespace TiltStopLoss
                 }
                 if (timestop != 0)
                 {
-                    if (timestop < minutetostop)
+                    if (timestop <= minutetostop)
                     {
                         if (!stop)
                         {

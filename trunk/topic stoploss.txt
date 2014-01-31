@@ -1,0 +1,46 @@
+[CENTER][COLOR=blue][B]StopLoss[/B][/COLOR][/CENTER]
+
+[CENTER][IMG]https://dl.dropboxusercontent.com/u/24467236/2.jpg[/IMG][/CENTER]
+
+Bonjour a tous,
+
+Étant joueur de poker avec quelque problème de tilt, comme d'autre certainement, je me suis mis dans l'idée d'acheter tilt breaker. 
+Oui mais voila, pour un joueur de poker jouant en micro limite la valeur de tilt breaker était trop élevé :(. Donc j'ai décidé de créer un petit software de stoploss.
+
+Ce petit soft je l'ai créer moi même, avec mes capacités réduite en programmation. Son but initial était de me prévenir quand je perdait xxBB, résultat concluant.
+
+Comme je voulais le faire partager, j'ai demandé a quelque membre de ce forum de le tester, et au fur et a mesure des test des améliorations et des demandes on était ajouté a ce petit software fait maison.
+Donc j'ai ajouté un stoploss, stopwin, stoptime et stophands.
+
+Mon but n'est pas lucratif, je le partage pour que ceux qui veulent en profiter.
+
+Ce soft, n'ayant que hem2 a la main, n'est compatible que avec la base de donnée de hem2, désolé pour ceux qui utilise pt4 :(
+Comme je ne touche en aucun cas a hem2, mais j'accède seulement a la base de donnée de postgres je pense qu'il n'y a aucune illégalité a mon soft car il y a des autre soft payant qui font le même (remarque d'un beta testeur ;)).
+
+Donc bon, pour ceux qui le veulent voila comment l'utiliser:
+
+1 - Télécharger ici la dernière version: [URL=https://www.dropbox.com/sh/j9l8fqlm67vpyzl/QKQWpcfVLO]Lien[/URL] (il y a un dossier appeler print pour ceux qui veulent voir des image du soft)
+
+2 - Dézippé le dossier stoploss (pour chaque actualisation il suffira de dézipper par dessus l'encien dossier, les config reste)
+
+3 - lancer le fichier: stoploss.exe
+
+4 - a l'ouverture du soft (au cas où vous avez une erreur, veuillez installer le net framework 4.0), veuillez introduire les données de connection a postgressql.
+Pour ceux qui ne les connaissent pas, pour cela il suffit d'aller sur hem2 -> database -> cliquer sur le petit "+" vert et voila les données apparaissent ;)
+
+5 - Apres avoir introduit les donnée cliquer sur test, si c'est ok il y aura un message de confirmation et le soft se ferme
+
+6 - le re-ouvrir, et vous pouvez désormais introduire votre pseudo de la room où vous jouez (cela n'accepte pas d'alias de hem2 vraiment le pseudo)
+
+7 - onglet configuration, choisissez ce que vous voulez comme stop (tous ou aucun le soft fonctionne quand même. Vous pouvez laisser tout avec 0 ou tout sans rien)
+
+8 - onglet start et cliquer sur start, et c'est parti.
+
+Remarque:
+
+- Lancer le soft avant de commencer a grind bien sur.
+- Une fois cliquer sur start, on peux toujours changer ou modifier les valeurs du stop en cliquant sur set
+- Le son choisit est fait exprès pour vraiment énervé le joueur et le forcé a arrêter
+- Le son ne s'arrête que en fermant mon soft
+
+Merci a tout mes beta testeurs (B45T13N, Stratege85, thr4shr42, akran, lunitis et misterdjul  pour les critique, tests et idées apportés ;)

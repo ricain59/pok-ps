@@ -58,10 +58,18 @@ namespace TiltStopLoss
             {
                 if (!stop)
                 {
-                    this.Visible = false;
-                    Stoploss sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text);
-                    sl.Show();
-                    //sl.beginBB(this, textBoxPlayer.Text, db);
+                    if (textBoxPlayer.Text.Equals(""))
+                    {
+                        MessageBox.Show("Fill player name please.");
+                        tabControlMain.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        this.Visible = false;
+                        Stoploss sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text);
+                        sl.Show();
+                        //sl.beginBB(this, textBoxPlayer.Text, db);
+                    }
                 }
             }
             catch (Exception ex)
