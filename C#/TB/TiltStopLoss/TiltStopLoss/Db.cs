@@ -148,7 +148,7 @@ namespace TiltStopLoss
         /// <returns></returns>
         public Double getSumBB(String playerid, String yearmonth)
         {
-            string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = "+playerid+" and playedyearandmonth = "+yearmonth;
+            string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = "+playerid+" and playedyearandmonth >= "+yearmonth;
             //string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = " + playerid + " and playedyearandmonth = 201402";
             NpgsqlCommand command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
