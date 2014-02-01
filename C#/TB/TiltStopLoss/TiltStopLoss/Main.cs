@@ -259,7 +259,18 @@ namespace TiltStopLoss
             {
                 Console.WriteLine("exception==" + ex);
             }
-        }     
+        }
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    openFileDialogSound.Filter = "Sound Wave|*.wav";
+        //    openFileDialogSound.ShowDialog();
+        //    textBoxSound.Text = openFileDialogSound.FileName;
+        //    //comment l'envoyer pour la faire sonner?
+        //    //List<Tuple<String, int>> list;
+        //    //list.Add(Tuple.Create(table, 0));
+        //    //ou pelo um array não sei.
+        //}     
 
     }
 }
