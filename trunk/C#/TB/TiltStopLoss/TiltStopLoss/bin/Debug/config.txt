@@ -1,4 +1,4 @@
-Location=26,26
+Location=216,192
 Player=hulkric59
 Server=127.0.0.1
 Port=5432

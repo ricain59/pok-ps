@@ -62,6 +62,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -259,7 +260,7 @@
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(312, 292);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Configuration";
+            this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // textBoxStopWin
@@ -413,6 +414,12 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // openFileDialogSound
+            // 
+            this.openFileDialogSound.FileName = "openFileDialogSound";
+            this.openFileDialogSound.InitialDirectory = "c:";
+            this.openFileDialogSound.Title = "Search Sound";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -468,6 +475,7 @@
         private System.Windows.Forms.TextBox textBoxStopWin;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.OpenFileDialog openFileDialogSound;
     }
 }
 

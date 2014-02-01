@@ -64,7 +64,7 @@
             this.labelBb.AutoSize = true;
             this.labelBb.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBb.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelBb.Location = new System.Drawing.Point(9, 17);
+            this.labelBb.Location = new System.Drawing.Point(12, 9);
             this.labelBb.Name = "labelBb";
             this.labelBb.Size = new System.Drawing.Size(71, 24);
             this.labelBb.TabIndex = 2;
