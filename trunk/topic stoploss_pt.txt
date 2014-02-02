@@ -1,0 +1,49 @@
+﻿[CENTER][COLOR=blue][B]StopLoss[/B][/COLOR][/CENTER]
+
+[CENTER][IMG]https://dl.dropboxusercontent.com/u/24467236/2.jpg[/IMG][/CENTER]
+
+Boas,
+
+Sendo jogador de poker com problemas de titl, como outros jogadores, qui comprar o tilt breaker.
+Sim mas pronto, para um jogador de micro limites o valor do tilt breaker era muito elevado :(. Decidi então de criar o meu proprio software stoploss.
+
+Esse software criei-o de raíz, com as minhas pequenas capacidade de programador (a universidade tem de servir para alguma coisa), e esse software iria me avisar quando eu estaria a perder xBBs, após alguns testes funciona.
+
+Como queria o partilhar com a comunidade, pedi a alguns membros do forum de o testar. Com os teste foram corrigidos anomalias e adicionado melhorias neste software.
+Neste momento faz de stoploss, stopwin, stoptime e stophand.
+
+Não quero ganhar dinheiro com isso, só quero partilha-lo para quem quiser usar.
+
+Como só tenho o hem2, ele só funciona com a base de dados do hem2, sorry para quem tem pt4.
+Foi me levantado uma duvida sobre a legalidade do meu software, neste caso acho que não há problema nenhum por não mexo no hem2 mas sim no postgres, e já existe varios software que faz o mesmo.
+
+Vamos la para aqueles que querem experimentar:
+
+1 - Descarregar aqui a ultima versão: [URL=https://www.dropbox.com/sh/j9l8fqlm67vpyzl/QKQWpcfVLO]Link[/URL] (existe print do software na pasta print, simples mas eficaz :) )
+
+2 - Dezipar a pasta stoploss ( para cada atualização basta dezipar em cima da pasta stoploss)
+
+3 - Lançar stoploss.exe
+
+4 - Ao abrir o sfotware (caso dê erro instalar o net framework da microsoft 40), intoduzir os dados de ligação a postgres.
+Para quem não os conhece, ir a hem2 -> home -> database -> clicar no "+" verde e os dados aparecem
+[SPOILER][IMG]https://dl.dropboxusercontent.com/u/24467236/3.png[/IMG][/SPOILER]
+
+5 - Depois de introduzir os dados, clicar em test, se estiver tudo bem vai haver uma mensagem a dizer ok e o software fecha.
+
+6 - Abrir novamente, e só agora é que pode introduzir o nome do vosso jogador onde jogam (neste momento não consigo aceitar alias)
+
+7 - Separador configuração, podem escolher que de tipo de stop querem aplicar (funcionam todos em conjunto como nenhum. Podem meter 0 ou nada)
+
+8 - Separador start, clicar em start e go
+
+Avisos:
+- Lançar o soft antes de começar a grindar
+- Uma vez que se clica em start, pode se alterar os valor de stop ao clicar no botão set
+- O som escolhido é do pior, mas foi de proposito
+- O som para ao carregar no botão stop
+- Para por aparecer o valor ganho ou perdido em BBs, meter o rato por cima de hands, não em cima de hands mas um pouco em cima
+
+Obrigado a todos que quiseram testar o meu soft pelas criticas e ideias.
+
+Se querem propor ideias para melhorar, e se tenho capacidades para as realizar, poderão ser implementadas.

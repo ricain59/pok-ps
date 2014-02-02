@@ -127,7 +127,7 @@ namespace TiltStopLoss
         /// <returns></returns>
         public String getHand(Int64 hhid)
         {
-            string sql = "select handhistory from handhistories where handhistory_id = " + hhid + "and tourneynumber = '';";
+            string sql = "select handhistory from handhistories where handhistory_id = " + hhid+";";
             NpgsqlCommand command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
             String hand = "";

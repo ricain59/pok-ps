@@ -143,7 +143,7 @@ namespace TiltStopLoss
                 if (!hand.Equals(""))
                 {
                     lastidhand++;
-                    if (hand.Contains(playername))
+                    if (hand.Contains(playername) && !hand.Contains("Tournament"))
                     {
                         handnumber++;
                         if (this.labelBb.InvokeRequired)
