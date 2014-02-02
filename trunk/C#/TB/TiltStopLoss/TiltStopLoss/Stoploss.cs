@@ -29,6 +29,7 @@ namespace TiltStopLoss
         private Int64 handstop;
         private Int32 timestop;
         private Double stopwin;
+        System.Media.SoundPlayer player;
 
         public Stoploss(Main wmain, String playerid, Db db, String playername, String stoploss, String hand, String time, String win)
         {
@@ -58,6 +59,7 @@ namespace TiltStopLoss
         private void Stoploss_FormClosed(object sender, FormClosedEventArgs e)
         {
             continu = false;
+            player.Stop();
             String con = dbase.closeconDb();
             if (!con.Equals(""))
             {
@@ -116,7 +118,8 @@ namespace TiltStopLoss
                     {
                         if (!stop)
                         {
-                            new Utils().playsound();
+                            player = new Utils().playsound();
+                            player.PlayLooping();
                         }
                         stop = true;
                         labelStopSet("!!!! StopLoss !!!!", Color.Red);
@@ -128,7 +131,8 @@ namespace TiltStopLoss
                     {
                         if (!stop)
                         {
-                            new Utils().playsound();
+                            player = new Utils().playsound();
+                            player.PlayLooping();
                         }
                         stop = true;
                         labelStopSet("!!!! StopWin !!!!", Color.Green);
@@ -158,7 +162,8 @@ namespace TiltStopLoss
                             {
                                 if (!stop)
                                 {
-                                    new Utils().playsound();
+                                    player = new Utils().playsound();
+                                    player.PlayLooping();
                                 }
                                 stop = true;
                                 labelStopSet("!!!! StopHand !!!!", Color.Blue);                                                             
@@ -231,7 +236,8 @@ namespace TiltStopLoss
                     {
                         if (!stop)
                         {
-                            new Utils().playsound();
+                            player = new Utils().playsound();
+                            player.PlayLooping();
                         }
                         stop = true;
                         labelStopSet("!!!! StopTime !!!!", Color.Black);                                               
