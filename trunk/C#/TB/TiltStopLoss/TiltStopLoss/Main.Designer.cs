@@ -63,6 +63,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
+            this.checkBoxHem1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxHem2 = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -82,6 +84,8 @@
             // 
             // tabDatabase
             // 
+            this.tabDatabase.Controls.Add(this.checkBoxHem2);
+            this.tabDatabase.Controls.Add(this.checkBoxHem1);
             this.tabDatabase.Controls.Add(this.label7);
             this.tabDatabase.Controls.Add(this.textBoxPlayerID);
             this.tabDatabase.Controls.Add(this.buttonTestDb);
@@ -219,7 +223,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(104, 80);
+            this.label2.Location = new System.Drawing.Point(104, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 20);
             this.label2.TabIndex = 2;
@@ -420,6 +424,28 @@
             this.openFileDialogSound.InitialDirectory = "c:";
             this.openFileDialogSound.Title = "Search Sound";
             // 
+            // checkBoxHem1
+            // 
+            this.checkBoxHem1.AutoSize = true;
+            this.checkBoxHem1.Location = new System.Drawing.Point(19, 85);
+            this.checkBoxHem1.Name = "checkBoxHem1";
+            this.checkBoxHem1.Size = new System.Drawing.Size(56, 17);
+            this.checkBoxHem1.TabIndex = 17;
+            this.checkBoxHem1.Text = "HEM1";
+            this.checkBoxHem1.UseVisualStyleBackColor = true;
+            this.checkBoxHem1.CheckedChanged += new System.EventHandler(this.checkBoxHem1_CheckedChanged);
+            // 
+            // checkBoxHem2
+            // 
+            this.checkBoxHem2.AutoSize = true;
+            this.checkBoxHem2.Location = new System.Drawing.Point(79, 86);
+            this.checkBoxHem2.Name = "checkBoxHem2";
+            this.checkBoxHem2.Size = new System.Drawing.Size(56, 17);
+            this.checkBoxHem2.TabIndex = 18;
+            this.checkBoxHem2.Text = "HEM2";
+            this.checkBoxHem2.UseVisualStyleBackColor = true;
+            this.checkBoxHem2.CheckedChanged += new System.EventHandler(this.checkBoxHem2_CheckedChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,6 +502,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.OpenFileDialog openFileDialogSound;
+        private System.Windows.Forms.CheckBox checkBoxHem2;
+        private System.Windows.Forms.CheckBox checkBoxHem1;
     }
 }
 
