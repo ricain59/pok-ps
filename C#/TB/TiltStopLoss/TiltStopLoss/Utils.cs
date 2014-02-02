@@ -25,12 +25,13 @@ namespace TiltStopLoss
         /// <summary>
         /// Toca a musica chata do stop
         /// </summary>
-        public void playsound()
+        public System.Media.SoundPlayer playsound()
         {
             String path = Directory.GetCurrentDirectory();
             String filepath = path + "/alarm.wav";
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(filepath);
-            player.PlayLooping();         
+            //player.PlayLooping();            
+            return player;
         }
 
         /// <summary>
