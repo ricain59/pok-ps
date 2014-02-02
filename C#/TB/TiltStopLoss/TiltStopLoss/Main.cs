@@ -66,7 +66,15 @@ namespace TiltStopLoss
                     else
                     {
                         this.Visible = false;
-                        Stoploss sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text);
+                        Stoploss sl;
+                        if (checkBoxHem1.Checked)
+                        {
+                            sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 1);
+                        }
+                        else
+                        {
+                            sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
+                        }
                         sl.Show();
                         //sl.beginBB(this, textBoxPlayer.Text, db);
                     }
@@ -141,6 +149,24 @@ namespace TiltStopLoss
                 case "StopWin":
                     textBoxStopWin.Text = line[1].ToString();
                     break;
+                case "Hem1":
+                    if(line[1].ToString().Equals("True"))
+                    {
+                        checkBoxHem1.Checked = true;
+                    }else{
+                        checkBoxHem1.Checked = false;
+                    }
+                    break;
+                case "Hem2":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxHem2.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxHem2.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -174,6 +200,10 @@ namespace TiltStopLoss
             w.Write("StopTime=" + textBoxStopTime.Text.ToString());
             w.WriteLine();
             w.Write("StopWin=" + textBoxStopWin.Text.ToString());
+            w.WriteLine();
+            w.Write("Hem1=" + checkBoxHem1.Checked.ToString());
+            w.WriteLine();
+            w.Write("Hem2=" + checkBoxHem2.Checked.ToString());
             w.WriteLine();
             w.Close();
         }
@@ -258,6 +288,30 @@ namespace TiltStopLoss
             catch (Exception ex)
             {
                 Console.WriteLine("exception==" + ex);
+            }
+        }
+
+        private void checkBoxHem1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHem1.Checked)
+            {
+                checkBoxHem2.Checked = false;
+            }
+            else
+            {
+                checkBoxHem2.Checked = true;
+            }
+        }
+
+        private void checkBoxHem2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHem2.Checked)
+            {
+                checkBoxHem1.Checked = false;
+            }
+            else
+            {
+                checkBoxHem1.Checked = true;
             }
         }
 

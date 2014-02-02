@@ -125,9 +125,9 @@ namespace TiltStopLoss
         /// </summary>
         /// <param name="hhid"></param>
         /// <returns></returns>
-        public String getHand(Int64 hhid)
+        public String getHand(Int64 hhid, String table, String column)
         {
-            string sql = "select handhistory from handhistories where handhistory_id = " + hhid+";";
+            string sql = "select handhistory from "+table+" where "+column+" = " + hhid;
             NpgsqlCommand command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
             String hand = "";
@@ -142,6 +142,7 @@ namespace TiltStopLoss
 
         /// <summary>
         /// Vou buscar a soma total da BBs de um mês.
+        /// Hem2
         /// </summary>
         /// <param name="playerid"></param>
         /// <param name="yearmonth"></param>
@@ -173,6 +174,43 @@ namespace TiltStopLoss
             }
             dr.Close();
             return bb/100;
+        }
+
+        /// <summary>
+        /// Vou buscar a soma total da BBs de um mês.
+        /// Hem1
+        /// </summary>
+        /// <param name="playerid"></param>
+        /// <param name="yearmonth"></param>
+        /// <returns></returns>
+        public Double getSumBBHem1(String playerid, String yearmonth)
+        {
+            //string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = "+playerid+" and playedyearandmonth >= "+yearmonth;
+            string sql = "select sum(cpm.totalbbswon) as bbtotal " +
+                         "from compiledresults_month crm, compiledplayerresults_month cpm " +
+                         "where crm.player_id = " + playerid + " and crm.playedonmonth >= " + yearmonth + " and " +
+                         "crm.compiledplayerresults_id = cpm.compiledplayerresults_id and crm.gametype_id in " +
+                            "(select gametype_id " +
+                             "from gametypes " +
+                             "where istourney = false)";
+            NpgsqlCommand command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            Double bb = 0.0;
+            while (dr.Read())
+            {
+                if (dr[0].ToString().Equals(""))
+                {
+                    dr.Close();
+                    return 0.0;
+                }
+                else
+                {
+                    bb = Convert.ToDouble(dr[0].ToString());
+                }
+                break;
+            }
+            dr.Close();
+            return bb / 100;
         }
     }
 }

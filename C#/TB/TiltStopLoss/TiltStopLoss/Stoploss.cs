@@ -30,8 +30,10 @@ namespace TiltStopLoss
         private Int32 timestop;
         private Double stopwin;
         System.Media.SoundPlayer player;
+        Boolean stop = false;
+        private int tracker;
 
-        public Stoploss(Main wmain, String playerid, Db db, String playername, String stoploss, String hand, String time, String win)
+        public Stoploss(Main wmain, String playerid, Db db, String playername, String stoploss, String hand, String time, String win, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -42,7 +44,7 @@ namespace TiltStopLoss
             handstop = new Utils().stringtoInt64(hand);
             timestop = new Utils().stringtoInt32(time);
             stopwin = new Utils().stringtoDouble(win);
-
+            this.tracker = tracker;
             loadconfig();
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
@@ -59,7 +61,10 @@ namespace TiltStopLoss
         private void Stoploss_FormClosed(object sender, FormClosedEventArgs e)
         {
             continu = false;
-            player.Stop();
+            if (stop)
+            {
+                player.Stop();
+            }
             String con = dbase.closeconDb();
             if (!con.Equals(""))
             {
@@ -90,88 +95,121 @@ namespace TiltStopLoss
         /// </summary>
         private void calculateBB()
         {
-            Boolean stop = false;
             //DEPOIS de recuperar o ultimo id
             String yearmonth = new Utils().yearmonth();
-            Double lastid = dbase.getSumBB(playerid, yearmonth);
-            Int64 lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
+            Double lastid;
+            Int64 lastidhand;
+            if (tracker == 2)//2 = hem2
+            {
+                lastid = dbase.getSumBB(playerid, yearmonth);
+                lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
+            }
+            else
+            {
+                lastid = dbase.getSumBBHem1(playerid, yearmonth);
+                lastidhand = dbase.getLastValue("handhistories", "pokerhand_id") + 1;
+            }
             Int64 handnumber = 0;
 
-            while (continu)
+            try
             {
-                //bb
-                Double bb = dbase.getSumBB(playerid, yearmonth);
-                bb = Math.Round((bb - lastid), 2);
-                if (this.labelBb.InvokeRequired)
+                while (continu)
                 {
-                    SetTextCallback d = new SetTextCallback(SetTextBb);
-                    this.Invoke(d, new object[] { bb.ToString() });
-                }
-                else
-                {
-                    // It's on the same thread, no need for Invoke
-                    this.labelBb.Text = bb.ToString();
-                }
-                if (stoploss > 0.0)
-                {
-                    if (bb <= (0 - stoploss))
+                    //bb
+                    Double bb;
+                    if (tracker == 2)//2 = hem2
                     {
-                        if (!stop)
-                        {
-                            player = new Utils().playsound();
-                            player.PlayLooping();
-                        }
-                        stop = true;
-                        labelStopSet("!!!! StopLoss !!!!", Color.Red);
+                        bb = dbase.getSumBB(playerid, yearmonth);
                     }
-                }
-                if (stopwin > 0.0)
-                {
-                    if (bb >= stopwin)
+                    else
                     {
-                        if (!stop)
-                        {
-                            player = new Utils().playsound();
-                            player.PlayLooping();
-                        }
-                        stop = true;
-                        labelStopSet("!!!! StopWin !!!!", Color.Green);
+                        bb = dbase.getSumBBHem1(playerid, yearmonth);
                     }
-                }
-                //hand
-                String hand = dbase.getHand(lastidhand);
-                if (!hand.Equals(""))
-                {
-                    lastidhand++;
-                    if (hand.Contains(playername) && !hand.Contains("Tournament"))
+                    
+                    bb = Math.Round((bb - lastid), 2);
+                    if (this.labelBb.InvokeRequired)
                     {
-                        handnumber++;
-                        if (this.labelBb.InvokeRequired)
+                        SetTextCallback d = new SetTextCallback(SetTextBb);
+                        this.Invoke(d, new object[] { bb.ToString() });
+                    }
+                    else
+                    {
+                        // It's on the same thread, no need for Invoke
+                        this.labelBb.Text = bb.ToString();
+                    }
+                    if (stoploss > 0.0)
+                    {
+                        if (bb <= (0 - stoploss))
                         {
-                            SetTextCallback d = new SetTextCallback(SetTextHands);
-                            this.Invoke(d, new object[] { handnumber.ToString() });
-                        }
-                        else
-                        {
-                            // It's on the same thread, no need for Invoke
-                            this.labelHands.Text = handnumber.ToString();
-                        }
-                        if (handstop != 0)
-                        {
-                            if (handstop <= handnumber)
+                            if (!stop)
                             {
-                                if (!stop)
+                                player = new Utils().playsound();
+                                player.PlayLooping();
+                            }
+                            stop = true;
+                            labelStopSet("!!!! StopLoss !!!!", Color.Red);
+                        }
+                    }
+                    if (stopwin > 0.0)
+                    {
+                        if (bb >= stopwin)
+                        {
+                            if (!stop)
+                            {
+                                player = new Utils().playsound();
+                                player.PlayLooping();
+                            }
+                            stop = true;
+                            labelStopSet("!!!! StopWin !!!!", Color.Green);
+                        }
+                    }
+                    //hand
+                    String hand;
+                    if (tracker == 2)//2 = hem2
+                    {
+                        hand = dbase.getHand(lastidhand, "handhistories", "handhistory_id");//hem2
+                    }
+                    else
+                    {
+                        hand = dbase.getHand(lastidhand, "handhistories", "pokerhand_id");//hem1
+                    }
+                    if (!hand.Equals(""))
+                    {
+                        lastidhand++;
+                        if (hand.Contains(playername) && !hand.Contains("Tournament"))
+                        {
+                            handnumber++;
+                            if (this.labelBb.InvokeRequired)
+                            {
+                                SetTextCallback d = new SetTextCallback(SetTextHands);
+                                this.Invoke(d, new object[] { handnumber.ToString() });
+                            }
+                            else
+                            {
+                                // It's on the same thread, no need for Invoke
+                                this.labelHands.Text = handnumber.ToString();
+                            }
+                            if (handstop != 0)
+                            {
+                                if (handstop <= handnumber)
                                 {
-                                    player = new Utils().playsound();
-                                    player.PlayLooping();
+                                    if (!stop)
+                                    {
+                                        player = new Utils().playsound();
+                                        player.PlayLooping();
+                                    }
+                                    stop = true;
+                                    labelStopSet("!!!! StopHand !!!!", Color.Blue);
                                 }
-                                stop = true;
-                                labelStopSet("!!!! StopHand !!!!", Color.Blue);                                                             
                             }
                         }
                     }
+                    Thread.Sleep(1000);
                 }
-                Thread.Sleep(2000);
+            }
+            catch (Exception ex)
+            {
+                new Debug().LogMessage(ex.ToString());
             }
         }        
 
@@ -184,8 +222,7 @@ namespace TiltStopLoss
             int minute = 0;
             int seconde = 0;
             int minutetostop = 0;
-            Boolean stop = false;
-
+            
             while (continu)
             {
                 Thread.Sleep(1000);
