@@ -19,12 +19,12 @@ namespace TiltStopLoss
     public partial class Stoploss : Form
     {
         private Main wmain;
-        private String playerid;
+        //private String playerid;
         private Db dbase;
         private Thread startcrono;
         private Thread startbb;
         private Boolean continu = true;
-        private String playername;
+        //private String playername;
         private Double stoploss;
         private Int64 handstop;
         private Int32 timestop;
@@ -32,13 +32,15 @@ namespace TiltStopLoss
         System.Media.SoundPlayer player;
         Boolean stop = false;
         private int tracker;
+        List<Tuple<String, String>> playeridname;
 
-        public Stoploss(Main wmain, String playerid, Db db, String playername, String stoploss, String hand, String time, String win, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String stoploss, String hand, String time, String win, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
-            this.playerid = playerid;
-            this.playername = playername;
+            playeridname = playerid;
+            //this.playerid = playerid;
+            //this.playername = playername;
             dbase = db;
             this.stoploss = new Utils().stringtoDouble(stoploss);
             handstop = new Utils().stringtoInt64(hand);
@@ -97,16 +99,22 @@ namespace TiltStopLoss
         {
             //DEPOIS de recuperar o ultimo id
             String yearmonth = new Utils().yearmonth();
-            Double lastid;
+            Double bbinit = 0.0;
             Int64 lastidhand;
             if (tracker == 2)//2 = hem2
             {
-                lastid = dbase.getSumBB(playerid, yearmonth);
+                for (int i = 0; i < playeridname.Count; i++)
+                {
+                    bbinit += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                }
                 lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
             }
             else
             {
-                lastid = dbase.getSumBBHem1(playerid, yearmonth);
+                for (int i = 0; i < playeridname.Count; i++)
+                {
+                    bbinit += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                }
                 lastidhand = dbase.getLastValue("handhistories", "pokerhand_id") + 1;
             }
             Int64 handnumber = 0;
@@ -116,17 +124,23 @@ namespace TiltStopLoss
                 while (continu)
                 {
                     //bb
-                    Double bb;
+                    Double bb = 0.0;
                     if (tracker == 2)//2 = hem2
                     {
-                        bb = dbase.getSumBB(playerid, yearmonth);
+                        for (int i = 0; i < playeridname.Count; i++)
+                        {
+                            bb += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                        }
                     }
                     else
                     {
-                        bb = dbase.getSumBBHem1(playerid, yearmonth);
+                        for (int i = 0; i < playeridname.Count; i++)
+                        {
+                            bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                        }
                     }
                     
-                    bb = Math.Round((bb - lastid), 2);
+                    bb = Math.Round((bb - bbinit), 2);
                     if (this.labelBb.InvokeRequired)
                     {
                         SetTextCallback d = new SetTextCallback(SetTextBb);
@@ -176,30 +190,33 @@ namespace TiltStopLoss
                     if (!hand.Equals(""))
                     {
                         lastidhand++;
-                        if (hand.Contains(playername) && !hand.Contains("Tournament"))
+                        for (int i = 0; i < playeridname.Count; i++)
                         {
-                            handnumber++;
-                            if (this.labelBb.InvokeRequired)
+                            if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
                             {
-                                SetTextCallback d = new SetTextCallback(SetTextHands);
-                                this.Invoke(d, new object[] { handnumber.ToString() });
-                            }
-                            else
-                            {
-                                // It's on the same thread, no need for Invoke
-                                this.labelHands.Text = handnumber.ToString();
-                            }
-                            if (handstop != 0)
-                            {
-                                if (handstop <= handnumber)
+                                handnumber++;
+                                if (this.labelBb.InvokeRequired)
                                 {
-                                    if (!stop)
+                                    SetTextCallback d = new SetTextCallback(SetTextHands);
+                                    this.Invoke(d, new object[] { handnumber.ToString() });
+                                }
+                                else
+                                {
+                                    // It's on the same thread, no need for Invoke
+                                    this.labelHands.Text = handnumber.ToString();
+                                }
+                                if (handstop != 0)
+                                {
+                                    if (handstop <= handnumber)
                                     {
-                                        player = new Utils().playsound();
-                                        player.PlayLooping();
+                                        if (!stop)
+                                        {
+                                            player = new Utils().playsound();
+                                            player.PlayLooping();
+                                        }
+                                        stop = true;
+                                        labelStopSet("!!!! StopHand !!!!", Color.Blue);
                                     }
-                                    stop = true;
-                                    labelStopSet("!!!! StopHand !!!!", Color.Blue);
                                 }
                             }
                         }

@@ -31,7 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabDatabase = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
+            this.checkBoxHem2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxHem1 = new System.Windows.Forms.CheckBox();
             this.textBoxPlayerID = new System.Windows.Forms.TextBox();
             this.buttonTestDb = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -63,8 +64,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
-            this.checkBoxHem1 = new System.Windows.Forms.CheckBox();
-            this.checkBoxHem2 = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -86,7 +85,6 @@
             // 
             this.tabDatabase.Controls.Add(this.checkBoxHem2);
             this.tabDatabase.Controls.Add(this.checkBoxHem1);
-            this.tabDatabase.Controls.Add(this.label7);
             this.tabDatabase.Controls.Add(this.textBoxPlayerID);
             this.tabDatabase.Controls.Add(this.buttonTestDb);
             this.tabDatabase.Controls.Add(this.label6);
@@ -110,15 +108,27 @@
             this.tabDatabase.Text = "Database";
             this.tabDatabase.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // checkBoxHem2
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(111, 50);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(109, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "*not work with aliases";
+            this.checkBoxHem2.AutoSize = true;
+            this.checkBoxHem2.Location = new System.Drawing.Point(79, 86);
+            this.checkBoxHem2.Name = "checkBoxHem2";
+            this.checkBoxHem2.Size = new System.Drawing.Size(56, 17);
+            this.checkBoxHem2.TabIndex = 18;
+            this.checkBoxHem2.Text = "HEM2";
+            this.checkBoxHem2.UseVisualStyleBackColor = true;
+            this.checkBoxHem2.CheckedChanged += new System.EventHandler(this.checkBoxHem2_CheckedChanged);
+            // 
+            // checkBoxHem1
+            // 
+            this.checkBoxHem1.AutoSize = true;
+            this.checkBoxHem1.Location = new System.Drawing.Point(19, 85);
+            this.checkBoxHem1.Name = "checkBoxHem1";
+            this.checkBoxHem1.Size = new System.Drawing.Size(56, 17);
+            this.checkBoxHem1.TabIndex = 17;
+            this.checkBoxHem1.Text = "HEM1";
+            this.checkBoxHem1.UseVisualStyleBackColor = true;
+            this.checkBoxHem1.CheckedChanged += new System.EventHandler(this.checkBoxHem1_CheckedChanged);
             // 
             // textBoxPlayerID
             // 
@@ -223,7 +233,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(104, 63);
+            this.label2.Location = new System.Drawing.Point(84, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 20);
             this.label2.TabIndex = 2;
@@ -234,9 +244,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(16, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Player*";
+            this.label1.Text = "Player";
             // 
             // textBoxPlayer
             // 
@@ -424,28 +434,6 @@
             this.openFileDialogSound.InitialDirectory = "c:";
             this.openFileDialogSound.Title = "Search Sound";
             // 
-            // checkBoxHem1
-            // 
-            this.checkBoxHem1.AutoSize = true;
-            this.checkBoxHem1.Location = new System.Drawing.Point(19, 85);
-            this.checkBoxHem1.Name = "checkBoxHem1";
-            this.checkBoxHem1.Size = new System.Drawing.Size(56, 17);
-            this.checkBoxHem1.TabIndex = 17;
-            this.checkBoxHem1.Text = "HEM1";
-            this.checkBoxHem1.UseVisualStyleBackColor = true;
-            this.checkBoxHem1.CheckedChanged += new System.EventHandler(this.checkBoxHem1_CheckedChanged);
-            // 
-            // checkBoxHem2
-            // 
-            this.checkBoxHem2.AutoSize = true;
-            this.checkBoxHem2.Location = new System.Drawing.Point(79, 86);
-            this.checkBoxHem2.Name = "checkBoxHem2";
-            this.checkBoxHem2.Size = new System.Drawing.Size(56, 17);
-            this.checkBoxHem2.TabIndex = 18;
-            this.checkBoxHem2.Text = "HEM2";
-            this.checkBoxHem2.UseVisualStyleBackColor = true;
-            this.checkBoxHem2.CheckedChanged += new System.EventHandler(this.checkBoxHem2_CheckedChanged);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -487,7 +475,6 @@
         public System.Windows.Forms.TextBox textBoxPort;
         public System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.TextBox textBoxPlayerID;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBoxStopLoss;

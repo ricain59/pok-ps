@@ -14,6 +14,7 @@ namespace TiltStopLoss
     public partial class Main : Form
     {
         private Db db = new Db();
+        private Boolean alias = false;
         
         public Main()
         {
@@ -67,16 +68,39 @@ namespace TiltStopLoss
                     {
                         this.Visible = false;
                         Stoploss sl;
-                        if (checkBoxHem1.Checked)
+                        if (checkBoxHem1.Checked)//hem1
                         {
-                            sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 1);
+                            //ver se é um alias ou não
+                            List<Tuple<String, String>> playeralias;
+                            if (alias)
+                            {
+                                playeralias = db.isAlias(textBoxPlayerID.Text);
+                            }
+                            else
+                            {
+                                playeralias = new List<Tuple<String, String>>();
+                                playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
+                                //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
+                            }
+                            sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 1);
                         }
-                        else
+                        else //hem2
                         {
-                            sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
+                            //ver se é um alias ou não
+                            List<Tuple<String, String>> playeralias;
+                            if (alias)
+                            {
+                                playeralias = db.isAlias(textBoxPlayerID.Text);                                
+                            }
+                            else
+                            {
+                                playeralias = new List<Tuple<String, String>>();
+                                playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
+                                //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
+                            }
+                            sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                         }
-                        sl.Show();
-                        //sl.beginBB(this, textBoxPlayer.Text, db);
+                        sl.Show();                        
                     }
                 }
             }
@@ -167,6 +191,16 @@ namespace TiltStopLoss
                         checkBoxHem2.Checked = false;
                     }
                     break;
+                case "Alias":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        alias = true;
+                    }
+                    else
+                    {
+                        alias = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -205,6 +239,8 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("Hem2=" + checkBoxHem2.Checked.ToString());
             w.WriteLine();
+            w.Write("Alias=" + alias.ToString());
+            w.WriteLine();
             w.Close();
         }
 
@@ -215,13 +251,29 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void textBoxPlayer_Leave(object sender, EventArgs e)
         {
-            string query = "select player_id from players where playername = '"+textBoxPlayer.Text.ToString()+"'";
+            string query;
+            if (checkBoxHem1.Checked)//hem1
+            {
+                query = "select player_id, site_id from players where playername = '" + textBoxPlayer.Text.ToString() + "'";
+            }
+            else
+            {
+                query = "select player_id, pokersite_id from players where playername = '" + textBoxPlayer.Text.ToString() + "'";
+            }
             db.connectDb();
             NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
             NpgsqlDataReader dr = command.ExecuteReader();
             while (dr.Read())
             {
                 textBoxPlayerID.Text = dr[0].ToString();
+                if (dr[1].ToString().Equals("-1"))
+                {
+                    alias = true;
+                }
+                else
+                {
+                    alias = false;
+                }
             }
             dr.Close();
             db.closeconDb();
