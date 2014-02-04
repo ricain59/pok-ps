@@ -212,5 +212,21 @@ namespace TiltStopLoss
             dr.Close();
             return bb / 100;
         }
+
+        public List<Tuple<String,String>> isAlias(String idplayer)
+        {
+            //mettre une requete plus complete
+            string sql = "select al.player_id, pl.playername from aliases al, players pl where al.aliasplayer_id = "+idplayer+" and al.player_id = pl.player_id";
+            NpgsqlCommand command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            List<Tuple<String, String>> playeralias = new List<Tuple<String, String>>();
+            //list.Add(Tuple.Create(table, 0));
+            while (dr.Read())
+            {
+                playeralias.Add(Tuple.Create(dr[0].ToString(), dr[1].ToString()));                
+            }
+            return playeralias;
+            
+        }
     }
 }
