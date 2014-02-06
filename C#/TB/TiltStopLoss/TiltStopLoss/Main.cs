@@ -315,6 +315,29 @@ namespace TiltStopLoss
         }
 
         /// <summary>
+        /// Ressume da sessão
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <param name="loss"></param>
+        /// <param name="time"></param>
+        public void setValueSession(String hand, String time, Double bbs)
+        {
+            textBoxRsHands.Text = hand;
+            textBoxRsTime.Text = time;
+            if (bbs < 0)
+            {
+                textBoxRsBbs.Text = bbs.ToString();
+                textBoxRsBbs.ForeColor = Color.Red;
+            }
+            else
+            {
+                textBoxRsBbs.Text = bbs.ToString();
+                textBoxRsBbs.ForeColor = Color.Green;
+            }
+            tabControlMain.SelectedIndex = 2;
+        }
+
+        /// <summary>
         /// Fill textbox player from databse
         /// </summary>
         private void fillTextboxPlayer()
@@ -343,6 +366,11 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// Only one DB checked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxHem1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxHem1.Checked)
@@ -355,6 +383,11 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// Only one DB checked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxHem2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxHem2.Checked)

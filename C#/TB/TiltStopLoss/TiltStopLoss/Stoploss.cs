@@ -19,12 +19,10 @@ namespace TiltStopLoss
     public partial class Stoploss : Form
     {
         private Main wmain;
-        //private String playerid;
         private Db dbase;
         private Thread startcrono;
         private Thread startbb;
         private Boolean continu = true;
-        //private String playername;
         private Double stoploss;
         private Int64 handstop;
         private Int32 timestop;
@@ -33,6 +31,9 @@ namespace TiltStopLoss
         Boolean stop = false;
         private int tracker;
         List<Tuple<String, String>> playeridname;
+        private String time;
+        private Double bb;
+        Int64 handnumber = 0;
 
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String stoploss, String hand, String time, String win, int tracker)
         {
@@ -84,6 +85,7 @@ namespace TiltStopLoss
             startcrono.Abort();
             
             wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString());
+            wmain.setValueSession(handnumber.ToString(), time, bb);
             wmain.Visible = true;            
         }
 
@@ -117,14 +119,13 @@ namespace TiltStopLoss
                 }
                 lastidhand = dbase.getLastValue("handhistories", "pokerhand_id") + 1;
             }
-            Int64 handnumber = 0;
-
+            
             try
             {
                 while (continu)
                 {
                     //bb
-                    Double bb = 0.0;
+                    bb = 0.0;
                     if (tracker == 2)//2 = hem2
                     {
                         for (int i = 0; i < playeridname.Count; i++)
@@ -273,7 +274,7 @@ namespace TiltStopLoss
                 {
                     secondest = "" + seconde;
                 }
-                String time = "0" + hour + ":" + minutest + ":" + secondest;
+                time = "0" + hour + ":" + minutest + ":" + secondest;
                 if (this.labelTimer.InvokeRequired)
                 {
                     SetTextCallback d = new SetTextCallback(SetTextTimer);

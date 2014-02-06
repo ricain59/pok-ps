@@ -64,16 +64,25 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
+            this.tabResumeSession = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBoxRsBbs = new System.Windows.Forms.TextBox();
+            this.textBoxRsHands = new System.Windows.Forms.TextBox();
+            this.textBoxRsTime = new System.Windows.Forms.TextBox();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabResumeSession.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
             // 
             this.tabControlMain.Controls.Add(this.tabDatabase);
             this.tabControlMain.Controls.Add(this.tabPage3);
+            this.tabControlMain.Controls.Add(this.tabResumeSession);
             this.tabControlMain.Controls.Add(this.tabPage2);
             this.tabControlMain.Location = new System.Drawing.Point(12, 12);
             this.tabControlMain.Name = "tabControlMain";
@@ -434,6 +443,78 @@
             this.openFileDialogSound.InitialDirectory = "c:";
             this.openFileDialogSound.Title = "Search Sound";
             // 
+            // tabResumeSession
+            // 
+            this.tabResumeSession.Controls.Add(this.textBoxRsTime);
+            this.tabResumeSession.Controls.Add(this.textBoxRsHands);
+            this.tabResumeSession.Controls.Add(this.textBoxRsBbs);
+            this.tabResumeSession.Controls.Add(this.label17);
+            this.tabResumeSession.Controls.Add(this.label16);
+            this.tabResumeSession.Controls.Add(this.label7);
+            this.tabResumeSession.Location = new System.Drawing.Point(4, 22);
+            this.tabResumeSession.Name = "tabResumeSession";
+            this.tabResumeSession.Size = new System.Drawing.Size(312, 292);
+            this.tabResumeSession.TabIndex = 3;
+            this.tabResumeSession.Text = "Resume Session";
+            this.tabResumeSession.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(19, 23);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "BBs";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(19, 55);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(43, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Hands";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(19, 86);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(34, 13);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "Time";
+            // 
+            // textBoxRsBbs
+            // 
+            this.textBoxRsBbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRsBbs.Location = new System.Drawing.Point(81, 20);
+            this.textBoxRsBbs.Name = "textBoxRsBbs";
+            this.textBoxRsBbs.Size = new System.Drawing.Size(70, 20);
+            this.textBoxRsBbs.TabIndex = 3;
+            this.textBoxRsBbs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBoxRsHands
+            // 
+            this.textBoxRsHands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRsHands.Location = new System.Drawing.Point(81, 52);
+            this.textBoxRsHands.Name = "textBoxRsHands";
+            this.textBoxRsHands.Size = new System.Drawing.Size(70, 20);
+            this.textBoxRsHands.TabIndex = 4;
+            this.textBoxRsHands.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBoxRsTime
+            // 
+            this.textBoxRsTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRsTime.Location = new System.Drawing.Point(81, 83);
+            this.textBoxRsTime.Name = "textBoxRsTime";
+            this.textBoxRsTime.Size = new System.Drawing.Size(70, 20);
+            this.textBoxRsTime.TabIndex = 5;
+            this.textBoxRsTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -450,6 +531,8 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabResumeSession.ResumeLayout(false);
+            this.tabResumeSession.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -491,6 +574,13 @@
         private System.Windows.Forms.OpenFileDialog openFileDialogSound;
         private System.Windows.Forms.CheckBox checkBoxHem2;
         private System.Windows.Forms.CheckBox checkBoxHem1;
+        private System.Windows.Forms.TabPage tabResumeSession;
+        private System.Windows.Forms.TextBox textBoxRsTime;
+        private System.Windows.Forms.TextBox textBoxRsHands;
+        private System.Windows.Forms.TextBox textBoxRsBbs;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label7;
     }
 }
 
