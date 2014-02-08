@@ -34,6 +34,7 @@
             this.checkBoxLogin = new System.Windows.Forms.CheckBox();
             this.checkBoxDown = new System.Windows.Forms.CheckBox();
             this.checkBoxZoom = new System.Windows.Forms.CheckBox();
+            this.textBoxVm = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -69,7 +70,7 @@
             // checkBoxLogin
             // 
             this.checkBoxLogin.AutoSize = true;
-            this.checkBoxLogin.Location = new System.Drawing.Point(53, 168);
+            this.checkBoxLogin.Location = new System.Drawing.Point(53, 182);
             this.checkBoxLogin.Name = "checkBoxLogin";
             this.checkBoxLogin.Size = new System.Drawing.Size(77, 17);
             this.checkBoxLogin.TabIndex = 3;
@@ -97,11 +98,19 @@
             this.checkBoxZoom.Text = "Zoom";
             this.checkBoxZoom.UseVisualStyleBackColor = true;
             // 
+            // textBoxVm
+            // 
+            this.textBoxVm.Location = new System.Drawing.Point(53, 157);
+            this.textBoxVm.Name = "textBoxVm";
+            this.textBoxVm.Size = new System.Drawing.Size(29, 20);
+            this.textBoxVm.TabIndex = 6;
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(186, 235);
+            this.Controls.Add(this.textBoxVm);
             this.Controls.Add(this.checkBoxZoom);
             this.Controls.Add(this.checkBoxDown);
             this.Controls.Add(this.checkBoxLogin);
@@ -124,6 +133,7 @@
         private System.Windows.Forms.CheckBox checkBoxLogin;
         private System.Windows.Forms.CheckBox checkBoxDown;
         private System.Windows.Forms.CheckBox checkBoxZoom;
+        private System.Windows.Forms.TextBox textBoxVm;
     }
 }
 
