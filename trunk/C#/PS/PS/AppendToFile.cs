@@ -11,7 +11,7 @@ namespace PS
         public int ndt = 0;
         public int fdt = 0;
 
-        public void AppendToFileDT(String handcopy, String date, Boolean down, Boolean zoom)
+        public void AppendToFileDT(String handcopy, String date, Boolean down, Boolean zoom, String vm)
         {
             String nl = getNL(handcopy);
             String path = "";
@@ -22,11 +22,11 @@ namespace PS
             }
             if (down)
             {
-                path = "E:/HH" + fdt + "_" + date + "_" + nl + "_up_" + txtzoom + ".txt";
+                path = "E:/HH" + fdt + "_" + date + "_" + nl + "_up_" + txtzoom + "_"+vm+".txt";
             }
             else
             {
-                path = "E:/HH" + fdt + "_" + date + "_" + nl + "_down_" + txtzoom + ".txt";
+                path = "E:/HH" + fdt + "_" + date + "_" + nl + "_down_" + txtzoom + "_" + vm + ".txt";
             }
             
             //File file = new File("E:/HH" + fdt + "_" + date + ".txt");

@@ -152,7 +152,7 @@ namespace PS
                         keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
 
                         //coller
-                        handcopy.getClipboard(ow, down, zoom);
+                        handcopy.getClipboard(ow, down, zoom, textBoxVm.Text);
 
                         cincominuto = cincominuto + 1;
 
