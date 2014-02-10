@@ -125,9 +125,9 @@ namespace TiltStopLoss
         /// </summary>
         /// <param name="hhid"></param>
         /// <returns></returns>
-        public String getHand(Int64 hhid, String table, String column)
+        public String getHand(Int64 hhid, String table, String column2, String column1)
         {
-            string sql = "select handhistory from "+table+" where "+column+" = " + hhid;
+            string sql = "select "+column1+" from " + table + " where " + column2 + " = " + hhid;
             NpgsqlCommand command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
             String hand = "";
@@ -178,6 +178,38 @@ namespace TiltStopLoss
 
         /// <summary>
         /// Vou buscar a soma total da BBs de um mês.
+        /// PT4
+        /// </summary>
+        /// <param name="playerid"></param>
+        /// <param name="yearmonth"></param>
+        /// <returns></returns>
+        public Double getSumBBPt4(String playerid, String yearmonth)
+        {
+            string sql = "select sum(amt_bb_won) as bbtotal " +
+                         "from cash_cache " +
+                         "where id_player = " + playerid + " and date_played_year_week >= " + yearmonth;
+            NpgsqlCommand command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            Double bb = 0.0;
+            while (dr.Read())
+            {
+                if (dr[0].ToString().Equals(""))
+                {
+                    dr.Close();
+                    return 0.0;
+                }
+                else
+                {
+                    bb = Convert.ToDouble(dr[0].ToString());
+                }
+                break;
+            }
+            dr.Close();
+            return bb;
+        }
+
+        /// <summary>
+        /// Vou buscar a soma total da BBs de um mês.
         /// Hem1
         /// </summary>
         /// <param name="playerid"></param>
@@ -213,6 +245,11 @@ namespace TiltStopLoss
             return bb / 100;
         }
 
+        /// <summary>
+        /// Para obter a lista do alias de hem1 ou hem2
+        /// </summary>
+        /// <param name="idplayer"></param>
+        /// <returns></returns>
         public List<Tuple<String,String>> isAlias(String idplayer)
         {
             //mettre une requete plus complete
@@ -220,13 +257,39 @@ namespace TiltStopLoss
             NpgsqlCommand command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
             List<Tuple<String, String>> playeralias = new List<Tuple<String, String>>();
-            //list.Add(Tuple.Create(table, 0));
             while (dr.Read())
             {
                 playeralias.Add(Tuple.Create(dr[0].ToString(), dr[1].ToString()));                
             }
+            dr.Close();
+            return playeralias;            
+        }
+
+        /// <summary>
+        /// Para obter os alias de pt4
+        /// </summary>
+        /// <param name="idplayer"></param>
+        /// <returns></returns>
+        public List<Tuple<String, String>> isAliasPt4(String idplayer)
+        {
+            //mettre une requete plus complete
+            string sql = "select player_name from player where id_player = " + idplayer;
+            NpgsqlCommand command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            List<Tuple<String, String>> playeralias = new List<Tuple<String, String>>();
+            while (dr.Read())
+            {
+                playeralias.Add(Tuple.Create(idplayer, dr[0].ToString()));
+            }
+            sql = "select id_player, player_name from player where id_player_alias = " + idplayer;
+            command = new NpgsqlCommand(sql, conn);
+            dr = command.ExecuteReader();
+            while (dr.Read())
+            {
+                playeralias.Add(Tuple.Create(dr[0].ToString(), dr[1].ToString()));
+            }
+            dr.Close();    
             return playeralias;
-            
         }
     }
 }
