@@ -208,6 +208,8 @@ namespace PS
                 w.Write("Checkbox_zoom=true");
                 w.WriteLine();
             }
+            w.Write("Vm="+textBoxVm.Text);
+            w.WriteLine();
             w.Close();
         }
 
@@ -247,6 +249,9 @@ namespace PS
                     break;
                 case "Checkbox_zoom":
                     checkBoxZoom.Checked = true;
+                    break;
+                case "Vm":
+                    textBoxVm.Text = line[1].ToString();
                     break;
                 default:
                     break;

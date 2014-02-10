@@ -100,25 +100,39 @@ namespace TiltStopLoss
         private void calculateBB()
         {
             //DEPOIS de recuperar o ultimo id
-            String yearmonth = new Utils().yearmonth();
+            String yearmonth;
             Double bbinit = 0.0;
             Int64 lastidhand;
-            if (tracker == 2)//2 = hem2
+            if (tracker == 1 || tracker == 2)
             {
+                yearmonth = new Utils().yearmonth();
+                if (tracker == 2)//2 = hem2
+                {
+                    for (int i = 0; i < playeridname.Count; i++)
+                    {
+                        bbinit += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                    }
+                    lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
+                }
+                else
+                {
+                    for (int i = 0; i < playeridname.Count; i++)
+                    {
+                        bbinit += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                    }
+                    lastidhand = dbase.getLastValue("handhistories", "pokerhand_id") + 1;
+                }
+            }
+            else //pt4
+            {
+                yearmonth = new Utils().yearweek();
                 for (int i = 0; i < playeridname.Count; i++)
                 {
-                    bbinit += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                    bbinit += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
                 }
-                lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
+                lastidhand = dbase.getLastValue("cash_hand_histories", "id_hand") + 1;
             }
-            else
-            {
-                for (int i = 0; i < playeridname.Count; i++)
-                {
-                    bbinit += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
-                }
-                lastidhand = dbase.getLastValue("handhistories", "pokerhand_id") + 1;
-            }
+
             
             try
             {
@@ -126,21 +140,32 @@ namespace TiltStopLoss
                 {
                     //bb
                     bb = 0.0;
-                    if (tracker == 2)//2 = hem2
+                    if (tracker == 1 || tracker == 2)
                     {
-                        for (int i = 0; i < playeridname.Count; i++)
+                        if (tracker == 2)//2 = hem2
                         {
-                            bb += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                            for (int i = 0; i < playeridname.Count; i++)
+                            {
+                                bb += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < playeridname.Count; i++)
+                            {
+                                bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                            }
                         }
                     }
-                    else
+                    else //pt4
                     {
+                        yearmonth = new Utils().yearweek();
                         for (int i = 0; i < playeridname.Count; i++)
                         {
-                            bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
-                        }
+                            bb += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
+                        }                       
                     }
-                    
+
                     bb = Math.Round((bb - bbinit), 2);
                     if (this.labelBb.InvokeRequired)
                     {
@@ -180,14 +205,23 @@ namespace TiltStopLoss
                     }
                     //hand
                     String hand;
-                    if (tracker == 2)//2 = hem2
+                    if (tracker == 1 || tracker == 2)
                     {
-                        hand = dbase.getHand(lastidhand, "handhistories", "handhistory_id");//hem2
+                        if (tracker == 2)//2 = hem2
+                        {
+                            hand = dbase.getHand(lastidhand, "handhistories", "handhistory_id", "handhistory");//hem2
+                        }
+                        else
+                        {
+                            hand = dbase.getHand(lastidhand, "handhistories", "pokerhand_id", "handhistory");//hem1
+                        }
                     }
                     else
                     {
-                        hand = dbase.getHand(lastidhand, "handhistories", "pokerhand_id");//hem1
+                        hand = dbase.getHand(lastidhand, "cash_hand_histories", "id_hand", "history");//pt4
                     }
+
+
                     if (!hand.Equals(""))
                     {
                         lastidhand++;

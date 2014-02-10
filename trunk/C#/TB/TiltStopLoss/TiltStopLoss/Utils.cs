@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace TiltStopLoss
 {
@@ -20,6 +21,31 @@ namespace TiltStopLoss
         public String yearmonth()
         {
             return DateTime.Now.ToString("yyyyMM");
+        }
+
+        public String yearweek()
+        {
+            DateTime date = DateTime.Now;
+            // Seriously cheat.  If its Monday, Tuesday or Wednesday, then it'll 
+            // be the same week# as whatever Thursday, Friday or Saturday are,
+            // and we always get those right
+            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(date);
+            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+            {
+                date = date.AddDays(3);
+            }
+            // Return the week of our adjusted day
+            int week = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            String weekfin = "";
+            if (week < 10)
+            {
+                weekfin = "0" + week.ToString();
+            }
+            else
+            {
+                weekfin = week.ToString();
+            }
+            return DateTime.Now.ToString("yyyy") + weekfin;
         }
 
         /// <summary>
