@@ -40,8 +40,6 @@ namespace TiltStopLoss
             InitializeComponent();
             this.wmain = wmain;
             playeridname = playerid;
-            //this.playerid = playerid;
-            //this.playername = playername;
             dbase = db;
             this.stoploss = new Utils().stringtoDouble(stoploss);
             handstop = new Utils().stringtoInt64(hand);
@@ -49,18 +47,20 @@ namespace TiltStopLoss
             stopwin = new Utils().stringtoDouble(win);
             this.tracker = tracker;
             loadconfig();
+
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
             startcrono.Start();
             //calculo dos BB e hands
             startbb = new Thread(new ThreadStart(this.calculateBB));
-            startbb.Start();
-            //calculateBB();
-            //calculo de hands jogadas
-            //starthand = new Thread(new ThreadStart(this.calculateHands));
-            //starthand.Start();            
+            startbb.Start();            
         }
 
+        /// <summary>
+        /// Quando fecho o form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Stoploss_FormClosed(object sender, FormClosedEventArgs e)
         {
             continu = false;
@@ -89,6 +89,11 @@ namespace TiltStopLoss
             wmain.Visible = true;            
         }
 
+        /// <summary>
+        /// Para lançar o método do close form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonStop_Click(object sender, EventArgs e)
         {
             this.Close();            
@@ -99,10 +104,10 @@ namespace TiltStopLoss
         /// </summary>
         private void calculateBB()
         {
-            //DEPOIS de recuperar o ultimo id
             String yearmonth;
             Double bbinit = 0.0;
             Int64 lastidhand;
+            //permite definir aqui os valores iniciais de bbinit e lastidhand
             if (tracker == 1 || tracker == 2)
             {
                 yearmonth = new Utils().yearmonth();
@@ -130,10 +135,10 @@ namespace TiltStopLoss
                 {
                     bbinit += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
                 }
-                lastidhand = dbase.getLastValue("cash_hand_histories", "id_hand") + 1;
+                lastidhand = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
             }
 
-            
+            //aqui é feito o resto dos calculos e das diferenças
             try
             {
                 while (continu)
@@ -177,6 +182,7 @@ namespace TiltStopLoss
                         // It's on the same thread, no need for Invoke
                         this.labelBb.Text = bb.ToString();
                     }
+                    //stop
                     if (stoploss > 0.0)
                     {
                         if (bb <= (0 - stoploss))
@@ -187,6 +193,7 @@ namespace TiltStopLoss
                                 player.PlayLooping();
                             }
                             stop = true;
+                            //buttonSoundStop.Visible = true;
                             labelStopSet("!!!! StopLoss !!!!", Color.Red);
                         }
                     }
@@ -200,11 +207,13 @@ namespace TiltStopLoss
                                 player.PlayLooping();
                             }
                             stop = true;
+                            //buttonSoundStop.Visible = true;
                             labelStopSet("!!!! StopWin !!!!", Color.Green);
                         }
                     }
+
                     //hand
-                    String hand;
+                    String hand = "";
                     if (tracker == 1 || tracker == 2)
                     {
                         if (tracker == 2)//2 = hem2
@@ -216,44 +225,55 @@ namespace TiltStopLoss
                             hand = dbase.getHand(lastidhand, "handhistories", "pokerhand_id", "handhistory");//hem1
                         }
                     }
-                    else
-                    {
-                        hand = dbase.getHand(lastidhand, "cash_hand_histories", "id_hand", "history");//pt4
-                    }
+                    //else
+                    //{
+                    //    hand = dbase.getHand(lastidhand, "cash_hand_histories", "id_hand", "history");//pt4
+                    //}
 
-
-                    if (!hand.Equals(""))
+                    if (tracker == 1 || tracker == 2)
                     {
-                        lastidhand++;
-                        for (int i = 0; i < playeridname.Count; i++)
+                        if (!hand.Equals(""))
                         {
-                            if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
+                            lastidhand++;
+                            for (int i = 0; i < playeridname.Count; i++)
                             {
-                                handnumber++;
-                                if (this.labelBb.InvokeRequired)
+                                if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
                                 {
-                                    SetTextCallback d = new SetTextCallback(SetTextHands);
-                                    this.Invoke(d, new object[] { handnumber.ToString() });
-                                }
-                                else
-                                {
-                                    // It's on the same thread, no need for Invoke
-                                    this.labelHands.Text = handnumber.ToString();
-                                }
-                                if (handstop != 0)
-                                {
-                                    if (handstop <= handnumber)
-                                    {
-                                        if (!stop)
-                                        {
-                                            player = new Utils().playsound();
-                                            player.PlayLooping();
-                                        }
-                                        stop = true;
-                                        labelStopSet("!!!! StopHand !!!!", Color.Blue);
-                                    }
+                                    handnumber++;                                    
                                 }
                             }
+                        }
+                    }
+                    else
+                    {
+                        //pt4
+                        for (int i = 0; i < playeridname.Count; i++)
+                        {
+                            handnumber = dbase.getHandPt4(playeridname[i].Item1, lastidhand);
+                        }
+                    }
+                    if (this.labelBb.InvokeRequired)
+                    {
+                        SetTextCallback d = new SetTextCallback(SetTextHands);
+                        this.Invoke(d, new object[] { handnumber.ToString() });
+                    }
+                    else
+                    {
+                        // It's on the same thread, no need for Invoke
+                        this.labelHands.Text = handnumber.ToString();
+                    }
+                    if (handstop != 0)
+                    {
+                        if (handstop <= handnumber)
+                        {
+                            if (!stop)
+                            {
+                                player = new Utils().playsound();
+                                player.PlayLooping();
+                            }
+                            stop = true;
+                            //buttonSoundStop.Visible = true;
+                            labelStopSet("!!!! StopHand !!!!", Color.Blue);
                         }
                     }
                     Thread.Sleep(1000);
@@ -329,6 +349,7 @@ namespace TiltStopLoss
                             player.PlayLooping();
                         }
                         stop = true;
+                        //buttonSoundStop.Visible = true;
                         labelStopSet("!!!! StopTime !!!!", Color.Black);                                               
                     }
                 }

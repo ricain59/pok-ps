@@ -40,7 +40,7 @@
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(138, 36);
+            this.buttonStop.Location = new System.Drawing.Point(138, 28);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(38, 23);
             this.buttonStop.TabIndex = 0;
@@ -97,7 +97,7 @@
             // 
             // buttonSet
             // 
-            this.buttonSet.Location = new System.Drawing.Point(101, 36);
+            this.buttonSet.Location = new System.Drawing.Point(101, 28);
             this.buttonSet.Name = "buttonSet";
             this.buttonSet.Size = new System.Drawing.Size(31, 23);
             this.buttonSet.TabIndex = 5;
@@ -109,7 +109,7 @@
             // 
             this.labelStop.AutoSize = true;
             this.labelStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStop.Location = new System.Drawing.Point(39, 62);
+            this.labelStop.Location = new System.Drawing.Point(41, 57);
             this.labelStop.Name = "labelStop";
             this.labelStop.Size = new System.Drawing.Size(20, 16);
             this.labelStop.TabIndex = 6;
