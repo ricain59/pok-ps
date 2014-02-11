@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabDatabase = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
             this.labelAlertDb = new System.Windows.Forms.Label();
             this.checkBoxPt4 = new System.Windows.Forms.CheckBox();
             this.checkBoxHem2 = new System.Windows.Forms.CheckBox();
@@ -73,7 +74,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
-            this.label18 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -122,6 +122,15 @@
             this.tabDatabase.TabIndex = 0;
             this.tabDatabase.Text = "Database";
             this.tabDatabase.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(269, 278);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(34, 13);
+            this.label18.TabIndex = 21;
+            this.label18.Text = "v1.2a";
             // 
             // labelAlertDb
             // 
@@ -546,15 +555,6 @@
             this.openFileDialogSound.FileName = "openFileDialogSound";
             this.openFileDialogSound.InitialDirectory = "c:";
             this.openFileDialogSound.Title = "Search Sound";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(269, 278);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(28, 13);
-            this.label18.TabIndex = 21;
-            this.label18.Text = "v1.2";
             // 
             // Main
             // 

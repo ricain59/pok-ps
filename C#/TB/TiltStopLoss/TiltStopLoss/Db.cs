@@ -161,12 +161,7 @@ namespace TiltStopLoss
             Double bb = 0.0;
             while (dr.Read())
             {
-                if (dr[0].ToString().Equals(""))
-                {
-                    dr.Close();
-                    return 0.0;
-                }
-                else
+                if (!dr[0].ToString().Equals(""))
                 {
                     bb = Convert.ToDouble(dr[0].ToString());                    
                 }
@@ -193,12 +188,7 @@ namespace TiltStopLoss
             Double bb = 0.0;
             while (dr.Read())
             {
-                if (dr[0].ToString().Equals(""))
-                {
-                    dr.Close();
-                    return 0.0;
-                }
-                else
+                if (!dr[0].ToString().Equals(""))
                 {
                     bb = Convert.ToDouble(dr[0].ToString());
                 }
@@ -230,12 +220,7 @@ namespace TiltStopLoss
             Double bb = 0.0;
             while (dr.Read())
             {
-                if (dr[0].ToString().Equals(""))
-                {
-                    dr.Close();
-                    return 0.0;
-                }
-                else
+                if (!dr[0].ToString().Equals(""))
                 {
                     bb = Convert.ToDouble(dr[0].ToString());
                 }
@@ -290,6 +275,24 @@ namespace TiltStopLoss
             }
             dr.Close();    
             return playeralias;
+        }
+
+        public Int64 getHandPt4(String idplayer, Int64 lastid)
+        {
+            string sql = "select sum(cnt_hands) as hands from cash_table_session_summary where id_player = "+idplayer+" and id_session >= "+lastid;
+            NpgsqlCommand command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            Int64 numhand = 0;
+            while (dr.Read())
+            {
+                if (!dr[0].ToString().Equals(""))
+                {
+                    numhand += Convert.ToInt64(dr[0].ToString());
+                }
+                break;
+            }
+            dr.Close();
+            return numhand;
         }
     }
 }

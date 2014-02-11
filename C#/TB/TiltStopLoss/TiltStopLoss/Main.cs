@@ -281,59 +281,62 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void textBoxPlayer_Leave(object sender, EventArgs e)
         {
-            string query = "";
-            if (checkBoxHem1.Checked || checkBoxHem2.Checked)
+            if (!textBoxPlayer.Text.Equals(""))
             {
-                if (checkBoxHem1.Checked)//hem1
+                string query = "";
+                if (checkBoxHem1.Checked || checkBoxHem2.Checked)
                 {
-                    query = "select player_id, site_id from players where playername = '" + textBoxPlayer.Text.ToString() + "'";
-                }
-                else
-                {
-                    query = "select player_id, pokersite_id from players where playername = '" + textBoxPlayer.Text.ToString() + "'";
-                }
-
-                db.connectDb();
-                NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
-                NpgsqlDataReader dr = command.ExecuteReader();
-                while (dr.Read())
-                {
-                    textBoxPlayerID.Text = dr[0].ToString();
-                    if (dr[1].ToString().Equals("-1"))
+                    if (checkBoxHem1.Checked)//hem1
                     {
-                        alias = true;
+                        query = "select player_id, site_id from players where playername = '" + textBoxPlayer.Text.ToString() + "'";
                     }
                     else
                     {
-                        alias = false;
+                        query = "select player_id, pokersite_id from players where playername = '" + textBoxPlayer.Text.ToString() + "'";
                     }
+
+                    db.connectDb();
+                    NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
+                    NpgsqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        textBoxPlayerID.Text = dr[0].ToString();
+                        if (dr[1].ToString().Equals("-1"))
+                        {
+                            alias = true;
+                        }
+                        else
+                        {
+                            alias = false;
+                        }
+                    }
+                    dr.Close();
+                    db.closeconDb();
                 }
-                dr.Close();
-                db.closeconDb();
-            }
-            else //pt4
-            {
-                query = "select id_player, player_name, id_player_alias from player where player_name = '" + textBoxPlayer.Text.ToString() + "'";
-                db.connectDb();
-                NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
-                NpgsqlDataReader dr = command.ExecuteReader();
-                String id_alias = "";
-                while (dr.Read())
+                else //pt4
                 {
-                    textBoxPlayerID.Text = dr[0].ToString();
-                    id_alias = dr[0].ToString();                    
+                    query = "select id_player, player_name, id_player_alias from player where player_name = '" + textBoxPlayer.Text.ToString() + "'";
+                    db.connectDb();
+                    NpgsqlCommand command = new NpgsqlCommand(query, db.conn);
+                    NpgsqlDataReader dr = command.ExecuteReader();
+                    String id_alias = "";
+                    while (dr.Read())
+                    {
+                        textBoxPlayerID.Text = dr[0].ToString();
+                        id_alias = dr[0].ToString();
+                    }
+                    dr.Close();
+                    query = "select id_player, player_name, id_player_alias from player where id_player_alias = " + id_alias;
+                    command = new NpgsqlCommand(query, db.conn);
+                    dr = command.ExecuteReader();
+                    alias = false;
+                    while (dr.Read())
+                    {
+                        alias = true;
+                    }
+                    dr.Close();
+                    db.closeconDb();
                 }
-                dr.Close();
-                query = "select id_player, player_name, id_player_alias from player where id_player_alias = "+id_alias;
-                command = new NpgsqlCommand(query, db.conn);
-                dr = command.ExecuteReader();
-                alias = false;
-                while (dr.Read())
-                {
-                    alias = true;                    
-                }
-                dr.Close();
-                db.closeconDb();
             }
         }
 
@@ -385,12 +388,12 @@ namespace TiltStopLoss
             if (bbs < 0)
             {
                 textBoxRsBbs.Text = bbs.ToString();
-                textBoxRsBbs.ForeColor = Color.Red;
+                textBoxRsBbs.ForeColor = Color.Red;                
             }
             else
             {
                 textBoxRsBbs.Text = bbs.ToString();
-                textBoxRsBbs.ForeColor = Color.Green;
+                textBoxRsBbs.ForeColor = Color.Green;                
             }
             tabControlMain.SelectedIndex = 2;
         }
@@ -400,6 +403,7 @@ namespace TiltStopLoss
         /// </summary>
         private void fillTextboxPlayer()
         {
+            
             try
             {
                 textBoxPlayer.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -409,7 +413,7 @@ namespace TiltStopLoss
                 db.connectDb();
                 if (checkBoxHem1.Checked || checkBoxHem2.Checked)
                 {
-                    query = "select player_id, playername from players ";                                        
+                    query = "select player_id, playername from players ";
                 }
                 else
                 {
@@ -429,6 +433,7 @@ namespace TiltStopLoss
             {
                 Console.WriteLine("exception==" + ex);
             }
+            
         }
 
         /// <summary>
@@ -469,6 +474,11 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// Only one DB checked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkBoxPt4_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxPt4.Checked)

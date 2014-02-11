@@ -23,6 +23,10 @@ namespace TiltStopLoss
             return DateTime.Now.ToString("yyyyMM");
         }
 
+        /// <summary>
+        /// Devolve o ano e semana que serve para o pedido a DB sobre os BBs
+        /// </summary>
+        /// <returns></returns>
         public String yearweek()
         {
             DateTime date = DateTime.Now;
