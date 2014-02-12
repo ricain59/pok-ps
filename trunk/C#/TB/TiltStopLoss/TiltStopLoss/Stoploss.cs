@@ -247,9 +247,10 @@ namespace TiltStopLoss
                     else
                     {
                         //pt4
+                        handnumber = 0;
                         for (int i = 0; i < playeridname.Count; i++)
                         {
-                            handnumber = dbase.getHandPt4(playeridname[i].Item1, lastidhand);
+                            handnumber += dbase.getHandPt4(playeridname[i].Item1, lastidhand);
                         }
                     }
                     if (this.labelBb.InvokeRequired)
