@@ -22,5 +22,14 @@ namespace PS
             w.Close();
         }
 
+        public void ErrorVpn(String message)
+        {
+            String path = "E:/!!VPN!!_DT_" + DateTime.Now.ToString("yyyy_M_d_HH_MM") + ".txt";
+            StreamWriter w = new StreamWriter(path, true);
+            w.Write(message);
+            w.WriteLine();
+            w.Close();
+        }
+
     }
 }
