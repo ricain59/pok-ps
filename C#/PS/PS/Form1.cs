@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Diagnostics;
+
 
 namespace PS
 {
@@ -24,6 +26,8 @@ namespace PS
         Boolean down = false;
         Boolean firststart = true;
         Boolean zoom = false;
+        String ipinicial;
+        VpnConnect.VPN vpn;
 
         const int VK_UP = 0x26; //key up
 
@@ -31,6 +35,9 @@ namespace PS
         {
             InitializeComponent();
             loadconfig();
+            //aqui vai ser para a vpn
+            ipinicial = new Utils().getipinternet();
+                       
         }
 
         [DllImport("user32.dll")]
@@ -103,6 +110,8 @@ namespace PS
             }
             ow.selectLobby(loginsend, down, zoom);            
             int cincominuto = 0;
+            int vpnminute = 0;
+            int vpnnumber = 1;
             while (true)
             {
                 while (continueDt)
@@ -155,10 +164,46 @@ namespace PS
                         handcopy.getClipboard(ow, down, zoom, textBoxVm.Text);
 
                         cincominuto = cincominuto + 1;
+                        vpnminute++;
 
                         System.Threading.Thread.Sleep(400);
                         //System.Threading.Thread.Sleep(1500);
 
+                        if (vpnminute >= 5)
+                        {
+                            vpnminute = 0;
+                            int tentative = 1;
+                            while (!vpn.TestConnection())
+                            {
+                                vpn.Manage();
+                                if (tentative > 5)
+                                {
+                                    if (vpnnumber == 1)
+                                    {
+                                        vpn.VPNConnectionName = textBoxVpn2.Text;
+                                        textBoxVpn1.ForeColor = Color.Red;
+                                        vpnnumber++;
+                                        tentative = 1;
+                                    }
+                                    else
+                                    {
+                                        if (vpnnumber == 2)
+                                        {
+                                            vpn.VPNConnectionName = textBoxVpn3.Text;
+                                            textBoxVpn2.ForeColor = Color.Red;
+                                            vpnnumber++;
+                                            tentative = 1;
+                                        }
+                                        else
+                                        {
+                                            //shutdown the machine
+                                            Process.Start("shutdown", "/s /t 0");
+                                        }
+                                    }
+                                }
+                                tentative++;
+                            }
+                        }
                         //ici je vais mettre une exception au cas ou
                     }
                     catch (Exception ex)
@@ -210,6 +255,12 @@ namespace PS
             }
             w.Write("Vm="+textBoxVm.Text);
             w.WriteLine();
+            w.Write("Vpn1=" + textBoxVpn1.Text);
+            w.WriteLine();
+            w.Write("Vpn2=" + textBoxVpn2.Text);
+            w.WriteLine();
+            w.Write("Vpn3=" + textBoxVpn3.Text);
+            w.WriteLine();
             w.Close();
         }
 
@@ -253,8 +304,30 @@ namespace PS
                 case "Vm":
                     textBoxVm.Text = line[1].ToString();
                     break;
+                case "Vpn1":
+                    textBoxVpn1.Text = line[1].ToString();
+                    break;
+                case "Vpn2":
+                    textBoxVpn2.Text = line[1].ToString();
+                    break;
+                case "Vpn3":
+                    textBoxVpn3.Text = line[1].ToString();
+                    break;                    
                 default:
                     break;
+            }
+        }
+
+        private void buttonConnectVpn_Click(object sender, EventArgs e)
+        {
+            if (textBoxVpn1.Text.Equals(""))
+            {
+                MessageBox.Show("Preencher as linhas das vpns");
+            }
+            else
+            {
+                //Process.Start("shutdown", "/s /t 0");
+                vpn = new VpnConnect.VPN(textBoxVpn1.Text, ipinicial);
             }
         }
     }
