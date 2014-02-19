@@ -35,7 +35,7 @@
             this.pictureBoxPort = new System.Windows.Forms.PictureBox();
             this.pictureBoxServer = new System.Windows.Forms.PictureBox();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
-            this.label18 = new System.Windows.Forms.Label();
+            this.labelVersion = new System.Windows.Forms.Label();
             this.labelAlertDb = new System.Windows.Forms.Label();
             this.checkBoxPt4 = new System.Windows.Forms.CheckBox();
             this.checkBoxHem2 = new System.Windows.Forms.CheckBox();
@@ -118,7 +118,7 @@
             this.tabDatabase.Controls.Add(this.pictureBoxPort);
             this.tabDatabase.Controls.Add(this.pictureBoxServer);
             this.tabDatabase.Controls.Add(this.pictureBoxPlayer);
-            this.tabDatabase.Controls.Add(this.label18);
+            this.tabDatabase.Controls.Add(this.labelVersion);
             this.tabDatabase.Controls.Add(this.labelAlertDb);
             this.tabDatabase.Controls.Add(this.checkBoxPt4);
             this.tabDatabase.Controls.Add(this.checkBoxHem2);
@@ -223,14 +223,14 @@
             this.pictureBoxPlayer.TabStop = false;
             this.pictureBoxPlayer.MouseHover += new System.EventHandler(this.pictureBoxPlayer_MouseHover);
             // 
-            // label18
+            // labelVersion
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(269, 278);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(28, 13);
-            this.label18.TabIndex = 21;
-            this.label18.Text = "v1.3";
+            this.labelVersion.AutoSize = true;
+            this.labelVersion.Location = new System.Drawing.Point(269, 278);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(28, 13);
+            this.labelVersion.TabIndex = 21;
+            this.labelVersion.Text = "v1.4";
             // 
             // labelAlertDb
             // 
@@ -772,7 +772,7 @@
         private System.Windows.Forms.Label labelSessionBBs;
         private System.Windows.Forms.CheckBox checkBoxPt4;
         private System.Windows.Forms.Label labelAlertDb;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBoxResumeSession;
         private System.ComponentModel.IContainer components;
