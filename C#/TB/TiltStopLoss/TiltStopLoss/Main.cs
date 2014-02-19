@@ -49,35 +49,41 @@ namespace TiltStopLoss
         private void checkupdate()
         {
             Double newversion = version;
-
-            using (XmlReader reader = XmlReader.Create(urlxml))
+            try
             {
-                while (reader.Read())
+                using (XmlReader reader = XmlReader.Create(urlxml))
                 {
-                    // Only detect start elements.
-                    if (reader.IsStartElement())
+                    while (reader.Read())
                     {
-                        // Get element name and switch on it.
-                        switch (reader.Name)
+                        // Only detect start elements.
+                        if (reader.IsStartElement())
                         {
-                            case "number":
-                                if (reader.Read())
-                                {
-                                    newversion = Convert.ToDouble(reader.Value.Trim().ToString().Replace('.', ','));
-                                }
-                                break;
+                            // Get element name and switch on it.
+                            switch (reader.Name)
+                            {
+                                case "number":
+                                    if (reader.Read())
+                                    {
+                                        newversion = Convert.ToDouble(reader.Value.Trim().ToString().Replace('.', ','));
+                                    }
+                                    break;
+                            }
                         }
                     }
                 }
-            }
-            if (version < newversion)
-            {
-                DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\nGo to download page?", "Update", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                if (version < newversion)
                 {
-                    //do something
-                    Process.Start(urldownload);                    
-                }                
+                    DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\nGo to download page?", "Update", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        //do something
+                        Process.Start(urldownload);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //do nothing
             }
         }
 
