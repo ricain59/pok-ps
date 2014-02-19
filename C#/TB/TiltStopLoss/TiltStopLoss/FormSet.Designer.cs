@@ -42,13 +42,16 @@
             this.textBoxStopWin = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxStopLossPeak = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxStopTime
             // 
             this.textBoxStopTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxStopTime.ForeColor = System.Drawing.Color.Blue;
-            this.textBoxStopTime.Location = new System.Drawing.Point(85, 87);
+            this.textBoxStopTime.Location = new System.Drawing.Point(101, 93);
             this.textBoxStopTime.Name = "textBoxStopTime";
             this.textBoxStopTime.Size = new System.Drawing.Size(71, 20);
             this.textBoxStopTime.TabIndex = 20;
@@ -60,7 +63,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Blue;
-            this.label13.Location = new System.Drawing.Point(166, 94);
+            this.label13.Location = new System.Drawing.Point(179, 100);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(51, 13);
             this.label13.TabIndex = 19;
@@ -71,7 +74,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Blue;
-            this.label12.Location = new System.Drawing.Point(12, 94);
+            this.label12.Location = new System.Drawing.Point(12, 100);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 13);
             this.label12.TabIndex = 18;
@@ -81,7 +84,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(166, 57);
+            this.label10.Location = new System.Drawing.Point(179, 72);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(43, 13);
             this.label10.TabIndex = 17;
@@ -90,7 +93,7 @@
             // textBoxStopHand
             // 
             this.textBoxStopHand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxStopHand.Location = new System.Drawing.Point(85, 50);
+            this.textBoxStopHand.Location = new System.Drawing.Point(101, 65);
             this.textBoxStopHand.Name = "textBoxStopHand";
             this.textBoxStopHand.Size = new System.Drawing.Size(71, 20);
             this.textBoxStopHand.TabIndex = 16;
@@ -101,7 +104,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(12, 57);
+            this.label8.Location = new System.Drawing.Point(12, 72);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 13);
             this.label8.TabIndex = 15;
@@ -112,7 +115,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(163, 19);
+            this.label11.Location = new System.Drawing.Point(179, 19);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(29, 13);
             this.label11.TabIndex = 14;
@@ -122,7 +125,7 @@
             // 
             this.textBoxStopLoss.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxStopLoss.ForeColor = System.Drawing.Color.Red;
-            this.textBoxStopLoss.Location = new System.Drawing.Point(85, 12);
+            this.textBoxStopLoss.Location = new System.Drawing.Point(101, 12);
             this.textBoxStopLoss.Name = "textBoxStopLoss";
             this.textBoxStopLoss.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBoxStopLoss.Size = new System.Drawing.Size(71, 20);
@@ -143,11 +146,11 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(85, 146);
+            this.buttonOk.Location = new System.Drawing.Point(86, 156);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(71, 23);
             this.buttonOk.TabIndex = 21;
-            this.buttonOk.Text = "Ok";
+            this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
@@ -155,7 +158,7 @@
             // 
             this.textBoxStopWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxStopWin.ForeColor = System.Drawing.Color.Green;
-            this.textBoxStopWin.Location = new System.Drawing.Point(85, 118);
+            this.textBoxStopWin.Location = new System.Drawing.Point(101, 120);
             this.textBoxStopWin.Name = "textBoxStopWin";
             this.textBoxStopWin.Size = new System.Drawing.Size(71, 20);
             this.textBoxStopWin.TabIndex = 24;
@@ -167,7 +170,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Green;
-            this.label14.Location = new System.Drawing.Point(166, 125);
+            this.label14.Location = new System.Drawing.Point(182, 127);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 13);
             this.label14.TabIndex = 23;
@@ -178,17 +181,54 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Green;
-            this.label15.Location = new System.Drawing.Point(12, 125);
+            this.label15.Location = new System.Drawing.Point(12, 127);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(55, 13);
             this.label15.TabIndex = 22;
             this.label15.Text = "StopWin";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Red;
+            this.label18.Location = new System.Drawing.Point(179, 45);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 13);
+            this.label18.TabIndex = 29;
+            this.label18.Text = "BBs";
+            // 
+            // textBoxStopLossPeak
+            // 
+            this.textBoxStopLossPeak.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxStopLossPeak.ForeColor = System.Drawing.Color.Red;
+            this.textBoxStopLossPeak.Location = new System.Drawing.Point(101, 38);
+            this.textBoxStopLossPeak.Name = "textBoxStopLossPeak";
+            this.textBoxStopLossPeak.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxStopLossPeak.Size = new System.Drawing.Size(71, 20);
+            this.textBoxStopLossPeak.TabIndex = 28;
+            this.textBoxStopLossPeak.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxStopLossPeak.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopLossPeak_KeyPress);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Red;
+            this.label19.Location = new System.Drawing.Point(12, 45);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(88, 13);
+            this.label19.TabIndex = 27;
+            this.label19.Text = "StopLossPeak";
+            // 
             // FormSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(228, 181);
+            this.ClientSize = new System.Drawing.Size(240, 191);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.textBoxStopLossPeak);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.textBoxStopWin);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label15);
@@ -206,7 +246,6 @@
             this.Name = "FormSet";
             this.Text = "Set New Value";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSet_FormClosed);
-            this.Load += new System.EventHandler(this.FormSet_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +266,8 @@
         private System.Windows.Forms.TextBox textBoxStopWin;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBoxStopLossPeak;
+        private System.Windows.Forms.Label label19;
     }
 }

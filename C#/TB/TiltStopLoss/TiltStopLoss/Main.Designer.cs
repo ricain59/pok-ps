@@ -56,6 +56,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPlayer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBoxResumeSession = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.checkBoxResumeSession = new System.Windows.Forms.CheckBox();
             this.textBoxStopWin = new System.Windows.Forms.TextBox();
@@ -67,9 +68,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxStopHand = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBoxStopLoss = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.tabResumeSession = new System.Windows.Forms.TabPage();
             this.textBoxRsTime = new System.Windows.Forms.TextBox();
             this.textBoxRsHands = new System.Windows.Forms.TextBox();
@@ -81,7 +79,13 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBoxResumeSession = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxStopLoss = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxStopLossPeak = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.pictureBoxLossPeak = new System.Windows.Forms.PictureBox();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).BeginInit();
@@ -92,9 +96,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxServer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).BeginInit();
             this.tabResumeSession.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLossPeak)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -405,6 +410,10 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.pictureBoxLossPeak);
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.textBoxStopLossPeak);
+            this.tabPage3.Controls.Add(this.label19);
             this.tabPage3.Controls.Add(this.pictureBoxResumeSession);
             this.tabPage3.Controls.Add(this.label7);
             this.tabPage3.Controls.Add(this.checkBoxResumeSession);
@@ -427,11 +436,22 @@
             this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // pictureBoxResumeSession
+            // 
+            this.pictureBoxResumeSession.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxResumeSession.Image")));
+            this.pictureBoxResumeSession.Location = new System.Drawing.Point(283, 181);
+            this.pictureBoxResumeSession.Name = "pictureBoxResumeSession";
+            this.pictureBoxResumeSession.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxResumeSession.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxResumeSession.TabIndex = 23;
+            this.pictureBoxResumeSession.TabStop = false;
+            this.pictureBoxResumeSession.MouseHover += new System.EventHandler(this.pictureBoxResumeSession_MouseHover);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(22, 166);
+            this.label7.Location = new System.Drawing.Point(22, 187);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 13);
             this.label7.TabIndex = 16;
@@ -440,7 +460,7 @@
             // checkBoxResumeSession
             // 
             this.checkBoxResumeSession.AutoSize = true;
-            this.checkBoxResumeSession.Location = new System.Drawing.Point(150, 166);
+            this.checkBoxResumeSession.Location = new System.Drawing.Point(166, 187);
             this.checkBoxResumeSession.Name = "checkBoxResumeSession";
             this.checkBoxResumeSession.Size = new System.Drawing.Size(15, 14);
             this.checkBoxResumeSession.TabIndex = 15;
@@ -451,7 +471,7 @@
             // 
             this.textBoxStopWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxStopWin.ForeColor = System.Drawing.Color.Green;
-            this.textBoxStopWin.Location = new System.Drawing.Point(94, 132);
+            this.textBoxStopWin.Location = new System.Drawing.Point(110, 153);
             this.textBoxStopWin.Name = "textBoxStopWin";
             this.textBoxStopWin.Size = new System.Drawing.Size(71, 20);
             this.textBoxStopWin.TabIndex = 14;
@@ -463,7 +483,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Green;
-            this.label14.Location = new System.Drawing.Point(175, 139);
+            this.label14.Location = new System.Drawing.Point(191, 160);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(29, 13);
             this.label14.TabIndex = 13;
@@ -474,7 +494,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Green;
-            this.label15.Location = new System.Drawing.Point(21, 139);
+            this.label15.Location = new System.Drawing.Point(21, 160);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(55, 13);
             this.label15.TabIndex = 12;
@@ -484,7 +504,7 @@
             // 
             this.textBoxStopTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxStopTime.ForeColor = System.Drawing.Color.Blue;
-            this.textBoxStopTime.Location = new System.Drawing.Point(94, 100);
+            this.textBoxStopTime.Location = new System.Drawing.Point(110, 121);
             this.textBoxStopTime.Name = "textBoxStopTime";
             this.textBoxStopTime.Size = new System.Drawing.Size(71, 20);
             this.textBoxStopTime.TabIndex = 11;
@@ -496,7 +516,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Blue;
-            this.label13.Location = new System.Drawing.Point(175, 107);
+            this.label13.Location = new System.Drawing.Point(191, 128);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(51, 13);
             this.label13.TabIndex = 10;
@@ -507,7 +527,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Blue;
-            this.label12.Location = new System.Drawing.Point(21, 107);
+            this.label12.Location = new System.Drawing.Point(21, 128);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 13);
             this.label12.TabIndex = 9;
@@ -517,7 +537,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(175, 70);
+            this.label10.Location = new System.Drawing.Point(191, 91);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(43, 13);
             this.label10.TabIndex = 8;
@@ -526,7 +546,7 @@
             // textBoxStopHand
             // 
             this.textBoxStopHand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxStopHand.Location = new System.Drawing.Point(94, 63);
+            this.textBoxStopHand.Location = new System.Drawing.Point(110, 84);
             this.textBoxStopHand.Name = "textBoxStopHand";
             this.textBoxStopHand.Size = new System.Drawing.Size(71, 20);
             this.textBoxStopHand.TabIndex = 7;
@@ -537,45 +557,11 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(21, 70);
+            this.label8.Location = new System.Drawing.Point(21, 91);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 13);
             this.label8.TabIndex = 6;
             this.label8.Text = "StopHands";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(172, 32);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 13);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "BBs";
-            // 
-            // textBoxStopLoss
-            // 
-            this.textBoxStopLoss.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxStopLoss.ForeColor = System.Drawing.Color.Red;
-            this.textBoxStopLoss.Location = new System.Drawing.Point(94, 25);
-            this.textBoxStopLoss.Name = "textBoxStopLoss";
-            this.textBoxStopLoss.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textBoxStopLoss.Size = new System.Drawing.Size(71, 20);
-            this.textBoxStopLoss.TabIndex = 3;
-            this.textBoxStopLoss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxStopLoss.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopLoss_KeyPress);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(21, 32);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 13);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "StopLoss";
             // 
             // tabResumeSession
             // 
@@ -685,16 +671,84 @@
             this.toolTipHelpText.InitialDelay = 100;
             this.toolTipHelpText.ReshowDelay = 20;
             // 
-            // pictureBoxResumeSession
+            // label9
             // 
-            this.pictureBoxResumeSession.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxResumeSession.Image")));
-            this.pictureBoxResumeSession.Location = new System.Drawing.Point(175, 160);
-            this.pictureBoxResumeSession.Name = "pictureBoxResumeSession";
-            this.pictureBoxResumeSession.Size = new System.Drawing.Size(26, 20);
-            this.pictureBoxResumeSession.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxResumeSession.TabIndex = 23;
-            this.pictureBoxResumeSession.TabStop = false;
-            this.pictureBoxResumeSession.MouseHover += new System.EventHandler(this.pictureBoxResumeSession_MouseHover);
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(21, 32);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "StopLoss";
+            // 
+            // textBoxStopLoss
+            // 
+            this.textBoxStopLoss.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxStopLoss.ForeColor = System.Drawing.Color.Red;
+            this.textBoxStopLoss.Location = new System.Drawing.Point(110, 25);
+            this.textBoxStopLoss.Name = "textBoxStopLoss";
+            this.textBoxStopLoss.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxStopLoss.Size = new System.Drawing.Size(71, 20);
+            this.textBoxStopLoss.TabIndex = 3;
+            this.textBoxStopLoss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxStopLoss.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopLoss_KeyPress);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(188, 32);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 13);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "BBs";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Red;
+            this.label18.Location = new System.Drawing.Point(188, 61);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 13);
+            this.label18.TabIndex = 26;
+            this.label18.Text = "BBs";
+            // 
+            // textBoxStopLossPeak
+            // 
+            this.textBoxStopLossPeak.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxStopLossPeak.ForeColor = System.Drawing.Color.Red;
+            this.textBoxStopLossPeak.Location = new System.Drawing.Point(110, 54);
+            this.textBoxStopLossPeak.Name = "textBoxStopLossPeak";
+            this.textBoxStopLossPeak.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxStopLossPeak.Size = new System.Drawing.Size(71, 20);
+            this.textBoxStopLossPeak.TabIndex = 25;
+            this.textBoxStopLossPeak.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxStopLossPeak.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopLossPeak_KeyPress);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Red;
+            this.label19.Location = new System.Drawing.Point(21, 61);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(88, 13);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "StopLossPeak";
+            // 
+            // pictureBoxLossPeak
+            // 
+            this.pictureBoxLossPeak.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLossPeak.Image")));
+            this.pictureBoxLossPeak.Location = new System.Drawing.Point(283, 54);
+            this.pictureBoxLossPeak.Name = "pictureBoxLossPeak";
+            this.pictureBoxLossPeak.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxLossPeak.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLossPeak.TabIndex = 27;
+            this.pictureBoxLossPeak.TabStop = false;
+            this.pictureBoxLossPeak.MouseHover += new System.EventHandler(this.pictureBoxLossPeak_MouseHover);
             // 
             // Main
             // 
@@ -718,10 +772,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).EndInit();
             this.tabResumeSession.ResumeLayout(false);
             this.tabResumeSession.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLossPeak)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -748,9 +803,6 @@
         public System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.TextBox textBoxPlayerID;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBoxStopLoss;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBoxStopHand;
         private System.Windows.Forms.Label label8;
@@ -785,6 +837,13 @@
         private System.Windows.Forms.PictureBox pictureBoxTracker;
         private System.Windows.Forms.ToolTip toolTipHelpText;
         private System.Windows.Forms.PictureBox pictureBoxResumeSession;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBoxStopLossPeak;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxStopLoss;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox pictureBoxLossPeak;
     }
 }
 
