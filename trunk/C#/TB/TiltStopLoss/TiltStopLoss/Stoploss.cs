@@ -33,9 +33,10 @@ namespace TiltStopLoss
         List<Tuple<String, String>> playeridname;
         private String time;
         private Double bb;
+        private Double bbpeak;
         Int64 handnumber = 0;
 
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String stoploss, String hand, String time, String win, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String stoploss, String hand, String time, String win, String stopwinpeak, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -45,6 +46,7 @@ namespace TiltStopLoss
             handstop = new Utils().stringtoInt64(hand);
             timestop = new Utils().stringtoInt32(time);
             stopwin = new Utils().stringtoDouble(win);
+            bbpeak = new Utils().stringtoDouble(stopwinpeak);
             this.tracker = tracker;
             loadconfig();
 
@@ -84,7 +86,7 @@ namespace TiltStopLoss
             startbb.Abort();
             startcrono.Abort();
             
-            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString());
+            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString());
             wmain.setValueSession(handnumber.ToString(), time, bb);
             wmain.Visible = true;            
         }
@@ -106,7 +108,8 @@ namespace TiltStopLoss
         {
             String yearmonth;
             Double bbinit = 0.0;
-            Int64 lastidhand;
+            Int64 lastidhand = 0;
+            Int64 lastidsessionpt4 = 0;
             //permite definir aqui os valores iniciais de bbinit e lastidhand
             if (tracker == 1 || tracker == 2)
             {
@@ -135,12 +138,13 @@ namespace TiltStopLoss
                 {
                     bbinit += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
                 }
-                lastidhand = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
+                lastidsessionpt4 = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
             }
 
             //aqui é feito o resto dos calculos e das diferenças
             try
             {
+                Double bbmax = 0.0;
                 while (continu)
                 {
                     //bb
@@ -182,6 +186,7 @@ namespace TiltStopLoss
                         // It's on the same thread, no need for Invoke
                         this.labelBb.Text = bb.ToString();
                     }
+
                     //stop
                     if (stoploss > 0.0)
                     {
@@ -211,9 +216,31 @@ namespace TiltStopLoss
                             labelStopSet("!!!! StopWin !!!!", Color.Green);
                         }
                     }
+                    if (bbpeak > 0.0)
+                    {
+                        if (bb > bbmax)
+                        {
+                            bbmax = bb;
+                        }
+                        else
+                        {
+                            if ((bbmax - bb) >= bbpeak)
+                            {
+                                if (!stop)
+                                {
+                                    player = new Utils().playsound();
+                                    player.PlayLooping();
+                                }
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopPeak !!!!", Color.Red);
+                            }
+                        }
+                    }                    
 
                     //hand
                     String hand = "";
+                    //aqui vou buscar a hand para depois ver os limites e contar as hands para hem1 e hem2
                     if (tracker == 1 || tracker == 2)
                     {
                         if (tracker == 2)//2 = hem2
@@ -225,10 +252,11 @@ namespace TiltStopLoss
                             hand = dbase.getHand(lastidhand, "handhistories", "pokerhand_id", "handhistory");//hem1
                         }
                     }
-                    //else
-                    //{
-                    //    hand = dbase.getHand(lastidhand, "cash_hand_histories", "id_hand", "history");//pt4
-                    //}
+                    else
+                    {
+                        hand = dbase.getHand(lastidhand, "cash_hand_histories", "id_hand", "history");//pt4
+                    }
+
 
                     if (tracker == 1 || tracker == 2)
                     {
@@ -250,7 +278,7 @@ namespace TiltStopLoss
                         handnumber = 0;
                         for (int i = 0; i < playeridname.Count; i++)
                         {
-                            handnumber += dbase.getHandPt4(playeridname[i].Item1, lastidhand);
+                            handnumber += dbase.getHandPt4(playeridname[i].Item1, lastidsessionpt4);
                         }
                     }
                     if (this.labelBb.InvokeRequired)
@@ -277,7 +305,7 @@ namespace TiltStopLoss
                             labelStopSet("!!!! StopHand !!!!", Color.Blue);
                         }
                     }
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
             }
             catch (Exception ex)
@@ -357,6 +385,7 @@ namespace TiltStopLoss
             }
         }
 
+        #region set label
         private void SetTextTimer(string text)
         {
             this.labelTimer.Text = text;
@@ -389,6 +418,7 @@ namespace TiltStopLoss
                 this.labelStop.ForeColor = cor;
             }
         }
+        #endregion
 
         /// <summary>
         /// mudar o texto das bb e po-lo visível ao passsar o rato por cima.
@@ -421,6 +451,7 @@ namespace TiltStopLoss
             labelBb.ForeColor = Color.White;
         }
 
+        #region load config
         /// <summary>
         /// carregas as configs
         /// </summary>
@@ -454,6 +485,8 @@ namespace TiltStopLoss
             }
         }
 
+        #endregion
+
         /// <summary>
         /// Permite ajustar os valores depois de arrancar com o programa
         /// </summary>
@@ -461,7 +494,7 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void buttonSet_Click(object sender, EventArgs e)
         {
-            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop, stopwin);
+            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop, stopwin, bbpeak);
             fs.Show();
         }
 
@@ -471,12 +504,13 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(Int64 hand, Double loss, Int32 time, Double win)
+        public void setNewValue(Int64 hand, Double loss, Int32 time, Double win, Double losspeak)
         {
             this.timestop = time;
             this.handstop = hand;
             this.stoploss = loss;
             this.stopwin = win;
+            this.bbpeak = losspeak;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.4;
+        private Double version = 1.41;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         
@@ -83,7 +83,7 @@ namespace TiltStopLoss
             }
             catch (Exception e)
             {
-                //do nothing
+                new Debug().LogMessage(e.ToString());
             }
         }
 
@@ -142,7 +142,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 1);
+                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, 1);
                             }
                             else //hem2
                             {
@@ -157,7 +157,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
+                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, 2);
                             }
                         }
                         else //pt4
@@ -172,7 +172,7 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 4);
+                            sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, 4);
                         }
                         sl.Show();                        
                     }
@@ -249,6 +249,9 @@ namespace TiltStopLoss
                 case "StopWin":
                     textBoxStopWin.Text = line[1].ToString();
                     break;
+                case "StopLossPeak":
+                    textBoxStopLossPeak.Text = line[1].ToString();
+                    break;
                 case "Hem1":
                     if(line[1].ToString().Equals("True"))
                     {
@@ -291,10 +294,12 @@ namespace TiltStopLoss
                     if (line[1].ToString().Equals("True"))
                     {
                         resumesession = true;
+                        checkBoxResumeSession.Checked = true;
                     }
                     else
                     {
                         resumesession = false;
+                        checkBoxResumeSession.Checked = false;
                     }
                     break;
                 default:
@@ -340,6 +345,8 @@ namespace TiltStopLoss
             w.Write("Pt4=" + checkBoxPt4.Checked.ToString());
             w.WriteLine();
             w.Write("Resumesession=" + checkBoxResumeSession.Checked.ToString());
+            w.WriteLine();
+            w.Write("StopLossPeak=" + textBoxStopLossPeak.Text.ToString());
             w.WriteLine();            
             w.Close();
         }
@@ -419,12 +426,13 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(String hand, String loss, String time, String win)
+        public void setNewValue(String hand, String loss, String time, String win, String losspeak)
         {
             textBoxStopLoss.Text = loss;
             textBoxStopHand.Text = hand;
             textBoxStopTime.Text = time;
             textBoxStopWin.Text = win;
+            textBoxStopLossPeak.Text = losspeak;
         }
 
         /// <summary>
@@ -511,6 +519,11 @@ namespace TiltStopLoss
         }
 
         private void textBoxStopWin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopLossPeak_KeyPress(object sender, KeyPressEventArgs e)
         {
             new Utils().onlynumeric(e);
         }
@@ -632,9 +645,13 @@ namespace TiltStopLoss
             toolTipHelpText.SetToolTip(this.pictureBoxResumeSession, "If checked resume session on stop");
         }
 
+        private void pictureBoxLossPeak_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxLossPeak, "Difference between max win session and bb actual");
+        }
+
         #endregion
 
-        
         //private void button1_Click(object sender, EventArgs e)
         //{
         //    openFileDialogSound.Filter = "Sound Wave|*.wav";

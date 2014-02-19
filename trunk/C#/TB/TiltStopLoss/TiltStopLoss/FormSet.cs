@@ -15,7 +15,7 @@ namespace StopLoss
     {
         private Stoploss sl;
         
-        public FormSet(Stoploss formsl, Double loss, Int64 hand, Int32 time, Double win)
+        public FormSet(Stoploss formsl, Double loss, Int64 hand, Int32 time, Double win, Double losspeak)
         {
             InitializeComponent();
             sl = formsl;
@@ -23,8 +23,11 @@ namespace StopLoss
             textBoxStopLoss.Text = loss.ToString();
             textBoxStopTime.Text = time.ToString();
             textBoxStopWin.Text = win.ToString();
+            textBoxStopLossPeak.Text = losspeak.ToString();
             loadconfig();
         }
+
+        #region only numeric on textbox
 
         private void textBoxStopLoss_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -46,10 +49,12 @@ namespace StopLoss
             new Utils().onlynumeric(e);
         }
 
-        private void FormSet_Load(object sender, EventArgs e)
+        private void textBoxStopLossPeak_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            new Utils().onlynumeric(e);
         }
+
+        #endregion
 
         /// <summary>
         /// Ao clicar no botão ok mando a informação para o form stoploss
@@ -62,10 +67,12 @@ namespace StopLoss
             Double loss = new Utils().stringtoDouble(textBoxStopLoss.Text);
             Int32 time = new Utils().stringtoInt32(textBoxStopTime.Text);
             Double win = new Utils().stringtoDouble(textBoxStopWin.Text);
-            sl.setNewValue(hand, loss, time, win);
+            Double losspeak = new Utils().stringtoDouble(textBoxStopLossPeak.Text);
+            sl.setNewValue(hand, loss, time, win, losspeak);
             this.Close();
         }
 
+        #region load config
         /// <summary>
         /// Permite guardar as configurações da janela
         /// </summary>
@@ -107,7 +114,9 @@ namespace StopLoss
             w.Write("Location=" + location);
             w.WriteLine();
             w.Close();
-        }     
+        }
+        #endregion
+
         
     }
 }
