@@ -224,7 +224,7 @@ namespace TiltStopLoss
                         }
                         else
                         {
-                            if ((bbmax - bb) >= bbpeak)
+                            if ((bbmax - bb) >= bbpeak && bbmax >= 150)
                             {
                                 if (!stop)
                                 {
