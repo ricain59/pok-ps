@@ -40,7 +40,7 @@ namespace PS
             /// <summary>
             /// Timer that manages the Manage function
             /// </summary>
-            private System.Timers.Timer MonitorTimer;
+            //private System.Timers.Timer MonitorTimer;
             /// <summary>
             /// Bool to flag if the system is currently checking for network validity
             /// </summary>
@@ -425,19 +425,19 @@ namespace PS
             /// <history>
             ///     [Tim Hibbard]   01/24/2007  Created
             /// </history>
-            void SystemEvents_PowerModeChanged(object sender, Microsoft.Win32.PowerModeChangedEventArgs e)
-            {
-                if (e.Mode == Microsoft.Win32.PowerModes.Resume)
-                {
-                    MonitorTimer.Stop();
-                    System.Threading.Thread.Sleep(15000);
-                    MonitorTimer.Start();
-                }
-                if (e.Mode == Microsoft.Win32.PowerModes.Suspend)
-                {
-                    MonitorTimer.Stop();
-                }
-            }
+            //void SystemEvents_PowerModeChanged(object sender, Microsoft.Win32.PowerModeChangedEventArgs e)
+            //{
+            //    if (e.Mode == Microsoft.Win32.PowerModes.Resume)
+            //    {
+            //        MonitorTimer.Stop();
+            //        System.Threading.Thread.Sleep(15000);
+            //        MonitorTimer.Start();
+            //    }
+            //    if (e.Mode == Microsoft.Win32.PowerModes.Suspend)
+            //    {
+            //        MonitorTimer.Stop();
+            //    }
+            //}
 
             /// <summary>
             /// Handles the event that is raised when the network status changes
@@ -447,20 +447,20 @@ namespace PS
             /// <history>
             ///     [Tim Hibbard]   01/24/2007  Created
             /// </history>
-            void NetworkChange_NetworkAvailabilityChanged(object sender, System.Net.NetworkInformation.NetworkAvailabilityEventArgs e)
-            {
-                if (e.IsAvailable)
-                {
-                    if (!MonitorTimer.Enabled)
-                    {
-                        MonitorTimer.Start();
-                    }
-                }
-                else
-                {
-                    MonitorTimer.Stop();
-                }
-            }
+            //void NetworkChange_NetworkAvailabilityChanged(object sender, System.Net.NetworkInformation.NetworkAvailabilityEventArgs e)
+            //{
+            //    if (e.IsAvailable)
+            //    {
+            //        if (!MonitorTimer.Enabled)
+            //        {
+            //            MonitorTimer.Start();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MonitorTimer.Stop();
+            //    }
+            //}
 
             /// <summary>
             /// Handles the event the timer raises when it elapses
@@ -470,10 +470,10 @@ namespace PS
             /// <history>
             ///     [Tim Hibbard]   01/24/2007  Created
             /// </history>
-            void MonitorTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-            {
-                Manage();
-            }
+            //void MonitorTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+            //{
+            //    Manage();
+            //}
             #endregion
         }
     }

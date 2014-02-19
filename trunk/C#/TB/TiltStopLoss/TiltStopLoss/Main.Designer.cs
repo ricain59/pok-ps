@@ -2,10 +2,6 @@
 {
     public partial class Main
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        public System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -28,9 +24,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabDatabase = new System.Windows.Forms.TabPage();
+            this.pictureBoxTracker = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPassword = new System.Windows.Forms.PictureBox();
+            this.pictureBoxUserDb = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDatabase = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPort = new System.Windows.Forms.PictureBox();
+            this.pictureBoxServer = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
             this.labelAlertDb = new System.Windows.Forms.Label();
             this.checkBoxPt4 = new System.Windows.Forms.CheckBox();
@@ -52,6 +56,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPlayer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.checkBoxResumeSession = new System.Windows.Forms.CheckBox();
             this.textBoxStopWin = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -70,15 +76,25 @@
             this.textBoxRsBbs = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelSessionBBs = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
+            this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBoxResumeSession = new System.Windows.Forms.PictureBox();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserDb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDatabase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPort)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxServer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -95,6 +111,13 @@
             // 
             // tabDatabase
             // 
+            this.tabDatabase.Controls.Add(this.pictureBoxTracker);
+            this.tabDatabase.Controls.Add(this.pictureBoxPassword);
+            this.tabDatabase.Controls.Add(this.pictureBoxUserDb);
+            this.tabDatabase.Controls.Add(this.pictureBoxDatabase);
+            this.tabDatabase.Controls.Add(this.pictureBoxPort);
+            this.tabDatabase.Controls.Add(this.pictureBoxServer);
+            this.tabDatabase.Controls.Add(this.pictureBoxPlayer);
             this.tabDatabase.Controls.Add(this.label18);
             this.tabDatabase.Controls.Add(this.labelAlertDb);
             this.tabDatabase.Controls.Add(this.checkBoxPt4);
@@ -123,21 +146,98 @@
             this.tabDatabase.Text = "Database";
             this.tabDatabase.UseVisualStyleBackColor = true;
             // 
+            // pictureBoxTracker
+            // 
+            this.pictureBoxTracker.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxTracker.Image")));
+            this.pictureBoxTracker.Location = new System.Drawing.Point(280, 83);
+            this.pictureBoxTracker.Name = "pictureBoxTracker";
+            this.pictureBoxTracker.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxTracker.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxTracker.TabIndex = 28;
+            this.pictureBoxTracker.TabStop = false;
+            this.pictureBoxTracker.MouseHover += new System.EventHandler(this.pictureBoxTracker_MouseHover);
+            // 
+            // pictureBoxPassword
+            // 
+            this.pictureBoxPassword.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPassword.Image")));
+            this.pictureBoxPassword.Location = new System.Drawing.Point(280, 222);
+            this.pictureBoxPassword.Name = "pictureBoxPassword";
+            this.pictureBoxPassword.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPassword.TabIndex = 27;
+            this.pictureBoxPassword.TabStop = false;
+            this.pictureBoxPassword.MouseHover += new System.EventHandler(this.pictureBoxPassword_MouseHover);
+            // 
+            // pictureBoxUserDb
+            // 
+            this.pictureBoxUserDb.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUserDb.Image")));
+            this.pictureBoxUserDb.Location = new System.Drawing.Point(280, 196);
+            this.pictureBoxUserDb.Name = "pictureBoxUserDb";
+            this.pictureBoxUserDb.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxUserDb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxUserDb.TabIndex = 26;
+            this.pictureBoxUserDb.TabStop = false;
+            this.pictureBoxUserDb.MouseHover += new System.EventHandler(this.pictureBoxUserDb_MouseHover);
+            // 
+            // pictureBoxDatabase
+            // 
+            this.pictureBoxDatabase.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDatabase.Image")));
+            this.pictureBoxDatabase.Location = new System.Drawing.Point(280, 169);
+            this.pictureBoxDatabase.Name = "pictureBoxDatabase";
+            this.pictureBoxDatabase.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxDatabase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxDatabase.TabIndex = 25;
+            this.pictureBoxDatabase.TabStop = false;
+            this.pictureBoxDatabase.MouseHover += new System.EventHandler(this.pictureBoxDatabase_MouseHover);
+            // 
+            // pictureBoxPort
+            // 
+            this.pictureBoxPort.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPort.Image")));
+            this.pictureBoxPort.Location = new System.Drawing.Point(280, 141);
+            this.pictureBoxPort.Name = "pictureBoxPort";
+            this.pictureBoxPort.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxPort.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPort.TabIndex = 24;
+            this.pictureBoxPort.TabStop = false;
+            this.pictureBoxPort.MouseHover += new System.EventHandler(this.pictureBoxPort_MouseHover);
+            // 
+            // pictureBoxServer
+            // 
+            this.pictureBoxServer.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxServer.Image")));
+            this.pictureBoxServer.Location = new System.Drawing.Point(280, 115);
+            this.pictureBoxServer.Name = "pictureBoxServer";
+            this.pictureBoxServer.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxServer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxServer.TabIndex = 23;
+            this.pictureBoxServer.TabStop = false;
+            this.pictureBoxServer.MouseHover += new System.EventHandler(this.pictureBoxServer_MouseHover);
+            // 
+            // pictureBoxPlayer
+            // 
+            this.pictureBoxPlayer.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPlayer.Image")));
+            this.pictureBoxPlayer.Location = new System.Drawing.Point(280, 22);
+            this.pictureBoxPlayer.Name = "pictureBoxPlayer";
+            this.pictureBoxPlayer.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxPlayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPlayer.TabIndex = 22;
+            this.pictureBoxPlayer.TabStop = false;
+            this.pictureBoxPlayer.MouseHover += new System.EventHandler(this.pictureBoxPlayer_MouseHover);
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(269, 278);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(34, 13);
+            this.label18.Size = new System.Drawing.Size(28, 13);
             this.label18.TabIndex = 21;
-            this.label18.Text = "v1.2a";
+            this.label18.Text = "v1.3";
             // 
             // labelAlertDb
             // 
             this.labelAlertDb.AutoSize = true;
             this.labelAlertDb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelAlertDb.ForeColor = System.Drawing.Color.Red;
-            this.labelAlertDb.Location = new System.Drawing.Point(194, 86);
+            this.labelAlertDb.Location = new System.Drawing.Point(183, 86);
             this.labelAlertDb.Name = "labelAlertDb";
             this.labelAlertDb.Size = new System.Drawing.Size(22, 13);
             this.labelAlertDb.TabIndex = 20;
@@ -158,7 +258,7 @@
             // checkBoxHem2
             // 
             this.checkBoxHem2.AutoSize = true;
-            this.checkBoxHem2.Location = new System.Drawing.Point(79, 86);
+            this.checkBoxHem2.Location = new System.Drawing.Point(80, 86);
             this.checkBoxHem2.Name = "checkBoxHem2";
             this.checkBoxHem2.Size = new System.Drawing.Size(56, 17);
             this.checkBoxHem2.TabIndex = 18;
@@ -180,14 +280,14 @@
             // textBoxPlayerID
             // 
             this.textBoxPlayerID.Enabled = false;
-            this.textBoxPlayerID.Location = new System.Drawing.Point(108, 22);
+            this.textBoxPlayerID.Location = new System.Drawing.Point(88, 22);
             this.textBoxPlayerID.Name = "textBoxPlayerID";
             this.textBoxPlayerID.Size = new System.Drawing.Size(51, 20);
             this.textBoxPlayerID.TabIndex = 15;
             // 
             // buttonTestDb
             // 
-            this.buttonTestDb.Location = new System.Drawing.Point(165, 249);
+            this.buttonTestDb.Location = new System.Drawing.Point(141, 249);
             this.buttonTestDb.Name = "buttonTestDb";
             this.buttonTestDb.Size = new System.Drawing.Size(75, 23);
             this.buttonTestDb.TabIndex = 13;
@@ -225,7 +325,7 @@
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(16, 149);
+            this.labelPort.Location = new System.Drawing.Point(19, 148);
             this.labelPort.Name = "labelPort";
             this.labelPort.Size = new System.Drawing.Size(26, 13);
             this.labelPort.TabIndex = 9;
@@ -233,7 +333,7 @@
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(108, 223);
+            this.textBoxPass.Location = new System.Drawing.Point(88, 223);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(189, 20);
@@ -241,28 +341,28 @@
             // 
             // textBoxUser
             // 
-            this.textBoxUser.Location = new System.Drawing.Point(108, 196);
+            this.textBoxUser.Location = new System.Drawing.Point(88, 196);
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(189, 20);
             this.textBoxUser.TabIndex = 7;
             // 
             // textBoxDb
             // 
-            this.textBoxDb.Location = new System.Drawing.Point(108, 169);
+            this.textBoxDb.Location = new System.Drawing.Point(88, 169);
             this.textBoxDb.Name = "textBoxDb";
             this.textBoxDb.Size = new System.Drawing.Size(189, 20);
             this.textBoxDb.TabIndex = 6;
             // 
             // textBoxPort
             // 
-            this.textBoxPort.Location = new System.Drawing.Point(108, 142);
+            this.textBoxPort.Location = new System.Drawing.Point(88, 142);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(189, 20);
             this.textBoxPort.TabIndex = 5;
             // 
             // textBoxServer
             // 
-            this.textBoxServer.Location = new System.Drawing.Point(108, 115);
+            this.textBoxServer.Location = new System.Drawing.Point(88, 115);
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(189, 20);
             this.textBoxServer.TabIndex = 4;
@@ -270,7 +370,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 122);
+            this.label3.Location = new System.Drawing.Point(19, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 3;
@@ -289,7 +389,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 25);
+            this.label1.Location = new System.Drawing.Point(19, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 1;
@@ -297,7 +397,7 @@
             // 
             // textBoxPlayer
             // 
-            this.textBoxPlayer.Location = new System.Drawing.Point(165, 22);
+            this.textBoxPlayer.Location = new System.Drawing.Point(145, 22);
             this.textBoxPlayer.Name = "textBoxPlayer";
             this.textBoxPlayer.Size = new System.Drawing.Size(132, 20);
             this.textBoxPlayer.TabIndex = 0;
@@ -305,6 +405,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.pictureBoxResumeSession);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.checkBoxResumeSession);
             this.tabPage3.Controls.Add(this.textBoxStopWin);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.label15);
@@ -323,6 +426,26 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(22, 166);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Resume on Stop";
+            // 
+            // checkBoxResumeSession
+            // 
+            this.checkBoxResumeSession.AutoSize = true;
+            this.checkBoxResumeSession.Location = new System.Drawing.Point(150, 166);
+            this.checkBoxResumeSession.Name = "checkBoxResumeSession";
+            this.checkBoxResumeSession.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxResumeSession.TabIndex = 15;
+            this.checkBoxResumeSession.UseVisualStyleBackColor = true;
+            this.checkBoxResumeSession.CheckedChanged += new System.EventHandler(this.checkBoxResumeSession_CheckedChanged);
             // 
             // textBoxStopWin
             // 
@@ -461,7 +584,7 @@
             this.tabResumeSession.Controls.Add(this.textBoxRsBbs);
             this.tabResumeSession.Controls.Add(this.label17);
             this.tabResumeSession.Controls.Add(this.label16);
-            this.tabResumeSession.Controls.Add(this.label7);
+            this.tabResumeSession.Controls.Add(this.labelSessionBBs);
             this.tabResumeSession.Location = new System.Drawing.Point(4, 22);
             this.tabResumeSession.Name = "tabResumeSession";
             this.tabResumeSession.Size = new System.Drawing.Size(312, 292);
@@ -472,9 +595,9 @@
             // textBoxRsTime
             // 
             this.textBoxRsTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRsTime.ForeColor = System.Drawing.Color.Blue;
             this.textBoxRsTime.Location = new System.Drawing.Point(81, 83);
             this.textBoxRsTime.Name = "textBoxRsTime";
-            this.textBoxRsTime.ReadOnly = true;
             this.textBoxRsTime.Size = new System.Drawing.Size(70, 20);
             this.textBoxRsTime.TabIndex = 5;
             this.textBoxRsTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -484,7 +607,6 @@
             this.textBoxRsHands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRsHands.Location = new System.Drawing.Point(81, 52);
             this.textBoxRsHands.Name = "textBoxRsHands";
-            this.textBoxRsHands.ReadOnly = true;
             this.textBoxRsHands.Size = new System.Drawing.Size(70, 20);
             this.textBoxRsHands.TabIndex = 4;
             this.textBoxRsHands.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -494,7 +616,6 @@
             this.textBoxRsBbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRsBbs.Location = new System.Drawing.Point(81, 20);
             this.textBoxRsBbs.Name = "textBoxRsBbs";
-            this.textBoxRsBbs.ReadOnly = true;
             this.textBoxRsBbs.Size = new System.Drawing.Size(70, 20);
             this.textBoxRsBbs.TabIndex = 3;
             this.textBoxRsBbs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -503,6 +624,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Blue;
             this.label17.Location = new System.Drawing.Point(19, 86);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(34, 13);
@@ -519,15 +641,15 @@
             this.label16.TabIndex = 1;
             this.label16.Text = "Hands";
             // 
-            // label7
+            // labelSessionBBs
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(19, 23);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "BBs";
+            this.labelSessionBBs.AutoSize = true;
+            this.labelSessionBBs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSessionBBs.Location = new System.Drawing.Point(19, 23);
+            this.labelSessionBBs.Name = "labelSessionBBs";
+            this.labelSessionBBs.Size = new System.Drawing.Size(29, 13);
+            this.labelSessionBBs.TabIndex = 0;
+            this.labelSessionBBs.Text = "BBs";
             // 
             // tabPage2
             // 
@@ -556,6 +678,24 @@
             this.openFileDialogSound.InitialDirectory = "c:";
             this.openFileDialogSound.Title = "Search Sound";
             // 
+            // toolTipHelpText
+            // 
+            this.toolTipHelpText.AutomaticDelay = 100;
+            this.toolTipHelpText.AutoPopDelay = 5000;
+            this.toolTipHelpText.InitialDelay = 100;
+            this.toolTipHelpText.ReshowDelay = 20;
+            // 
+            // pictureBoxResumeSession
+            // 
+            this.pictureBoxResumeSession.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxResumeSession.Image")));
+            this.pictureBoxResumeSession.Location = new System.Drawing.Point(175, 160);
+            this.pictureBoxResumeSession.Name = "pictureBoxResumeSession";
+            this.pictureBoxResumeSession.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxResumeSession.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxResumeSession.TabIndex = 23;
+            this.pictureBoxResumeSession.TabStop = false;
+            this.pictureBoxResumeSession.MouseHover += new System.EventHandler(this.pictureBoxResumeSession_MouseHover);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,11 +709,19 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabDatabase.ResumeLayout(false);
             this.tabDatabase.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserDb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDatabase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPort)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxServer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabResumeSession.ResumeLayout(false);
             this.tabResumeSession.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -621,10 +769,22 @@
         private System.Windows.Forms.TextBox textBoxRsBbs;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelSessionBBs;
         private System.Windows.Forms.CheckBox checkBoxPt4;
         private System.Windows.Forms.Label labelAlertDb;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox checkBoxResumeSession;
+        private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.PictureBox pictureBoxPlayer;
+        private System.Windows.Forms.PictureBox pictureBoxPassword;
+        private System.Windows.Forms.PictureBox pictureBoxUserDb;
+        private System.Windows.Forms.PictureBox pictureBoxDatabase;
+        private System.Windows.Forms.PictureBox pictureBoxPort;
+        private System.Windows.Forms.PictureBox pictureBoxServer;
+        private System.Windows.Forms.PictureBox pictureBoxTracker;
+        private System.Windows.Forms.ToolTip toolTipHelpText;
+        private System.Windows.Forms.PictureBox pictureBoxResumeSession;
     }
 }
 
