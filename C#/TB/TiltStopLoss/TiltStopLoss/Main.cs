@@ -16,6 +16,7 @@ namespace TiltStopLoss
         private Db db = new Db();
         private Boolean alias = false;
         private Boolean start = true;
+        private Boolean resumesession = false;
         
         public Main()
         {
@@ -128,6 +129,8 @@ namespace TiltStopLoss
             }
         }
 
+        #region Save and load config
+
         /// <summary>
         /// Permite guardar os dados inseridos no software
         /// </summary>
@@ -229,6 +232,16 @@ namespace TiltStopLoss
                         alias = false;
                     }
                     break;
+                case "Resumesession":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        resumesession = true;
+                    }
+                    else
+                    {
+                        resumesession = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -270,9 +283,13 @@ namespace TiltStopLoss
             w.Write("Alias=" + alias.ToString());
             w.WriteLine();
             w.Write("Pt4=" + checkBoxPt4.Checked.ToString());
+            w.WriteLine();
+            w.Write("Resumesession=" + checkBoxResumeSession.Checked.ToString());
             w.WriteLine();            
             w.Close();
         }
+
+        #endregion
 
         /// <summary>
         /// Vou procurar o id do nome inserido no textbox do player
@@ -340,26 +357,6 @@ namespace TiltStopLoss
             }
         }
 
-        private void textBoxStopLoss_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            new Utils().onlynumeric(e);
-        }
-
-        private void textBoxStopHand_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            new Utils().onlynumeric(e);
-        }
-
-        private void textBoxStopTime_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            new Utils().onlynumeric(e);
-        }
-
-        private void textBoxStopWin_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            new Utils().onlynumeric(e);
-        }
-
         /// <summary>
         /// Se quando estamos a jogar alteramos os valores inseridos anteriomente
         /// Altero tambem aqui
@@ -383,19 +380,24 @@ namespace TiltStopLoss
         /// <param name="time"></param>
         public void setValueSession(String hand, String time, Double bbs)
         {
-            textBoxRsHands.Text = hand;
-            textBoxRsTime.Text = time;
-            if (bbs < 0)
+            if (resumesession)
             {
-                textBoxRsBbs.Text = bbs.ToString();
-                textBoxRsBbs.ForeColor = Color.Red;                
+                textBoxRsHands.Text = hand;
+                textBoxRsTime.Text = time;
+                if (bbs < 0)
+                {
+                    textBoxRsBbs.Text = bbs.ToString();
+                    textBoxRsBbs.ForeColor = Color.Red;
+                    labelSessionBBs.ForeColor = Color.Red;
+                }
+                else
+                {
+                    textBoxRsBbs.Text = bbs.ToString();
+                    textBoxRsBbs.ForeColor = Color.Green;
+                    labelSessionBBs.ForeColor = Color.Green;
+                }
+                tabControlMain.SelectedIndex = 2;
             }
-            else
-            {
-                textBoxRsBbs.Text = bbs.ToString();
-                textBoxRsBbs.ForeColor = Color.Green;                
-            }
-            tabControlMain.SelectedIndex = 2;
         }
 
         /// <summary>
@@ -435,6 +437,44 @@ namespace TiltStopLoss
             }
             
         }
+
+        #region tab conf stop
+
+        private void textBoxStopLoss_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopHand_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopTime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopWin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void checkBoxResumeSession_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxResumeSession.Checked)
+            {
+                resumesession = true;
+            }
+            else
+            {
+                resumesession = false;
+            }            
+        }
+
+        #endregion
+
+        #region checkbox tracker
 
         /// <summary>
         /// Only one DB checked
@@ -493,6 +533,53 @@ namespace TiltStopLoss
             }
         }
 
+        #endregion
+
+        #region Help mouse over image
+
+        private void pictureBoxPlayer_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxPlayer, "First fill database and after software close, re-open and fill this");
+        }
+
+        private void pictureBoxTracker_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxTracker, "Choose your tracker");
+        }
+
+        private void pictureBoxServer_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxServer, "Default: 127.0.0.1");
+        }
+
+        private void pictureBoxPort_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxPort, "Default: 5432");
+        }
+
+        private void pictureBoxDatabase_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxDatabase, "Name Database Tracker (click on database on tracker)");
+        }
+
+        private void pictureBoxUserDb_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxUserDb, "Default: postgres");
+        }
+
+        private void pictureBoxPassword_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxPassword, "Default: postgrespass or dbpass");
+        }
+
+        private void pictureBoxResumeSession_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxResumeSession, "If checked resume session on stop");
+        }
+
+        #endregion
+
+        
         //private void button1_Click(object sender, EventArgs e)
         //{
         //    openFileDialogSound.Filter = "Sound Wave|*.wav";
