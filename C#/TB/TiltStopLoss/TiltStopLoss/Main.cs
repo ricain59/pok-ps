@@ -20,7 +20,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.41;
+        private Double version = 1.42;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         
@@ -647,7 +647,7 @@ namespace TiltStopLoss
 
         private void pictureBoxLossPeak_MouseHover(object sender, EventArgs e)
         {
-            toolTipHelpText.SetToolTip(this.pictureBoxLossPeak, "Difference between max win session and bb actual");
+            toolTipHelpText.SetToolTip(this.pictureBoxLossPeak, "Difference between max win session and bb actual.\r\nOnly if peak session superior or equal 150bb");
         }
 
         #endregion
