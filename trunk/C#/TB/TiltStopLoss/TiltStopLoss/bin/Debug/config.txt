@@ -14,4 +14,4 @@ Hem1=False
 Hem2=True
 Alias=False
 Pt4=False
-Resumesession=True
+Resumesession=False

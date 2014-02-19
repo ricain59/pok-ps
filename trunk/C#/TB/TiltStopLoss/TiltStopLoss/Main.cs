@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Npgsql;
+using System.Xml;
+using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace TiltStopLoss
 {
@@ -17,10 +20,17 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
+        private Double version = 1.4;
+        private String urldownload = "http://bit.ly/1aSxGIA";
+        private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         
         public Main()
         {
             InitializeComponent();
+            labelVersion.Text = "v"+version.ToString().Replace(',', '.');
+            //aqui vou ver se existe update ou não
+            checkupdate();            
+            //depois disso volto ao soft caso diz que não
             loadconfig();
             start = false;
             db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text, textBoxPlayer.Text);
@@ -29,6 +39,45 @@ namespace TiltStopLoss
             {
                 textBoxPlayer.Enabled = true;
                 fillTextboxPlayer();
+            }
+        }
+
+        /// <summary>
+        /// Verifica se existe update ou não
+        /// </summary>
+        /// <returns></returns>
+        private void checkupdate()
+        {
+            Double newversion = version;
+
+            using (XmlReader reader = XmlReader.Create(urlxml))
+            {
+                while (reader.Read())
+                {
+                    // Only detect start elements.
+                    if (reader.IsStartElement())
+                    {
+                        // Get element name and switch on it.
+                        switch (reader.Name)
+                        {
+                            case "number":
+                                if (reader.Read())
+                                {
+                                    newversion = Convert.ToDouble(reader.Value.Trim().ToString().Replace('.', ','));
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            if (version < newversion)
+            {
+                DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\nGo to download page?", "Update", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    //do something
+                    Process.Start(urldownload);                    
+                }                
             }
         }
 
