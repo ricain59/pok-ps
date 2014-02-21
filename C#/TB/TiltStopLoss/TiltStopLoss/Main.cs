@@ -20,7 +20,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.42;
+        private Double version = 1.43;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         
@@ -117,10 +117,20 @@ namespace TiltStopLoss
             {
                 if (!stop)
                 {
-                    if (textBoxPlayer.Text.Equals(""))
+                    int stoplosspeak = new Utils().stringtoInt32(textBoxStopLossPeak.Text);
+                    int overpeak = new Utils().stringtoInt32(textBoxPeakOver.Text);
+                    if (textBoxPlayer.Text.Equals("") || (stoplosspeak > 0 && overpeak == 0))
                     {
-                        MessageBox.Show("Fill player name please.");
-                        tabControlMain.SelectedIndex = 0;
+                        if (textBoxPlayer.Text.Equals(""))
+                        {
+                            MessageBox.Show("Fill player name please.");
+                            tabControlMain.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fill peak over please.");
+                            tabControlMain.SelectedIndex = 1;
+                        }
                     }
                     else
                     {
@@ -142,7 +152,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, 1);
+                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, checkBoxHideBbbs.Checked, 1);
                             }
                             else //hem2
                             {
@@ -157,7 +167,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, 2);
+                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, checkBoxHideBbbs.Checked, 2);
                             }
                         }
                         else //pt4
@@ -172,7 +182,7 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, 4);
+                            sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, checkBoxHideBbbs.Checked, 4);
                         }
                         sl.Show();                        
                     }
@@ -249,6 +259,9 @@ namespace TiltStopLoss
                 case "StopWin":
                     textBoxStopWin.Text = line[1].ToString();
                     break;
+                case "StopLossPeakOver":
+                    textBoxPeakOver.Text = line[1].ToString();
+                    break;
                 case "StopLossPeak":
                     textBoxStopLossPeak.Text = line[1].ToString();
                     break;
@@ -302,6 +315,16 @@ namespace TiltStopLoss
                         checkBoxResumeSession.Checked = false;
                     }
                     break;
+                case "Hidebbs":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxHideBbbs.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxHideBbbs.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -347,6 +370,10 @@ namespace TiltStopLoss
             w.Write("Resumesession=" + checkBoxResumeSession.Checked.ToString());
             w.WriteLine();
             w.Write("StopLossPeak=" + textBoxStopLossPeak.Text.ToString());
+            w.WriteLine();
+            w.Write("Hidebbs=" + checkBoxHideBbbs.Checked.ToString());
+            w.WriteLine();
+            w.Write("StopLossPeakOver=" + textBoxPeakOver.Text.ToString());
             w.WriteLine();            
             w.Close();
         }
@@ -432,7 +459,7 @@ namespace TiltStopLoss
             textBoxStopHand.Text = hand;
             textBoxStopTime.Text = time;
             textBoxStopWin.Text = win;
-            textBoxStopLossPeak.Text = losspeak;
+            textBoxStopLossPeak.Text = losspeak;            
         }
 
         /// <summary>
@@ -524,6 +551,11 @@ namespace TiltStopLoss
         }
 
         private void textBoxStopLossPeak_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             new Utils().onlynumeric(e);
         }
@@ -647,11 +679,17 @@ namespace TiltStopLoss
 
         private void pictureBoxLossPeak_MouseHover(object sender, EventArgs e)
         {
-            toolTipHelpText.SetToolTip(this.pictureBoxLossPeak, "Difference between max win session and bb actual.\r\nOnly if peak session superior or equal 150bb");
+            toolTipHelpText.SetToolTip(this.pictureBoxLossPeak, "Difference between max win session and bb actual.\r\nOnly if peak session >= over.\r\nIf peak defined, over also");
+        }
+
+        private void pictureBoxHideBbbs_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxHideBbbs, "If checked, not show BBs on mouse over");
         }
 
         #endregion
 
+               
         //private void button1_Click(object sender, EventArgs e)
         //{
         //    openFileDialogSound.Filter = "Sound Wave|*.wav";
@@ -661,7 +699,11 @@ namespace TiltStopLoss
         //    //List<Tuple<String, int>> list;
         //    //list.Add(Tuple.Create(table, 0));
         //    //ou pelo um array não sei.
-        //}     
+        //}  
+        //https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=24A3K9ZV6ZA3Y&lc=US&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
+        //https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ricain59%40gmail%2ecom&lc=US&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
+        //https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ricain59@gmail.com&lc=PT&item_name=Donation&currency_code=EUR&bn=PP%2dDonationsBF
+        //https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif
 
     }
 }

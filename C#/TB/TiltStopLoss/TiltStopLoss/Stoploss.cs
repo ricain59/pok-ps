@@ -34,9 +34,10 @@ namespace TiltStopLoss
         private String time;
         private Double bb;
         private Double bbpeak;
+        private Double peakover;
         Int64 handnumber = 0;
 
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String stoploss, String hand, String time, String win, String stopwinpeak, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String stoploss, String hand, String time, String win, String stopwinpeak, String peakover, Boolean hidebb, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -47,7 +48,14 @@ namespace TiltStopLoss
             timestop = new Utils().stringtoInt32(time);
             stopwin = new Utils().stringtoDouble(win);
             bbpeak = new Utils().stringtoDouble(stopwinpeak);
+            this.peakover = new Utils().stringtoDouble(peakover);
             this.tracker = tracker;
+            if (hidebb)
+            {
+                labelBb.Enabled = false;
+                labelBb.Visible = false;
+
+            }
             loadconfig();
 
             //cronometro
@@ -224,7 +232,7 @@ namespace TiltStopLoss
                         }
                         else
                         {
-                            if ((bbmax - bb) >= bbpeak && bbmax >= 150)
+                            if ((bbmax - bb) >= bbpeak && bbmax >= peakover)
                             {
                                 if (!stop)
                                 {
