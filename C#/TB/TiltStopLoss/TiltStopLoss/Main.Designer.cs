@@ -56,6 +56,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPlayer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBoxPeakOver = new System.Windows.Forms.TextBox();
+            this.pictureBoxHideBbbs = new System.Windows.Forms.PictureBox();
+            this.checkBoxHideBbbs = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.pictureBoxLossPeak = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxStopLossPeak = new System.Windows.Forms.TextBox();
@@ -86,11 +91,7 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
-            this.label20 = new System.Windows.Forms.Label();
-            this.checkBoxHideBbbs = new System.Windows.Forms.CheckBox();
-            this.pictureBoxHideBbbs = new System.Windows.Forms.PictureBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.textBoxPeakOver = new System.Windows.Forms.TextBox();
+            this.buttonDonate = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).BeginInit();
@@ -101,11 +102,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxServer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHideBbbs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLossPeak)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).BeginInit();
             this.tabResumeSession.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHideBbbs)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -447,6 +448,59 @@
             this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Red;
+            this.label21.Location = new System.Drawing.Point(248, 61);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(29, 13);
+            this.label21.TabIndex = 32;
+            this.label21.Text = "BBs";
+            // 
+            // textBoxPeakOver
+            // 
+            this.textBoxPeakOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPeakOver.ForeColor = System.Drawing.Color.Red;
+            this.textBoxPeakOver.Location = new System.Drawing.Point(207, 54);
+            this.textBoxPeakOver.Name = "textBoxPeakOver";
+            this.textBoxPeakOver.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxPeakOver.Size = new System.Drawing.Size(35, 20);
+            this.textBoxPeakOver.TabIndex = 31;
+            this.textBoxPeakOver.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxPeakOver.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // pictureBoxHideBbbs
+            // 
+            this.pictureBoxHideBbbs.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxHideBbbs.Image")));
+            this.pictureBoxHideBbbs.Location = new System.Drawing.Point(283, 192);
+            this.pictureBoxHideBbbs.Name = "pictureBoxHideBbbs";
+            this.pictureBoxHideBbbs.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxHideBbbs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxHideBbbs.TabIndex = 30;
+            this.pictureBoxHideBbbs.TabStop = false;
+            this.pictureBoxHideBbbs.MouseHover += new System.EventHandler(this.pictureBoxHideBbbs_MouseHover);
+            // 
+            // checkBoxHideBbbs
+            // 
+            this.checkBoxHideBbbs.AutoSize = true;
+            this.checkBoxHideBbbs.Location = new System.Drawing.Point(166, 192);
+            this.checkBoxHideBbbs.Name = "checkBoxHideBbbs";
+            this.checkBoxHideBbbs.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxHideBbbs.TabIndex = 29;
+            this.checkBoxHideBbbs.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(21, 192);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(59, 13);
+            this.label20.TabIndex = 28;
+            this.label20.Text = "Hide BBs";
+            // 
             // pictureBoxLossPeak
             // 
             this.pictureBoxLossPeak.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLossPeak.Image")));
@@ -729,6 +783,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonDonate);
             this.tabPage2.Controls.Add(this.buttonStart);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -740,7 +795,7 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(97, 108);
+            this.buttonStart.Location = new System.Drawing.Point(100, 45);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(117, 59);
             this.buttonStart.TabIndex = 0;
@@ -761,58 +816,15 @@
             this.toolTipHelpText.InitialDelay = 100;
             this.toolTipHelpText.ReshowDelay = 20;
             // 
-            // label20
+            // buttonDonate
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(21, 192);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(59, 13);
-            this.label20.TabIndex = 28;
-            this.label20.Text = "Hide BBs";
-            // 
-            // checkBoxHideBbbs
-            // 
-            this.checkBoxHideBbbs.AutoSize = true;
-            this.checkBoxHideBbbs.Location = new System.Drawing.Point(166, 192);
-            this.checkBoxHideBbbs.Name = "checkBoxHideBbbs";
-            this.checkBoxHideBbbs.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxHideBbbs.TabIndex = 29;
-            this.checkBoxHideBbbs.UseVisualStyleBackColor = true;
-            // 
-            // pictureBoxHideBbbs
-            // 
-            this.pictureBoxHideBbbs.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxHideBbbs.Image")));
-            this.pictureBoxHideBbbs.Location = new System.Drawing.Point(283, 192);
-            this.pictureBoxHideBbbs.Name = "pictureBoxHideBbbs";
-            this.pictureBoxHideBbbs.Size = new System.Drawing.Size(26, 20);
-            this.pictureBoxHideBbbs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxHideBbbs.TabIndex = 30;
-            this.pictureBoxHideBbbs.TabStop = false;
-            this.pictureBoxHideBbbs.MouseHover += new System.EventHandler(this.pictureBoxHideBbbs_MouseHover);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.Red;
-            this.label21.Location = new System.Drawing.Point(248, 61);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(29, 13);
-            this.label21.TabIndex = 32;
-            this.label21.Text = "BBs";
-            // 
-            // textBoxPeakOver
-            // 
-            this.textBoxPeakOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPeakOver.ForeColor = System.Drawing.Color.Red;
-            this.textBoxPeakOver.Location = new System.Drawing.Point(207, 54);
-            this.textBoxPeakOver.Name = "textBoxPeakOver";
-            this.textBoxPeakOver.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.textBoxPeakOver.Size = new System.Drawing.Size(35, 20);
-            this.textBoxPeakOver.TabIndex = 31;
-            this.textBoxPeakOver.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxPeakOver.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.buttonDonate.Image = ((System.Drawing.Image)(resources.GetObject("buttonDonate.Image")));
+            this.buttonDonate.Location = new System.Drawing.Point(100, 192);
+            this.buttonDonate.Name = "buttonDonate";
+            this.buttonDonate.Size = new System.Drawing.Size(117, 68);
+            this.buttonDonate.TabIndex = 1;
+            this.buttonDonate.UseVisualStyleBackColor = true;
+            this.buttonDonate.Click += new System.EventHandler(this.buttonDonate_Click);
             // 
             // Main
             // 
@@ -836,12 +848,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHideBbbs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLossPeak)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).EndInit();
             this.tabResumeSession.ResumeLayout(false);
             this.tabResumeSession.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHideBbbs)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -914,6 +926,7 @@
         private System.Windows.Forms.PictureBox pictureBoxHideBbbs;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBoxPeakOver;
+        private System.Windows.Forms.Button buttonDonate;
     }
 }
 

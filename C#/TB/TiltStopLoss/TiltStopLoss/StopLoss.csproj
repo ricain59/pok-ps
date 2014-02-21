@@ -70,6 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDonate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDonate.Designer.cs">
+      <DependentUpon>FormDonate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +100,9 @@
       <DependentUpon>Stoploss.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="FormDonate.resx">
+      <DependentUpon>FormDonate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSet.resx">
       <DependentUpon>FormSet.cs</DependentUpon>
     </EmbeddedResource>
