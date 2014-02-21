@@ -16,3 +16,5 @@ Alias=False
 Pt4=False
 Resumesession=True
 StopLossPeak=1
+Hidebbs=True
+StopLossPeakOver=50
