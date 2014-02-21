@@ -11,6 +11,7 @@ using Npgsql;
 using System.Xml;
 using System.Xml.Linq;
 using System.Diagnostics;
+using StopLoss;
 
 namespace TiltStopLoss
 {
@@ -20,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.43;
+        private Double version = 1.44;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         
@@ -689,6 +690,17 @@ namespace TiltStopLoss
 
         #endregion
 
+        /// <summary>
+        /// Code for donate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDonate_Click(object sender, EventArgs e)
+        {
+            FormDonate fd = new FormDonate();
+            fd.Show();
+        }
+
                
         //private void button1_Click(object sender, EventArgs e)
         //{
@@ -700,10 +712,6 @@ namespace TiltStopLoss
         //    //list.Add(Tuple.Create(table, 0));
         //    //ou pelo um array não sei.
         //}  
-        //https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=24A3K9ZV6ZA3Y&lc=US&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
-        //https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ricain59%40gmail%2ecom&lc=US&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
-        //https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ricain59@gmail.com&lc=PT&item_name=Donation&currency_code=EUR&bn=PP%2dDonationsBF
-        //https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif
-
+        
     }
 }
