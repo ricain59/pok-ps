@@ -88,10 +88,11 @@
             this.label16 = new System.Windows.Forms.Label();
             this.labelSessionBBs = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonDonate = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonDonate = new System.Windows.Forms.Button();
+            this.buttonChoiceSounds = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).BeginInit();
@@ -417,6 +418,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.buttonChoiceSounds);
             this.tabPage3.Controls.Add(this.label21);
             this.tabPage3.Controls.Add(this.textBoxPeakOver);
             this.tabPage3.Controls.Add(this.pictureBoxHideBbbs);
@@ -793,6 +795,16 @@
             this.tabPage2.Text = "Start";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // buttonDonate
+            // 
+            this.buttonDonate.Image = ((System.Drawing.Image)(resources.GetObject("buttonDonate.Image")));
+            this.buttonDonate.Location = new System.Drawing.Point(100, 192);
+            this.buttonDonate.Name = "buttonDonate";
+            this.buttonDonate.Size = new System.Drawing.Size(117, 68);
+            this.buttonDonate.TabIndex = 1;
+            this.buttonDonate.UseVisualStyleBackColor = true;
+            this.buttonDonate.Click += new System.EventHandler(this.buttonDonate_Click);
+            // 
             // buttonStart
             // 
             this.buttonStart.Location = new System.Drawing.Point(100, 45);
@@ -816,15 +828,15 @@
             this.toolTipHelpText.InitialDelay = 100;
             this.toolTipHelpText.ReshowDelay = 20;
             // 
-            // buttonDonate
+            // buttonChoiceSounds
             // 
-            this.buttonDonate.Image = ((System.Drawing.Image)(resources.GetObject("buttonDonate.Image")));
-            this.buttonDonate.Location = new System.Drawing.Point(100, 192);
-            this.buttonDonate.Name = "buttonDonate";
-            this.buttonDonate.Size = new System.Drawing.Size(117, 68);
-            this.buttonDonate.TabIndex = 1;
-            this.buttonDonate.UseVisualStyleBackColor = true;
-            this.buttonDonate.Click += new System.EventHandler(this.buttonDonate_Click);
+            this.buttonChoiceSounds.Location = new System.Drawing.Point(24, 219);
+            this.buttonChoiceSounds.Name = "buttonChoiceSounds";
+            this.buttonChoiceSounds.Size = new System.Drawing.Size(75, 23);
+            this.buttonChoiceSounds.TabIndex = 33;
+            this.buttonChoiceSounds.Text = "Sounds";
+            this.buttonChoiceSounds.UseVisualStyleBackColor = true;
+            this.buttonChoiceSounds.Click += new System.EventHandler(this.buttonChoiceSounds_Click);
             // 
             // Main
             // 
@@ -927,6 +939,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBoxPeakOver;
         private System.Windows.Forms.Button buttonDonate;
+        private System.Windows.Forms.Button buttonChoiceSounds;
     }
 }
 

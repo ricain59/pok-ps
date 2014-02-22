@@ -55,10 +55,10 @@ namespace TiltStopLoss
         /// <summary>
         /// Toca a musica chata do stop
         /// </summary>
-        public System.Media.SoundPlayer playsound()
+        public System.Media.SoundPlayer playsound(String sound)
         {
             String path = Directory.GetCurrentDirectory();
-            String filepath = path + "/alarm.wav";
+            String filepath = path + "\\sounds\\" +sound;
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(filepath);
             //player.PlayLooping();            
             return player;
@@ -135,6 +135,30 @@ namespace TiltStopLoss
                 return Convert.ToInt32(value);
             }
         }
-        
+
+        /// <summary>
+        /// copy file source to folder software
+        /// </summary>
+        /// <param name="path"></param>
+        public void copyFile(String path)
+        {
+            String pathfinal = Directory.GetCurrentDirectory();
+            String fileName = System.IO.Path.GetFileName(path);
+            String destFile = System.IO.Path.Combine(pathfinal+"\\sounds", fileName);
+            System.IO.File.Copy(path, destFile, true);
+        }
+
+        /// <summary>
+        /// delete sound from original path because exist in new path
+        /// </summary>
+        public void deleteSound()
+        {
+            String pathfinal = Directory.GetCurrentDirectory();
+            String filepath = pathfinal + "\\alarm.wav";
+            if (File.Exists(@filepath))
+            {
+                File.Delete(@filepath);
+            }
+        }
     }
 }

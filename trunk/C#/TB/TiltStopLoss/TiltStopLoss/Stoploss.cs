@@ -36,20 +36,22 @@ namespace TiltStopLoss
         private Double bbpeak;
         private Double peakover;
         Int64 handnumber = 0;
+        private String[] sounds;
 
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String stoploss, String hand, String time, String win, String stopwinpeak, String peakover, Boolean hidebb, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, String[] sound, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
             playeridname = playerid;
             dbase = db;
-            this.stoploss = new Utils().stringtoDouble(stoploss);
-            handstop = new Utils().stringtoInt64(hand);
-            timestop = new Utils().stringtoInt32(time);
-            stopwin = new Utils().stringtoDouble(win);
-            bbpeak = new Utils().stringtoDouble(stopwinpeak);
-            this.peakover = new Utils().stringtoDouble(peakover);
+            this.stoploss = new Utils().stringtoDouble(data[0]);
+            handstop = new Utils().stringtoInt64(data[1]);
+            timestop = new Utils().stringtoInt32(data[2]);
+            stopwin = new Utils().stringtoDouble(data[3]);
+            bbpeak = new Utils().stringtoDouble(data[4]);
+            this.peakover = new Utils().stringtoDouble(data[5]);
             this.tracker = tracker;
+            sounds = sound;
             if (hidebb)
             {
                 labelBb.Enabled = false;
@@ -202,7 +204,7 @@ namespace TiltStopLoss
                         {
                             if (!stop)
                             {
-                                player = new Utils().playsound();
+                                player = new Utils().playsound(sounds[0]);
                                 player.PlayLooping();
                             }
                             stop = true;
@@ -216,7 +218,7 @@ namespace TiltStopLoss
                         {
                             if (!stop)
                             {
-                                player = new Utils().playsound();
+                                player = new Utils().playsound(sounds[2]);
                                 player.PlayLooping();
                             }
                             stop = true;
@@ -236,7 +238,7 @@ namespace TiltStopLoss
                             {
                                 if (!stop)
                                 {
-                                    player = new Utils().playsound();
+                                    player = new Utils().playsound(sounds[0]);
                                     player.PlayLooping();
                                 }
                                 stop = true;
@@ -305,7 +307,7 @@ namespace TiltStopLoss
                         {
                             if (!stop)
                             {
-                                player = new Utils().playsound();
+                                player = new Utils().playsound(sounds[3]);
                                 player.PlayLooping();
                             }
                             stop = true;
@@ -382,7 +384,7 @@ namespace TiltStopLoss
                     {
                         if (!stop)
                         {
-                            player = new Utils().playsound();
+                            player = new Utils().playsound(sounds[1]);
                             player.PlayLooping();
                         }
                         stop = true;
