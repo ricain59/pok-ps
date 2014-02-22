@@ -21,14 +21,21 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.44;
+        private Double version = 1.45;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
+        //sounds
+        private String soundloss = "alarm.wav";
+        private String soundtime = "alarm.wav";
+        private String soundwin = "alarm.wav";
+        private String soundhands = "alarm.wav";
         
         public Main()
         {
             InitializeComponent();
             labelVersion.Text = "v"+version.ToString().Replace(',', '.');
+            //como mudei os sound elimino onde estava o original inicialmente
+            new Utils().deleteSound();
             //aqui vou ver se existe update ou não
             checkupdate();            
             //depois disso volto ao soft caso diz que não
@@ -138,6 +145,9 @@ namespace TiltStopLoss
                         this.Visible = false;
                         Stoploss sl;
                         List<Tuple<String, String>> playeralias;
+                        //em vez de mandar só string crio um array do que preciso
+                        String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text };
+                        String[] sounds = { soundloss, soundtime, soundwin, soundhands };
                         if (checkBoxHem1.Checked || checkBoxHem2.Checked)
                         {
                             if (checkBoxHem1.Checked)//hem1
@@ -153,7 +163,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, checkBoxHideBbbs.Checked, 1);
+                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, sounds, 1);
                             }
                             else //hem2
                             {
@@ -168,7 +178,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, checkBoxHideBbbs.Checked, 2);
+                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, sounds, 2);
                             }
                         }
                         else //pt4
@@ -183,7 +193,7 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, checkBoxHideBbbs.Checked, 4);
+                            sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, sounds, 4);
                         }
                         sl.Show();                        
                     }
@@ -326,6 +336,18 @@ namespace TiltStopLoss
                         checkBoxHideBbbs.Checked = false;
                     }
                     break;
+                case "soundloss":
+                    soundloss = line[1].ToString();
+                    break;
+                case "soundtime":
+                    soundtime = line[1].ToString();
+                    break;
+                case "soundwin":
+                    soundwin = line[1].ToString();
+                    break;
+                case "soundhands":
+                    soundhands = line[1].ToString();
+                    break;
                 default:
                     break;
             }
@@ -375,7 +397,15 @@ namespace TiltStopLoss
             w.Write("Hidebbs=" + checkBoxHideBbbs.Checked.ToString());
             w.WriteLine();
             w.Write("StopLossPeakOver=" + textBoxPeakOver.Text.ToString());
-            w.WriteLine();            
+            w.WriteLine(); 
+            w.Write("soundloss=" + soundloss);
+            w.WriteLine();
+            w.Write("soundtime=" + soundtime);
+            w.WriteLine();
+            w.Write("soundwin=" + soundwin);
+            w.WriteLine();
+            w.Write("soundhands=" + soundhands);
+            w.WriteLine();
             w.Close();
         }
 
@@ -701,17 +731,32 @@ namespace TiltStopLoss
             fd.Show();
         }
 
-               
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    openFileDialogSound.Filter = "Sound Wave|*.wav";
-        //    openFileDialogSound.ShowDialog();
-        //    textBoxSound.Text = openFileDialogSound.FileName;
-        //    //comment l'envoyer pour la faire sonner?
-        //    //List<Tuple<String, int>> list;
-        //    //list.Add(Tuple.Create(table, 0));
-        //    //ou pelo um array não sei.
-        //}  
-        
+        /// <summary>
+        /// call form for select sounds
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonChoiceSounds_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            String[] sound = new String[] { soundloss, soundtime, soundwin, soundhands };
+            FormSounds fs = new FormSounds(this, sound);
+            fs.Show();
+        }
+
+        /// <summary>
+        /// set value for sounds
+        /// </summary>
+        /// <param name="loss"></param>
+        /// <param name="hands"></param>
+        /// <param name="time"></param>
+        /// <param name="win"></param>
+        public void setSounds(String loss, String hands, String time, String win)
+        {
+            soundloss = loss;
+            soundtime = time;
+            soundwin = win;
+            soundhands = hands;
+        }
     }
 }
