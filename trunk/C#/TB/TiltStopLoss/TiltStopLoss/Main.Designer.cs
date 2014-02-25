@@ -56,6 +56,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPlayer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonChoiceSounds = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.textBoxPeakOver = new System.Windows.Forms.TextBox();
             this.pictureBoxHideBbbs = new System.Windows.Forms.PictureBox();
@@ -81,6 +82,8 @@
             this.textBoxStopLoss = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tabResumeSession = new System.Windows.Forms.TabPage();
+            this.textBoxBbsMax = new System.Windows.Forms.TextBox();
+            this.labelBbsMax = new System.Windows.Forms.Label();
             this.textBoxRsTime = new System.Windows.Forms.TextBox();
             this.textBoxRsHands = new System.Windows.Forms.TextBox();
             this.textBoxRsBbs = new System.Windows.Forms.TextBox();
@@ -92,7 +95,9 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonChoiceSounds = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
+            this.pictureBoxCloseSkype = new System.Windows.Forms.PictureBox();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).BeginInit();
@@ -108,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).BeginInit();
             this.tabResumeSession.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -418,6 +424,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.pictureBoxCloseSkype);
+            this.tabPage3.Controls.Add(this.checkBoxCloseSkype);
+            this.tabPage3.Controls.Add(this.label22);
             this.tabPage3.Controls.Add(this.buttonChoiceSounds);
             this.tabPage3.Controls.Add(this.label21);
             this.tabPage3.Controls.Add(this.textBoxPeakOver);
@@ -449,6 +458,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // buttonChoiceSounds
+            // 
+            this.buttonChoiceSounds.Location = new System.Drawing.Point(24, 249);
+            this.buttonChoiceSounds.Name = "buttonChoiceSounds";
+            this.buttonChoiceSounds.Size = new System.Drawing.Size(75, 23);
+            this.buttonChoiceSounds.TabIndex = 33;
+            this.buttonChoiceSounds.Text = "Sounds";
+            this.buttonChoiceSounds.UseVisualStyleBackColor = true;
+            this.buttonChoiceSounds.Click += new System.EventHandler(this.buttonChoiceSounds_Click);
             // 
             // label21
             // 
@@ -711,6 +730,8 @@
             // 
             // tabResumeSession
             // 
+            this.tabResumeSession.Controls.Add(this.textBoxBbsMax);
+            this.tabResumeSession.Controls.Add(this.labelBbsMax);
             this.tabResumeSession.Controls.Add(this.textBoxRsTime);
             this.tabResumeSession.Controls.Add(this.textBoxRsHands);
             this.tabResumeSession.Controls.Add(this.textBoxRsBbs);
@@ -723,6 +744,25 @@
             this.tabResumeSession.TabIndex = 3;
             this.tabResumeSession.Text = "Resume Session";
             this.tabResumeSession.UseVisualStyleBackColor = true;
+            // 
+            // textBoxBbsMax
+            // 
+            this.textBoxBbsMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxBbsMax.Location = new System.Drawing.Point(81, 116);
+            this.textBoxBbsMax.Name = "textBoxBbsMax";
+            this.textBoxBbsMax.Size = new System.Drawing.Size(70, 20);
+            this.textBoxBbsMax.TabIndex = 7;
+            this.textBoxBbsMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // labelBbsMax
+            // 
+            this.labelBbsMax.AutoSize = true;
+            this.labelBbsMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBbsMax.Location = new System.Drawing.Point(19, 119);
+            this.labelBbsMax.Name = "labelBbsMax";
+            this.labelBbsMax.Size = new System.Drawing.Size(56, 13);
+            this.labelBbsMax.TabIndex = 6;
+            this.labelBbsMax.Text = "BBs Max";
             // 
             // textBoxRsTime
             // 
@@ -828,15 +868,35 @@
             this.toolTipHelpText.InitialDelay = 100;
             this.toolTipHelpText.ReshowDelay = 20;
             // 
-            // buttonChoiceSounds
+            // label22
             // 
-            this.buttonChoiceSounds.Location = new System.Drawing.Point(24, 219);
-            this.buttonChoiceSounds.Name = "buttonChoiceSounds";
-            this.buttonChoiceSounds.Size = new System.Drawing.Size(75, 23);
-            this.buttonChoiceSounds.TabIndex = 33;
-            this.buttonChoiceSounds.Text = "Sounds";
-            this.buttonChoiceSounds.UseVisualStyleBackColor = true;
-            this.buttonChoiceSounds.Click += new System.EventHandler(this.buttonChoiceSounds_Click);
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(21, 218);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(84, 13);
+            this.label22.TabIndex = 34;
+            this.label22.Text = "Close Skype?";
+            // 
+            // checkBoxCloseSkype
+            // 
+            this.checkBoxCloseSkype.AutoSize = true;
+            this.checkBoxCloseSkype.Location = new System.Drawing.Point(166, 218);
+            this.checkBoxCloseSkype.Name = "checkBoxCloseSkype";
+            this.checkBoxCloseSkype.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxCloseSkype.TabIndex = 35;
+            this.checkBoxCloseSkype.UseVisualStyleBackColor = true;
+            // 
+            // pictureBoxCloseSkype
+            // 
+            this.pictureBoxCloseSkype.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCloseSkype.Image")));
+            this.pictureBoxCloseSkype.Location = new System.Drawing.Point(283, 218);
+            this.pictureBoxCloseSkype.Name = "pictureBoxCloseSkype";
+            this.pictureBoxCloseSkype.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxCloseSkype.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxCloseSkype.TabIndex = 36;
+            this.pictureBoxCloseSkype.TabStop = false;
+            this.pictureBoxCloseSkype.MouseHover += new System.EventHandler(this.pictureBoxCloseSkype_MouseHover);
             // 
             // Main
             // 
@@ -846,7 +906,7 @@
             this.Controls.Add(this.tabControlMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.Text = "Stop Loss";
+            this.Text = "StopLoss";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.tabControlMain.ResumeLayout(false);
             this.tabDatabase.ResumeLayout(false);
@@ -866,6 +926,7 @@
             this.tabResumeSession.ResumeLayout(false);
             this.tabResumeSession.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -940,6 +1001,11 @@
         private System.Windows.Forms.TextBox textBoxPeakOver;
         private System.Windows.Forms.Button buttonDonate;
         private System.Windows.Forms.Button buttonChoiceSounds;
+        private System.Windows.Forms.TextBox textBoxBbsMax;
+        private System.Windows.Forms.Label labelBbsMax;
+        private System.Windows.Forms.PictureBox pictureBoxCloseSkype;
+        private System.Windows.Forms.CheckBox checkBoxCloseSkype;
+        private System.Windows.Forms.Label label22;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.IO;
 using TiltStopLoss;
+using System.Runtime.InteropServices;
 
 namespace TiltStopLoss
 {
@@ -37,6 +38,7 @@ namespace TiltStopLoss
         private Double peakover;
         Int64 handnumber = 0;
         private String[] sounds;
+        Double bbmax;
 
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, String[] sound, int tracker)
         {
@@ -88,7 +90,7 @@ namespace TiltStopLoss
             //guarda as config
             String location = this.Location.X.ToString() + ',' + this.Location.Y.ToString();
             String path = Directory.GetCurrentDirectory();
-            StreamWriter w = new StreamWriter(path + "/config2.txt", false);
+            StreamWriter w = new StreamWriter(path + "/config_stoploss.txt", false);
             w.Write("Location=" + location);
             w.WriteLine();
             w.Close();
@@ -97,7 +99,7 @@ namespace TiltStopLoss
             startcrono.Abort();
             
             wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString());
-            wmain.setValueSession(handnumber.ToString(), time, bb);
+            wmain.setValueSession(handnumber.ToString(), time, bb, bbmax);
             wmain.Visible = true;            
         }
 
@@ -154,7 +156,7 @@ namespace TiltStopLoss
             //aqui é feito o resto dos calculos e das diferenças
             try
             {
-                Double bbmax = 0.0;
+                bbmax = 0.0;
                 while (continu)
                 {
                     //bb
@@ -205,7 +207,7 @@ namespace TiltStopLoss
                             if (!stop)
                             {
                                 player = new Utils().playsound(sounds[0]);
-                                player.PlayLooping();
+                                player.PlayLooping();                                
                             }
                             stop = true;
                             //buttonSoundStop.Visible = true;
@@ -468,7 +470,7 @@ namespace TiltStopLoss
         private void loadconfig()
         {
             String path = Directory.GetCurrentDirectory();
-            String filepath = path + "/config2.txt";
+            String filepath = path + "/config_stoploss.txt";
             if (File.Exists(filepath))
             {
                 string line;
