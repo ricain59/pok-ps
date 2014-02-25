@@ -22,3 +22,4 @@ soundloss=alarm.wav
 soundtime=alarm.wav
 soundwin=alarm.wav
 soundhands=alarm.wav
+Skype=False

@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.46;
+        private Double version = 1.47;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -752,6 +752,11 @@ namespace TiltStopLoss
             toolTipHelpText.SetToolTip(this.pictureBoxCloseSkype, "Close Skype if checked");
         }
 
+        private void pictureBoxStopTime_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxStopTime, "Click on time allows stop timer in case of sitout");
+        }
+
         #endregion
 
         /// <summary>
@@ -792,6 +797,8 @@ namespace TiltStopLoss
             soundwin = win;
             soundhands = hands;
         }
+
+        
 
     }
 }

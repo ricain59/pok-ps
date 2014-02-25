@@ -98,6 +98,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
             this.pictureBoxCloseSkype = new System.Windows.Forms.PictureBox();
+            this.pictureBoxStopTime = new System.Windows.Forms.PictureBox();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).BeginInit();
@@ -114,6 +115,7 @@
             this.tabResumeSession.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStopTime)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -424,6 +426,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.pictureBoxStopTime);
             this.tabPage3.Controls.Add(this.pictureBoxCloseSkype);
             this.tabPage3.Controls.Add(this.checkBoxCloseSkype);
             this.tabPage3.Controls.Add(this.label22);
@@ -898,6 +901,17 @@
             this.pictureBoxCloseSkype.TabStop = false;
             this.pictureBoxCloseSkype.MouseHover += new System.EventHandler(this.pictureBoxCloseSkype_MouseHover);
             // 
+            // pictureBoxStopTime
+            // 
+            this.pictureBoxStopTime.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxStopTime.Image")));
+            this.pictureBoxStopTime.Location = new System.Drawing.Point(283, 112);
+            this.pictureBoxStopTime.Name = "pictureBoxStopTime";
+            this.pictureBoxStopTime.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxStopTime.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxStopTime.TabIndex = 37;
+            this.pictureBoxStopTime.TabStop = false;
+            this.pictureBoxStopTime.MouseHover += new System.EventHandler(this.pictureBoxStopTime_MouseHover);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -927,6 +941,7 @@
             this.tabResumeSession.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStopTime)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1006,6 +1021,7 @@
         private System.Windows.Forms.PictureBox pictureBoxCloseSkype;
         private System.Windows.Forms.CheckBox checkBoxCloseSkype;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.PictureBox pictureBoxStopTime;
     }
 }
 
