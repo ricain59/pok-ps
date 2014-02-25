@@ -39,6 +39,7 @@ namespace TiltStopLoss
         Int64 handnumber = 0;
         private String[] sounds;
         Double bbmax;
+        private Boolean sitout = true;
 
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, String[] sound, int tracker)
         {
@@ -338,60 +339,63 @@ namespace TiltStopLoss
             
             while (continu)
             {
-                Thread.Sleep(1000);
-                seconde++;
-                if (seconde == 60)
+                while (sitout)
                 {
-                    seconde = 0;
-                    minutetostop++;
-                    minute++;
-                    if (minute == 60)
+                    Thread.Sleep(1000);
+                    seconde++;
+                    if (seconde == 60)
                     {
-                        minute = 0;
-                        hour++;
-                    }
-                }
-                String minutest;
-                if (minute < 10)
-                {
-                    minutest = "0" + minute;
-                }
-                else
-                {
-                    minutest = "" + minute;
-                }
-                String secondest;
-                if (seconde < 10)
-                {
-                    secondest = "0" + seconde;
-                }
-                else
-                {
-                    secondest = "" + seconde;
-                }
-                time = "0" + hour + ":" + minutest + ":" + secondest;
-                if (this.labelTimer.InvokeRequired)
-                {
-                    SetTextCallback d = new SetTextCallback(SetTextTimer);
-                    this.Invoke(d, new object[] { time });
-                }
-                else
-                {
-                    // It's on the same thread, no need for Invoke
-                    this.labelTimer.Text = time;
-                }
-                if (timestop != 0)
-                {
-                    if (timestop <= minutetostop)
-                    {
-                        if (!stop)
+                        seconde = 0;
+                        minutetostop++;
+                        minute++;
+                        if (minute == 60)
                         {
-                            player = new Utils().playsound(sounds[1]);
-                            player.PlayLooping();
+                            minute = 0;
+                            hour++;
                         }
-                        stop = true;
-                        //buttonSoundStop.Visible = true;
-                        labelStopSet("!!!! StopTime !!!!", Color.Black);                                               
+                    }
+                    String minutest;
+                    if (minute < 10)
+                    {
+                        minutest = "0" + minute;
+                    }
+                    else
+                    {
+                        minutest = "" + minute;
+                    }
+                    String secondest;
+                    if (seconde < 10)
+                    {
+                        secondest = "0" + seconde;
+                    }
+                    else
+                    {
+                        secondest = "" + seconde;
+                    }
+                    time = "0" + hour + ":" + minutest + ":" + secondest;
+                    if (this.labelTimer.InvokeRequired)
+                    {
+                        SetTextCallback d = new SetTextCallback(SetTextTimer);
+                        this.Invoke(d, new object[] { time });
+                    }
+                    else
+                    {
+                        // It's on the same thread, no need for Invoke
+                        this.labelTimer.Text = time;
+                    }
+                    if (timestop != 0)
+                    {
+                        if (timestop <= minutetostop)
+                        {
+                            if (!stop)
+                            {
+                                player = new Utils().playsound(sounds[1]);
+                                player.PlayLooping();
+                            }
+                            stop = true;
+                            //buttonSoundStop.Visible = true;
+                            labelStopSet("!!!! StopTime !!!!", Color.Black);
+                        }
                     }
                 }
             }
@@ -523,6 +527,25 @@ namespace TiltStopLoss
             this.stoploss = loss;
             this.stopwin = win;
             this.bbpeak = losspeak;
+        }
+
+        /// <summary>
+        /// permite clicar e fazer um stop ao tempo em caso de sitout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void labelTimer_Click(object sender, EventArgs e)
+        {
+            if (sitout)
+            {
+                sitout = false;
+                labelStopSet("!!!! Timer Stopped !!!!", Color.Blue);
+            }
+            else
+            {
+                sitout = true;
+                labelStopSet("", Color.Blue);
+            }
         }
     }
 }

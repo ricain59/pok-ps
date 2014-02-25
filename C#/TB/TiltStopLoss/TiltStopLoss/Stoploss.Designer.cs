@@ -57,6 +57,7 @@
             this.labelTimer.Size = new System.Drawing.Size(56, 16);
             this.labelTimer.TabIndex = 1;
             this.labelTimer.Text = "00:00:00";
+            this.labelTimer.Click += new System.EventHandler(this.labelTimer_Click);
             // 
             // labelBb
             // 
@@ -109,7 +110,7 @@
             // 
             this.labelStop.AutoSize = true;
             this.labelStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStop.Location = new System.Drawing.Point(41, 57);
+            this.labelStop.Location = new System.Drawing.Point(30, 57);
             this.labelStop.Name = "labelStop";
             this.labelStop.Size = new System.Drawing.Size(20, 16);
             this.labelStop.TabIndex = 6;
