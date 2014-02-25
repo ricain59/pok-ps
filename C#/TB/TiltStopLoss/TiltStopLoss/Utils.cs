@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace TiltStopLoss
 {
@@ -159,6 +160,51 @@ namespace TiltStopLoss
             {
                 File.Delete(@filepath);
             }
+        }
+
+        /// <summary>
+        /// change name file config
+        /// </summary>
+        public void changeFileConfig()
+        {
+            String pathfinal = Directory.GetCurrentDirectory();
+            String filepath = pathfinal + "\\config.txt";
+            if (File.Exists(@filepath))
+            {
+                File.Move(@filepath, pathfinal+"\\config_main.txt");
+                File.Delete(@filepath);
+            }
+            filepath = pathfinal + "\\config2.txt";
+            if (File.Exists(@filepath))
+            {
+                File.Move(@filepath, pathfinal + "\\config_stoploss.txt");
+                File.Delete(@filepath);
+            }
+            filepath = pathfinal + "\\config3.txt";
+            if (File.Exists(@filepath))
+            {
+                File.Move(@filepath, pathfinal + "\\config_setnewvalue.txt");
+                File.Delete(@filepath);
+            }
+        }
+
+        /// <summary>
+        /// close skype
+        /// </summary>
+        public void detectApps()
+        {
+            // Is running
+            try
+            {
+                foreach (Process proc in Process.GetProcessesByName("Skype"))
+                {
+                    proc.Kill();
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }            
         }
     }
 }

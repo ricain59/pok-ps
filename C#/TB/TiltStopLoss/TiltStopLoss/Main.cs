@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.45;
+        private Double version = 1.46;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -33,11 +33,17 @@ namespace TiltStopLoss
         public Main()
         {
             InitializeComponent();
-            labelVersion.Text = "v"+version.ToString().Replace(',', '.');
+            labelVersion.Text = "v" + version.ToString().Replace(',', '.');
             //como mudei os sound elimino onde estava o original inicialmente
             new Utils().deleteSound();
+            new Utils().changeFileConfig();
             //aqui vou ver se existe update ou não
-            checkupdate();            
+            checkupdate();
+            //abro no separador conf stop se já foi configurado a DB
+            if (!textBoxPlayer.Text.Equals(""))
+            {
+                tabControlMain.SelectedIndex = 1;
+            }
             //depois disso volto ao soft caso diz que não
             loadconfig();
             start = false;
@@ -47,7 +53,7 @@ namespace TiltStopLoss
             {
                 textBoxPlayer.Enabled = true;
                 fillTextboxPlayer();
-            }
+            }                       
         }
 
         /// <summary>
@@ -123,6 +129,11 @@ namespace TiltStopLoss
             //aqui tenho de abrir a outra janela que vai ficar a funcar em paralela dessa
             try
             {
+                if (checkBoxCloseSkype.Checked)
+                {
+                    new Utils().detectApps();
+                }
+
                 if (!stop)
                 {
                     int stoplosspeak = new Utils().stringtoInt32(textBoxStopLossPeak.Text);
@@ -213,7 +224,7 @@ namespace TiltStopLoss
         private void loadconfig()
         {
             String path = Directory.GetCurrentDirectory();
-            String filepath = path + "/config.txt";
+            String filepath = path + "/config_main.txt";
             if (File.Exists(filepath))
             {
                 string line;
@@ -348,6 +359,16 @@ namespace TiltStopLoss
                 case "soundhands":
                     soundhands = line[1].ToString();
                     break;
+                case "Skype":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxCloseSkype.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxCloseSkype.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -357,7 +378,7 @@ namespace TiltStopLoss
         {
             String location = this.Location.X.ToString() + ',' + this.Location.Y.ToString();
             String path = Directory.GetCurrentDirectory();
-            StreamWriter w = new StreamWriter(path + "/config.txt", false);
+            StreamWriter w = new StreamWriter(path + "/config_main.txt", false);
             w.Write("Location=" + location);
             w.WriteLine();
             w.Write("Player=" + textBoxPlayer.Text.ToString());
@@ -406,6 +427,8 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("soundhands=" + soundhands);
             w.WriteLine();
+            w.Write("Skype=" + checkBoxCloseSkype.Checked.ToString());
+            w.WriteLine();            
             w.Close();
         }
 
@@ -499,12 +522,18 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setValueSession(String hand, String time, Double bbs)
+        public void setValueSession(String hand, String time, Double bbs, Double bbmax)
         {
             if (resumesession)
             {
                 textBoxRsHands.Text = hand;
                 textBoxRsTime.Text = time;
+                textBoxBbsMax.Text = bbmax.ToString();
+                if (bbmax > 0)
+                {
+                    textBoxBbsMax.ForeColor = Color.Green;
+                    labelBbsMax.ForeColor = Color.Green;
+                }
                 if (bbs < 0)
                 {
                     textBoxRsBbs.Text = bbs.ToString();
@@ -718,6 +747,11 @@ namespace TiltStopLoss
             toolTipHelpText.SetToolTip(this.pictureBoxHideBbbs, "If checked, not show BBs on mouse over");
         }
 
+        private void pictureBoxCloseSkype_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxCloseSkype, "Close Skype if checked");
+        }
+
         #endregion
 
         /// <summary>
@@ -758,5 +792,6 @@ namespace TiltStopLoss
             soundwin = win;
             soundhands = hands;
         }
+
     }
 }
