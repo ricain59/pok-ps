@@ -41,7 +41,7 @@ namespace TiltStopLoss
         Double bbmax;
         private Boolean sitout = true;
 
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, String[] sound, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, Boolean buttonset, String[] sound, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -59,10 +59,9 @@ namespace TiltStopLoss
             {
                 labelBb.Enabled = false;
                 labelBb.Visible = false;
-
             }
+            buttonSet.Visible = buttonset;
             loadconfig();
-
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
             startcrono.Start();
@@ -91,7 +90,7 @@ namespace TiltStopLoss
             //guarda as config
             String location = this.Location.X.ToString() + ',' + this.Location.Y.ToString();
             String path = Directory.GetCurrentDirectory();
-            StreamWriter w = new StreamWriter(path + "/config_stoploss.txt", false);
+            StreamWriter w = new StreamWriter(path + "/config/config_stoploss.txt", false);
             w.Write("Location=" + location);
             w.WriteLine();
             w.Close();
@@ -474,7 +473,7 @@ namespace TiltStopLoss
         private void loadconfig()
         {
             String path = Directory.GetCurrentDirectory();
-            String filepath = path + "/config_stoploss.txt";
+            String filepath = path + "/config/config_stoploss.txt";
             if (File.Exists(filepath))
             {
                 string line;

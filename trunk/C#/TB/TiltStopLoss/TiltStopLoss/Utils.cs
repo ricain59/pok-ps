@@ -186,6 +186,25 @@ namespace TiltStopLoss
                 File.Move(@filepath, pathfinal + "\\config_setnewvalue.txt");
                 File.Delete(@filepath);
             }
+            String pathfinal2 = pathfinal + "\\config";
+            filepath = pathfinal + "\\config_main.txt";
+            if (File.Exists(@filepath))
+            {
+                File.Move(@filepath, pathfinal2 + "\\config_main.txt");
+                File.Delete(@filepath);
+            }
+            filepath = pathfinal + "\\config_stoploss.txt";
+            if (File.Exists(@filepath))
+            {
+                File.Move(@filepath, pathfinal2 + "\\config_stoploss.txt");
+                File.Delete(@filepath);
+            }
+            filepath = pathfinal + "\\config_setnewvalue.txt";
+            if (File.Exists(@filepath))
+            {
+                File.Move(@filepath, pathfinal2 + "\\config_setnewvalue.txt");
+                File.Delete(@filepath);
+            }
         }
 
         /// <summary>
@@ -215,8 +234,15 @@ namespace TiltStopLoss
         /// <returns></returns>
         public Int32 stringTimeToMinute(String time)
         {
-            String[] timer = time.Split(':');
-            return (Convert.ToInt32(timer[0]) * 60 + Convert.ToInt32(timer[1]));
+            if (String.IsNullOrEmpty(time))
+            {
+                return 0;
+            }
+            else
+            {
+                String[] timer = time.Split(':');
+                return (Convert.ToInt32(timer[0]) * 60 + Convert.ToInt32(timer[1]));
+            }
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.48;
+        private Double version = 1.49;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -179,7 +179,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, sounds, 1);
+                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, sounds, 1);
                             }
                             else //hem2
                             {
@@ -194,7 +194,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, sounds, 2);
+                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, sounds, 2);
                             }
                         }
                         else //pt4
@@ -209,7 +209,7 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, sounds, 4);
+                            sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, sounds, 4);
                         }
                         sl.Show();                        
                     }
@@ -229,7 +229,7 @@ namespace TiltStopLoss
         private void loadconfig()
         {
             String path = Directory.GetCurrentDirectory();
-            String filepath = path + "/config_main.txt";
+            String filepath = path + "/config/config_main.txt";
             if (File.Exists(filepath))
             {
                 string line;
@@ -390,6 +390,16 @@ namespace TiltStopLoss
                     histbbsmax = new Utils().stringtoDouble(line[1].ToString());
                     textBoxHistoryBbsMax.Text = line[1].ToString();
                     break;
+                case "Buttonset":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxButtonSet.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxButtonSet.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -399,7 +409,7 @@ namespace TiltStopLoss
         {
             String location = this.Location.X.ToString() + ',' + this.Location.Y.ToString();
             String path = Directory.GetCurrentDirectory();
-            StreamWriter w = new StreamWriter(path + "/config_main.txt", false);
+            StreamWriter w = new StreamWriter(path + "/config/config_main.txt", false);
             w.Write("Location=" + location);
             w.WriteLine();
             w.Write("Player=" + textBoxPlayer.Text.ToString());
@@ -457,7 +467,9 @@ namespace TiltStopLoss
             w.Write("historyhands=" + histhands.ToString());
             w.WriteLine();
             w.Write("historybbsmax=" + histbbsmax.ToString());
-            w.WriteLine(); 
+            w.WriteLine();
+            w.Write("Buttonset=" + checkBoxButtonSet.Checked.ToString());
+            w.WriteLine();            
             w.Close();
         }
 
@@ -556,7 +568,14 @@ namespace TiltStopLoss
             if (resumesession)
             {
                 textBoxRsHands.Text = hand;
-                textBoxRsTime.Text = time;
+                if (String.IsNullOrEmpty(time))
+                {
+                    textBoxRsTime.Text = "00:00:00";
+                }
+                else
+                {
+                    textBoxRsTime.Text = time;
+                }                
                 textBoxBbsMax.Text = bbmax.ToString();
                 if (bbmax > 0)
                 {
@@ -814,6 +833,11 @@ namespace TiltStopLoss
             toolTipHelpText.SetToolTip(this.linkLabelFeedback, "Mailto: stoploss59@gmail.com");
         }
 
+        private void pictureBoxCheckBoxButtonSet_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxCheckBoxButtonSet, "If checked hide button set on next window");
+        }
+
         #endregion
 
         /// <summary>
@@ -864,7 +888,6 @@ namespace TiltStopLoss
         {
             System.Diagnostics.Process.Start("mailto:stoploss59@gmail.com");
         }
-
 
     }
 }
