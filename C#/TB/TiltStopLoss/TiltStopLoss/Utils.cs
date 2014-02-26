@@ -204,7 +204,70 @@ namespace TiltStopLoss
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message);
+                new Debug().LogMessage(ex.ToString());
             }            
+        }
+
+        /// <summary>
+        /// string to minute
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public Int32 stringTimeToMinute(String time)
+        {
+            String[] timer = time.Split(':');
+            return (Convert.ToInt32(timer[0]) * 60 + Convert.ToInt32(timer[1]));
+        }
+
+        /// <summary>
+        /// int to string 
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public String intToStringTimer(Int32 time)
+        {
+            if (time < 60)
+            {
+                if (time >= 10)
+                {
+                    return "00:" + time + ":00";
+                }
+                else
+                {
+                    return "00:0" + time + ":00";
+                }
+            }
+            else
+            {
+                Int32 hours = 0;
+                while (time >= 60)
+                {
+                    hours++;
+                    time = time - 60;
+                }
+                if (hours >= 10)
+                {
+                    if (time >= 10)
+                    {
+                        return hours+":" + time + ":00";
+                    }
+                    else
+                    {
+                        return hours+":0" + time + ":00";
+                    }                    
+                }
+                else
+                {
+                    if (time >= 10)
+                    {
+                        return "0"+hours + ":" + time + ":00";
+                    }
+                    else
+                    {
+                        return "0"+hours + ":0" + time + ":00";
+                    }
+                }
+            }
         }
     }
 }

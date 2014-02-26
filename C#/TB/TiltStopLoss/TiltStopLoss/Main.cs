@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.47;
+        private Double version = 1.48;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -29,6 +29,11 @@ namespace TiltStopLoss
         private String soundtime = "alarm.wav";
         private String soundwin = "alarm.wav";
         private String soundhands = "alarm.wav";
+        //history value
+        private Double histbbsloss = 0;
+        private Int32 histhands = 0;
+        private Int32 histtime = 0;
+        private Double histbbsmax = 0;
         
         public Main()
         {
@@ -53,7 +58,7 @@ namespace TiltStopLoss
             {
                 textBoxPlayer.Enabled = true;
                 fillTextboxPlayer();
-            }                       
+            }          
         }
 
         /// <summary>
@@ -369,6 +374,22 @@ namespace TiltStopLoss
                         checkBoxCloseSkype.Checked = false;
                     }
                     break;
+                case "historybbsloss":
+                    histbbsloss = new Utils().stringtoDouble(line[1].ToString());
+                    textBoxHistoryBbsloss.Text = line[1].ToString();
+                    break;
+                case "historytimer":
+                    histtime = new Utils().stringtoInt32(line[1].ToString());
+                    textBoxHistoryTime.Text = new Utils().intToStringTimer(histtime);
+                    break;
+                case "historyhands":
+                    histhands = new Utils().stringtoInt32(line[1].ToString());
+                    textBoxHistoryHands.Text = line[1].ToString();
+                    break;
+                case "historybbsmax":
+                    histbbsmax = new Utils().stringtoDouble(line[1].ToString());
+                    textBoxHistoryBbsMax.Text = line[1].ToString();
+                    break;
                 default:
                     break;
             }
@@ -428,7 +449,15 @@ namespace TiltStopLoss
             w.Write("soundhands=" + soundhands);
             w.WriteLine();
             w.Write("Skype=" + checkBoxCloseSkype.Checked.ToString());
-            w.WriteLine();            
+            w.WriteLine();
+            w.Write("historybbsloss=" + histbbsloss.ToString());
+            w.WriteLine();
+            w.Write("historytimer=" + histtime.ToString());
+            w.WriteLine();
+            w.Write("historyhands=" + histhands.ToString());
+            w.WriteLine();
+            w.Write("historybbsmax=" + histbbsmax.ToString());
+            w.WriteLine(); 
             w.Close();
         }
 
@@ -547,6 +576,29 @@ namespace TiltStopLoss
                     labelSessionBBs.ForeColor = Color.Green;
                 }
                 tabControlMain.SelectedIndex = 2;
+            }
+            //mas faço na mesma o history
+            Int32 handsession = new Utils().stringtoInt32(hand);
+            Int32 timesession = new Utils().stringTimeToMinute(time);
+            if (handsession > histhands)
+            {
+                histhands = handsession;
+                textBoxHistoryHands.Text = handsession.ToString();
+            }
+            if (timesession > histtime)
+            {
+                histtime = timesession;
+                textBoxHistoryTime.Text = new Utils().intToStringTimer(timesession);
+            }
+            if (bbs < histbbsloss)
+            {
+                histbbsloss = bbs;
+                textBoxHistoryBbsloss.Text = bbs.ToString();
+            }
+            if (bbs > histbbsmax)
+            {
+                histbbsmax = bbs;
+                textBoxHistoryBbsMax.Text = bbs.ToString();
             }
         }
 
@@ -699,7 +751,7 @@ namespace TiltStopLoss
 
         private void pictureBoxPlayer_MouseHover(object sender, EventArgs e)
         {
-            toolTipHelpText.SetToolTip(this.pictureBoxPlayer, "First fill database and after software close, re-open and fill this");
+            toolTipHelpText.SetToolTip(this.pictureBoxPlayer, "First fill database and after software close, re-open and fill this.\r\nAccept Alias hem and pt4");
         }
 
         private void pictureBoxTracker_MouseHover(object sender, EventArgs e)
@@ -739,7 +791,7 @@ namespace TiltStopLoss
 
         private void pictureBoxLossPeak_MouseHover(object sender, EventArgs e)
         {
-            toolTipHelpText.SetToolTip(this.pictureBoxLossPeak, "Difference between max win session and bb actual.\r\nOnly if peak session >= over.\r\nIf peak defined, over also");
+            toolTipHelpText.SetToolTip(this.pictureBoxLossPeak, "Difference between max win session and bb actual.\r\nOnly if peak session => over.\r\nIf peak defined, over also");
         }
 
         private void pictureBoxHideBbbs_MouseHover(object sender, EventArgs e)
@@ -749,12 +801,17 @@ namespace TiltStopLoss
 
         private void pictureBoxCloseSkype_MouseHover(object sender, EventArgs e)
         {
-            toolTipHelpText.SetToolTip(this.pictureBoxCloseSkype, "Close Skype if checked");
+            toolTipHelpText.SetToolTip(this.pictureBoxCloseSkype, "If checked close Skype");
         }
 
         private void pictureBoxStopTime_MouseHover(object sender, EventArgs e)
         {
             toolTipHelpText.SetToolTip(this.pictureBoxStopTime, "Click on time allows stop timer in case of sitout");
+        }
+
+        private void linkLabelFeedback_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.linkLabelFeedback, "Mailto: stoploss59@gmail.com");
         }
 
         #endregion
@@ -798,7 +855,16 @@ namespace TiltStopLoss
             soundhands = hands;
         }
 
-        
+        /// <summary>
+        /// Send mail to support
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabelFeedback_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("mailto:stoploss59@gmail.com");
+        }
+
 
     }
 }

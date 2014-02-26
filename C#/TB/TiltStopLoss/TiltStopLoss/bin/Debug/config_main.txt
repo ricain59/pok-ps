@@ -1,4 +1,4 @@
-Location=614,297
+Location=459,302
 Player=hulkric59
 Server=127.0.0.1
 Port=5432
@@ -23,3 +23,7 @@ soundtime=alarm.wav
 soundwin=alarm.wav
 soundhands=alarm.wav
 Skype=False
+historybbsloss=-0,1
+historytimer=45
+historyhands=10
+historybbsmax=1,1

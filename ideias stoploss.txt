@@ -1,1 +1,3 @@
-
+- mail to feedback
+- minor correction
+- history results lifetime for sessions

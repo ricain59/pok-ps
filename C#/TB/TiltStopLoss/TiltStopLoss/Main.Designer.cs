@@ -56,6 +56,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPlayer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBoxStopTime = new System.Windows.Forms.PictureBox();
+            this.pictureBoxCloseSkype = new System.Windows.Forms.PictureBox();
+            this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.buttonChoiceSounds = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.textBoxPeakOver = new System.Windows.Forms.TextBox();
@@ -95,10 +99,16 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
-            this.label22 = new System.Windows.Forms.Label();
-            this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
-            this.pictureBoxCloseSkype = new System.Windows.Forms.PictureBox();
-            this.pictureBoxStopTime = new System.Windows.Forms.PictureBox();
+            this.linkLabelFeedback = new System.Windows.Forms.LinkLabel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBoxHistoryBbsMax = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.textBoxHistoryTime = new System.Windows.Forms.TextBox();
+            this.textBoxHistoryHands = new System.Windows.Forms.TextBox();
+            this.textBoxHistoryBbsloss = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).BeginInit();
@@ -109,13 +119,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxServer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStopTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHideBbbs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLossPeak)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).BeginInit();
             this.tabResumeSession.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStopTime)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -124,10 +134,10 @@
             this.tabControlMain.Controls.Add(this.tabPage3);
             this.tabControlMain.Controls.Add(this.tabResumeSession);
             this.tabControlMain.Controls.Add(this.tabPage2);
-            this.tabControlMain.Location = new System.Drawing.Point(12, 12);
+            this.tabControlMain.Location = new System.Drawing.Point(4, 2);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(320, 318);
+            this.tabControlMain.Size = new System.Drawing.Size(334, 328);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabDatabase
@@ -162,7 +172,7 @@
             this.tabDatabase.Location = new System.Drawing.Point(4, 22);
             this.tabDatabase.Name = "tabDatabase";
             this.tabDatabase.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDatabase.Size = new System.Drawing.Size(312, 292);
+            this.tabDatabase.Size = new System.Drawing.Size(326, 302);
             this.tabDatabase.TabIndex = 0;
             this.tabDatabase.Text = "Database";
             this.tabDatabase.UseVisualStyleBackColor = true;
@@ -170,7 +180,7 @@
             // pictureBoxTracker
             // 
             this.pictureBoxTracker.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxTracker.Image")));
-            this.pictureBoxTracker.Location = new System.Drawing.Point(280, 83);
+            this.pictureBoxTracker.Location = new System.Drawing.Point(294, 83);
             this.pictureBoxTracker.Name = "pictureBoxTracker";
             this.pictureBoxTracker.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxTracker.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -181,7 +191,7 @@
             // pictureBoxPassword
             // 
             this.pictureBoxPassword.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPassword.Image")));
-            this.pictureBoxPassword.Location = new System.Drawing.Point(280, 222);
+            this.pictureBoxPassword.Location = new System.Drawing.Point(294, 223);
             this.pictureBoxPassword.Name = "pictureBoxPassword";
             this.pictureBoxPassword.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -192,7 +202,7 @@
             // pictureBoxUserDb
             // 
             this.pictureBoxUserDb.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUserDb.Image")));
-            this.pictureBoxUserDb.Location = new System.Drawing.Point(280, 196);
+            this.pictureBoxUserDb.Location = new System.Drawing.Point(294, 196);
             this.pictureBoxUserDb.Name = "pictureBoxUserDb";
             this.pictureBoxUserDb.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxUserDb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -203,7 +213,7 @@
             // pictureBoxDatabase
             // 
             this.pictureBoxDatabase.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDatabase.Image")));
-            this.pictureBoxDatabase.Location = new System.Drawing.Point(280, 169);
+            this.pictureBoxDatabase.Location = new System.Drawing.Point(294, 169);
             this.pictureBoxDatabase.Name = "pictureBoxDatabase";
             this.pictureBoxDatabase.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxDatabase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -214,7 +224,7 @@
             // pictureBoxPort
             // 
             this.pictureBoxPort.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPort.Image")));
-            this.pictureBoxPort.Location = new System.Drawing.Point(280, 141);
+            this.pictureBoxPort.Location = new System.Drawing.Point(294, 141);
             this.pictureBoxPort.Name = "pictureBoxPort";
             this.pictureBoxPort.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxPort.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -225,7 +235,7 @@
             // pictureBoxServer
             // 
             this.pictureBoxServer.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxServer.Image")));
-            this.pictureBoxServer.Location = new System.Drawing.Point(280, 115);
+            this.pictureBoxServer.Location = new System.Drawing.Point(294, 115);
             this.pictureBoxServer.Name = "pictureBoxServer";
             this.pictureBoxServer.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxServer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -236,7 +246,7 @@
             // pictureBoxPlayer
             // 
             this.pictureBoxPlayer.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPlayer.Image")));
-            this.pictureBoxPlayer.Location = new System.Drawing.Point(280, 22);
+            this.pictureBoxPlayer.Location = new System.Drawing.Point(294, 22);
             this.pictureBoxPlayer.Name = "pictureBoxPlayer";
             this.pictureBoxPlayer.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxPlayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -247,7 +257,7 @@
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(269, 278);
+            this.labelVersion.Location = new System.Drawing.Point(292, 286);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(28, 13);
             this.labelVersion.TabIndex = 21;
@@ -457,10 +467,51 @@
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(312, 292);
+            this.tabPage3.Size = new System.Drawing.Size(326, 302);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pictureBoxStopTime
+            // 
+            this.pictureBoxStopTime.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxStopTime.Image")));
+            this.pictureBoxStopTime.Location = new System.Drawing.Point(295, 112);
+            this.pictureBoxStopTime.Name = "pictureBoxStopTime";
+            this.pictureBoxStopTime.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxStopTime.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxStopTime.TabIndex = 37;
+            this.pictureBoxStopTime.TabStop = false;
+            this.pictureBoxStopTime.MouseHover += new System.EventHandler(this.pictureBoxStopTime_MouseHover);
+            // 
+            // pictureBoxCloseSkype
+            // 
+            this.pictureBoxCloseSkype.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCloseSkype.Image")));
+            this.pictureBoxCloseSkype.Location = new System.Drawing.Point(295, 218);
+            this.pictureBoxCloseSkype.Name = "pictureBoxCloseSkype";
+            this.pictureBoxCloseSkype.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxCloseSkype.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxCloseSkype.TabIndex = 36;
+            this.pictureBoxCloseSkype.TabStop = false;
+            this.pictureBoxCloseSkype.MouseHover += new System.EventHandler(this.pictureBoxCloseSkype_MouseHover);
+            // 
+            // checkBoxCloseSkype
+            // 
+            this.checkBoxCloseSkype.AutoSize = true;
+            this.checkBoxCloseSkype.Location = new System.Drawing.Point(166, 218);
+            this.checkBoxCloseSkype.Name = "checkBoxCloseSkype";
+            this.checkBoxCloseSkype.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxCloseSkype.TabIndex = 35;
+            this.checkBoxCloseSkype.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(21, 218);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(84, 13);
+            this.label22.TabIndex = 34;
+            this.label22.Text = "Close Skype?";
             // 
             // buttonChoiceSounds
             // 
@@ -498,7 +549,7 @@
             // pictureBoxHideBbbs
             // 
             this.pictureBoxHideBbbs.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxHideBbbs.Image")));
-            this.pictureBoxHideBbbs.Location = new System.Drawing.Point(283, 192);
+            this.pictureBoxHideBbbs.Location = new System.Drawing.Point(295, 192);
             this.pictureBoxHideBbbs.Name = "pictureBoxHideBbbs";
             this.pictureBoxHideBbbs.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxHideBbbs.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -528,7 +579,7 @@
             // pictureBoxLossPeak
             // 
             this.pictureBoxLossPeak.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLossPeak.Image")));
-            this.pictureBoxLossPeak.Location = new System.Drawing.Point(283, 54);
+            this.pictureBoxLossPeak.Location = new System.Drawing.Point(295, 54);
             this.pictureBoxLossPeak.Name = "pictureBoxLossPeak";
             this.pictureBoxLossPeak.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxLossPeak.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -573,7 +624,7 @@
             // pictureBoxResumeSession
             // 
             this.pictureBoxResumeSession.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxResumeSession.Image")));
-            this.pictureBoxResumeSession.Location = new System.Drawing.Point(283, 166);
+            this.pictureBoxResumeSession.Location = new System.Drawing.Point(295, 166);
             this.pictureBoxResumeSession.Name = "pictureBoxResumeSession";
             this.pictureBoxResumeSession.Size = new System.Drawing.Size(26, 20);
             this.pictureBoxResumeSession.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -733,6 +784,15 @@
             // 
             // tabResumeSession
             // 
+            this.tabResumeSession.Controls.Add(this.textBoxHistoryBbsMax);
+            this.tabResumeSession.Controls.Add(this.label24);
+            this.tabResumeSession.Controls.Add(this.textBoxHistoryTime);
+            this.tabResumeSession.Controls.Add(this.textBoxHistoryHands);
+            this.tabResumeSession.Controls.Add(this.textBoxHistoryBbsloss);
+            this.tabResumeSession.Controls.Add(this.label25);
+            this.tabResumeSession.Controls.Add(this.label26);
+            this.tabResumeSession.Controls.Add(this.label27);
+            this.tabResumeSession.Controls.Add(this.label23);
             this.tabResumeSession.Controls.Add(this.textBoxBbsMax);
             this.tabResumeSession.Controls.Add(this.labelBbsMax);
             this.tabResumeSession.Controls.Add(this.textBoxRsTime);
@@ -743,7 +803,7 @@
             this.tabResumeSession.Controls.Add(this.labelSessionBBs);
             this.tabResumeSession.Location = new System.Drawing.Point(4, 22);
             this.tabResumeSession.Name = "tabResumeSession";
-            this.tabResumeSession.Size = new System.Drawing.Size(312, 292);
+            this.tabResumeSession.Size = new System.Drawing.Size(326, 302);
             this.tabResumeSession.TabIndex = 3;
             this.tabResumeSession.Text = "Resume Session";
             this.tabResumeSession.UseVisualStyleBackColor = true;
@@ -751,7 +811,7 @@
             // textBoxBbsMax
             // 
             this.textBoxBbsMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxBbsMax.Location = new System.Drawing.Point(81, 116);
+            this.textBoxBbsMax.Location = new System.Drawing.Point(138, 99);
             this.textBoxBbsMax.Name = "textBoxBbsMax";
             this.textBoxBbsMax.Size = new System.Drawing.Size(70, 20);
             this.textBoxBbsMax.TabIndex = 7;
@@ -761,7 +821,7 @@
             // 
             this.labelBbsMax.AutoSize = true;
             this.labelBbsMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBbsMax.Location = new System.Drawing.Point(19, 119);
+            this.labelBbsMax.Location = new System.Drawing.Point(76, 102);
             this.labelBbsMax.Name = "labelBbsMax";
             this.labelBbsMax.Size = new System.Drawing.Size(56, 13);
             this.labelBbsMax.TabIndex = 6;
@@ -771,7 +831,7 @@
             // 
             this.textBoxRsTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRsTime.ForeColor = System.Drawing.Color.Blue;
-            this.textBoxRsTime.Location = new System.Drawing.Point(81, 83);
+            this.textBoxRsTime.Location = new System.Drawing.Point(138, 73);
             this.textBoxRsTime.Name = "textBoxRsTime";
             this.textBoxRsTime.Size = new System.Drawing.Size(70, 20);
             this.textBoxRsTime.TabIndex = 5;
@@ -780,7 +840,7 @@
             // textBoxRsHands
             // 
             this.textBoxRsHands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxRsHands.Location = new System.Drawing.Point(81, 52);
+            this.textBoxRsHands.Location = new System.Drawing.Point(138, 47);
             this.textBoxRsHands.Name = "textBoxRsHands";
             this.textBoxRsHands.Size = new System.Drawing.Size(70, 20);
             this.textBoxRsHands.TabIndex = 4;
@@ -789,7 +849,7 @@
             // textBoxRsBbs
             // 
             this.textBoxRsBbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxRsBbs.Location = new System.Drawing.Point(81, 20);
+            this.textBoxRsBbs.Location = new System.Drawing.Point(138, 21);
             this.textBoxRsBbs.Name = "textBoxRsBbs";
             this.textBoxRsBbs.Size = new System.Drawing.Size(70, 20);
             this.textBoxRsBbs.TabIndex = 3;
@@ -800,7 +860,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Blue;
-            this.label17.Location = new System.Drawing.Point(19, 86);
+            this.label17.Location = new System.Drawing.Point(76, 76);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(34, 13);
             this.label17.TabIndex = 2;
@@ -810,7 +870,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(19, 55);
+            this.label16.Location = new System.Drawing.Point(76, 50);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(43, 13);
             this.label16.TabIndex = 1;
@@ -820,7 +880,7 @@
             // 
             this.labelSessionBBs.AutoSize = true;
             this.labelSessionBBs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSessionBBs.Location = new System.Drawing.Point(19, 23);
+            this.labelSessionBBs.Location = new System.Drawing.Point(76, 24);
             this.labelSessionBBs.Name = "labelSessionBBs";
             this.labelSessionBBs.Size = new System.Drawing.Size(29, 13);
             this.labelSessionBBs.TabIndex = 0;
@@ -828,12 +888,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.linkLabelFeedback);
             this.tabPage2.Controls.Add(this.buttonDonate);
             this.tabPage2.Controls.Add(this.buttonStart);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(312, 292);
+            this.tabPage2.Size = new System.Drawing.Size(326, 302);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Start";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -841,7 +902,7 @@
             // buttonDonate
             // 
             this.buttonDonate.Image = ((System.Drawing.Image)(resources.GetObject("buttonDonate.Image")));
-            this.buttonDonate.Location = new System.Drawing.Point(100, 192);
+            this.buttonDonate.Location = new System.Drawing.Point(110, 191);
             this.buttonDonate.Name = "buttonDonate";
             this.buttonDonate.Size = new System.Drawing.Size(117, 68);
             this.buttonDonate.TabIndex = 1;
@@ -850,7 +911,7 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(100, 45);
+            this.buttonStart.Location = new System.Drawing.Point(110, 44);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(117, 59);
             this.buttonStart.TabIndex = 0;
@@ -871,46 +932,110 @@
             this.toolTipHelpText.InitialDelay = 100;
             this.toolTipHelpText.ReshowDelay = 20;
             // 
-            // label22
+            // linkLabelFeedback
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(21, 218);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(84, 13);
-            this.label22.TabIndex = 34;
-            this.label22.Text = "Close Skype?";
+            this.linkLabelFeedback.AutoSize = true;
+            this.linkLabelFeedback.Location = new System.Drawing.Point(265, 286);
+            this.linkLabelFeedback.Name = "linkLabelFeedback";
+            this.linkLabelFeedback.Size = new System.Drawing.Size(55, 13);
+            this.linkLabelFeedback.TabIndex = 2;
+            this.linkLabelFeedback.TabStop = true;
+            this.linkLabelFeedback.Text = "Feedback";
+            this.linkLabelFeedback.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelFeedback_LinkClicked);
+            this.linkLabelFeedback.MouseHover += new System.EventHandler(this.linkLabelFeedback_MouseHover);
             // 
-            // checkBoxCloseSkype
+            // label23
             // 
-            this.checkBoxCloseSkype.AutoSize = true;
-            this.checkBoxCloseSkype.Location = new System.Drawing.Point(166, 218);
-            this.checkBoxCloseSkype.Name = "checkBoxCloseSkype";
-            this.checkBoxCloseSkype.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxCloseSkype.TabIndex = 35;
-            this.checkBoxCloseSkype.UseVisualStyleBackColor = true;
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.Magenta;
+            this.label23.Location = new System.Drawing.Point(119, 139);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(89, 16);
+            this.label23.TabIndex = 8;
+            this.label23.Text = "History Max";
             // 
-            // pictureBoxCloseSkype
+            // textBoxHistoryBbsMax
             // 
-            this.pictureBoxCloseSkype.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCloseSkype.Image")));
-            this.pictureBoxCloseSkype.Location = new System.Drawing.Point(283, 218);
-            this.pictureBoxCloseSkype.Name = "pictureBoxCloseSkype";
-            this.pictureBoxCloseSkype.Size = new System.Drawing.Size(26, 20);
-            this.pictureBoxCloseSkype.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxCloseSkype.TabIndex = 36;
-            this.pictureBoxCloseSkype.TabStop = false;
-            this.pictureBoxCloseSkype.MouseHover += new System.EventHandler(this.pictureBoxCloseSkype_MouseHover);
+            this.textBoxHistoryBbsMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxHistoryBbsMax.ForeColor = System.Drawing.Color.Green;
+            this.textBoxHistoryBbsMax.Location = new System.Drawing.Point(138, 250);
+            this.textBoxHistoryBbsMax.Name = "textBoxHistoryBbsMax";
+            this.textBoxHistoryBbsMax.Size = new System.Drawing.Size(70, 20);
+            this.textBoxHistoryBbsMax.TabIndex = 16;
+            this.textBoxHistoryBbsMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // pictureBoxStopTime
+            // label24
             // 
-            this.pictureBoxStopTime.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxStopTime.Image")));
-            this.pictureBoxStopTime.Location = new System.Drawing.Point(283, 112);
-            this.pictureBoxStopTime.Name = "pictureBoxStopTime";
-            this.pictureBoxStopTime.Size = new System.Drawing.Size(26, 20);
-            this.pictureBoxStopTime.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxStopTime.TabIndex = 37;
-            this.pictureBoxStopTime.TabStop = false;
-            this.pictureBoxStopTime.MouseHover += new System.EventHandler(this.pictureBoxStopTime_MouseHover);
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.Green;
+            this.label24.Location = new System.Drawing.Point(76, 253);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(56, 13);
+            this.label24.TabIndex = 15;
+            this.label24.Text = "BBs Max";
+            // 
+            // textBoxHistoryTime
+            // 
+            this.textBoxHistoryTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxHistoryTime.ForeColor = System.Drawing.Color.Blue;
+            this.textBoxHistoryTime.Location = new System.Drawing.Point(138, 224);
+            this.textBoxHistoryTime.Name = "textBoxHistoryTime";
+            this.textBoxHistoryTime.Size = new System.Drawing.Size(70, 20);
+            this.textBoxHistoryTime.TabIndex = 14;
+            this.textBoxHistoryTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBoxHistoryHands
+            // 
+            this.textBoxHistoryHands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxHistoryHands.Location = new System.Drawing.Point(138, 198);
+            this.textBoxHistoryHands.Name = "textBoxHistoryHands";
+            this.textBoxHistoryHands.Size = new System.Drawing.Size(70, 20);
+            this.textBoxHistoryHands.TabIndex = 13;
+            this.textBoxHistoryHands.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBoxHistoryBbsloss
+            // 
+            this.textBoxHistoryBbsloss.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxHistoryBbsloss.ForeColor = System.Drawing.Color.Red;
+            this.textBoxHistoryBbsloss.Location = new System.Drawing.Point(138, 172);
+            this.textBoxHistoryBbsloss.Name = "textBoxHistoryBbsloss";
+            this.textBoxHistoryBbsloss.Size = new System.Drawing.Size(70, 20);
+            this.textBoxHistoryBbsloss.TabIndex = 12;
+            this.textBoxHistoryBbsloss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.Blue;
+            this.label25.Location = new System.Drawing.Point(76, 227);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(34, 13);
+            this.label25.TabIndex = 11;
+            this.label25.Text = "Time";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(76, 201);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(43, 13);
+            this.label26.TabIndex = 10;
+            this.label26.Text = "Hands";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.Color.Red;
+            this.label27.Location = new System.Drawing.Point(76, 175);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(29, 13);
+            this.label27.TabIndex = 9;
+            this.label27.Text = "BBs";
             // 
             // Main
             // 
@@ -934,14 +1059,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStopTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHideBbbs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLossPeak)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).EndInit();
             this.tabResumeSession.ResumeLayout(false);
             this.tabResumeSession.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStopTime)).EndInit();
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1022,6 +1148,16 @@
         private System.Windows.Forms.CheckBox checkBoxCloseSkype;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.PictureBox pictureBoxStopTime;
+        private System.Windows.Forms.LinkLabel linkLabelFeedback;
+        private System.Windows.Forms.TextBox textBoxHistoryBbsMax;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox textBoxHistoryTime;
+        private System.Windows.Forms.TextBox textBoxHistoryHands;
+        private System.Windows.Forms.TextBox textBoxHistoryBbsloss;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label23;
     }
 }
 
