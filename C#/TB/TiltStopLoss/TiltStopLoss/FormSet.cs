@@ -79,7 +79,7 @@ namespace StopLoss
         private void loadconfig()
         {
             String path = Directory.GetCurrentDirectory();
-            String filepath = path + "/config_setnewvalue.txt";
+            String filepath = path + "/config/config_setnewvalue.txt";
             if (File.Exists(filepath))
             {
                 string line;
@@ -110,7 +110,7 @@ namespace StopLoss
         {
             String location = this.Location.X.ToString() + ',' + this.Location.Y.ToString();
             String path = Directory.GetCurrentDirectory();
-            StreamWriter w = new StreamWriter(path + "/config_setnewvalue.txt", false);
+            StreamWriter w = new StreamWriter(path + "/config/config_setnewvalue.txt", false);
             w.Write("Location=" + location);
             w.WriteLine();
             w.Close();

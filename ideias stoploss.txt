@@ -1,3 +1,2 @@
-- mail to feedback
-- minor correction
-- history results lifetime for sessions
+- changer le dossier des fichier de config
+- activer ou non le bouton set ok
