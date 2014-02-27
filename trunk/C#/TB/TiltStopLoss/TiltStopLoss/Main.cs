@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.51;
+        private Double version = 1.52;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -68,6 +68,7 @@ namespace TiltStopLoss
         private void checkupdate()
         {
             Double newversion = version;
+            String log = "";
             try
             {
                 using (XmlReader reader = XmlReader.Create(urlxml))
@@ -86,13 +87,19 @@ namespace TiltStopLoss
                                         newversion = Convert.ToDouble(reader.Value.Trim().ToString().Replace('.', ','));
                                     }
                                     break;
+                                case "log":
+                                    if (reader.Read())
+                                    {
+                                        log += reader.Value.Trim().ToString()+ "\r\n";
+                                    }
+                                    break;
                             }
                         }
                     }
                 }
                 if (version < newversion)
                 {
-                    DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\nGo to download page?", "Update", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\n\r\nNew:\r\n"+ log +"\r\nGo to download page?", "Update", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
                         //do something
