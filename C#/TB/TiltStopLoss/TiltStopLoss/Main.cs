@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.50;
+        private Double version = 1.51;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -108,16 +108,23 @@ namespace TiltStopLoss
 
         private void buttonTestDb_Click(object sender, EventArgs e)
         {
-            db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text, textBoxPlayer.Text);
-            String testconnect = db.testconnectDb();
-            if (testconnect.Equals(""))
+            if (textBoxDb.Text.Equals(""))
             {
-                MessageBox.Show("Test connection OK.\r\n This windows is closed, open it for selected player.");
-                this.Close();              
+                MessageBox.Show("Fill Database please.");
             }
             else
             {
-                MessageBox.Show(testconnect);
+                db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text, textBoxPlayer.Text);
+                String testconnect = db.testconnectDb();
+                if (testconnect.Equals(""))
+                {
+                    MessageBox.Show("Test connection OK.\r\n This windows is closed, open it for selected player.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(testconnect);
+                }
             }
         }
 
@@ -471,7 +478,12 @@ namespace TiltStopLoss
             w.Write("Buttonset=" + checkBoxButtonSet.Checked.ToString());
             w.WriteLine();            
             w.Close();
+            //test
+           
+
         }
+
+        
 
         #endregion
 
