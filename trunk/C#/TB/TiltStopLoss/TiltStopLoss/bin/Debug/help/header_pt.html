@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>StopLoss - Help</title>
+		<style type="text/css">
+		/* For Mozilla only: create rounded corners */
+		#box {
+		  -moz-border-radius: 10px 10px 10px 10px;
+		}
+		</style>
+		<link href="newcss.css" rel="stylesheet" type="text/css" name="css">
+        <meta http-equiv="content-type" content="text/html;charset=UTF8">
+		
+	</head>
+	
+	<body>
+            
+        <div class="estrutura">	
+            <div id="banner">
+                &nbsp;
+            </div>			
+			<a href="header_fr.html">Français</a>
+			<a href="header_pt.html">Português</a>
+			<a href="header_en.html">English</a>
+			<br/>
+			
+			<h1>Arranque</h1>
+			<p>
+			Dezipar a pasta stoploss onde quiserem.
+			Para cada atualização futuras, basta dezipar a pasta em cima da antiga pasta e assim não vão perder as configurações anteriores.
+			</p>
+			<p>
+			Clicar em Stoploss.exe para lançar a aplicação:<br/>
+			<img src="images/start.jpg"><br/>
+			</p>
+			<p>
+			Se ao lançamento tem uma mensagem de erro, tem de descarregar o "net framework 4.0" da microsoft.
+			</p>
+			<h1>Configuração da DB</h1>
+			<p>
+			Nos campos server, port, userdb, password, vocês tem de preencher os valores necessarios para que a aplicação
+			consegue se ligar a vossa DB postgresql.
+			Os valores aqui inseridos correspondem aos valores por defeitos (ver os valores ao passar o rato em cima do "i").
+			</p>
+			<p>
+			O campo databse corresponde ao nome da vossa base de dados do vosso tracker.
+			</p>
+			<p>
+			<img src="images/DB.jpg"><br/>
+			</p>
+			<p>
+			Depois de ter preenchido todos os campos, clicar em test e se tiver tudo bem vão obter essa mensagem e a applicação vai se fechar.
+			</p>
+			<p><img src="images/db_ok.jpg"><br/></p>
+			<p>
+			Em caso contrario verificar os dados inseridos, mas em particular o nome da base de dados.
+			</p>
+			<p>
+			Abrir de novo a aplicação, e agora vão poder inserir o vosso nickname da room onde jogam ou o alias criado no hem ou pt4
+			(se tiver tudo bem vão ter isso).
+			</p>
+			<p><img src="images/player.jpg"><br/></p>
+			<h1>Conf. Stop</h1>
+			<p>
+			No separador conf. stop vão poder configurar o stops.
+			Podem os confiugrar todos ou nenhum.
+			</p>
+			<p><img src="images/confstop.jpg"><br/></p>
+			<h4>Stoploss:</h4>
+			A partir de xx BBs negativos o som toca.
+			<h4>StoplossPeak:</h4>
+			Aqui é mais dificil a explicar, vamos ver se o povo entende.
+			Começamos uma sessão onde já estamos positivos de 200bs. Vamos agora supor que inseri 160 no campo over, neste caso o stoplosspeak comece
+			já entra em jogo por ter ultrapassados os 160. Vamos agora supor, que perdemos 180 dos 200, e que inseri 150 no stoplosspeak. Neste
+			caso perdi mais daquilo que inseri, os 150, logo o som começa a tocar.
+			<h4>StopHands:</h4>
+			A partir de xx hands o som toca.
+			<h4>StopTime:</h4>
+			A partir de xx minutos o som toca.(inserir em minutos).
+			<h4>StopWin:</h4>
+			A partir de xx BBs positivos o som toca.
+			<h4>Resume on Stop:</h4>
+			Se metemos o visto, ao fim da sessão, depois de clicar em stop vamos ser redireccionados para o separador resume session onde
+			vai estar o resume da sessão que jogamos.
+			<h4>Hide BBs:</h4>
+			Permite de esconder os bbs da janela que aparece depois de clicar em start.
+			<h4>Close Skype:</h4>
+			Se ativo, fecha o skype.
+			<h4>Active button set:</h4>
+			Permite de ativar o botão "set" que permite reajustar os valores de stop durante a sessão.
+			<h4>Sounds:</h4>
+			Permite de definir os sons (só *.wav).
+			<h1>Resume Session</h1>
+			Faz um resumo da sessão que acabaram de realizar e dos melhores resultados positivos ou negativos desde que tenham o stoploss.
+			<p><img src="images/resumesession.jpg"><br/></p>
+			<h1>Start</h1>
+			Start para começar.<br/>
+			Se gostem não se esqueçam de um pequeno donativo.<br/>
+			Feedback para enviar um critica ou sugestão.
+			<p><img src="images/start2.jpg"><br/></p>
+			<h1>Durante a sessão</h1>
+			<p><img src="images/session.jpg"><br/></p>
+			Se vocês desativaram "hide session" ao passar o rato onde tem o "0" como na imgem, aí vai ser mostrados os BBs ganhos ou perdidos durante
+			a sessãoa atual.
+			<h4>Hands:</h4>
+			Numero de mãos jogadas na sessão.
+			<h4>Tempo:</h4>
+			O tempo que passou desde o inicio da sessão. Ao cliar no tempo, o tempo para. Exemplo: sitout.
+			<h4>Set:</h4>
+			Permite reajustar os valores dos stops.
+			<h4>Stop:</h4>
+			Parar a sessão.
+			
+		</div>		
+    </body>
+</html>
