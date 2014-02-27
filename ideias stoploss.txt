@@ -1,2 +1,0 @@
-- changer le dossier des fichier de config
-- activer ou non le bouton set ok

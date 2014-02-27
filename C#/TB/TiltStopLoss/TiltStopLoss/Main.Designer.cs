@@ -56,6 +56,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPlayer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBoxCheckBoxButtonSet = new System.Windows.Forms.PictureBox();
+            this.checkBoxButtonSet = new System.Windows.Forms.CheckBox();
+            this.label28 = new System.Windows.Forms.Label();
             this.pictureBoxStopTime = new System.Windows.Forms.PictureBox();
             this.pictureBoxCloseSkype = new System.Windows.Forms.PictureBox();
             this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
@@ -109,9 +112,7 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
-            this.label28 = new System.Windows.Forms.Label();
-            this.checkBoxButtonSet = new System.Windows.Forms.CheckBox();
-            this.pictureBoxCheckBoxButtonSet = new System.Windows.Forms.PictureBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTracker)).BeginInit();
@@ -122,6 +123,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxServer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckBoxButtonSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStopTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHideBbbs)).BeginInit();
@@ -129,7 +131,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResumeSession)).BeginInit();
             this.tabResumeSession.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckBoxButtonSet)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -146,6 +147,7 @@
             // 
             // tabDatabase
             // 
+            this.tabDatabase.Controls.Add(this.linkLabel1);
             this.tabDatabase.Controls.Add(this.pictureBoxTracker);
             this.tabDatabase.Controls.Add(this.pictureBoxPassword);
             this.tabDatabase.Controls.Add(this.pictureBoxUserDb);
@@ -478,6 +480,36 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pictureBoxCheckBoxButtonSet
+            // 
+            this.pictureBoxCheckBoxButtonSet.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCheckBoxButtonSet.Image")));
+            this.pictureBoxCheckBoxButtonSet.Location = new System.Drawing.Point(295, 244);
+            this.pictureBoxCheckBoxButtonSet.Name = "pictureBoxCheckBoxButtonSet";
+            this.pictureBoxCheckBoxButtonSet.Size = new System.Drawing.Size(26, 20);
+            this.pictureBoxCheckBoxButtonSet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxCheckBoxButtonSet.TabIndex = 40;
+            this.pictureBoxCheckBoxButtonSet.TabStop = false;
+            this.pictureBoxCheckBoxButtonSet.MouseHover += new System.EventHandler(this.pictureBoxCheckBoxButtonSet_MouseHover);
+            // 
+            // checkBoxButtonSet
+            // 
+            this.checkBoxButtonSet.AutoSize = true;
+            this.checkBoxButtonSet.Location = new System.Drawing.Point(166, 251);
+            this.checkBoxButtonSet.Name = "checkBoxButtonSet";
+            this.checkBoxButtonSet.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxButtonSet.TabIndex = 39;
+            this.checkBoxButtonSet.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(21, 251);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(122, 13);
+            this.label28.TabIndex = 38;
+            this.label28.Text = "Activate button set?";
             // 
             // pictureBoxStopTime
             // 
@@ -1044,35 +1076,17 @@
             this.toolTipHelpText.InitialDelay = 100;
             this.toolTipHelpText.ReshowDelay = 20;
             // 
-            // label28
+            // linkLabel1
             // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(21, 251);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(122, 13);
-            this.label28.TabIndex = 38;
-            this.label28.Text = "Activate button set?";
-            // 
-            // checkBoxButtonSet
-            // 
-            this.checkBoxButtonSet.AutoSize = true;
-            this.checkBoxButtonSet.Location = new System.Drawing.Point(166, 251);
-            this.checkBoxButtonSet.Name = "checkBoxButtonSet";
-            this.checkBoxButtonSet.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxButtonSet.TabIndex = 39;
-            this.checkBoxButtonSet.UseVisualStyleBackColor = true;
-            // 
-            // pictureBoxCheckBoxButtonSet
-            // 
-            this.pictureBoxCheckBoxButtonSet.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCheckBoxButtonSet.Image")));
-            this.pictureBoxCheckBoxButtonSet.Location = new System.Drawing.Point(295, 244);
-            this.pictureBoxCheckBoxButtonSet.Name = "pictureBoxCheckBoxButtonSet";
-            this.pictureBoxCheckBoxButtonSet.Size = new System.Drawing.Size(26, 20);
-            this.pictureBoxCheckBoxButtonSet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxCheckBoxButtonSet.TabIndex = 40;
-            this.pictureBoxCheckBoxButtonSet.TabStop = false;
-            this.pictureBoxCheckBoxButtonSet.MouseHover += new System.EventHandler(this.pictureBoxCheckBoxButtonSet_MouseHover);
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(19, 283);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(37, 16);
+            this.linkLabel1.TabIndex = 29;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Help";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // Main
             // 
@@ -1096,6 +1110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckBoxButtonSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStopTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseSkype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHideBbbs)).EndInit();
@@ -1105,7 +1120,6 @@
             this.tabResumeSession.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckBoxButtonSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1199,6 +1213,7 @@
         private System.Windows.Forms.PictureBox pictureBoxCheckBoxButtonSet;
         private System.Windows.Forms.CheckBox checkBoxButtonSet;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 
