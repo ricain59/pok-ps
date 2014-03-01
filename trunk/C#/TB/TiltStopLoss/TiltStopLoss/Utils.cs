@@ -210,12 +210,12 @@ namespace TiltStopLoss
         /// <summary>
         /// close skype
         /// </summary>
-        public void detectApps()
+        public void detectApps(String nameprocess)
         {
             // Is running
             try
             {
-                foreach (Process proc in Process.GetProcessesByName("Skype"))
+                foreach (Process proc in Process.GetProcessesByName(nameprocess))
                 {
                     proc.Kill();
                 }
@@ -295,5 +295,47 @@ namespace TiltStopLoss
                 }
             }
         }
+
+        /// <summary>
+        /// get limit of hand PS
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <returns></returns>
+        public Int16 getNlPs(String hand)
+        {
+            if (hand.Contains("0.02/") && hand.Contains("0.05"))
+            {
+                return 5;
+            }
+            if (hand.Contains("0.05/") && hand.Contains("0.10"))
+            {
+                return 10;
+            }
+            if (hand.Contains("0.08/") && hand.Contains("0.16"))
+            {
+                return 16;
+            }
+            if (hand.Contains("0.10/") && hand.Contains("0.25"))
+            {
+                return 25;
+            }
+            if (hand.Contains("0.25/") && hand.Contains("0.50"))
+            {
+                return 50;
+            }
+            if (hand.Contains("0.50/") && hand.Contains("1.00"))
+            {
+                return 100;
+            }
+            if (hand.Contains("1/") && hand.Contains("2"))
+            {
+                return 200;
+            }
+            if (hand.Contains("2.50/") && hand.Contains("5.00"))
+            {
+                return 500;
+            }
+            return 0;
+        } 
     }
 }
