@@ -40,8 +40,9 @@ namespace TiltStopLoss
         private String[] sounds;
         Double bbmax;
         private Boolean sitout = true;
+        private Int32 blocklimit;
 
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, Boolean buttonset, String[] sound, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, Boolean buttonset, Int32 limit, String[] sound, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -55,6 +56,7 @@ namespace TiltStopLoss
             this.peakover = new Utils().stringtoDouble(data[5]);
             this.tracker = tracker;
             sounds = sound;
+            blocklimit = limit;
             if (hidebb)
             {
                 labelBb.Enabled = false;
@@ -151,6 +153,8 @@ namespace TiltStopLoss
                     bbinit += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
                 }
                 lastidsessionpt4 = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
+                //vou buscar o last idhand de pt4
+                lastidhand = dbase.getLastValue("cash_hand_histories", "id_hand") + 1;
             }
 
             //aqui é feito o resto dos calculos e das diferenças
@@ -317,14 +321,61 @@ namespace TiltStopLoss
                             labelStopSet("!!!! StopHand !!!!", Color.Blue);
                         }
                     }
-                    Thread.Sleep(500);
+                    //stoplimit
+                    if (blocklimit != 0)
+                    {
+                        stopLimit(hand);
+                    }
+                    Thread.Sleep(250);
                 }
             }
             catch (Exception ex)
             {
                 new Debug().LogMessage(ex.ToString());
             }
-        }        
+        }
+
+        /// <summary>
+        /// stoplimit for brm
+        /// </summary>
+        /// <param name="hand"></param>
+        private void stopLimit(String hand)
+        {
+            Int16 nl = 0;
+            for (int i = 0; i < playeridname.Count; i++)
+            {
+                if (hand.Contains(playeridname[i].Item2))
+                {
+                    if (hand.ToLower().Contains("pokerstars") && !hand.ToLower().Contains("tournament"))
+                    {
+                        nl = new Utils().getNlPs(hand);
+                        if (nl.Equals(0))
+                        {
+                            new Debug().LogAlert("Problem limit not defined", "Problem_Limit");
+                        }
+                        else
+                        {
+                            //je vérifie si la limite rendu é supériru a la limite accepter
+                            if (nl > blocklimit)
+                            {
+                                //aqui apita e change le text du label
+                                if (!stop)
+                                {
+                                    player = new Utils().playsound(sounds[0]);
+                                    player.PlayLooping();
+                                }
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopLoss !!!!", Color.Red);
+                                //close poker stars
+                                new Utils().detectApps("PokerStars");
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
 
         /// <summary>
         /// cronometro do tempo da sessão e para o stop time

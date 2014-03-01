@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.52;
+        private Double version = 1.53;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -44,13 +44,16 @@ namespace TiltStopLoss
             new Utils().changeFileConfig();
             //aqui vou ver se existe update ou não
             checkupdate();
+            //por defeito a combobox no NO
+            comboBoxBRM.SelectedIndex = 0;
+            //depois disso volto ao soft caso diz que não
+            loadconfig();
             //abro no separador conf stop se já foi configurado a DB
             if (!textBoxPlayer.Text.Equals(""))
             {
                 tabControlMain.SelectedIndex = 1;
             }
-            //depois disso volto ao soft caso diz que não
-            loadconfig();
+            //o resto
             start = false;
             db.getData(textBoxUser.Text, textBoxServer.Text, textBoxPort.Text, textBoxPass.Text, textBoxDb.Text, textBoxPlayer.Text);
             textBoxPlayer.Enabled = false;
@@ -150,7 +153,7 @@ namespace TiltStopLoss
             {
                 if (checkBoxCloseSkype.Checked)
                 {
-                    new Utils().detectApps();
+                    new Utils().detectApps("Skype");
                 }
 
                 if (!stop)
@@ -178,6 +181,17 @@ namespace TiltStopLoss
                         //em vez de mandar só string crio um array do que preciso
                         String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text };
                         String[] sounds = { soundloss, soundtime, soundwin, soundhands };
+                        //para o limit
+                        Int32 limit;
+                        if (comboBoxBRM.SelectedIndex == 0)
+                        {
+                            limit = 0;
+                        }
+                        else
+                        {
+                            limit = new Utils().stringtoInt32(comboBoxBRM.SelectedItem.ToString());
+                        }
+                        //
                         if (checkBoxHem1.Checked || checkBoxHem2.Checked)
                         {
                             if (checkBoxHem1.Checked)//hem1
@@ -193,7 +207,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, sounds, 1);
+                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, limit, sounds, 1);
                             }
                             else //hem2
                             {
@@ -208,7 +222,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, sounds, 2);
+                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, limit, sounds, 2);
                             }
                         }
                         else //pt4
@@ -223,7 +237,7 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, sounds, 4);
+                            sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, limit, sounds, 4);
                         }
                         sl.Show();                        
                     }
@@ -414,6 +428,9 @@ namespace TiltStopLoss
                         checkBoxButtonSet.Checked = false;
                     }
                     break;
+                case "ComboboxBRM":
+                    comboBoxBRM.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
+                    break;                    
                 default:
                     break;
             }
@@ -483,14 +500,12 @@ namespace TiltStopLoss
             w.Write("historybbsmax=" + histbbsmax.ToString());
             w.WriteLine();
             w.Write("Buttonset=" + checkBoxButtonSet.Checked.ToString());
-            w.WriteLine();            
+            w.WriteLine();
+            w.Write("ComboboxBRM=" + comboBoxBRM.SelectedIndex);
+            w.WriteLine(); 
             w.Close();
             //test
-           
-
         }
-
-        
 
         #endregion
 
@@ -857,6 +872,11 @@ namespace TiltStopLoss
             toolTipHelpText.SetToolTip(this.pictureBoxCheckBoxButtonSet, "If checked hide button set on next window");
         }
 
+        private void pictureBoxBlockLimit_MouseHover(object sender, EventArgs e)
+        {
+            toolTipHelpText.SetToolTip(this.pictureBoxBlockLimit, "If limit playing above limit selected close imediately lobby PokerStars");
+        }
+
         #endregion
 
         /// <summary>
@@ -908,11 +928,18 @@ namespace TiltStopLoss
             System.Diagnostics.Process.Start("mailto:stoploss59@gmail.com");
         }
 
+        /// <summary>
+        /// Link to help browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             String pathfinal = Directory.GetCurrentDirectory();
             System.Diagnostics.Process.Start(pathfinal + "/help/header.html");
         }
+
+        
 
     }
 }
