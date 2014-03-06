@@ -211,11 +211,11 @@ namespace TiltStopLoss
                             if (!stop)
                             {
                                 player = new Utils().playsound(sounds[0]);
-                                player.PlayLooping();                                
-                            }
-                            stop = true;
-                            //buttonSoundStop.Visible = true;
-                            labelStopSet("!!!! StopLoss !!!!", Color.Red);
+                                player.PlayLooping();
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopLoss !!!!", Color.Red);
+                            }                            
                         }
                     }
                     if (stopwin > 0.0)
@@ -226,10 +226,10 @@ namespace TiltStopLoss
                             {
                                 player = new Utils().playsound(sounds[2]);
                                 player.PlayLooping();
-                            }
-                            stop = true;
-                            //buttonSoundStop.Visible = true;
-                            labelStopSet("!!!! StopWin !!!!", Color.Green);
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopWin !!!!", Color.Green);
+                            }                            
                         }
                     }
                     if (bbpeak > 0.0)
@@ -246,10 +246,10 @@ namespace TiltStopLoss
                                 {
                                     player = new Utils().playsound(sounds[0]);
                                     player.PlayLooping();
-                                }
-                                stop = true;
-                                //buttonSoundStop.Visible = true;
-                                labelStopSet("!!!! StopPeak !!!!", Color.Red);
+                                    stop = true;
+                                    //buttonSoundStop.Visible = true;
+                                    labelStopSet("!!!! StopPeak !!!!", Color.Red);
+                                }                                
                             }
                         }
                     }                    
@@ -315,10 +315,10 @@ namespace TiltStopLoss
                             {
                                 player = new Utils().playsound(sounds[3]);
                                 player.PlayLooping();
-                            }
-                            stop = true;
-                            //buttonSoundStop.Visible = true;
-                            labelStopSet("!!!! StopHand !!!!", Color.Blue);
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopHand !!!!", Color.Blue);
+                            }                            
                         }
                     }
                     //stoplimit
@@ -441,10 +441,10 @@ namespace TiltStopLoss
                             {
                                 player = new Utils().playsound(sounds[1]);
                                 player.PlayLooping();
-                            }
-                            stop = true;
-                            //buttonSoundStop.Visible = true;
-                            labelStopSet("!!!! StopTime !!!!", Color.Black);
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopTime !!!!", Color.Black);
+                            }                            
                         }
                     }
                 }

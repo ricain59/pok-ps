@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.53;
+        private Double version = 1.54;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -34,6 +34,8 @@ namespace TiltStopLoss
         private Int32 histhands = 0;
         private Int32 histtime = 0;
         private Double histbbsmax = 0;
+        //mouse
+        private String help;
         
         public Main()
         {
@@ -46,6 +48,7 @@ namespace TiltStopLoss
             checkupdate();
             //por defeito a combobox no NO
             comboBoxBRM.SelectedIndex = 0;
+            comboBoxLanguage.SelectedIndex = 0;
             //depois disso volto ao soft caso diz que não
             loadconfig();
             //abro no separador conf stop se já foi configurado a DB
@@ -430,7 +433,10 @@ namespace TiltStopLoss
                     break;
                 case "ComboboxBRM":
                     comboBoxBRM.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
-                    break;                    
+                    break;
+                case "ComboboxLanguage":
+                    comboBoxLanguage.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
+                    break; 
                 default:
                     break;
             }
@@ -502,7 +508,9 @@ namespace TiltStopLoss
             w.Write("Buttonset=" + checkBoxButtonSet.Checked.ToString());
             w.WriteLine();
             w.Write("ComboboxBRM=" + comboBoxBRM.SelectedIndex);
-            w.WriteLine(); 
+            w.WriteLine();
+            w.Write("ComboboxLanguage=" + comboBoxLanguage.SelectedIndex);
+            w.WriteLine();             
             w.Close();
             //test
         }
@@ -800,85 +808,6 @@ namespace TiltStopLoss
 
         #endregion
 
-        #region Help mouse over image
-
-        private void pictureBoxPlayer_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxPlayer, "First fill database and after software close, re-open and fill this.\r\nAccept Alias hem and pt4");
-        }
-
-        private void pictureBoxTracker_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxTracker, "Choose your tracker");
-        }
-
-        private void pictureBoxServer_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxServer, "Default: 127.0.0.1");
-        }
-
-        private void pictureBoxPort_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxPort, "Default: 5432");
-        }
-
-        private void pictureBoxDatabase_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxDatabase, "Name Database Tracker (click on database on tracker)");
-        }
-
-        private void pictureBoxUserDb_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxUserDb, "Default: postgres");
-        }
-
-        private void pictureBoxPassword_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxPassword, "Default: postgrespass or dbpass");
-        }
-
-        private void pictureBoxResumeSession_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxResumeSession, "If checked resume session on stop");
-        }
-
-        private void pictureBoxLossPeak_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxLossPeak, "Difference between max win session and bb actual.\r\nOnly if peak session => over.\r\nIf peak defined, over also");
-        }
-
-        private void pictureBoxHideBbbs_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxHideBbbs, "If checked, not show BBs on mouse over");
-        }
-
-        private void pictureBoxCloseSkype_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxCloseSkype, "If checked close Skype");
-        }
-
-        private void pictureBoxStopTime_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxStopTime, "Click on time allows stop timer in case of sitout");
-        }
-
-        private void linkLabelFeedback_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.linkLabelFeedback, "Mailto: stoploss59@gmail.com");
-        }
-
-        private void pictureBoxCheckBoxButtonSet_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxCheckBoxButtonSet, "If checked hide button set on next window");
-        }
-
-        private void pictureBoxBlockLimit_MouseHover(object sender, EventArgs e)
-        {
-            toolTipHelpText.SetToolTip(this.pictureBoxBlockLimit, "If limit playing above limit selected close imediately lobby PokerStars");
-        }
-
-        #endregion
-
         /// <summary>
         /// Code for donate
         /// </summary>
@@ -933,13 +862,104 @@ namespace TiltStopLoss
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             String pathfinal = Directory.GetCurrentDirectory();
-            System.Diagnostics.Process.Start(pathfinal + "/help/header.html");
+            System.Diagnostics.Process.Start(pathfinal + help);
         }
 
-        
+        /// <summary>
+        /// le choix de la langue plus facil dans le soft.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxLanguage.SelectedIndex == 0)//english
+            {
+                linkLabelHelp.Text = "Help";
+                labelPlayer.Text = "Player";
+                labelServer.Text = "Server";
+                labelPort.Text = "Port";
+                labelDb.Text = "DataBase";
+                labelUserDb.Text = "UserDb";
+                labePassword.Text = "Password";
+                labelTitleDB.Text = "Database Config";
+                help = "/help/header_en.html";
+                labelStoploss.Text = "StopLoss";
+                labelStopLossPeak.Text = "StopLossPeak";
+                labelBbOver.Text = "BBs Over";
+                labelStophands.Text = "StopHands";
+                labelStopTime.Text = "StopTime";
+                labelStopWin.Text = "StopWin";
+                labelResumeOnStop.Text = "Resume on Stop";
+                labelHideBbs.Text = "Hide BBs";
+                labelCloseSkype.Text = "Close Skype?";
+                labelActiveSet.Text = "Activate Button Set?";
+                labelBrm.Text = "Block Limit Above";
+                buttonChoiceSounds.Text = "Sounds";
+                labelInfo.Text = "For the moment, BRM block only works with pokerstars.com\r\n" +
+                                 "NoLimit because only play in this room and nolimit.\r\n" +
+                                 "For more room and limit, send me HH (3 or 4 hands only and can\r\n" +
+                                 "change name player) and i can try compatible.";
+            }
+            if (comboBoxLanguage.SelectedIndex == 1)//french
+            {
+                linkLabelHelp.Text = "Aide";
+                labelPlayer.Text = "Joueur";
+                labelServer.Text = "Serveur";
+                labelPort.Text = "Port";
+                labelDb.Text = "Base de Donnée";
+                labelUserDb.Text = "Utilisateur BD";
+                labePassword.Text = "Mot de passe";
+                labelTitleDB.Text = "Conf. Base de Donnée";
+                help = "/help/header_fr.html";
+                labelStoploss.Text = "StopPerte";
+                labelStopLossPeak.Text = "StopPertePic";
+                labelBbOver.Text = "BBs au dessus de";
+                labelStophands.Text = "StopMains";
+                labelStopTime.Text = "StopTemps";
+                labelStopWin.Text = "StopGain";
+                labelResumeOnStop.Text = "Resumé de session";
+                labelHideBbs.Text = "Cacher les BBs";
+                labelCloseSkype.Text = "Fermer Skype?";
+                labelActiveSet.Text = "Activer Bouton Set?";
+                labelBrm.Text = "Bloquer limite au dessus";
+                buttonChoiceSounds.Text = "Sons";
+                labelInfo.Text = "Pour l'instant cela fonctionne seulement avec pokerstars.com\r\n" +
+                                 "NoLimit car je ne joue que sur cette room.\r\n" +
+                                 "Pour plus de limite et de room envoyer moi une HH (3 or 4 mains suffit\r\n" +
+                                 "et vous pouvez changer les noms)";
+            }
+            if (comboBoxLanguage.SelectedIndex == 2)//portugues
+            {
+                linkLabelHelp.Text = "Ajuda";
+                labelPlayer.Text = "Jogador";
+                labelServer.Text = "Servidor";
+                labelPort.Text = "Porta";
+                labelDb.Text = "Base Dados";
+                labelUserDb.Text = "Utilizador BD";
+                labePassword.Text = "Palavra passe";
+                labelTitleDB.Text = "Conf. Base Dados";
+                help = "/help/header_pt.html";
+                labelStoploss.Text = "StopPercas";
+                labelStopLossPeak.Text = "StopPercasPico";
+                labelBbOver.Text = "BBs acima de";
+                labelStophands.Text = "StopMãos";
+                labelStopTime.Text = "StopTempo";
+                labelStopWin.Text = "StopGanhos";
+                labelResumeOnStop.Text = "Resumir a sessão";
+                labelHideBbs.Text = "Esconder os BBs";
+                labelCloseSkype.Text = "Fechar Skype?";
+                labelActiveSet.Text = "Ativar botão Set?";
+                labelBrm.Text = "Bloquear limite acima";
+                buttonChoiceSounds.Text = "Sons";
+                labelInfo.Text = "Por enquanto só funcionas com a pokerstars.com\r\n" +
+                                 "NoLimit porque só jogo nessa room.\r\n" +
+                                 "Para mais room e limites envia me 3 ou 4 maõs\r\n" +
+                                 "podem mudar os nomes";
+            }
+        }
 
     }
 }
