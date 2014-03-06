@@ -1,2 +1,1 @@
-- BRM
-- como guardar os dados.
+- rajouter le fait que si on redescend en dessous du seuil stopper le son

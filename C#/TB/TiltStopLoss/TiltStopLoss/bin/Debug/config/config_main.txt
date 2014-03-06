@@ -1,4 +1,4 @@
-Location=733,298
+Location=2038,166
 Player=hulkric59
 Server=127.0.0.1
 Port=5432
@@ -28,4 +28,5 @@ historytimer=60
 historyhands=10
 historybbsmax=1,1
 Buttonset=False
-ComboboxBRM=1
+ComboboxBRM=9
+ComboboxLanguage=2

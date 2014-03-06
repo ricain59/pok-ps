@@ -76,7 +76,8 @@ namespace TiltStopLoss
             }
             catch (Exception msg)
             {
-                return msg.ToString();
+                String[] error = msg.ToString().Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                return error[1].ToString();
             }
         }
 
