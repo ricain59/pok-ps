@@ -48,29 +48,57 @@ namespace PS
 
         public String getNL(String hand)
         {
+            //only nl200
+            String[] temp = hand.Split('(');
+            String[] temp2 = temp[1].ToString().Split(')');
+
+            if (hand.Contains("0.01/") && hand.Contains("0.02"))
+            {
+                return "2";
+            }
             if (hand.Contains("0.02/") && hand.Contains("0.05"))
             {
-                return "nl5";
+                return "5";
             }
-            if(hand.Contains("0.05/") && hand.Contains("0.10"))
+            if (hand.Contains("0.05/") && hand.Contains("0.10"))
             {
-                return "nl10";
-            }             
+                return "10";
+            }
             if (hand.Contains("0.08/") && hand.Contains("0.16"))
             {
-                return "nl16";
+                return "16";
+            }
+            if (hand.Contains("0.10/") && hand.Contains("0.20"))
+            {
+                return "20";
             }
             if (hand.Contains("0.10/") && hand.Contains("0.25"))
             {
-                return "nl25";
+                return "25";
+            }
+            if (hand.Contains("0.15/") && hand.Contains("0.30"))
+            {
+                return "30";
             }
             if (hand.Contains("0.25/") && hand.Contains("0.50"))
             {
-                return "nl50";
+                return "50";
             }
-            if (hand.Contains("0.50/") && hand.Contains("1"))
+            if (hand.Contains("0.50/") && hand.Contains("1.00"))
             {
-                return "nl100";
+                return "100";
+            }
+            if (temp2[0].Contains("1/") && temp2[0].Contains("2") && !temp2[0].Contains("."))
+            {
+                return "200";
+            }
+            if (temp2[0].Contains("2/") && temp2[0].Contains("4") && !temp2[0].Contains("."))
+            {
+                return "400";
+            }
+            if (hand.Contains("2.50/") && hand.Contains("5.00"))
+            {
+                return "500";
             }
             return "_";
         }
