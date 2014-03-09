@@ -408,10 +408,12 @@
             "5",
             "10",
             "16",
+            "20",
             "25",
             "50",
             "100",
             "200",
+            "400",
             "500"});
             this.comboBoxBRM.Location = new System.Drawing.Point(161, 270);
             this.comboBoxBRM.Name = "comboBoxBRM";

@@ -303,6 +303,14 @@ namespace TiltStopLoss
         /// <returns></returns>
         public Int16 getNlPs(String hand)
         {
+            //only nl200
+            String[] temp = hand.Split('(');
+            String[] temp2 = temp[1].ToString().Split(')');
+            
+            if (hand.Contains("0.01/") && hand.Contains("0.02"))
+            {
+                return 2;
+            }
             if (hand.Contains("0.02/") && hand.Contains("0.05"))
             {
                 return 5;
@@ -315,9 +323,17 @@ namespace TiltStopLoss
             {
                 return 16;
             }
+            if (hand.Contains("0.10/") && hand.Contains("0.20"))
+            {
+                return 20;
+            }
             if (hand.Contains("0.10/") && hand.Contains("0.25"))
             {
                 return 25;
+            }
+            if (hand.Contains("0.15/") && hand.Contains("0.30"))
+            {
+                return 30;
             }
             if (hand.Contains("0.25/") && hand.Contains("0.50"))
             {
@@ -327,9 +343,13 @@ namespace TiltStopLoss
             {
                 return 100;
             }
-            if (hand.Contains("1/") && hand.Contains("2"))
+            if (temp2[0].Contains("1/") && temp2[0].Contains("2") && !temp2[0].Contains("."))
             {
                 return 200;
+            }
+            if (temp2[0].Contains("2/") && temp2[0].Contains("4") && !temp2[0].Contains("."))
+            {
+                return 400;
             }
             if (hand.Contains("2.50/") && hand.Contains("5.00"))
             {

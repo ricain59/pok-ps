@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.54;
+        private Double version = 1.55;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -898,7 +898,7 @@ namespace TiltStopLoss
                 labelActiveSet.Text = "Activate Button Set?";
                 labelBrm.Text = "Block Limit Above";
                 buttonChoiceSounds.Text = "Sounds";
-                labelInfo.Text = "For the moment, BRM block only works with pokerstars.com\r\n" +
+                labelInfo.Text = "For the moment, BRM block only works with pokerstars\r\n" +
                                  "NoLimit because only play in this room and nolimit.\r\n" +
                                  "For more room and limit, send me HH (3 or 4 hands only and can\r\n" +
                                  "change name player) and i can try compatible.";
@@ -926,7 +926,7 @@ namespace TiltStopLoss
                 labelActiveSet.Text = "Activer Bouton Set?";
                 labelBrm.Text = "Bloquer limite au dessus";
                 buttonChoiceSounds.Text = "Sons";
-                labelInfo.Text = "Pour l'instant cela fonctionne seulement avec pokerstars.com\r\n" +
+                labelInfo.Text = "Pour l'instant cela fonctionne seulement avec pokerstars\r\n" +
                                  "NoLimit car je ne joue que sur cette room.\r\n" +
                                  "Pour plus de limite et de room envoyer moi une HH (3 or 4 mains suffit\r\n" +
                                  "et vous pouvez changer les noms)";
@@ -954,7 +954,7 @@ namespace TiltStopLoss
                 labelActiveSet.Text = "Ativar botão Set?";
                 labelBrm.Text = "Bloquear limite acima";
                 buttonChoiceSounds.Text = "Sons";
-                labelInfo.Text = "Por enquanto só funcionas com a pokerstars.com\r\n" +
+                labelInfo.Text = "Por enquanto só funcionas com a pokerstars\r\n" +
                                  "NoLimit porque só jogo nessa room.\r\n" +
                                  "Para mais room e limites envia me 3 ou 4 maõs\r\n" +
                                  "podem mudar os nomes";
