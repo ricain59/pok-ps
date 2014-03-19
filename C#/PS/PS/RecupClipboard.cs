@@ -45,7 +45,7 @@ namespace PS
 
         public String getDate()
         {
-            return DateTime.Now.ToString("yyyy_M_d_HH");
+            return DateTime.Now.ToString("yyyy_M_d");
         }
 
         [DllImport("user32.dll")]

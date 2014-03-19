@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>StopLoss - Help</title>
+		<style type="text/css">
+		/* For Mozilla only: create rounded corners */
+		#box {
+		  -moz-border-radius: 10px 10px 10px 10px;
+		}
+		</style>
+		<link href="newcss.css" rel="stylesheet" type="text/css" name="css">
+        <meta http-equiv="content-type" content="text/html;charset=UTF8">
+		
+	</head>
+	
+	<body>
+            
+        <div class="estrutura">	
+            <div id="banner">
+                &nbsp;
+            </div>			
+			<a href="header_fr.html">Français</a>
+			<a href="header_pt.html">Português</a>
+			<a href="header_en.html">English</a>
+			<br/>
+			
+			<h1>Démarrage</h1>
+			<p>
+			Dézipper le dossier stoploss a l'endroit souhaité.
+			Pour chaque actualisation future il suffira de dézipper par dessus votre ancien dossier stoploss
+			pour garder les configurations telles quelles.
+			</p>
+			<p>
+			Lancer l'application (StopLoss.exe):<br/>
+			<img src="images/start.jpg"><br/>
+			</p>
+			<p>
+			Si vous obtenez une erreur au lancement de l'appli, veuillez télécharger "net framework 4.0" de microsoft.
+			</p>
+			<h1>Configuration de la DB</h1>
+			<p>
+			Dans les champs "server", "port", "userdb", "password" vous devez renseigner les valeurs nécessaires pour que le soft
+			puisse se connecter à votre DB postgresql.
+			Les valeurs ici insérées correspondent aux valeurs par défaut:</p>
+			<p>Serveur: 127.0.0.1</p>
+			<p>Port: 5432</p>
+			<p>Base de Donnée: clicquer sur le trracker dans l'option database</p>
+			<p>Utilisateur BD: postgres</p>
+			<p>Mot de passe: postgrespass or dbpass</p>			
+			<p>
+			Le champ database correspond au nom de la base de donnée de votre tracker
+			</p>
+			<p>
+			<img src="images/DB.jpg"><br/>
+			</p>
+			<p>
+			Après avoir rempli tous les champs, cliquer sur test. Si c'est ok vous obtiendrez ce message et l'application se ferme.
+			</p>
+			<p><img src="images/db_ok.jpg"><br/></p>
+			<p>
+			En cas contraire, veuillez vérifier les données insérées, plus particulièrement le nom de la base de donnée.
+			</p>
+			<p>
+			Ré-ouvrir l'application, et désormais vous pourrez saisir le pseudo de la room où vous jouez ou votre
+			alias de hem ou pt4 (si tout est ok vous aurez ceci).
+			</p>
+			<p><img src="images/player.jpg"><br/></p>
+			<h1>Conf. Stop</h1>
+			<p>
+			Dans l'onglet conf. stop vous allez pouvoir configurer vos stop.
+			Ici vous pouvez tous les configurer ou aucun, à votre choix.
+			</p>
+			<p><img src="images/confstop.jpg"><br/></p>
+			<h4>Stoploss:</h4>
+			À partir de xx BBs négatif le son retentit.
+			<h4>StoplossPeak:</h4>
+			On commence notre session et, au bout d'un certain temps, on gagne 200bbs. Donc, si dans "over" on a mis 160bbs, le stoplosspeak commence à rentrer en
+			action (vu que 200 > 160). Maintenant, si je perd 180 bbs et que j'ai renseigné 150bbs dans "stoplosspeak", de 200 gagnés, je tombe à 20bbs.
+			Dans ce cas là, le son retentit car j'ai perdu  plus que les 150bbs définis dans "stoplosspeak".
+			<h4>StopHands:</h4>
+			À partir de xx hands le son retentit.
+			<h4>StopTime:</h4>
+			À partir de xx minutes le son retentit (insérer en minutes).
+			<h4>StopWin:</h4>
+			À partir de xx BBs positifs le son retentit.
+			<h4>Resume on Stop:</h4>
+			Si on coche, à la fin de la session, en cliquant sur stop on se verra amené vers l'onglet "resume session" où il y aura le résumé
+			de la session.
+			<h4>Hide BBs:</h4>
+			Permet de cacher les bbs dans la fenêtre qui apparaît après avoir cliqué sur start.
+			<h4>Close Skype:</h4>
+			En cochant, l'application ferme skype pour vous.
+			<h4>Active button set:</h4>
+			Permet d'activer le bouton "set" pour réajuster les valeurs des stop en cours de session.
+			<h4>Block Limit above:</h4>
+			Ceci permet de vous interdire de jouer une limite pour laqu'elle, selon votre BRM, vous ne devriez pas jouer.
+			Choisissez la limite maximal.
+			Room: pokerstars.
+			<h4>Sounds:</h4>
+			Permet de définir les sons souhaités(seulement des sons *.wav).
+			<h1>Resume Session</h1>
+			Cet onglet vous permettra d'avoir un résumé de votre session et de vos meilleurs résultats positifs et négatifs depuis que vous avez stoploss.
+			<p><img src="images/resumesession.jpg"><br/></p>
+			<h1>Start</h1>
+			Start pour commencer la session.<br/>
+			Si vous aimez le soft un petit don, merci.<br/>
+			En bas, vous avez aussi la possibilité d'envoyer un mail pour une critique ou suggestion.
+			<p><img src="images/start2.jpg"><br/></p>
+			<h1>Durant la session</h1>
+			<p><img src="images/session.jpg"><br/></p>
+			Si vous avez décoché la case "hide session" en passant votre souris où il y a le 0, comme dans l'image, cela affichera les BBs 
+			gagnés ou perdus pendant la session actuelle.
+			<h4>Hands:</h4>
+			Nombre de mains jouées pendant la session.
+			<h4>Temps:</h4>
+			Le temps écoulé et si vous cliquez sur le temps, celui-ci s'arrête. Exemple: quand vous êtes sit-out.
+			<h4>Set:</h4>
+			Si activé, permet de réajuster les valeurs de stop.
+			<h4>Stop:</h4>
+			Stopper la session.
+		</div>		
+    </body>
+</html>
