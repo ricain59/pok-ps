@@ -22,11 +22,11 @@ namespace PS
             }
             if (down)
             {
-                path = "E:/HH" + fdt + "_" + date + "_" + nl + "_up_" + txtzoom + "_"+vm+".txt";
+                path = "E:/HH" + fdt + "_" + date + "_NL" + nl + "_up_" + txtzoom + "_"+vm+".txt";
             }
             else
             {
-                path = "E:/HH" + fdt + "_" + date + "_" + nl + "_down_" + txtzoom + "_" + vm + ".txt";
+                path = "E:/HH" + fdt + "_" + date + "_NL" + nl + "_down_" + txtzoom + "_" + vm + ".txt";
             }
             
             //File file = new File("E:/HH" + fdt + "_" + date + ".txt");
