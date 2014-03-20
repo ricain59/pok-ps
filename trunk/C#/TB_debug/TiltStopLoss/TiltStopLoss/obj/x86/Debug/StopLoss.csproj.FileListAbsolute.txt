@@ -44,3 +44,5 @@ M:\Dropbox\taff et autre\pok-ps\C#\TB_debug\TiltStopLoss\TiltStopLoss\obj\x86\De
 M:\Dropbox\taff et autre\pok-ps\C#\TB_debug\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.Properties.Resources.resources
 M:\Dropbox\taff et autre\pok-ps\C#\TB_debug\TiltStopLoss\TiltStopLoss\obj\x86\Debug\TiltStopLoss.Stoploss.resources
 M:\Dropbox\taff et autre\pok-ps\C#\TB_debug\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.csproj.GenerateResource.Cache
+M:\Dropbox\taff et autre\pok-ps\C#\TB_debug\TiltStopLoss\TiltStopLoss\obj\x86\Debug\Interop.WMPLib.dll
+M:\Dropbox\taff et autre\pok-ps\C#\TB_debug\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.csproj.ResolveComReference.cache

@@ -68,7 +68,7 @@ namespace StopLoss
 
         private void chooseFile()
         {
-            openFileDialogSounds.Filter = "Sound Wave|*.wav";
+            openFileDialogSounds.Filter = "Sound Wave,MP3|*.wav;*.mp3";
             openFileDialogSounds.FileName = "";
             openFileDialogSounds.ShowDialog();
         }
