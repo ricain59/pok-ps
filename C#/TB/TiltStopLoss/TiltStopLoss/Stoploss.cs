@@ -28,7 +28,7 @@ namespace TiltStopLoss
         private Int64 handstop;
         private Int32 timestop;
         private Double stopwin;
-        System.Media.SoundPlayer player;
+        WMPLib.WindowsMediaPlayer player;
         Boolean stop = false;
         private int tracker;
         List<Tuple<String, String>> playeridname;
@@ -82,7 +82,7 @@ namespace TiltStopLoss
             continu = false;
             if (stop)
             {
-                player.Stop();
+                player.controls.stop();
             }
             String con = dbase.closeconDb();
             if (!con.Equals(""))
@@ -211,7 +211,6 @@ namespace TiltStopLoss
                             if (!stop)
                             {
                                 player = new Utils().playsound(sounds[0]);
-                                player.PlayLooping();
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopLoss !!!!", Color.Red);
@@ -225,7 +224,6 @@ namespace TiltStopLoss
                             if (!stop)
                             {
                                 player = new Utils().playsound(sounds[2]);
-                                player.PlayLooping();
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopWin !!!!", Color.Green);
@@ -245,7 +243,6 @@ namespace TiltStopLoss
                                 if (!stop)
                                 {
                                     player = new Utils().playsound(sounds[0]);
-                                    player.PlayLooping();
                                     stop = true;
                                     //buttonSoundStop.Visible = true;
                                     labelStopSet("!!!! StopPeak !!!!", Color.Red);
@@ -283,7 +280,36 @@ namespace TiltStopLoss
                             {
                                 if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
                                 {
-                                    handnumber++;                                    
+                                    Boolean fim = false;
+                                    //winamax
+                                    if (hand.ToLower().Contains("winamax"))
+                                    {
+                                        String[] handsplit = hand.ToLower().Split(new string[] { "pre-flop" }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (handsplit[1].Contains(playeridname[i].Item2))
+                                        {
+                                            handnumber++;
+                                            i = playeridname.Count;
+                                            fim = true;
+                                        }
+                                    }
+                                    //ipoker file xml
+                                    if (hand.ToLower().Contains("xml") && !fim)
+                                    {
+                                        String handnew = hand.Replace("\"", "");
+                                        String[] handsplit = handnew.Split(new string[] { "<round no=1>" }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (handsplit[1].Contains(playeridname[i].Item2))
+                                        {
+                                            handnumber++;
+                                            i = playeridname.Count;
+                                            fim = true;
+                                        }
+                                    }
+                                    //pokerstars.
+                                    if (!fim)
+                                    {
+                                        handnumber++;
+                                        i = playeridname.Count;
+                                    }
                                 }
                             }
                         }
@@ -314,7 +340,6 @@ namespace TiltStopLoss
                             if (!stop)
                             {
                                 player = new Utils().playsound(sounds[3]);
-                                player.PlayLooping();
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopHand !!!!", Color.Blue);
@@ -361,8 +386,7 @@ namespace TiltStopLoss
                                 //aqui apita e change le text du label
                                 if (!stop)
                                 {
-                                    player = new Utils().playsound(sounds[0]);
-                                    player.PlayLooping();
+                                    player = new Utils().playsound(sounds[0]);                                    
                                 }
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
@@ -440,7 +464,6 @@ namespace TiltStopLoss
                             if (!stop)
                             {
                                 player = new Utils().playsound(sounds[1]);
-                                player.PlayLooping();
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopTime !!!!", Color.Black);

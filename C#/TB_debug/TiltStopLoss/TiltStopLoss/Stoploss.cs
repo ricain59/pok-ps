@@ -282,42 +282,66 @@ namespace TiltStopLoss
                         hand = dbase.getHand(lastidhand, "cash_hand_histories", "id_hand", "history");//pt4
                     }
 
-
+                    
                     if (tracker == 1 || tracker == 2)
                     {
                         if (!hand.Equals(""))
                         {
-                            String icon_path = startupPath + subPath + "//" + ifile + ".txt";
-                            StreamWriter w = new StreamWriter(icon_path, true);
-                            w.Write("lastidhand = " + lastidhand);
+                            StreamWriter w = new StreamWriter(startupPath + subPath + "\\" + ifile + ".txt", true);
+                            w.Write("lastid = " + lastidhand);
+                            w.WriteLine();
+                            w.Write("hand = " + hand);
                             w.WriteLine();
                             
                             lastidhand++;
-
-                            Boolean fim = false;
                             for (int i = 0; i < playeridname.Count; i++)
                             {
-                                //debug melo
-                                
-                                w.Write("Player name = "+playeridname[i].Item2);
-                                w.WriteLine();
-
-                                //Regex.IsMatch("Hello1 Hello2", @"\bHello\b")
-                                //fin debug
-                                //if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
-                                if (Regex.IsMatch(hand, @"\b" + playeridname[i].Item2 + "\b") && !hand.Contains("Tournament"))
+                                if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
                                 {
-                                    handnumber++;
-                                    w.Write("hand = "+hand);
+                                    w.Write("Handnumner = " + handnumber);
                                     w.WriteLine();
-                                    fim = true;
-                                }
-                                if (fim)
-                                    break;
+                                    w.Write("playercount = " + playeridname.Count);
+                                    w.WriteLine();
+
+                                    Boolean fim = false;
+                                    //winamax
+                                    if (hand.ToLower().Contains("winamax"))
+                                    {
+                                        String[] handsplit = hand.ToLower().Split(new string[] { "pre-flop" }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (handsplit[1].Contains(playeridname[i].Item2))
+                                        {
+                                            handnumber++;
+                                            i = playeridname.Count;
+                                            fim = true;
+                                        }
+                                    }
+                                    //ipoker file xml
+                                    if (hand.ToLower().Contains("xml") && !fim)
+                                    {
+                                        String handnew = hand.Replace("\"", "");
+                                        String[] handsplit = handnew.Split(new string[] { "<round no=1>" }, StringSplitOptions.RemoveEmptyEntries);
+                                        if (handsplit[1].Contains(playeridname[i].Item2))
+                                        {
+                                            handnumber++;
+                                            i = playeridname.Count;
+                                            fim = true;
+                                        }
+                                    }
+                                    //pokerstars.
+                                    if(!fim)
+                                    {
+                                        handnumber++;
+                                        i = playeridname.Count;
+                                    }
+                                    w.Write("i = " + i);
+                                    w.WriteLine();
+
+
+
+
+                                    ifile++;
+                                }                                
                             }
-                            ifile++;
-                            w.Write("fim ciclo");
-                            w.WriteLine();
                             w.Close();
                         }
                     }

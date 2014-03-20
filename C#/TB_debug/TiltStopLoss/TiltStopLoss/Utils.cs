@@ -60,6 +60,12 @@ namespace TiltStopLoss
         {
             String path = Directory.GetCurrentDirectory();
             String filepath = path + "\\sounds\\" +sound;
+            WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+            wplayer.URL = filepath;
+            wplayer.settings.setMode("loop", true);
+            wplayer.controls.play(); 
+            
+            //mp3
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(filepath);
             //player.PlayLooping();            
             return player;
