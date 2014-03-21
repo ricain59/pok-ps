@@ -284,24 +284,28 @@ namespace TiltStopLoss
                                     //winamax
                                     if (hand.ToLower().Contains("winamax"))
                                     {
-                                        String[] handsplit = hand.ToLower().Split(new string[] { "pre-flop" }, StringSplitOptions.RemoveEmptyEntries);
+                                        fim = true;
+                                        String[] handsplit = hand.Split(new string[] { "PRE-FLOP" }, StringSplitOptions.RemoveEmptyEntries);
                                         if (handsplit[1].Contains(playeridname[i].Item2))
                                         {
                                             handnumber++;
                                             i = playeridname.Count;
-                                            fim = true;
                                         }
                                     }
                                     //ipoker file xml
                                     if (hand.ToLower().Contains("xml") && !fim)
                                     {
+                                        fim = true;
                                         String handnew = hand.Replace("\"", "");
-                                        String[] handsplit = handnew.Split(new string[] { "<round no=1>" }, StringSplitOptions.RemoveEmptyEntries);
-                                        if (handsplit[1].Contains(playeridname[i].Item2))
+                                        String[] handsplit = handnew.Split(new string[] { "round" }, StringSplitOptions.RemoveEmptyEntries);
+                                        for (int l = 1; l < handsplit.Count(); l++)
                                         {
-                                            handnumber++;
-                                            i = playeridname.Count;
-                                            fim = true;
+                                            if (handsplit[l].Contains(playeridname[i].Item2))
+                                            {
+                                                handnumber++;
+                                                i = playeridname.Count;
+                                                l = handsplit.Count();
+                                            }
                                         }
                                     }
                                     //pokerstars.
