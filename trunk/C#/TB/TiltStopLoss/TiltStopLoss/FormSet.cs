@@ -15,7 +15,7 @@ namespace StopLoss
     {
         private Stoploss sl;
         
-        public FormSet(Stoploss formsl, Double loss, Int64 hand, Int32 time, Double win, Double losspeak)
+        public FormSet(Stoploss formsl, Double loss, Int64 hand, Int32 time, Double win, Double losspeak, Double peakover, Boolean hidebb)
         {
             InitializeComponent();
             sl = formsl;
@@ -24,6 +24,15 @@ namespace StopLoss
             textBoxStopTime.Text = time.ToString();
             textBoxStopWin.Text = win.ToString();
             textBoxStopLossPeak.Text = losspeak.ToString();
+            textBoxPeakOver.Text = peakover.ToString();
+            if (hidebb)
+            {
+                checkBoxHideBbbs.Checked = true;
+            }
+            else
+            {
+                checkBoxHideBbbs.Checked = false;
+            }
             loadconfig();
         }
 
@@ -54,6 +63,11 @@ namespace StopLoss
             new Utils().onlynumeric(e);
         }
 
+        private void textBoxPeakOver_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
         #endregion
 
         /// <summary>
@@ -68,7 +82,8 @@ namespace StopLoss
             Int32 time = new Utils().stringtoInt32(textBoxStopTime.Text);
             Double win = new Utils().stringtoDouble(textBoxStopWin.Text);
             Double losspeak = new Utils().stringtoDouble(textBoxStopLossPeak.Text);
-            sl.setNewValue(hand, loss, time, win, losspeak);
+            Double peakover = new Utils().stringtoDouble(textBoxPeakOver.Text);
+            sl.setNewValue(hand, loss, time, win, losspeak, peakover, checkBoxHideBbbs.Checked);
             this.Close();
         }
 

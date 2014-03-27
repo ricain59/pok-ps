@@ -41,6 +41,7 @@ namespace TiltStopLoss
         Double bbmax;
         private Boolean sitout = true;
         private Int32 blocklimit;
+        private Boolean hidebb;
 
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, Boolean buttonset, Int32 limit, String[] sound, int tracker)
         {
@@ -57,6 +58,7 @@ namespace TiltStopLoss
             this.tracker = tracker;
             sounds = sound;
             blocklimit = limit;
+            this.hidebb = hidebb;
             if (hidebb)
             {
                 labelBb.Enabled = false;
@@ -100,8 +102,15 @@ namespace TiltStopLoss
             startbb.Abort();
             startcrono.Abort();
             
-            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString());
-            wmain.setValueSession(handnumber.ToString(), time, bb, bbmax);
+            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString(), peakover.ToString(), hidebb);
+            Double  bb100;
+            if(bb == 0)
+            {
+                bb100 = 0;
+            }else{
+                bb100 = Math.Round((bb * 100) / handnumber, 2);
+            }
+            wmain.setValueSession(handnumber.ToString(), time, bb, bbmax, bb100);
             wmain.Visible = true;            
         }
 
@@ -587,7 +596,7 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void buttonSet_Click(object sender, EventArgs e)
         {
-            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop, stopwin, bbpeak);
+            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop, stopwin, bbpeak, peakover, this.hidebb);
             fs.Show();
         }
 
@@ -597,13 +606,26 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(Int64 hand, Double loss, Int32 time, Double win, Double losspeak)
+        public void setNewValue(Int64 hand, Double loss, Int32 time, Double win, Double losspeak, Double peakover, Boolean hidebb)
         {
             this.timestop = time;
             this.handstop = hand;
             this.stoploss = loss;
             this.stopwin = win;
             this.bbpeak = losspeak;
+            this.peakover = peakover;
+            if (hidebb)
+            {
+                this.hidebb = true;
+                labelBb.Enabled = false;
+                labelBb.Visible = false;
+            }
+            else
+            {
+                labelBb.Enabled = true;
+                labelBb.Visible = true;
+                this.hidebb = false;
+            }
         }
 
         /// <summary>

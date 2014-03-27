@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.57;
+        private Double version = 1.59;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -64,7 +64,7 @@ namespace TiltStopLoss
             {
                 textBoxPlayer.Enabled = true;
                 fillTextboxPlayer();
-            }          
+            }            
         }
 
         /// <summary>
@@ -272,6 +272,14 @@ namespace TiltStopLoss
                     configframe(array);
                 }
                 file.Close();
+            }
+            else
+            {
+                //aqui vou por uma form a pedir a lingua
+                //this.Visible = false;
+                FormInit fi = new FormInit(this);
+                fi.Show();
+                //depois ao voltar do form peço se querem ver a ajuda                
             }
         }
 
@@ -590,13 +598,22 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(String hand, String loss, String time, String win, String losspeak)
+        public void setNewValue(String hand, String loss, String time, String win, String losspeak, String peakover, Boolean hidebb)
         {
             textBoxStopLoss.Text = loss;
             textBoxStopHand.Text = hand;
             textBoxStopTime.Text = time;
             textBoxStopWin.Text = win;
-            textBoxStopLossPeak.Text = losspeak;            
+            textBoxStopLossPeak.Text = losspeak;
+            textBoxPeakOver.Text = peakover;
+            if (hidebb)
+            {
+                checkBoxHideBbbs.Checked = true;
+            }
+            else
+            {
+                checkBoxHideBbbs.Checked = false;
+            }
         }
 
         /// <summary>
@@ -605,7 +622,7 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setValueSession(String hand, String time, Double bbs, Double bbmax)
+        public void setValueSession(String hand, String time, Double bbs, Double bbmax, Double bb100)
         {
             if (resumesession)
             {
@@ -635,6 +652,18 @@ namespace TiltStopLoss
                     textBoxRsBbs.Text = bbs.ToString();
                     textBoxRsBbs.ForeColor = Color.Green;
                     labelSessionBBs.ForeColor = Color.Green;
+                }
+                if (bb100 < 0)
+                {
+                    textBoxbb100.Text = bb100.ToString();
+                    textBoxbb100.ForeColor = Color.Red;
+                    labelbb100.ForeColor = Color.Red;
+                }
+                else
+                {
+                    textBoxbb100.Text = bb100.ToString();
+                    textBoxbb100.ForeColor = Color.Green;
+                    labelbb100.ForeColor = Color.Green;
                 }
                 tabControlMain.SelectedIndex = 2;
             }
@@ -878,6 +907,7 @@ namespace TiltStopLoss
             if (comboBoxLanguage.SelectedIndex == 0)//english
             {
                 linkLabelHelp.Text = "Help";
+                linkLabelHelp2.Text = "Help";
                 labelPlayer.Text = "Player";
                 labelServer.Text = "Server";
                 labelPort.Text = "Port";
@@ -898,14 +928,14 @@ namespace TiltStopLoss
                 labelActiveSet.Text = "Activate Button Set?";
                 labelBrm.Text = "Block Limit Above";
                 buttonChoiceSounds.Text = "Sounds";
-                labelInfo.Text = "For the moment, BRM block only works with pokerstars\r\n" +
-                                 "NoLimit because only play in this room and nolimit.\r\n" +
-                                 "For more room and limit, send me HH (3 or 4 hands only and can\r\n" +
-                                 "change name player) and i can try compatible.";
+                labelInfo.Text = "View help please";
+                labelResumeSession.Text = "Resume Session";
+                labelHistoryMax.Text = "History";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
                 linkLabelHelp.Text = "Aide";
+                linkLabelHelp2.Text = "Aide";
                 labelPlayer.Text = "Joueur";
                 labelServer.Text = "Serveur";
                 labelPort.Text = "Port";
@@ -926,14 +956,14 @@ namespace TiltStopLoss
                 labelActiveSet.Text = "Activer Bouton Set?";
                 labelBrm.Text = "Bloquer limite au dessus";
                 buttonChoiceSounds.Text = "Sons";
-                labelInfo.Text = "Pour l'instant cela fonctionne seulement avec pokerstars\r\n" +
-                                 "NoLimit car je ne joue que sur cette room.\r\n" +
-                                 "Pour plus de limite et de room envoyer moi une HH (3 or 4 mains suffit\r\n" +
-                                 "et vous pouvez changer les noms)";
+                labelInfo.Text = "Voir l'aide svp";
+                labelResumeSession.Text = "Résumé de Session";
+                labelHistoryMax.Text = "Historique";
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
                 linkLabelHelp.Text = "Ajuda";
+                linkLabelHelp2.Text = "Ajuda";
                 labelPlayer.Text = "Jogador";
                 labelServer.Text = "Servidor";
                 labelPort.Text = "Porta";
@@ -954,12 +984,52 @@ namespace TiltStopLoss
                 labelActiveSet.Text = "Ativar botão Set?";
                 labelBrm.Text = "Bloquear limite acima";
                 buttonChoiceSounds.Text = "Sons";
-                labelInfo.Text = "Por enquanto só funcionas com a pokerstars\r\n" +
-                                 "NoLimit porque só jogo nessa room.\r\n" +
-                                 "Para mais room e limites envia me 3 ou 4 maõs\r\n" +
-                                 "podem mudar os nomes";
+                labelInfo.Text = "Ver a ajuda sff";
+                labelResumeSession.Text = "Resumo da Sessão";
+                labelHistoryMax.Text = "Histórico";
             }
         }
+
+        /// <summary>
+        /// Link to help browser
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabelHelp2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            String pathfinal = Directory.GetCurrentDirectory();
+            System.Diagnostics.Process.Start(pathfinal + help);
+        }
+
+        /// <summary>
+        /// First start sfotware
+        /// </summary>
+        /// <param name="cb"></param>
+        public void SelectLanguage(int cb)
+        {
+            comboBoxLanguage.SelectedIndex = cb;
+            string helpstart = "";
+            switch (comboBoxLanguage.SelectedIndex)
+            {
+                case 0:
+                    helpstart = "View help?";
+                    break;
+                case 1:
+                    helpstart = "Voir l'aide?";
+                    break;
+                case 2:
+                    helpstart = "Ver a ajuda?";
+                    break;
+            }
+            DialogResult dialogResult = MessageBox.Show(helpstart, "StopLoss", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                //do something
+                String pathfinal = Directory.GetCurrentDirectory();
+                System.Diagnostics.Process.Start(pathfinal + help);
+            }
+        }
+
 
     }
 }
