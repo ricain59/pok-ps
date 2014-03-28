@@ -23,10 +23,12 @@ namespace TiltStopLoss
         private Db dbase;
         private Thread startcrono;
         private Thread startbb;
+        private Thread startapp;
         private Boolean continu = true;
         Boolean stop = false;
         WMPLib.WindowsMediaPlayer player;
         private String[] sounds;
+        private Boolean verapp;
         //data
         private Double stoploss;
         private Int64 handstop;
@@ -46,7 +48,7 @@ namespace TiltStopLoss
         private Double winintermediate;
         private Double lossintermediate;
 
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, Boolean buttonset, Int32 limit, String[] sound, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, Boolean buttonset, Boolean verifyapp, Int32 limit, String[] sound, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -76,7 +78,14 @@ namespace TiltStopLoss
             startcrono.Start();
             //calculo dos BB e hands
             startbb = new Thread(new ThreadStart(this.calculateBB));
-            startbb.Start();            
+            startbb.Start();  
+            //verify app
+            verapp = verifyapp;
+            if (verapp)
+            {
+                startapp = new Thread(new ThreadStart(this.verifyApp));
+                startapp.Start();
+            }
         }
 
         /// <summary>
@@ -103,10 +112,14 @@ namespace TiltStopLoss
             w.Write("Location=" + location);
             w.WriteLine();
             w.Close();
-            
+            //fecho as minhas threads
             startbb.Abort();
             startcrono.Abort();
-            
+            if (verapp)
+            {
+                startapp.Abort();
+            }
+            //faço o new value na janela principal
             wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString(), peakover.ToString(), hidebb, winintermediate.ToString(), lossintermediate.ToString());
             Double  bb100;
             if(bb == 0)
@@ -718,6 +731,38 @@ namespace TiltStopLoss
             {
                 sitout = true;
                 labelStopSet("", Color.Blue);
+            }
+        }
+
+        /// <summary>
+        /// Aqui verifico se o skype, firefox, chrome e ie estão abertos.
+        /// Se estão só dou uma alerta sobre isso, e caso o user a fache deixa de dar o alerta
+        /// </summary>
+        private void verifyApp()
+        {
+            string[] apps = { "Skype", "chrome", "firefox", "iexplore" };
+            while (continu)
+            {
+                Boolean appopen = false;
+                foreach (String app in apps)
+                {
+                    if (!appopen)
+                    {
+                        appopen = new Utils().detectApp(app);
+                    }                    
+                    if (appopen && !stop)
+                    {
+                        //player = new Utils().playSoundIntermediate(sounds[0]);
+                        labelStopSet("!!!! StopApplication !!!!", Color.Red);
+                    }
+                    else
+                    {
+                        if (!stop)
+                        {
+                            labelStopSet("", Color.White);
+                        }
+                    }
+                }                
             }
         }
     }

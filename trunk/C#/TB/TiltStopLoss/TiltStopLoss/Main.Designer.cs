@@ -116,6 +116,9 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBoxVerifyApplication = new System.Windows.Forms.CheckBox();
+            this.labelVerifyApp = new System.Windows.Forms.Label();
+            this.labelInfo2 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -132,7 +135,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(4, 2);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(334, 389);
+            this.tabControlMain.Size = new System.Drawing.Size(334, 407);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabDatabase
@@ -162,7 +165,7 @@
             this.tabDatabase.Location = new System.Drawing.Point(4, 22);
             this.tabDatabase.Name = "tabDatabase";
             this.tabDatabase.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDatabase.Size = new System.Drawing.Size(326, 363);
+            this.tabDatabase.Size = new System.Drawing.Size(326, 381);
             this.tabDatabase.TabIndex = 0;
             this.tabDatabase.Text = "Database";
             this.tabDatabase.UseVisualStyleBackColor = true;
@@ -195,7 +198,7 @@
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(292, 316);
+            this.labelVersion.Location = new System.Drawing.Point(292, 346);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(28, 13);
             this.labelVersion.TabIndex = 21;
@@ -206,7 +209,7 @@
             this.labelAlertDb.AutoSize = true;
             this.labelAlertDb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelAlertDb.ForeColor = System.Drawing.Color.Red;
-            this.labelAlertDb.Location = new System.Drawing.Point(183, 130);
+            this.labelAlertDb.Location = new System.Drawing.Point(183, 151);
             this.labelAlertDb.Name = "labelAlertDb";
             this.labelAlertDb.Size = new System.Drawing.Size(22, 13);
             this.labelAlertDb.TabIndex = 20;
@@ -216,7 +219,7 @@
             // checkBoxPt4
             // 
             this.checkBoxPt4.AutoSize = true;
-            this.checkBoxPt4.Location = new System.Drawing.Point(142, 130);
+            this.checkBoxPt4.Location = new System.Drawing.Point(142, 151);
             this.checkBoxPt4.Name = "checkBoxPt4";
             this.checkBoxPt4.Size = new System.Drawing.Size(46, 17);
             this.checkBoxPt4.TabIndex = 19;
@@ -227,7 +230,7 @@
             // checkBoxHem2
             // 
             this.checkBoxHem2.AutoSize = true;
-            this.checkBoxHem2.Location = new System.Drawing.Point(80, 130);
+            this.checkBoxHem2.Location = new System.Drawing.Point(80, 151);
             this.checkBoxHem2.Name = "checkBoxHem2";
             this.checkBoxHem2.Size = new System.Drawing.Size(56, 17);
             this.checkBoxHem2.TabIndex = 18;
@@ -238,7 +241,7 @@
             // checkBoxHem1
             // 
             this.checkBoxHem1.AutoSize = true;
-            this.checkBoxHem1.Location = new System.Drawing.Point(19, 129);
+            this.checkBoxHem1.Location = new System.Drawing.Point(19, 150);
             this.checkBoxHem1.Name = "checkBoxHem1";
             this.checkBoxHem1.Size = new System.Drawing.Size(56, 17);
             this.checkBoxHem1.TabIndex = 17;
@@ -256,7 +259,7 @@
             // 
             // buttonTestDb
             // 
-            this.buttonTestDb.Location = new System.Drawing.Point(141, 293);
+            this.buttonTestDb.Location = new System.Drawing.Point(141, 323);
             this.buttonTestDb.Name = "buttonTestDb";
             this.buttonTestDb.Size = new System.Drawing.Size(75, 23);
             this.buttonTestDb.TabIndex = 13;
@@ -267,7 +270,7 @@
             // labePassword
             // 
             this.labePassword.AutoSize = true;
-            this.labePassword.Location = new System.Drawing.Point(6, 273);
+            this.labePassword.Location = new System.Drawing.Point(6, 294);
             this.labePassword.Name = "labePassword";
             this.labePassword.Size = new System.Drawing.Size(53, 13);
             this.labePassword.TabIndex = 12;
@@ -276,7 +279,7 @@
             // labelUserDb
             // 
             this.labelUserDb.AutoSize = true;
-            this.labelUserDb.Location = new System.Drawing.Point(6, 246);
+            this.labelUserDb.Location = new System.Drawing.Point(6, 267);
             this.labelUserDb.Name = "labelUserDb";
             this.labelUserDb.Size = new System.Drawing.Size(43, 13);
             this.labelUserDb.TabIndex = 11;
@@ -285,7 +288,7 @@
             // labelDb
             // 
             this.labelDb.AutoSize = true;
-            this.labelDb.Location = new System.Drawing.Point(6, 219);
+            this.labelDb.Location = new System.Drawing.Point(6, 240);
             this.labelDb.Name = "labelDb";
             this.labelDb.Size = new System.Drawing.Size(53, 13);
             this.labelDb.TabIndex = 10;
@@ -294,7 +297,7 @@
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(6, 192);
+            this.labelPort.Location = new System.Drawing.Point(6, 213);
             this.labelPort.Name = "labelPort";
             this.labelPort.Size = new System.Drawing.Size(26, 13);
             this.labelPort.TabIndex = 9;
@@ -302,7 +305,7 @@
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(120, 267);
+            this.textBoxPass.Location = new System.Drawing.Point(120, 288);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(177, 20);
@@ -310,28 +313,28 @@
             // 
             // textBoxUser
             // 
-            this.textBoxUser.Location = new System.Drawing.Point(120, 240);
+            this.textBoxUser.Location = new System.Drawing.Point(120, 261);
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(177, 20);
             this.textBoxUser.TabIndex = 7;
             // 
             // textBoxDb
             // 
-            this.textBoxDb.Location = new System.Drawing.Point(120, 213);
+            this.textBoxDb.Location = new System.Drawing.Point(120, 234);
             this.textBoxDb.Name = "textBoxDb";
             this.textBoxDb.Size = new System.Drawing.Size(177, 20);
             this.textBoxDb.TabIndex = 6;
             // 
             // textBoxPort
             // 
-            this.textBoxPort.Location = new System.Drawing.Point(120, 186);
+            this.textBoxPort.Location = new System.Drawing.Point(120, 207);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(177, 20);
             this.textBoxPort.TabIndex = 5;
             // 
             // textBoxServer
             // 
-            this.textBoxServer.Location = new System.Drawing.Point(120, 159);
+            this.textBoxServer.Location = new System.Drawing.Point(120, 180);
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(177, 20);
             this.textBoxServer.TabIndex = 4;
@@ -339,7 +342,7 @@
             // labelServer
             // 
             this.labelServer.AutoSize = true;
-            this.labelServer.Location = new System.Drawing.Point(6, 166);
+            this.labelServer.Location = new System.Drawing.Point(6, 187);
             this.labelServer.Name = "labelServer";
             this.labelServer.Size = new System.Drawing.Size(38, 13);
             this.labelServer.TabIndex = 3;
@@ -349,7 +352,7 @@
             // 
             this.labelTitleDB.AutoSize = true;
             this.labelTitleDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitleDB.Location = new System.Drawing.Point(84, 98);
+            this.labelTitleDB.Location = new System.Drawing.Point(84, 106);
             this.labelTitleDB.Name = "labelTitleDB";
             this.labelTitleDB.Size = new System.Drawing.Size(144, 20);
             this.labelTitleDB.TabIndex = 2;
@@ -374,6 +377,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.labelInfo2);
+            this.tabPage3.Controls.Add(this.checkBoxVerifyApplication);
+            this.tabPage3.Controls.Add(this.labelVerifyApp);
             this.tabPage3.Controls.Add(this.labelStopWinIntermediate);
             this.tabPage3.Controls.Add(this.textBoxStopWinIntermediate);
             this.tabPage3.Controls.Add(this.labelStopWinFinal);
@@ -414,7 +420,7 @@
             this.tabPage3.Controls.Add(this.labelStoploss);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(326, 363);
+            this.tabPage3.Size = new System.Drawing.Size(326, 381);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -536,7 +542,7 @@
             "200",
             "400",
             "500"});
-            this.comboBoxBRM.Location = new System.Drawing.Point(161, 301);
+            this.comboBoxBRM.Location = new System.Drawing.Point(161, 318);
             this.comboBoxBRM.Name = "comboBoxBRM";
             this.comboBoxBRM.Size = new System.Drawing.Size(45, 21);
             this.comboBoxBRM.TabIndex = 43;
@@ -545,7 +551,7 @@
             // 
             this.labelBrm.AutoSize = true;
             this.labelBrm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBrm.Location = new System.Drawing.Point(6, 305);
+            this.labelBrm.Location = new System.Drawing.Point(6, 322);
             this.labelBrm.Name = "labelBrm";
             this.labelBrm.Size = new System.Drawing.Size(109, 13);
             this.labelBrm.TabIndex = 42;
@@ -555,7 +561,7 @@
             // 
             this.labelInfo.AutoSize = true;
             this.labelInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInfo.Location = new System.Drawing.Point(212, 305);
+            this.labelInfo.Location = new System.Drawing.Point(212, 322);
             this.labelInfo.Name = "labelInfo";
             this.labelInfo.Size = new System.Drawing.Size(87, 13);
             this.labelInfo.TabIndex = 41;
@@ -564,7 +570,7 @@
             // checkBoxButtonSet
             // 
             this.checkBoxButtonSet.AutoSize = true;
-            this.checkBoxButtonSet.Location = new System.Drawing.Point(191, 281);
+            this.checkBoxButtonSet.Location = new System.Drawing.Point(191, 298);
             this.checkBoxButtonSet.Name = "checkBoxButtonSet";
             this.checkBoxButtonSet.Size = new System.Drawing.Size(15, 14);
             this.checkBoxButtonSet.TabIndex = 39;
@@ -574,7 +580,7 @@
             // 
             this.labelActiveSet.AutoSize = true;
             this.labelActiveSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelActiveSet.Location = new System.Drawing.Point(6, 281);
+            this.labelActiveSet.Location = new System.Drawing.Point(6, 298);
             this.labelActiveSet.Name = "labelActiveSet";
             this.labelActiveSet.Size = new System.Drawing.Size(122, 13);
             this.labelActiveSet.TabIndex = 38;
@@ -583,7 +589,7 @@
             // checkBoxCloseSkype
             // 
             this.checkBoxCloseSkype.AutoSize = true;
-            this.checkBoxCloseSkype.Location = new System.Drawing.Point(191, 255);
+            this.checkBoxCloseSkype.Location = new System.Drawing.Point(191, 247);
             this.checkBoxCloseSkype.Name = "checkBoxCloseSkype";
             this.checkBoxCloseSkype.Size = new System.Drawing.Size(15, 14);
             this.checkBoxCloseSkype.TabIndex = 35;
@@ -593,7 +599,7 @@
             // 
             this.labelCloseSkype.AutoSize = true;
             this.labelCloseSkype.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCloseSkype.Location = new System.Drawing.Point(6, 255);
+            this.labelCloseSkype.Location = new System.Drawing.Point(6, 247);
             this.labelCloseSkype.Name = "labelCloseSkype";
             this.labelCloseSkype.Size = new System.Drawing.Size(84, 13);
             this.labelCloseSkype.TabIndex = 34;
@@ -601,7 +607,7 @@
             // 
             // buttonChoiceSounds
             // 
-            this.buttonChoiceSounds.Location = new System.Drawing.Point(19, 336);
+            this.buttonChoiceSounds.Location = new System.Drawing.Point(19, 353);
             this.buttonChoiceSounds.Name = "buttonChoiceSounds";
             this.buttonChoiceSounds.Size = new System.Drawing.Size(75, 23);
             this.buttonChoiceSounds.TabIndex = 33;
@@ -635,7 +641,7 @@
             // checkBoxHideBbbs
             // 
             this.checkBoxHideBbbs.AutoSize = true;
-            this.checkBoxHideBbbs.Location = new System.Drawing.Point(191, 229);
+            this.checkBoxHideBbbs.Location = new System.Drawing.Point(191, 224);
             this.checkBoxHideBbbs.Name = "checkBoxHideBbbs";
             this.checkBoxHideBbbs.Size = new System.Drawing.Size(15, 14);
             this.checkBoxHideBbbs.TabIndex = 29;
@@ -645,7 +651,7 @@
             // 
             this.labelHideBbs.AutoSize = true;
             this.labelHideBbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHideBbs.Location = new System.Drawing.Point(6, 229);
+            this.labelHideBbs.Location = new System.Drawing.Point(6, 224);
             this.labelHideBbs.Name = "labelHideBbs";
             this.labelHideBbs.Size = new System.Drawing.Size(59, 13);
             this.labelHideBbs.TabIndex = 28;
@@ -859,7 +865,7 @@
             this.tabResumeSession.Controls.Add(this.labelSessionBBs);
             this.tabResumeSession.Location = new System.Drawing.Point(4, 22);
             this.tabResumeSession.Name = "tabResumeSession";
-            this.tabResumeSession.Size = new System.Drawing.Size(326, 363);
+            this.tabResumeSession.Size = new System.Drawing.Size(326, 381);
             this.tabResumeSession.TabIndex = 3;
             this.tabResumeSession.Text = "Resume Session";
             this.tabResumeSession.UseVisualStyleBackColor = true;
@@ -897,7 +903,7 @@
             // 
             this.textBoxHistoryBbsMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxHistoryBbsMax.ForeColor = System.Drawing.Color.Green;
-            this.textBoxHistoryBbsMax.Location = new System.Drawing.Point(154, 298);
+            this.textBoxHistoryBbsMax.Location = new System.Drawing.Point(154, 314);
             this.textBoxHistoryBbsMax.Name = "textBoxHistoryBbsMax";
             this.textBoxHistoryBbsMax.Size = new System.Drawing.Size(70, 20);
             this.textBoxHistoryBbsMax.TabIndex = 16;
@@ -908,7 +914,7 @@
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.Green;
-            this.label24.Location = new System.Drawing.Point(92, 301);
+            this.label24.Location = new System.Drawing.Point(92, 317);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(55, 13);
             this.label24.TabIndex = 15;
@@ -918,7 +924,7 @@
             // 
             this.textBoxHistoryTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxHistoryTime.ForeColor = System.Drawing.Color.Blue;
-            this.textBoxHistoryTime.Location = new System.Drawing.Point(154, 272);
+            this.textBoxHistoryTime.Location = new System.Drawing.Point(154, 288);
             this.textBoxHistoryTime.Name = "textBoxHistoryTime";
             this.textBoxHistoryTime.Size = new System.Drawing.Size(70, 20);
             this.textBoxHistoryTime.TabIndex = 14;
@@ -927,7 +933,7 @@
             // textBoxHistoryHands
             // 
             this.textBoxHistoryHands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxHistoryHands.Location = new System.Drawing.Point(154, 246);
+            this.textBoxHistoryHands.Location = new System.Drawing.Point(154, 262);
             this.textBoxHistoryHands.Name = "textBoxHistoryHands";
             this.textBoxHistoryHands.Size = new System.Drawing.Size(70, 20);
             this.textBoxHistoryHands.TabIndex = 13;
@@ -937,7 +943,7 @@
             // 
             this.textBoxHistoryBbsloss.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxHistoryBbsloss.ForeColor = System.Drawing.Color.Red;
-            this.textBoxHistoryBbsloss.Location = new System.Drawing.Point(154, 220);
+            this.textBoxHistoryBbsloss.Location = new System.Drawing.Point(154, 236);
             this.textBoxHistoryBbsloss.Name = "textBoxHistoryBbsloss";
             this.textBoxHistoryBbsloss.Size = new System.Drawing.Size(70, 20);
             this.textBoxHistoryBbsloss.TabIndex = 12;
@@ -948,7 +954,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.Blue;
-            this.label25.Location = new System.Drawing.Point(92, 275);
+            this.label25.Location = new System.Drawing.Point(92, 291);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(34, 13);
             this.label25.TabIndex = 11;
@@ -958,7 +964,7 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(92, 249);
+            this.label26.Location = new System.Drawing.Point(92, 265);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(43, 13);
             this.label26.TabIndex = 10;
@@ -969,7 +975,7 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.Red;
-            this.label27.Location = new System.Drawing.Point(92, 223);
+            this.label27.Location = new System.Drawing.Point(92, 239);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(59, 13);
             this.label27.TabIndex = 9;
@@ -980,7 +986,7 @@
             this.labelHistoryMax.AutoSize = true;
             this.labelHistoryMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelHistoryMax.ForeColor = System.Drawing.Color.Magenta;
-            this.labelHistoryMax.Location = new System.Drawing.Point(135, 191);
+            this.labelHistoryMax.Location = new System.Drawing.Point(135, 207);
             this.labelHistoryMax.Name = "labelHistoryMax";
             this.labelHistoryMax.Size = new System.Drawing.Size(89, 16);
             this.labelHistoryMax.TabIndex = 8;
@@ -1072,7 +1078,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(326, 363);
+            this.tabPage2.Size = new System.Drawing.Size(326, 381);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Start";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1121,12 +1127,41 @@
             this.toolTipHelpText.InitialDelay = 100;
             this.toolTipHelpText.ReshowDelay = 20;
             // 
+            // checkBoxVerifyApplication
+            // 
+            this.checkBoxVerifyApplication.AutoSize = true;
+            this.checkBoxVerifyApplication.Location = new System.Drawing.Point(191, 272);
+            this.checkBoxVerifyApplication.Name = "checkBoxVerifyApplication";
+            this.checkBoxVerifyApplication.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxVerifyApplication.TabIndex = 54;
+            this.checkBoxVerifyApplication.UseVisualStyleBackColor = true;
+            // 
+            // labelVerifyApp
+            // 
+            this.labelVerifyApp.AutoSize = true;
+            this.labelVerifyApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVerifyApp.Location = new System.Drawing.Point(6, 272);
+            this.labelVerifyApp.Name = "labelVerifyApp";
+            this.labelVerifyApp.Size = new System.Drawing.Size(106, 13);
+            this.labelVerifyApp.TabIndex = 53;
+            this.labelVerifyApp.Text = "Verify Application";
+            // 
+            // labelInfo2
+            // 
+            this.labelInfo2.AutoSize = true;
+            this.labelInfo2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInfo2.Location = new System.Drawing.Point(212, 272);
+            this.labelInfo2.Name = "labelInfo2";
+            this.labelInfo2.Size = new System.Drawing.Size(87, 13);
+            this.labelInfo2.TabIndex = 55;
+            this.labelInfo2.Text = "View help please";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(341, 396);
+            this.ClientSize = new System.Drawing.Size(341, 410);
             this.Controls.Add(this.tabControlMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
@@ -1238,6 +1273,9 @@
         private System.Windows.Forms.Label labelStopWinIntermediate;
         private System.Windows.Forms.TextBox textBoxStopWinIntermediate;
         private System.Windows.Forms.Label labelStopWinFinal;
+        private System.Windows.Forms.CheckBox checkBoxVerifyApplication;
+        private System.Windows.Forms.Label labelVerifyApp;
+        private System.Windows.Forms.Label labelInfo2;
     }
 }
 
