@@ -72,6 +72,24 @@ namespace TiltStopLoss
         }
 
         /// <summary>
+        /// Toca a musica chata do stop intermediate
+        /// </summary>
+        public WMPLib.WindowsMediaPlayer playSoundIntermediate(String sound)
+        {
+            String path = Directory.GetCurrentDirectory();
+            String filepath = path + "\\sounds\\" + sound;
+            //mp3  & wav
+            WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
+            player.URL = filepath;
+            //player.settings.setMode("loop", true);
+            player.controls.play();
+            //old only wav
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(filepath);
+            //player.PlayLooping();            
+            return player;
+        }
+
+        /// <summary>
         /// Serve para as textbox
         /// Só permite inserir numeros
         /// </summary>

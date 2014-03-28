@@ -15,7 +15,7 @@ namespace StopLoss
     {
         private Stoploss sl;
         
-        public FormSet(Stoploss formsl, Double loss, Int64 hand, Int32 time, Double win, Double losspeak, Double peakover, Boolean hidebb)
+        public FormSet(Stoploss formsl, Double loss, Int64 hand, Int32 time, Double win, Double losspeak, Double peakover, Boolean hidebb, Double wininter, Double lossinter)
         {
             InitializeComponent();
             sl = formsl;
@@ -25,6 +25,8 @@ namespace StopLoss
             textBoxStopWin.Text = win.ToString();
             textBoxStopLossPeak.Text = losspeak.ToString();
             textBoxPeakOver.Text = peakover.ToString();
+            textBoxStopLossIntermediate.Text = lossinter.ToString();
+            textBoxStopWinIntermediate.Text = wininter.ToString();
             if (hidebb)
             {
                 checkBoxHideBbbs.Checked = true;
@@ -68,6 +70,16 @@ namespace StopLoss
             new Utils().onlynumeric(e);
         }
 
+        private void textBoxStopLossIntermediate_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopWinIntermediate_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
         #endregion
 
         /// <summary>
@@ -83,8 +95,24 @@ namespace StopLoss
             Double win = new Utils().stringtoDouble(textBoxStopWin.Text);
             Double losspeak = new Utils().stringtoDouble(textBoxStopLossPeak.Text);
             Double peakover = new Utils().stringtoDouble(textBoxPeakOver.Text);
-            sl.setNewValue(hand, loss, time, win, losspeak, peakover, checkBoxHideBbbs.Checked);
-            this.Close();
+            Double wininter = new Utils().stringtoDouble(textBoxStopWinIntermediate.Text);
+            Double lossinter = new Utils().stringtoDouble(textBoxStopLossIntermediate.Text);
+            Boolean continu = true;
+            if (wininter >= win)
+            {
+                labelAlertIntermediate.Text = "Stopwin intermediate don't superior at stopwin final";
+                continu = false;
+            }
+            if (lossinter >= loss)
+            {
+                labelAlertIntermediate.Text = "StopLoss intermediate don't superior at stopLoss final";
+                continu = false;
+            }
+            if(continu)
+            {
+                sl.setNewValue(hand, loss, time, win, losspeak, peakover, checkBoxHideBbbs.Checked, wininter, lossinter);
+                this.Close();
+            }
         }
 
         #region load config
