@@ -32,3 +32,4 @@ ComboboxBRM=2
 ComboboxLanguage=0
 StopLossIntermediate=48
 StopWinIntermediate=48
+Verifyapp=False

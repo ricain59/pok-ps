@@ -252,6 +252,30 @@ namespace TiltStopLoss
         }
 
         /// <summary>
+        /// metodo para verifyapp
+        /// </summary>
+        /// <param name="nameprocess"></param>
+        /// <returns></returns>
+        public Boolean detectApp(String nameprocess)
+        {
+            // Is running
+            try
+            {
+                foreach (Process proc in Process.GetProcessesByName(nameprocess))
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+                new Debug().LogMessage(ex.ToString() + "_detecApp");
+                return false;
+            }
+        }
+
+        /// <summary>
         /// string to minute
         /// </summary>
         /// <param name="time"></param>

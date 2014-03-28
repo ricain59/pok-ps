@@ -29,7 +29,7 @@ namespace TiltStopLoss
         private String soundtime = "alarm.wav";
         private String soundwin = "alarm.wav";
         private String soundhands = "alarm.wav";
-        private String soundinternediatewin = "";
+        private String soundinternediatewin = "ring.wav";
         private String soundinternediateloss = "alarm.wav";
         //history value
         private Double histbbsloss = 0;
@@ -244,7 +244,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, limit, sounds, 1);
+                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, limit, sounds, 1);
                             }
                             else //hem2
                             {
@@ -259,7 +259,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, limit, sounds, 2);
+                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, limit, sounds, 2);
                             }
                         }
                         else //pt4
@@ -274,7 +274,7 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, limit, sounds, 4);
+                            sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, limit, sounds, 4);
                         }
                         sl.Show();                        
                     }
@@ -484,7 +484,17 @@ namespace TiltStopLoss
                     break;
                 case "ComboboxLanguage":
                     comboBoxLanguage.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
-                    break; 
+                    break;
+                case "Verifyapp":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxVerifyApplication.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxVerifyApplication.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -563,6 +573,8 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("StopWinIntermediate=" + textBoxStopWinIntermediate.Text.ToString());
             w.WriteLine();
+            w.Write("Verifyapp=" + checkBoxVerifyApplication.Checked.ToString());
+            w.WriteLine();            
             w.Close();
             //test
         }
@@ -985,10 +997,12 @@ namespace TiltStopLoss
                 labelBrm.Text = "Block Limit Above";
                 buttonChoiceSounds.Text = "Sounds";
                 labelInfo.Text = "View help please";
+                labelInfo2.Text = "View help please";
                 labelResumeSession.Text = "Resume Session";
                 labelHistoryMax.Text = "History";
                 labelStoplossIntermediate.Text = "Intermediate";
                 labelStopWinIntermediate.Text = "Intermediate";
+                labelVerifyApp.Text = "Verify application?";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
@@ -1015,10 +1029,12 @@ namespace TiltStopLoss
                 labelBrm.Text = "Bloquer limite au dessus";
                 buttonChoiceSounds.Text = "Sons";
                 labelInfo.Text = "Voir l'aide svp";
+                labelInfo2.Text = "Voir l'aide svp";
                 labelResumeSession.Text = "Résumé de Session";
                 labelHistoryMax.Text = "Historique";
                 labelStoplossIntermediate.Text = "Intermédiaire";
                 labelStopWinIntermediate.Text = "Intermédiaire";
+                labelVerifyApp.Text = "Vérifier Applications?";
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
@@ -1045,10 +1061,12 @@ namespace TiltStopLoss
                 labelBrm.Text = "Bloquear limite acima";
                 buttonChoiceSounds.Text = "Sons";
                 labelInfo.Text = "Ver a ajuda sff";
+                labelInfo2.Text = "Ver a ajuda sff";
                 labelResumeSession.Text = "Resumo da Sessão";
                 labelHistoryMax.Text = "Histórico";
                 labelStoplossIntermediate.Text = "Intermédio";
                 labelStopWinIntermediate.Text = "Intermédio";
+                labelVerifyApp.Text = "Verificar Applicações?";
             }
         }
 
