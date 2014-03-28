@@ -24,12 +24,14 @@ namespace TiltStopLoss
         private Thread startcrono;
         private Thread startbb;
         private Boolean continu = true;
+        Boolean stop = false;
+        WMPLib.WindowsMediaPlayer player;
+        private String[] sounds;
+        //data
         private Double stoploss;
         private Int64 handstop;
         private Int32 timestop;
         private Double stopwin;
-        WMPLib.WindowsMediaPlayer player;
-        Boolean stop = false;
         private int tracker;
         List<Tuple<String, String>> playeridname;
         private String time;
@@ -37,11 +39,12 @@ namespace TiltStopLoss
         private Double bbpeak;
         private Double peakover;
         Int64 handnumber = 0;
-        private String[] sounds;
         Double bbmax;
         private Boolean sitout = true;
         private Int32 blocklimit;
         private Boolean hidebb;
+        private Double winintermediate;
+        private Double lossintermediate;
 
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, Boolean buttonset, Int32 limit, String[] sound, int tracker)
         {
@@ -55,6 +58,8 @@ namespace TiltStopLoss
             stopwin = new Utils().stringtoDouble(data[3]);
             bbpeak = new Utils().stringtoDouble(data[4]);
             this.peakover = new Utils().stringtoDouble(data[5]);
+            lossintermediate = new Utils().stringtoDouble(data[6]);
+            winintermediate = new Utils().stringtoDouble(data[7]);
             this.tracker = tracker;
             sounds = sound;
             blocklimit = limit;
@@ -102,7 +107,7 @@ namespace TiltStopLoss
             startbb.Abort();
             startcrono.Abort();
             
-            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString(), peakover.ToString(), hidebb);
+            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString(), peakover.ToString(), hidebb, winintermediate.ToString(), lossintermediate.ToString());
             Double  bb100;
             if(bb == 0)
             {
@@ -170,6 +175,8 @@ namespace TiltStopLoss
             try
             {
                 bbmax = 0.0;
+                Boolean intermediatewin = true;
+                Boolean intermediateloss = true;
                 while (continu)
                 {
                     //bb
@@ -212,7 +219,7 @@ namespace TiltStopLoss
                         this.labelBb.Text = bb.ToString();
                     }
 
-                    //stop
+                    //stop                    
                     if (stoploss > 0.0)
                     {
                         if (bb <= (0 - stoploss))
@@ -258,7 +265,47 @@ namespace TiltStopLoss
                                 }                                
                             }
                         }
-                    }                    
+                    }
+                    if (lossintermediate > 0.0 && intermediateloss && !stop)
+                    {
+                        if (bb <= (0 - lossintermediate))
+                        {
+                            if (!stop)
+                            {
+                                player = new Utils().playSoundIntermediate(sounds[4]);
+                                //stop = true;
+                                intermediateloss = false;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! LossIntermediate !!!!", Color.Red);
+                                Thread.Sleep(5000);
+                                labelStopSet("", Color.White);
+                                if (!intermediatewin)
+                                {
+                                    intermediatewin = true;
+                                }
+                            }
+                        }
+                    }
+                    if (winintermediate > 0.0 && intermediatewin && !stop)
+                    {
+                        if (bb >= winintermediate)
+                        {
+                            if (!stop)
+                            {
+                                player = new Utils().playSoundIntermediate(sounds[5]);
+                                //stop = true;
+                                intermediatewin = false;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! WinIntermediate !!!!", Color.Green);
+                                Thread.Sleep(5000);
+                                labelStopSet("", Color.White);
+                                if (!intermediateloss)
+                                {
+                                    intermediateloss = true;
+                                }
+                            }
+                        }
+                    }
 
                     //hand
                     String hand = "";
@@ -393,7 +440,7 @@ namespace TiltStopLoss
                         }
                         else
                         {
-                            //je vérifie si la limite rendu é supériru a la limite accepter
+                            //je vérifie si la limite rendu é supérieur a la limite accepter
                             if (nl > blocklimit)
                             {
                                 //aqui apita e change le text du label
@@ -403,9 +450,34 @@ namespace TiltStopLoss
                                 }
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
-                                labelStopSet("!!!! StopLoss !!!!", Color.Red);
+                                labelStopSet("!!!! StopLimit !!!!", Color.Red);
                                 //close poker stars
                                 new Utils().detectApps("PokerStars");
+                            }
+                        }
+                    }
+                    if (hand.ToLower().Contains("winamax") && !hand.ToLower().Contains("tournament"))
+                    {
+                        nl = new Utils().getNlPs(hand);
+                        if (nl.Equals(0))
+                        {
+                            new Debug().LogAlert("Problem limit not defined", "Problem_Limit");
+                        }
+                        else
+                        {
+                            //je vérifie si la limite rendu é supérieur a la limite accepter
+                            if (nl > blocklimit)
+                            {
+                                //aqui apita e change le text du label
+                                if (!stop)
+                                {
+                                    player = new Utils().playsound(sounds[0]);
+                                }
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopLimit !!!!", Color.Red);
+                                //close poker stars
+                                new Utils().detectApps("Winamax Poker");
                             }
                         }
                     }
@@ -596,7 +668,7 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void buttonSet_Click(object sender, EventArgs e)
         {
-            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop, stopwin, bbpeak, peakover, this.hidebb);
+            StopLoss.FormSet fs = new StopLoss.FormSet(this, stoploss, handstop, timestop, stopwin, bbpeak, peakover, this.hidebb, winintermediate, lossintermediate);
             fs.Show();
         }
 
@@ -606,7 +678,7 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(Int64 hand, Double loss, Int32 time, Double win, Double losspeak, Double peakover, Boolean hidebb)
+        public void setNewValue(Int64 hand, Double loss, Int32 time, Double win, Double losspeak, Double peakover, Boolean hidebb, Double wininter, Double lossinter)
         {
             this.timestop = time;
             this.handstop = hand;
@@ -614,6 +686,8 @@ namespace TiltStopLoss
             this.stopwin = win;
             this.bbpeak = losspeak;
             this.peakover = peakover;
+            winintermediate = wininter;
+            lossintermediate = lossinter;
             if (hidebb)
             {
                 this.hidebb = true;

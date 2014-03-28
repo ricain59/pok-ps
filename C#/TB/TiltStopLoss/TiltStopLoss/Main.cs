@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.59;
+        private Double version = 1.60;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -29,6 +29,8 @@ namespace TiltStopLoss
         private String soundtime = "alarm.wav";
         private String soundwin = "alarm.wav";
         private String soundhands = "alarm.wav";
+        private String soundinternediatewin = "";
+        private String soundinternediateloss = "alarm.wav";
         //history value
         private Double histbbsloss = 0;
         private Int32 histhands = 0;
@@ -150,6 +152,38 @@ namespace TiltStopLoss
                 MessageBox.Show(con.ToString());
                 stop = true;
             }
+            if (new Utils().stringtoDouble(textBoxStopWinIntermediate.Text) >= new Utils().stringtoDouble(textBoxStopWin.Text))
+            {
+                if (comboBoxLanguage.SelectedIndex == 0)
+                {
+                    MessageBox.Show("Stopwin intermediate don't superior at stopwin");
+                }
+                if (comboBoxLanguage.SelectedIndex == 1)
+                {
+                    MessageBox.Show("Stopgain intermédiaire ne peux pas être supérieur a stopwin");
+                }
+                if (comboBoxLanguage.SelectedIndex == 2)
+                {
+                    MessageBox.Show("Stopganhos intermédios não pode ser superior a stopganhos");
+                }                
+                stop = true;
+            }
+            if (new Utils().stringtoDouble(textBoxStopLossIntermediate.Text) >= new Utils().stringtoDouble(textBoxStopLoss.Text))
+            {
+                if (comboBoxLanguage.SelectedIndex == 0)
+                {
+                    MessageBox.Show("StopLoss intermediate don't superior at stopLoss");
+                }
+                if (comboBoxLanguage.SelectedIndex == 1)
+                {
+                    MessageBox.Show("Stopperte intermédiaire ne peux pas être supérieur a stopperte");
+                }
+                if (comboBoxLanguage.SelectedIndex == 2)
+                {
+                    MessageBox.Show("Stoppercas intermédios não pode ser superior a stoppercas");
+                }
+                stop = true;
+            }
             //se dá erro a me ligar a DB não faço mais nada
             //aqui tenho de abrir a outra janela que vai ficar a funcar em paralela dessa
             try
@@ -182,8 +216,8 @@ namespace TiltStopLoss
                         Stoploss sl;
                         List<Tuple<String, String>> playeralias;
                         //em vez de mandar só string crio um array do que preciso
-                        String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text };
-                        String[] sounds = { soundloss, soundtime, soundwin, soundhands };
+                        String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text };
+                        String[] sounds = { soundloss, soundtime, soundwin, soundhands, soundinternediateloss, soundinternediatewin };
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -330,6 +364,12 @@ namespace TiltStopLoss
                     break;
                 case "StopLossPeak":
                     textBoxStopLossPeak.Text = line[1].ToString();
+                    break;
+                case "StopLossIntermediate":
+                    textBoxStopLossIntermediate.Text = line[1].ToString();
+                    break;
+                case "StopWinIntermediate":
+                    textBoxStopWinIntermediate.Text = line[1].ToString();
                     break;
                 case "Hem1":
                     if(line[1].ToString().Equals("True"))
@@ -518,7 +558,11 @@ namespace TiltStopLoss
             w.Write("ComboboxBRM=" + comboBoxBRM.SelectedIndex);
             w.WriteLine();
             w.Write("ComboboxLanguage=" + comboBoxLanguage.SelectedIndex);
-            w.WriteLine();             
+            w.WriteLine();  
+            w.Write("StopLossIntermediate=" + textBoxStopLossIntermediate.Text.ToString());
+            w.WriteLine();
+            w.Write("StopWinIntermediate=" + textBoxStopWinIntermediate.Text.ToString());
+            w.WriteLine();
             w.Close();
             //test
         }
@@ -598,7 +642,7 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(String hand, String loss, String time, String win, String losspeak, String peakover, Boolean hidebb)
+        public void setNewValue(String hand, String loss, String time, String win, String losspeak, String peakover, Boolean hidebb, String wininter, String lossinter)
         {
             textBoxStopLoss.Text = loss;
             textBoxStopHand.Text = hand;
@@ -606,6 +650,8 @@ namespace TiltStopLoss
             textBoxStopWin.Text = win;
             textBoxStopLossPeak.Text = losspeak;
             textBoxPeakOver.Text = peakover;
+            textBoxStopLossIntermediate.Text = lossinter;
+            textBoxStopWinIntermediate.Text = wininter;
             if (hidebb)
             {
                 checkBoxHideBbbs.Checked = true;
@@ -757,7 +803,17 @@ namespace TiltStopLoss
             new Utils().onlynumeric(e);
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxPeakOver_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopLossIntermediate_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopWinIntermediate_KeyPress(object sender, KeyPressEventArgs e)
         {
             new Utils().onlynumeric(e);
         }
@@ -916,12 +972,12 @@ namespace TiltStopLoss
                 labePassword.Text = "Password";
                 labelTitleDB.Text = "Database Config";
                 help = "/help/header_en.html";
-                labelStoploss.Text = "StopLoss";
+                labelStoploss.Text = "StopLoss:";
                 labelStopLossPeak.Text = "StopLossPeak";
                 labelBbOver.Text = "BBs Over";
                 labelStophands.Text = "StopHands";
                 labelStopTime.Text = "StopTime";
-                labelStopWin.Text = "StopWin";
+                labelStopWin.Text = "StopWin:";
                 labelResumeOnStop.Text = "Resume on Stop";
                 labelHideBbs.Text = "Hide BBs";
                 labelCloseSkype.Text = "Close Skype?";
@@ -931,6 +987,8 @@ namespace TiltStopLoss
                 labelInfo.Text = "View help please";
                 labelResumeSession.Text = "Resume Session";
                 labelHistoryMax.Text = "History";
+                labelStoplossIntermediate.Text = "Intermediate";
+                labelStopWinIntermediate.Text = "Intermediate";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
@@ -944,12 +1002,12 @@ namespace TiltStopLoss
                 labePassword.Text = "Mot de passe";
                 labelTitleDB.Text = "Conf. Base de Donnée";
                 help = "/help/header_fr.html";
-                labelStoploss.Text = "StopPerte";
+                labelStoploss.Text = "StopPerte:";
                 labelStopLossPeak.Text = "StopPertePic";
                 labelBbOver.Text = "BBs au dessus de";
                 labelStophands.Text = "StopMains";
                 labelStopTime.Text = "StopTemps";
-                labelStopWin.Text = "StopGain";
+                labelStopWin.Text = "StopGain:";
                 labelResumeOnStop.Text = "Resumé de session";
                 labelHideBbs.Text = "Cacher les BBs";
                 labelCloseSkype.Text = "Fermer Skype?";
@@ -959,6 +1017,8 @@ namespace TiltStopLoss
                 labelInfo.Text = "Voir l'aide svp";
                 labelResumeSession.Text = "Résumé de Session";
                 labelHistoryMax.Text = "Historique";
+                labelStoplossIntermediate.Text = "Intermédiaire";
+                labelStopWinIntermediate.Text = "Intermédiaire";
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
@@ -972,12 +1032,12 @@ namespace TiltStopLoss
                 labePassword.Text = "Palavra passe";
                 labelTitleDB.Text = "Conf. Base Dados";
                 help = "/help/header_pt.html";
-                labelStoploss.Text = "StopPercas";
+                labelStoploss.Text = "StopPercas:";
                 labelStopLossPeak.Text = "StopPercasPico";
                 labelBbOver.Text = "BBs acima de";
                 labelStophands.Text = "StopMãos";
                 labelStopTime.Text = "StopTempo";
-                labelStopWin.Text = "StopGanhos";
+                labelStopWin.Text = "StopGanhos:";
                 labelResumeOnStop.Text = "Resumir a sessão";
                 labelHideBbs.Text = "Esconder os BBs";
                 labelCloseSkype.Text = "Fechar Skype?";
@@ -987,6 +1047,8 @@ namespace TiltStopLoss
                 labelInfo.Text = "Ver a ajuda sff";
                 labelResumeSession.Text = "Resumo da Sessão";
                 labelHistoryMax.Text = "Histórico";
+                labelStoplossIntermediate.Text = "Intermédio";
+                labelStopWinIntermediate.Text = "Intermédio";
             }
         }
 
@@ -1030,6 +1092,6 @@ namespace TiltStopLoss
             }
         }
 
-
+        
     }
 }

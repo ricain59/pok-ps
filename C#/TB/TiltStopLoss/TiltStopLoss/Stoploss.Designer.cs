@@ -110,11 +110,12 @@
             // 
             this.labelStop.AutoSize = true;
             this.labelStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStop.Location = new System.Drawing.Point(30, 57);
+            this.labelStop.ForeColor = System.Drawing.Color.White;
+            this.labelStop.Location = new System.Drawing.Point(13, 57);
             this.labelStop.Name = "labelStop";
-            this.labelStop.Size = new System.Drawing.Size(20, 16);
+            this.labelStop.Size = new System.Drawing.Size(152, 16);
             this.labelStop.TabIndex = 6;
-            this.labelStop.Text = "   ";
+            this.labelStop.Text = "__________________";
             // 
             // Stoploss
             // 
