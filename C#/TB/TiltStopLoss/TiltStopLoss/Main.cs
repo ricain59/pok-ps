@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.60;
+        private Double version = 1.61;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -218,6 +218,7 @@ namespace TiltStopLoss
                         //em vez de mandar só string crio um array do que preciso
                         String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text };
                         String[] sounds = { soundloss, soundtime, soundwin, soundhands, soundinternediateloss, soundinternediatewin };
+                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked };
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -244,7 +245,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, limit, sounds, 1);
+                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, sounds, 1);
                             }
                             else //hem2
                             {
@@ -259,7 +260,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, limit, sounds, 2);
+                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, sounds, 2);
                             }
                         }
                         else //pt4
@@ -274,7 +275,7 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, data, checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, limit, sounds, 4);
+                            sl = new Stoploss(this, playeralias, db, data, checkb, limit, sounds, 4);
                         }
                         sl.Show();                        
                     }
@@ -495,6 +496,16 @@ namespace TiltStopLoss
                         checkBoxVerifyApplication.Checked = false;
                     }
                     break;
+                case "Ragequit":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxRageQuit.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxRageQuit.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -574,6 +585,8 @@ namespace TiltStopLoss
             w.Write("StopWinIntermediate=" + textBoxStopWinIntermediate.Text.ToString());
             w.WriteLine();
             w.Write("Verifyapp=" + checkBoxVerifyApplication.Checked.ToString());
+            w.WriteLine();
+            w.Write("Ragequit=" + checkBoxRageQuit.Checked.ToString());
             w.WriteLine();            
             w.Close();
             //test
@@ -998,6 +1011,7 @@ namespace TiltStopLoss
                 buttonChoiceSounds.Text = "Sounds";
                 labelInfo.Text = "View help please";
                 labelInfo2.Text = "View help please";
+                labelInfo3.Text = "View help please";
                 labelResumeSession.Text = "Resume Session";
                 labelHistoryMax.Text = "History";
                 labelStoplossIntermediate.Text = "Intermediate";
@@ -1030,6 +1044,7 @@ namespace TiltStopLoss
                 buttonChoiceSounds.Text = "Sons";
                 labelInfo.Text = "Voir l'aide svp";
                 labelInfo2.Text = "Voir l'aide svp";
+                labelInfo3.Text = "Voir l'aide svp";
                 labelResumeSession.Text = "Résumé de Session";
                 labelHistoryMax.Text = "Historique";
                 labelStoplossIntermediate.Text = "Intermédiaire";
@@ -1062,6 +1077,7 @@ namespace TiltStopLoss
                 buttonChoiceSounds.Text = "Sons";
                 labelInfo.Text = "Ver a ajuda sff";
                 labelInfo2.Text = "Ver a ajuda sff";
+                labelInfo3.Text = "Ver a ajuda sff";
                 labelResumeSession.Text = "Resumo da Sessão";
                 labelHistoryMax.Text = "Histórico";
                 labelStoplossIntermediate.Text = "Intermédio";

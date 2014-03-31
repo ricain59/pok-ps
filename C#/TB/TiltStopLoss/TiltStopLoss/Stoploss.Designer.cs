@@ -36,13 +36,14 @@
             this.labelHands = new System.Windows.Forms.Label();
             this.buttonSet = new System.Windows.Forms.Button();
             this.labelStop = new System.Windows.Forms.Label();
+            this.buttonRageQuit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(138, 28);
+            this.buttonStop.Location = new System.Drawing.Point(148, 28);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(38, 23);
+            this.buttonStop.Size = new System.Drawing.Size(37, 23);
             this.buttonStop.TabIndex = 0;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -52,7 +53,7 @@
             // 
             this.labelTimer.AutoSize = true;
             this.labelTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimer.Location = new System.Drawing.Point(120, 9);
+            this.labelTimer.Location = new System.Drawing.Point(126, 7);
             this.labelTimer.Name = "labelTimer";
             this.labelTimer.Size = new System.Drawing.Size(56, 16);
             this.labelTimer.TabIndex = 1;
@@ -65,7 +66,7 @@
             this.labelBb.AutoSize = true;
             this.labelBb.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBb.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelBb.Location = new System.Drawing.Point(12, 9);
+            this.labelBb.Location = new System.Drawing.Point(38, 6);
             this.labelBb.Name = "labelBb";
             this.labelBb.Size = new System.Drawing.Size(71, 24);
             this.labelBb.TabIndex = 2;
@@ -80,7 +81,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 39);
+            this.label1.Location = new System.Drawing.Point(5, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 16);
             this.label1.TabIndex = 3;
@@ -90,7 +91,7 @@
             // 
             this.labelHands.AutoSize = true;
             this.labelHands.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHands.Location = new System.Drawing.Point(57, 39);
+            this.labelHands.Location = new System.Drawing.Point(52, 36);
             this.labelHands.Name = "labelHands";
             this.labelHands.Size = new System.Drawing.Size(15, 16);
             this.labelHands.TabIndex = 4;
@@ -98,7 +99,7 @@
             // 
             // buttonSet
             // 
-            this.buttonSet.Location = new System.Drawing.Point(101, 28);
+            this.buttonSet.Location = new System.Drawing.Point(112, 28);
             this.buttonSet.Name = "buttonSet";
             this.buttonSet.Size = new System.Drawing.Size(31, 23);
             this.buttonSet.TabIndex = 5;
@@ -109,20 +110,32 @@
             // labelStop
             // 
             this.labelStop.AutoSize = true;
-            this.labelStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelStop.ForeColor = System.Drawing.Color.White;
-            this.labelStop.Location = new System.Drawing.Point(13, 57);
+            this.labelStop.Location = new System.Drawing.Point(38, 60);
             this.labelStop.Name = "labelStop";
-            this.labelStop.Size = new System.Drawing.Size(152, 16);
+            this.labelStop.Size = new System.Drawing.Size(151, 15);
             this.labelStop.TabIndex = 6;
             this.labelStop.Text = "__________________";
+            // 
+            // buttonRageQuit
+            // 
+            this.buttonRageQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRageQuit.Location = new System.Drawing.Point(2, 56);
+            this.buttonRageQuit.Name = "buttonRageQuit";
+            this.buttonRageQuit.Size = new System.Drawing.Size(36, 23);
+            this.buttonRageQuit.TabIndex = 7;
+            this.buttonRageQuit.Text = "Rage";
+            this.buttonRageQuit.UseVisualStyleBackColor = true;
+            this.buttonRageQuit.Click += new System.EventHandler(this.buttonRageQuit_Click);
             // 
             // Stoploss
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(188, 82);
+            this.ClientSize = new System.Drawing.Size(196, 82);
+            this.Controls.Add(this.buttonRageQuit);
             this.Controls.Add(this.labelStop);
             this.Controls.Add(this.buttonSet);
             this.Controls.Add(this.labelHands);
@@ -148,5 +161,6 @@
         private System.Windows.Forms.Label labelHands;
         private System.Windows.Forms.Button buttonSet;
         private System.Windows.Forms.Label labelStop;
+        private System.Windows.Forms.Button buttonRageQuit;
     }
 }
