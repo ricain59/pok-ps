@@ -51,6 +51,9 @@
             this.labelPlayer = new System.Windows.Forms.Label();
             this.textBoxPlayer = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.labelInfo2 = new System.Windows.Forms.Label();
+            this.checkBoxVerifyApplication = new System.Windows.Forms.CheckBox();
+            this.labelVerifyApp = new System.Windows.Forms.Label();
             this.labelStopWinIntermediate = new System.Windows.Forms.Label();
             this.textBoxStopWinIntermediate = new System.Windows.Forms.TextBox();
             this.labelStopWinFinal = new System.Windows.Forms.Label();
@@ -116,9 +119,9 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
-            this.checkBoxVerifyApplication = new System.Windows.Forms.CheckBox();
-            this.labelVerifyApp = new System.Windows.Forms.Label();
-            this.labelInfo2 = new System.Windows.Forms.Label();
+            this.labelInfo3 = new System.Windows.Forms.Label();
+            this.checkBoxRageQuit = new System.Windows.Forms.CheckBox();
+            this.labelRageQuit = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabDatabase.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -377,6 +380,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.labelInfo3);
+            this.tabPage3.Controls.Add(this.checkBoxRageQuit);
+            this.tabPage3.Controls.Add(this.labelRageQuit);
             this.tabPage3.Controls.Add(this.labelInfo2);
             this.tabPage3.Controls.Add(this.checkBoxVerifyApplication);
             this.tabPage3.Controls.Add(this.labelVerifyApp);
@@ -424,6 +430,35 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Conf. Stop";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // labelInfo2
+            // 
+            this.labelInfo2.AutoSize = true;
+            this.labelInfo2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInfo2.Location = new System.Drawing.Point(212, 261);
+            this.labelInfo2.Name = "labelInfo2";
+            this.labelInfo2.Size = new System.Drawing.Size(87, 13);
+            this.labelInfo2.TabIndex = 55;
+            this.labelInfo2.Text = "View help please";
+            // 
+            // checkBoxVerifyApplication
+            // 
+            this.checkBoxVerifyApplication.AutoSize = true;
+            this.checkBoxVerifyApplication.Location = new System.Drawing.Point(191, 261);
+            this.checkBoxVerifyApplication.Name = "checkBoxVerifyApplication";
+            this.checkBoxVerifyApplication.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxVerifyApplication.TabIndex = 54;
+            this.checkBoxVerifyApplication.UseVisualStyleBackColor = true;
+            // 
+            // labelVerifyApp
+            // 
+            this.labelVerifyApp.AutoSize = true;
+            this.labelVerifyApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVerifyApp.Location = new System.Drawing.Point(6, 261);
+            this.labelVerifyApp.Name = "labelVerifyApp";
+            this.labelVerifyApp.Size = new System.Drawing.Size(106, 13);
+            this.labelVerifyApp.TabIndex = 53;
+            this.labelVerifyApp.Text = "Verify Application";
             // 
             // labelStopWinIntermediate
             // 
@@ -542,7 +577,7 @@
             "200",
             "400",
             "500"});
-            this.comboBoxBRM.Location = new System.Drawing.Point(161, 318);
+            this.comboBoxBRM.Location = new System.Drawing.Point(161, 326);
             this.comboBoxBRM.Name = "comboBoxBRM";
             this.comboBoxBRM.Size = new System.Drawing.Size(45, 21);
             this.comboBoxBRM.TabIndex = 43;
@@ -551,7 +586,7 @@
             // 
             this.labelBrm.AutoSize = true;
             this.labelBrm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBrm.Location = new System.Drawing.Point(6, 322);
+            this.labelBrm.Location = new System.Drawing.Point(6, 330);
             this.labelBrm.Name = "labelBrm";
             this.labelBrm.Size = new System.Drawing.Size(109, 13);
             this.labelBrm.TabIndex = 42;
@@ -561,7 +596,7 @@
             // 
             this.labelInfo.AutoSize = true;
             this.labelInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInfo.Location = new System.Drawing.Point(212, 322);
+            this.labelInfo.Location = new System.Drawing.Point(212, 330);
             this.labelInfo.Name = "labelInfo";
             this.labelInfo.Size = new System.Drawing.Size(87, 13);
             this.labelInfo.TabIndex = 41;
@@ -570,7 +605,7 @@
             // checkBoxButtonSet
             // 
             this.checkBoxButtonSet.AutoSize = true;
-            this.checkBoxButtonSet.Location = new System.Drawing.Point(191, 298);
+            this.checkBoxButtonSet.Location = new System.Drawing.Point(191, 304);
             this.checkBoxButtonSet.Name = "checkBoxButtonSet";
             this.checkBoxButtonSet.Size = new System.Drawing.Size(15, 14);
             this.checkBoxButtonSet.TabIndex = 39;
@@ -580,7 +615,7 @@
             // 
             this.labelActiveSet.AutoSize = true;
             this.labelActiveSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelActiveSet.Location = new System.Drawing.Point(6, 298);
+            this.labelActiveSet.Location = new System.Drawing.Point(6, 304);
             this.labelActiveSet.Name = "labelActiveSet";
             this.labelActiveSet.Size = new System.Drawing.Size(122, 13);
             this.labelActiveSet.TabIndex = 38;
@@ -589,7 +624,7 @@
             // checkBoxCloseSkype
             // 
             this.checkBoxCloseSkype.AutoSize = true;
-            this.checkBoxCloseSkype.Location = new System.Drawing.Point(191, 247);
+            this.checkBoxCloseSkype.Location = new System.Drawing.Point(191, 240);
             this.checkBoxCloseSkype.Name = "checkBoxCloseSkype";
             this.checkBoxCloseSkype.Size = new System.Drawing.Size(15, 14);
             this.checkBoxCloseSkype.TabIndex = 35;
@@ -599,7 +634,7 @@
             // 
             this.labelCloseSkype.AutoSize = true;
             this.labelCloseSkype.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCloseSkype.Location = new System.Drawing.Point(6, 247);
+            this.labelCloseSkype.Location = new System.Drawing.Point(6, 240);
             this.labelCloseSkype.Name = "labelCloseSkype";
             this.labelCloseSkype.Size = new System.Drawing.Size(84, 13);
             this.labelCloseSkype.TabIndex = 34;
@@ -641,7 +676,7 @@
             // checkBoxHideBbbs
             // 
             this.checkBoxHideBbbs.AutoSize = true;
-            this.checkBoxHideBbbs.Location = new System.Drawing.Point(191, 224);
+            this.checkBoxHideBbbs.Location = new System.Drawing.Point(191, 220);
             this.checkBoxHideBbbs.Name = "checkBoxHideBbbs";
             this.checkBoxHideBbbs.Size = new System.Drawing.Size(15, 14);
             this.checkBoxHideBbbs.TabIndex = 29;
@@ -651,7 +686,7 @@
             // 
             this.labelHideBbs.AutoSize = true;
             this.labelHideBbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHideBbs.Location = new System.Drawing.Point(6, 224);
+            this.labelHideBbs.Location = new System.Drawing.Point(6, 220);
             this.labelHideBbs.Name = "labelHideBbs";
             this.labelHideBbs.Size = new System.Drawing.Size(59, 13);
             this.labelHideBbs.TabIndex = 28;
@@ -1127,34 +1162,34 @@
             this.toolTipHelpText.InitialDelay = 100;
             this.toolTipHelpText.ReshowDelay = 20;
             // 
-            // checkBoxVerifyApplication
+            // labelInfo3
             // 
-            this.checkBoxVerifyApplication.AutoSize = true;
-            this.checkBoxVerifyApplication.Location = new System.Drawing.Point(191, 272);
-            this.checkBoxVerifyApplication.Name = "checkBoxVerifyApplication";
-            this.checkBoxVerifyApplication.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxVerifyApplication.TabIndex = 54;
-            this.checkBoxVerifyApplication.UseVisualStyleBackColor = true;
+            this.labelInfo3.AutoSize = true;
+            this.labelInfo3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInfo3.Location = new System.Drawing.Point(212, 282);
+            this.labelInfo3.Name = "labelInfo3";
+            this.labelInfo3.Size = new System.Drawing.Size(87, 13);
+            this.labelInfo3.TabIndex = 58;
+            this.labelInfo3.Text = "View help please";
             // 
-            // labelVerifyApp
+            // checkBoxRageQuit
             // 
-            this.labelVerifyApp.AutoSize = true;
-            this.labelVerifyApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVerifyApp.Location = new System.Drawing.Point(6, 272);
-            this.labelVerifyApp.Name = "labelVerifyApp";
-            this.labelVerifyApp.Size = new System.Drawing.Size(106, 13);
-            this.labelVerifyApp.TabIndex = 53;
-            this.labelVerifyApp.Text = "Verify Application";
+            this.checkBoxRageQuit.AutoSize = true;
+            this.checkBoxRageQuit.Location = new System.Drawing.Point(191, 282);
+            this.checkBoxRageQuit.Name = "checkBoxRageQuit";
+            this.checkBoxRageQuit.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRageQuit.TabIndex = 57;
+            this.checkBoxRageQuit.UseVisualStyleBackColor = true;
             // 
-            // labelInfo2
+            // labelRageQuit
             // 
-            this.labelInfo2.AutoSize = true;
-            this.labelInfo2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInfo2.Location = new System.Drawing.Point(212, 272);
-            this.labelInfo2.Name = "labelInfo2";
-            this.labelInfo2.Size = new System.Drawing.Size(87, 13);
-            this.labelInfo2.TabIndex = 55;
-            this.labelInfo2.Text = "View help please";
+            this.labelRageQuit.AutoSize = true;
+            this.labelRageQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRageQuit.Location = new System.Drawing.Point(6, 282);
+            this.labelRageQuit.Name = "labelRageQuit";
+            this.labelRageQuit.Size = new System.Drawing.Size(64, 13);
+            this.labelRageQuit.TabIndex = 56;
+            this.labelRageQuit.Text = "Rage Quit";
             // 
             // Main
             // 
@@ -1276,6 +1311,9 @@
         private System.Windows.Forms.CheckBox checkBoxVerifyApplication;
         private System.Windows.Forms.Label labelVerifyApp;
         private System.Windows.Forms.Label labelInfo2;
+        private System.Windows.Forms.Label labelInfo3;
+        private System.Windows.Forms.CheckBox checkBoxRageQuit;
+        private System.Windows.Forms.Label labelRageQuit;
     }
 }
 

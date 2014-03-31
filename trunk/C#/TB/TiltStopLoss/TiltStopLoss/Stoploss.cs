@@ -47,8 +47,8 @@ namespace TiltStopLoss
         private Boolean hidebb;
         private Double winintermediate;
         private Double lossintermediate;
-
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean hidebb, Boolean buttonset, Boolean verifyapp, Int32 limit, String[] sound, int tracker)
+        
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, String[] sound, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -65,13 +65,13 @@ namespace TiltStopLoss
             this.tracker = tracker;
             sounds = sound;
             blocklimit = limit;
-            this.hidebb = hidebb;
+            this.hidebb = checkb[0];
             if (hidebb)
             {
                 labelBb.Enabled = false;
                 labelBb.Visible = false;
             }
-            buttonSet.Visible = buttonset;
+            buttonSet.Visible = checkb[1];
             loadconfig();
             //cronometro
             startcrono = new Thread(new ThreadStart(this.stoptimer));
@@ -80,12 +80,13 @@ namespace TiltStopLoss
             startbb = new Thread(new ThreadStart(this.calculateBB));
             startbb.Start();  
             //verify app
-            verapp = verifyapp;
+            verapp = checkb[2];
             if (verapp)
             {
                 startapp = new Thread(new ThreadStart(this.verifyApp));
                 startapp.Start();
             }
+            buttonRageQuit.Visible = checkb[3];            
         }
 
         /// <summary>
@@ -765,5 +766,20 @@ namespace TiltStopLoss
                 }                
             }
         }
+
+        /// <summary>
+        /// RAGEQUIT
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonRageQuit_Click(object sender, EventArgs e)
+        {
+            String[] rooms = { "pokerstars", "winamax" };
+            foreach (String room in rooms)
+            {
+                new Utils().detectApps(room);
+            }
+            this.Close();
+        }        
     }
 }
