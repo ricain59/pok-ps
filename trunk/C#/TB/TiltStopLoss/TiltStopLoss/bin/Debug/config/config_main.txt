@@ -34,3 +34,4 @@ StopLossIntermediate=48
 StopWinIntermediate=48
 Verifyapp=False
 Ragequit=True
+repeatsound=True

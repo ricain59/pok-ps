@@ -14,13 +14,14 @@ namespace StopLoss
     {
         private Main wmain;
         
-        public FormSounds(Main wmain, String[] sounds)
+        public FormSounds(Main wmain, String[] sounds, Boolean repeat)
         {
             InitializeComponent();
             textBoxSoundStopLoss.Text = sounds[0];
             textBoxSoundStopTime.Text = sounds[1];
             textBoxSoundStopWin.Text = sounds[2];
             textBoxSoundStopHands.Text = sounds[3];
+            checkBoxRepeatSound.Checked = repeat;
             this.wmain = wmain;
         }
 
@@ -111,7 +112,7 @@ namespace StopLoss
 
         private void FormSounds_FormClosed(object sender, FormClosedEventArgs e)
         {
-            wmain.setSounds(textBoxSoundStopLoss.Text, textBoxSoundStopHands.Text, textBoxSoundStopTime.Text, textBoxSoundStopWin.Text);
+            wmain.setSounds(textBoxSoundStopLoss.Text, textBoxSoundStopHands.Text, textBoxSoundStopTime.Text, textBoxSoundStopWin.Text, checkBoxRepeatSound.Checked);
             wmain.Visible = true;            
         }
     }

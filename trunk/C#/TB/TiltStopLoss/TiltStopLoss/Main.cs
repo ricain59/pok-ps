@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.61;
+        private Double version = 1.62;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -36,6 +36,7 @@ namespace TiltStopLoss
         private Int32 histhands = 0;
         private Int32 histtime = 0;
         private Double histbbsmax = 0;
+        private Boolean repeat = true;
         //mouse
         private String help;
         
@@ -218,7 +219,7 @@ namespace TiltStopLoss
                         //em vez de mandar só string crio um array do que preciso
                         String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text };
                         String[] sounds = { soundloss, soundtime, soundwin, soundhands, soundinternediateloss, soundinternediatewin };
-                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked };
+                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, repeat };
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -506,6 +507,16 @@ namespace TiltStopLoss
                         checkBoxRageQuit.Checked = false;
                     }
                     break;
+                case "repeatsound":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        repeat = true;
+                    }
+                    else
+                    {
+                        repeat = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -587,6 +598,8 @@ namespace TiltStopLoss
             w.Write("Verifyapp=" + checkBoxVerifyApplication.Checked.ToString());
             w.WriteLine();
             w.Write("Ragequit=" + checkBoxRageQuit.Checked.ToString());
+            w.WriteLine();
+            w.Write("repeatsound=" + repeat.ToString());
             w.WriteLine();            
             w.Close();
             //test
@@ -938,7 +951,7 @@ namespace TiltStopLoss
         {
             this.Visible = false;
             String[] sound = new String[] { soundloss, soundtime, soundwin, soundhands };
-            FormSounds fs = new FormSounds(this, sound);
+            FormSounds fs = new FormSounds(this, sound, repeat);
             fs.Show();
         }
 
@@ -949,12 +962,13 @@ namespace TiltStopLoss
         /// <param name="hands"></param>
         /// <param name="time"></param>
         /// <param name="win"></param>
-        public void setSounds(String loss, String hands, String time, String win)
+        public void setSounds(String loss, String hands, String time, String win, Boolean repeatsounds)
         {
             soundloss = loss;
             soundtime = time;
             soundwin = win;
             soundhands = hands;
+            repeat = repeatsounds;
         }
 
         /// <summary>

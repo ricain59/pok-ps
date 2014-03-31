@@ -56,33 +56,18 @@ namespace TiltStopLoss
         /// <summary>
         /// Toca a musica chata do stop
         /// </summary>
-        public WMPLib.WindowsMediaPlayer playsound(String sound)
+        public WMPLib.WindowsMediaPlayer playsound(String sound, Boolean loop)
         {
             String path = Directory.GetCurrentDirectory();
             String filepath = path + "\\sounds\\" +sound;
             //mp3  & wav
             WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
             player.URL = filepath;
-            player.settings.setMode("loop", true);
+            if (loop)
+            {
+                player.settings.setMode("loop", true);
+            }
             player.controls.play();            
-            //old only wav
-            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(filepath);
-            //player.PlayLooping();            
-            return player;
-        }
-
-        /// <summary>
-        /// Toca a musica chata do stop intermediate
-        /// </summary>
-        public WMPLib.WindowsMediaPlayer playSoundIntermediate(String sound)
-        {
-            String path = Directory.GetCurrentDirectory();
-            String filepath = path + "\\sounds\\" + sound;
-            //mp3  & wav
-            WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
-            player.URL = filepath;
-            //player.settings.setMode("loop", true);
-            player.controls.play();
             //old only wav
             //System.Media.SoundPlayer player = new System.Media.SoundPlayer(filepath);
             //player.PlayLooping();            
@@ -404,6 +389,67 @@ namespace TiltStopLoss
                 return 500;
             }
             return 0;
-        } 
+        }
+
+        /// <summary>
+        /// get limit for ipoker
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <returns></returns>
+        public Int16 getNlIpoker(String hand)
+        {
+            //only nl200
+            String[] temp = hand.Split(new string[] { "gametype" }, StringSplitOptions.RemoveEmptyEntries);
+            
+            if (temp[1].Contains("0.01/") && temp[1].Contains("0.02"))
+            {
+                return 2;
+            }
+            if (temp[1].Contains("0.02/") && temp[1].Contains("0.05"))
+            {
+                return 5;
+            }
+            if (temp[1].Contains("0.05/") && temp[1].Contains("0.10"))
+            {
+                return 10;
+            }
+            if (temp[1].Contains("0.08/") && temp[1].Contains("0.16"))
+            {
+                return 16;
+            }
+            if (temp[1].Contains("0.10/") && temp[1].Contains("0.20"))
+            {
+                return 20;
+            }
+            if (temp[1].Contains("0.10/") && temp[1].Contains("0.25"))
+            {
+                return 25;
+            }
+            if (temp[1].Contains("0.15/") && temp[1].Contains("0.30"))
+            {
+                return 30;
+            }
+            if (temp[1].Contains("0.25/") && temp[1].Contains("0.50"))
+            {
+                return 50;
+            }
+            if (temp[1].Contains("0.50/") && temp[1].Contains("1.00"))
+            {
+                return 100;
+            }
+            if (temp[1].Contains("1/") && temp[1].Contains("2"))
+            {
+                return 200;
+            }
+            if (temp[1].Contains("2/") && temp[1].Contains("4"))
+            {
+                return 400;
+            }
+            if (temp[1].Contains("2.50/") && temp[1].Contains("5.00"))
+            {
+                return 500;
+            }
+            return 0;
+        }
     }
 }

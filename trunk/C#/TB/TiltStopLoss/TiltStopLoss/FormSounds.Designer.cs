@@ -47,6 +47,8 @@
             this.textBoxSoundStopWin = new System.Windows.Forms.TextBox();
             this.buttonStopWin = new System.Windows.Forms.Button();
             this.buttonBrowseStopWin = new System.Windows.Forms.Button();
+            this.labelRepeatSound = new System.Windows.Forms.Label();
+            this.checkBoxRepeatSound = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label9
@@ -93,7 +95,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(220, 145);
+            this.buttonOk.Location = new System.Drawing.Point(220, 158);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 6;
@@ -214,12 +216,33 @@
             this.buttonBrowseStopWin.UseVisualStyleBackColor = true;
             this.buttonBrowseStopWin.Click += new System.EventHandler(this.buttonBrowseStopWin_Click);
             // 
+            // labelRepeatSound
+            // 
+            this.labelRepeatSound.AutoSize = true;
+            this.labelRepeatSound.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRepeatSound.Location = new System.Drawing.Point(12, 138);
+            this.labelRepeatSound.Name = "labelRepeatSound";
+            this.labelRepeatSound.Size = new System.Drawing.Size(95, 13);
+            this.labelRepeatSound.TabIndex = 25;
+            this.labelRepeatSound.Text = "Repeat Sound?";
+            // 
+            // checkBoxRepeatSound
+            // 
+            this.checkBoxRepeatSound.AutoSize = true;
+            this.checkBoxRepeatSound.Location = new System.Drawing.Point(115, 137);
+            this.checkBoxRepeatSound.Name = "checkBoxRepeatSound";
+            this.checkBoxRepeatSound.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRepeatSound.TabIndex = 26;
+            this.checkBoxRepeatSound.UseVisualStyleBackColor = true;
+            // 
             // FormSounds
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(485, 179);
+            this.ClientSize = new System.Drawing.Size(485, 189);
+            this.Controls.Add(this.checkBoxRepeatSound);
+            this.Controls.Add(this.labelRepeatSound);
             this.Controls.Add(this.textBoxSoundStopWin);
             this.Controls.Add(this.buttonStopWin);
             this.Controls.Add(this.buttonBrowseStopWin);
@@ -266,5 +289,7 @@
         private System.Windows.Forms.TextBox textBoxSoundStopWin;
         private System.Windows.Forms.Button buttonStopWin;
         private System.Windows.Forms.Button buttonBrowseStopWin;
+        private System.Windows.Forms.Label labelRepeatSound;
+        private System.Windows.Forms.CheckBox checkBoxRepeatSound;
     }
 }
