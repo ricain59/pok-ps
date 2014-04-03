@@ -16,12 +16,14 @@ namespace TiltStopLoss
 {
     delegate void SetTextCallback(string text);
     delegate void SetTextCallbacks(String text, Color cor);
+    delegate void SetButtonCallbacks(Boolean vi);
     
     public partial class Stoploss : Form
     {
         private Main wmain;
         private Db dbase;
         private Thread startcrono;
+        private Thread startcronosnooze;
         private Thread startbb;
         private Thread startapp;
         private Boolean continu = true;
@@ -48,8 +50,11 @@ namespace TiltStopLoss
         private Boolean repeat;
         private Double winintermediate;
         private Double lossintermediate;
+        private Boolean snoozeb;
+        private Int32 snoozeminute;
+        private Boolean activesnooze = false;
         
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, String[] sound, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, Int32 snooze, String[] sound, int tracker)
         {
             InitializeComponent();
             this.wmain = wmain;
@@ -89,6 +94,9 @@ namespace TiltStopLoss
             }
             buttonRageQuit.Visible = checkb[3];
             repeat = checkb[4];
+            snoozeb = checkb[5];
+            snoozeminute = snooze;
+            buttonSnooze.Visible = false;
         }
 
         /// <summary>
@@ -121,6 +129,10 @@ namespace TiltStopLoss
             if (verapp)
             {
                 startapp.Abort();
+            }
+            if (activesnooze)
+            {
+                startcronosnooze.Abort();
             }
             //faço o new value na janela principal
             wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString(), peakover.ToString(), hidebb, winintermediate.ToString(), lossintermediate.ToString());
@@ -247,6 +259,7 @@ namespace TiltStopLoss
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopLoss !!!!", Color.Red);
+                                snooze();
                             }                            
                         }
                     }
@@ -260,6 +273,7 @@ namespace TiltStopLoss
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopWin !!!!", Color.Green);
+                                snooze();
                             }                            
                         }
                     }
@@ -279,6 +293,7 @@ namespace TiltStopLoss
                                     stop = true;
                                     //buttonSoundStop.Visible = true;
                                     labelStopSet("!!!! StopPeak !!!!", Color.Red);
+                                    snooze();
                                 }                                
                             }
                         }
@@ -420,6 +435,7 @@ namespace TiltStopLoss
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopHand !!!!", Color.Blue);
+                                snooze();
                             }                            
                         }
                     }
@@ -598,6 +614,7 @@ namespace TiltStopLoss
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopTime !!!!", Color.Black);
+                                snooze();
                             }                            
                         }
                     }
@@ -638,6 +655,12 @@ namespace TiltStopLoss
                 this.labelStop.ForeColor = cor;
             }
         }
+
+        private void SetButtonSnoozeVi(Boolean vi)
+        {
+            this.buttonSnooze.Visible = vi;
+        }
+
         #endregion
 
         /// <summary>
@@ -812,6 +835,80 @@ namespace TiltStopLoss
                 new Utils().detectApps(room);
             }
             this.Close();
-        }        
+        }
+
+        /// <summary>
+        /// view button snooze
+        /// </summary>
+        private void snooze()
+        {
+            if (snoozeb)
+            {
+                if (this.buttonSnooze.InvokeRequired)
+                {
+                    SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
+                    this.Invoke(d, new object[] { true });
+                }
+                else
+                {
+                    // It's on the same thread, no need for Invoke
+                    this.buttonSnooze.Visible = true;
+                }
+                
+                //buttonSnooze.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// thread pour lancer le timer égal au temps du snooze pour relancer le player.
+        /// le stop = true a ce moment la
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSnooze_Click(object sender, EventArgs e)
+        {
+            player.controls.pause();
+            if (this.buttonSnooze.InvokeRequired)
+            {
+                SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
+                this.Invoke(d, new object[] { false });
+            }
+            else
+            {
+                // It's on the same thread, no need for Invoke
+                this.buttonSnooze.Visible = false;
+            }
+            startcronosnooze = new Thread(new ThreadStart(this.timerSnooze));
+            startcronosnooze.Start();            
+        }
+
+        /// <summary>
+        /// Son en pause
+        /// </summary>
+        private void timerSnooze()
+        {
+            activesnooze = true;
+            int seconde = 0;
+            int finaltime = snoozeminute * 60;            
+            while (seconde < finaltime)
+            {
+                Thread.Sleep(1000);
+                seconde++;
+            }
+            player.controls.play();
+            if (this.buttonSnooze.InvokeRequired)
+            {
+                SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
+                this.Invoke(d, new object[] { true });
+            }
+            else
+            {
+                // It's on the same thread, no need for Invoke
+                this.buttonSnooze.Visible = true;
+            }
+            activesnooze = false;
+        }
+
+
     }
 }

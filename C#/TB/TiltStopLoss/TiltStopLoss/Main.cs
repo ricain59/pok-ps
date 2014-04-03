@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.62;
+        private Double version = 1.63;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -52,6 +52,8 @@ namespace TiltStopLoss
             //por defeito a combobox no NO
             comboBoxBRM.SelectedIndex = 0;
             comboBoxLanguage.SelectedIndex = 0;
+            comboBoxSnoozeMinute.SelectedIndex = 0;
+            comboBoxSnoozeMinute.Enabled = false;
             //depois disso volto ao soft caso diz que não
             loadconfig();
             //abro no separador conf stop se já foi configurado a DB
@@ -153,7 +155,8 @@ namespace TiltStopLoss
                 MessageBox.Show(con.ToString());
                 stop = true;
             }
-            if (new Utils().stringtoDouble(textBoxStopWinIntermediate.Text) >= new Utils().stringtoDouble(textBoxStopWin.Text))
+            Double intwin = new Utils().stringtoDouble(textBoxStopWinIntermediate.Text);
+            if (intwin != 0 && intwin >= new Utils().stringtoDouble(textBoxStopWin.Text))
             {
                 if (comboBoxLanguage.SelectedIndex == 0)
                 {
@@ -167,9 +170,10 @@ namespace TiltStopLoss
                 {
                     MessageBox.Show("Stopganhos intermédios não pode ser superior a stopganhos");
                 }                
-                stop = true;
+                stop = true;            
             }
-            if (new Utils().stringtoDouble(textBoxStopLossIntermediate.Text) >= new Utils().stringtoDouble(textBoxStopLoss.Text))
+            double intloss = new Utils().stringtoDouble(textBoxStopLossIntermediate.Text);
+            if (intloss != 0 && intloss >= new Utils().stringtoDouble(textBoxStopLoss.Text))
             {
                 if (comboBoxLanguage.SelectedIndex == 0)
                 {
@@ -219,7 +223,7 @@ namespace TiltStopLoss
                         //em vez de mandar só string crio um array do que preciso
                         String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text };
                         String[] sounds = { soundloss, soundtime, soundwin, soundhands, soundinternediateloss, soundinternediatewin };
-                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, repeat };
+                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, repeat, checkBoxSnoozeSound.Checked };
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -230,6 +234,7 @@ namespace TiltStopLoss
                         {
                             limit = new Utils().stringtoInt32(comboBoxBRM.SelectedItem.ToString());
                         }
+                        Int32 minutesnooze = new Utils().stringtoInt32(comboBoxSnoozeMinute.SelectedItem.ToString());
                         //
                         if (checkBoxHem1.Checked || checkBoxHem2.Checked)
                         {
@@ -246,7 +251,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, sounds, 1);
+                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 1);
                             }
                             else //hem2
                             {
@@ -261,7 +266,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, sounds, 2);
+                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 2);
                             }
                         }
                         else //pt4
@@ -276,7 +281,7 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, data, checkb, limit, sounds, 4);
+                            sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 4);
                         }
                         sl.Show();                        
                     }
@@ -517,6 +522,21 @@ namespace TiltStopLoss
                         repeat = false;
                     }
                     break;
+                case "Snooze":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxSnoozeSound.Checked = true;
+                        comboBoxSnoozeMinute.Enabled = true;
+                    }
+                    else
+                    {
+                        checkBoxSnoozeSound.Checked = false;
+                        comboBoxSnoozeMinute.Enabled = false;
+                    }
+                    break;
+                case "Snoozeminute":
+                    comboBoxSnoozeMinute.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
+                    break;
                 default:
                     break;
             }
@@ -600,6 +620,10 @@ namespace TiltStopLoss
             w.Write("Ragequit=" + checkBoxRageQuit.Checked.ToString());
             w.WriteLine();
             w.Write("repeatsound=" + repeat.ToString());
+            w.WriteLine();
+            w.Write("Snooze=" + checkBoxSnoozeSound.Checked.ToString());
+            w.WriteLine();
+            w.Write("Snoozeminute=" + comboBoxSnoozeMinute.SelectedIndex);
             w.WriteLine();            
             w.Close();
             //test
@@ -1026,11 +1050,13 @@ namespace TiltStopLoss
                 labelInfo.Text = "View help please";
                 labelInfo2.Text = "View help please";
                 labelInfo3.Text = "View help please";
+                labelInfo4.Text = "View help please";
                 labelResumeSession.Text = "Resume Session";
                 labelHistoryMax.Text = "History";
                 labelStoplossIntermediate.Text = "Intermediate";
                 labelStopWinIntermediate.Text = "Intermediate";
                 labelVerifyApp.Text = "Verify application?";
+                labelSnoozeSounds.Text = "Snooze Sound";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
@@ -1059,11 +1085,13 @@ namespace TiltStopLoss
                 labelInfo.Text = "Voir l'aide svp";
                 labelInfo2.Text = "Voir l'aide svp";
                 labelInfo3.Text = "Voir l'aide svp";
+                labelInfo4.Text = "Voir l'aide svp";
                 labelResumeSession.Text = "Résumé de Session";
                 labelHistoryMax.Text = "Historique";
                 labelStoplossIntermediate.Text = "Intermédiaire";
                 labelStopWinIntermediate.Text = "Intermédiaire";
                 labelVerifyApp.Text = "Vérifier Applications?";
+                labelSnoozeSounds.Text = "Snooze Son";
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
@@ -1092,11 +1120,13 @@ namespace TiltStopLoss
                 labelInfo.Text = "Ver a ajuda sff";
                 labelInfo2.Text = "Ver a ajuda sff";
                 labelInfo3.Text = "Ver a ajuda sff";
+                labelInfo4.Text = "Ver a ajuda sff";
                 labelResumeSession.Text = "Resumo da Sessão";
                 labelHistoryMax.Text = "Histórico";
                 labelStoplossIntermediate.Text = "Intermédio";
                 labelStopWinIntermediate.Text = "Intermédio";
                 labelVerifyApp.Text = "Verificar Applicações?";
+                labelSnoozeSounds.Text = "Snooze Som";
             }
         }
 
@@ -1137,6 +1167,23 @@ namespace TiltStopLoss
                 //do something
                 String pathfinal = Directory.GetCurrentDirectory();
                 System.Diagnostics.Process.Start(pathfinal + help);
+            }
+        }
+
+        /// <summary>
+        /// para ativar a combobox dos minutos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxSnoozeSound_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxSnoozeSound.Checked)
+            {
+                comboBoxSnoozeMinute.Enabled = true;
+            }
+            else
+            {
+                comboBoxSnoozeMinute.Enabled = false;
             }
         }
 
