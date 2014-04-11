@@ -451,5 +451,37 @@ namespace TiltStopLoss
             }
             return 0;
         }
+
+        public Int16 getNlpp(String hand)
+        {
+            String[] handsplitbl = hand.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            String[] linefinal = handsplitbl[1].Split(' ');
+            String limite1 = linefinal[0].Replace("$", "");
+            String limite2 = limite1.Replace("€", "");
+            String limitefinal = limite2.Replace("£", "");
+            switch (limitefinal)
+            {
+                case "0.01/0.02":
+                    return 2;
+                case "0.02/0.04":
+                    return 4;
+                case "4":
+                    return 4;
+                case "0.05/0.10":
+                    return 10;
+                case "10":
+                    return 10;
+                case "0.10/0.25":
+                    return 25;
+                case "25":
+                    return 25;
+                case "0.25/0.50":
+                    return 50;
+                case "50":
+                    return 50;
+                default:
+                    return 0;
+            }            
+        }
     }
 }

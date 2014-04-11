@@ -1,0 +1,37 @@
+***** Hand History for Game 11815751519 *****
+€50 EUR NL Texas Hold'em - Thursday, June 07, 08:44:33 CEST 2012
+Table Klieng (Real Money)
+Seat 5 is the button
+Total number of players : 6/6 
+Seat 1: Drazounet ( €52.12 EUR )
+Seat 4: MrLoLin ( €98.34 EUR )
+Seat 3: ZodomiZatoR ( €57.90 EUR )
+Seat 6: ollen ( €0 EUR )
+Seat 5: pioupe99 ( €59 EUR )
+Seat 2: riton777 ( €61.58 EUR )
+Drazounet posts small blind [€0.25 EUR].
+riton777 posts big blind [€0.50 EUR].
+** Dealing down cards **
+Dealt to Drazounet [  4d 3s ]
+ZodomiZatoR folds
+MrLoLin folds
+pioupe99 calls [€0.50 EUR]
+Drazounet folds
+riton777 checks
+** Dealing Flop ** [ 3h, Qd, 6d ]
+riton777 checks
+ollen has left the table.
+pioupe99 bets [€2 EUR]
+riton777 calls [€2 EUR]
+** Dealing Turn ** [ Ah ]
+TheVal13 has joined the table.
+riton777 checks
+pioupe99 checks
+** Dealing River ** [ Kh ]
+riton777 bets [€4.90 EUR]
+pioupe99 folds
+riton777 does not show cards.
+riton777 wins €9.80 EUR
+Game #11815752302 starts.
+
+#Game No : 11815752302 

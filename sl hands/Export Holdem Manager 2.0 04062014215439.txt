@@ -1,0 +1,35 @@
+***** Hand History for Game 11815750270 *****
+€25 EUR NL Texas Hold'em - Thursday, June 07, 08:42:50 CEST 2012
+Table Mefomo (Real Money)
+Seat 2 is the button
+Total number of players : 6/6 
+Seat 1: Drazounet ( €25 EUR )
+Seat 6: ServalAA ( €25 EUR )
+Seat 5: TheVal13 ( €25 EUR )
+Seat 4: antodmuge ( €24.49 EUR )
+Seat 3: geso36 ( €32.02 EUR )
+Seat 2: joumann ( €12.37 EUR )
+antodmuge posts small blind [€0.10 EUR].
+TheVal13 posts big blind [€0.25 EUR].
+** Dealing down cards **
+Dealt to Drazounet [  Kd Ah ]
+Drazounet raises [€1.25 EUR]
+joumann calls [€1.25 EUR]
+antodmuge folds
+TheVal13 folds
+** Dealing Flop ** [ Ad, Qh, Jd ]
+Drazounet bets [€1.77 EUR]
+joumann calls [€1.77 EUR]
+** Dealing Turn ** [ Jh ]
+Drazounet checks
+joumann bets [€1.75 EUR]
+Drazounet calls [€1.75 EUR]
+** Dealing River ** [ Td ]
+Drazounet checks
+joumann checks
+Drazounet shows [ Kd, Ah ]a straight, Ten to Ace.
+joumann doesn't show [ As, 7d ]two pairs, Aces and Jacks.
+Drazounet wins €9.24 EUR from the main pot with a straight, Ten to Ace.
+Game #11815750937 starts.
+
+#Game No : 11815750937 

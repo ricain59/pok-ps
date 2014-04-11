@@ -1,0 +1,37 @@
+***** Hand History for Game 11815735612 *****
+€25 EUR NL Texas Hold'em - Thursday, June 07, 08:21:06 CEST 2012
+Table Hilab (Real Money)
+Seat 5 is the button
+Total number of players : 6/6 
+Seat 6: Drazounet ( €25 EUR )
+Seat 3: JhonnyCash75 ( €15.26 EUR )
+Seat 4: ZinedineZappa ( €48.55 EUR )
+Seat 2: patlestephano06 ( €9.75 EUR )
+Seat 1: thyphil ( €13.60 EUR )
+Seat 5: xJazzMasterx ( €25.53 EUR )
+Drazounet posts small blind [€0.10 EUR].
+thyphil posts big blind [€0.25 EUR].
+** Dealing down cards **
+Dealt to Drazounet [  Jh 7h ]
+patlestephano06 calls [€0.25 EUR]
+JhonnyCash75 calls [€0.25 EUR]
+ZinedineZappa folds
+xJazzMasterx folds
+Drazounet calls [€0.15 EUR]
+thyphil checks
+** Dealing Flop ** [ Js, 2s, 7d ]
+Drazounet bets [€0.62 EUR]
+thyphil calls [€0.62 EUR]
+patlestephano06 is all-In  [€9.50 EUR]
+JhonnyCash75 folds
+Drazounet raises [€17.76 EUR]
+thyphil folds
+** Dealing Turn ** [ Tc ]
+** Dealing River ** [ As ]
+Drazounet shows [ Jh, 7h ]two pairs, Jacks and Sevens.
+patlestephano06 doesn't show [ Qs, Qd ]a pair of Queens.
+Drazounet wins €8.88 EUR from the side pot 1 with two pairs, Jacks and Sevens.
+Drazounet wins €19.25 EUR from the main pot with two pairs, Jacks and Sevens.
+Game #11815736090 starts.
+
+#Game No : 11815736090 

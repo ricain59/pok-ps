@@ -48,7 +48,10 @@
             this.buttonStopWin = new System.Windows.Forms.Button();
             this.buttonBrowseStopWin = new System.Windows.Forms.Button();
             this.labelRepeatSound = new System.Windows.Forms.Label();
-            this.checkBoxRepeatSound = new System.Windows.Forms.CheckBox();
+            this.checkBoxRepeatLoss = new System.Windows.Forms.CheckBox();
+            this.checkBoxrepeatHands = new System.Windows.Forms.CheckBox();
+            this.checkBoxRepeatTime = new System.Windows.Forms.CheckBox();
+            this.checkBoxRepeatWin = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label9
@@ -56,7 +59,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(12, 28);
+            this.label9.Location = new System.Drawing.Point(7, 36);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 13);
             this.label9.TabIndex = 2;
@@ -64,9 +67,9 @@
             // 
             // buttonBrowseStopLoss
             // 
-            this.buttonBrowseStopLoss.Location = new System.Drawing.Point(320, 23);
+            this.buttonBrowseStopLoss.Location = new System.Drawing.Point(315, 31);
             this.buttonBrowseStopLoss.Name = "buttonBrowseStopLoss";
-            this.buttonBrowseStopLoss.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrowseStopLoss.Size = new System.Drawing.Size(57, 23);
             this.buttonBrowseStopLoss.TabIndex = 3;
             this.buttonBrowseStopLoss.Text = "Browse";
             this.buttonBrowseStopLoss.UseVisualStyleBackColor = true;
@@ -74,9 +77,9 @@
             // 
             // buttonDefaultStopLoss
             // 
-            this.buttonDefaultStopLoss.Location = new System.Drawing.Point(401, 23);
+            this.buttonDefaultStopLoss.Location = new System.Drawing.Point(377, 31);
             this.buttonDefaultStopLoss.Name = "buttonDefaultStopLoss";
-            this.buttonDefaultStopLoss.Size = new System.Drawing.Size(75, 23);
+            this.buttonDefaultStopLoss.Size = new System.Drawing.Size(52, 23);
             this.buttonDefaultStopLoss.TabIndex = 4;
             this.buttonDefaultStopLoss.Text = "Default";
             this.buttonDefaultStopLoss.UseVisualStyleBackColor = true;
@@ -84,7 +87,7 @@
             // 
             // textBoxSoundStopLoss
             // 
-            this.textBoxSoundStopLoss.Location = new System.Drawing.Point(93, 23);
+            this.textBoxSoundStopLoss.Location = new System.Drawing.Point(88, 31);
             this.textBoxSoundStopLoss.Name = "textBoxSoundStopLoss";
             this.textBoxSoundStopLoss.Size = new System.Drawing.Size(221, 20);
             this.textBoxSoundStopLoss.TabIndex = 5;
@@ -108,7 +111,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Green;
-            this.label15.Location = new System.Drawing.Point(12, 110);
+            this.label15.Location = new System.Drawing.Point(7, 118);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(55, 13);
             this.label15.TabIndex = 15;
@@ -119,7 +122,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Blue;
-            this.label12.Location = new System.Drawing.Point(12, 83);
+            this.label12.Location = new System.Drawing.Point(7, 91);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 13);
             this.label12.TabIndex = 14;
@@ -129,7 +132,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(12, 55);
+            this.label8.Location = new System.Drawing.Point(7, 63);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 13);
             this.label8.TabIndex = 13;
@@ -137,16 +140,16 @@
             // 
             // textBoxSoundStopHands
             // 
-            this.textBoxSoundStopHands.Location = new System.Drawing.Point(93, 52);
+            this.textBoxSoundStopHands.Location = new System.Drawing.Point(88, 60);
             this.textBoxSoundStopHands.Name = "textBoxSoundStopHands";
             this.textBoxSoundStopHands.Size = new System.Drawing.Size(221, 20);
             this.textBoxSoundStopHands.TabIndex = 18;
             // 
             // buttonDefaultStophands
             // 
-            this.buttonDefaultStophands.Location = new System.Drawing.Point(401, 52);
+            this.buttonDefaultStophands.Location = new System.Drawing.Point(377, 60);
             this.buttonDefaultStophands.Name = "buttonDefaultStophands";
-            this.buttonDefaultStophands.Size = new System.Drawing.Size(75, 23);
+            this.buttonDefaultStophands.Size = new System.Drawing.Size(52, 23);
             this.buttonDefaultStophands.TabIndex = 17;
             this.buttonDefaultStophands.Text = "Default";
             this.buttonDefaultStophands.UseVisualStyleBackColor = true;
@@ -154,9 +157,9 @@
             // 
             // buttonBrwoseStopHands
             // 
-            this.buttonBrwoseStopHands.Location = new System.Drawing.Point(320, 52);
+            this.buttonBrwoseStopHands.Location = new System.Drawing.Point(315, 60);
             this.buttonBrwoseStopHands.Name = "buttonBrwoseStopHands";
-            this.buttonBrwoseStopHands.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrwoseStopHands.Size = new System.Drawing.Size(57, 23);
             this.buttonBrwoseStopHands.TabIndex = 16;
             this.buttonBrwoseStopHands.Text = "Browse";
             this.buttonBrwoseStopHands.UseVisualStyleBackColor = true;
@@ -164,16 +167,16 @@
             // 
             // textBoxSoundStopTime
             // 
-            this.textBoxSoundStopTime.Location = new System.Drawing.Point(93, 80);
+            this.textBoxSoundStopTime.Location = new System.Drawing.Point(88, 88);
             this.textBoxSoundStopTime.Name = "textBoxSoundStopTime";
             this.textBoxSoundStopTime.Size = new System.Drawing.Size(221, 20);
             this.textBoxSoundStopTime.TabIndex = 21;
             // 
             // buttonDefaultStopTime
             // 
-            this.buttonDefaultStopTime.Location = new System.Drawing.Point(401, 80);
+            this.buttonDefaultStopTime.Location = new System.Drawing.Point(377, 88);
             this.buttonDefaultStopTime.Name = "buttonDefaultStopTime";
-            this.buttonDefaultStopTime.Size = new System.Drawing.Size(75, 23);
+            this.buttonDefaultStopTime.Size = new System.Drawing.Size(52, 23);
             this.buttonDefaultStopTime.TabIndex = 20;
             this.buttonDefaultStopTime.Text = "Default";
             this.buttonDefaultStopTime.UseVisualStyleBackColor = true;
@@ -181,9 +184,9 @@
             // 
             // buttonBrowseStopTime
             // 
-            this.buttonBrowseStopTime.Location = new System.Drawing.Point(320, 80);
+            this.buttonBrowseStopTime.Location = new System.Drawing.Point(315, 88);
             this.buttonBrowseStopTime.Name = "buttonBrowseStopTime";
-            this.buttonBrowseStopTime.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrowseStopTime.Size = new System.Drawing.Size(57, 23);
             this.buttonBrowseStopTime.TabIndex = 19;
             this.buttonBrowseStopTime.Text = "Browse";
             this.buttonBrowseStopTime.UseVisualStyleBackColor = true;
@@ -191,16 +194,16 @@
             // 
             // textBoxSoundStopWin
             // 
-            this.textBoxSoundStopWin.Location = new System.Drawing.Point(93, 107);
+            this.textBoxSoundStopWin.Location = new System.Drawing.Point(88, 115);
             this.textBoxSoundStopWin.Name = "textBoxSoundStopWin";
             this.textBoxSoundStopWin.Size = new System.Drawing.Size(221, 20);
             this.textBoxSoundStopWin.TabIndex = 24;
             // 
             // buttonStopWin
             // 
-            this.buttonStopWin.Location = new System.Drawing.Point(401, 107);
+            this.buttonStopWin.Location = new System.Drawing.Point(377, 115);
             this.buttonStopWin.Name = "buttonStopWin";
-            this.buttonStopWin.Size = new System.Drawing.Size(75, 23);
+            this.buttonStopWin.Size = new System.Drawing.Size(52, 23);
             this.buttonStopWin.TabIndex = 23;
             this.buttonStopWin.Text = "Default";
             this.buttonStopWin.UseVisualStyleBackColor = true;
@@ -208,9 +211,9 @@
             // 
             // buttonBrowseStopWin
             // 
-            this.buttonBrowseStopWin.Location = new System.Drawing.Point(320, 107);
+            this.buttonBrowseStopWin.Location = new System.Drawing.Point(315, 115);
             this.buttonBrowseStopWin.Name = "buttonBrowseStopWin";
-            this.buttonBrowseStopWin.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrowseStopWin.Size = new System.Drawing.Size(57, 23);
             this.buttonBrowseStopWin.TabIndex = 22;
             this.buttonBrowseStopWin.Text = "Browse";
             this.buttonBrowseStopWin.UseVisualStyleBackColor = true;
@@ -220,20 +223,47 @@
             // 
             this.labelRepeatSound.AutoSize = true;
             this.labelRepeatSound.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRepeatSound.Location = new System.Drawing.Point(12, 138);
+            this.labelRepeatSound.Location = new System.Drawing.Point(418, 9);
             this.labelRepeatSound.Name = "labelRepeatSound";
-            this.labelRepeatSound.Size = new System.Drawing.Size(95, 13);
+            this.labelRepeatSound.Size = new System.Drawing.Size(55, 13);
             this.labelRepeatSound.TabIndex = 25;
-            this.labelRepeatSound.Text = "Repeat Sound?";
+            this.labelRepeatSound.Text = "Repeat?";
             // 
-            // checkBoxRepeatSound
+            // checkBoxRepeatLoss
             // 
-            this.checkBoxRepeatSound.AutoSize = true;
-            this.checkBoxRepeatSound.Location = new System.Drawing.Point(115, 137);
-            this.checkBoxRepeatSound.Name = "checkBoxRepeatSound";
-            this.checkBoxRepeatSound.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxRepeatSound.TabIndex = 26;
-            this.checkBoxRepeatSound.UseVisualStyleBackColor = true;
+            this.checkBoxRepeatLoss.AutoSize = true;
+            this.checkBoxRepeatLoss.Location = new System.Drawing.Point(443, 37);
+            this.checkBoxRepeatLoss.Name = "checkBoxRepeatLoss";
+            this.checkBoxRepeatLoss.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRepeatLoss.TabIndex = 26;
+            this.checkBoxRepeatLoss.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxrepeatHands
+            // 
+            this.checkBoxrepeatHands.AutoSize = true;
+            this.checkBoxrepeatHands.Location = new System.Drawing.Point(443, 63);
+            this.checkBoxrepeatHands.Name = "checkBoxrepeatHands";
+            this.checkBoxrepeatHands.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxrepeatHands.TabIndex = 27;
+            this.checkBoxrepeatHands.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxRepeatTime
+            // 
+            this.checkBoxRepeatTime.AutoSize = true;
+            this.checkBoxRepeatTime.Location = new System.Drawing.Point(443, 91);
+            this.checkBoxRepeatTime.Name = "checkBoxRepeatTime";
+            this.checkBoxRepeatTime.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRepeatTime.TabIndex = 28;
+            this.checkBoxRepeatTime.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxRepeatWin
+            // 
+            this.checkBoxRepeatWin.AutoSize = true;
+            this.checkBoxRepeatWin.Location = new System.Drawing.Point(443, 118);
+            this.checkBoxRepeatWin.Name = "checkBoxRepeatWin";
+            this.checkBoxRepeatWin.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRepeatWin.TabIndex = 29;
+            this.checkBoxRepeatWin.UseVisualStyleBackColor = true;
             // 
             // FormSounds
             // 
@@ -241,7 +271,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(485, 189);
-            this.Controls.Add(this.checkBoxRepeatSound);
+            this.Controls.Add(this.checkBoxRepeatWin);
+            this.Controls.Add(this.checkBoxRepeatTime);
+            this.Controls.Add(this.checkBoxrepeatHands);
+            this.Controls.Add(this.checkBoxRepeatLoss);
             this.Controls.Add(this.labelRepeatSound);
             this.Controls.Add(this.textBoxSoundStopWin);
             this.Controls.Add(this.buttonStopWin);
@@ -290,6 +323,9 @@
         private System.Windows.Forms.Button buttonStopWin;
         private System.Windows.Forms.Button buttonBrowseStopWin;
         private System.Windows.Forms.Label labelRepeatSound;
-        private System.Windows.Forms.CheckBox checkBoxRepeatSound;
+        private System.Windows.Forms.CheckBox checkBoxRepeatLoss;
+        private System.Windows.Forms.CheckBox checkBoxrepeatHands;
+        private System.Windows.Forms.CheckBox checkBoxRepeatTime;
+        private System.Windows.Forms.CheckBox checkBoxRepeatWin;
     }
 }

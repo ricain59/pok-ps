@@ -161,7 +161,7 @@ namespace PS
                         keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
 
                         //coller
-                        handcopy.getClipboard(ow, down, zoom, textBoxVm.Text);
+                        handcopy.getClipboard(ow, down, zoom, textBoxVm.Text, textBoxDrive.Text);
 
                         cincominuto = cincominuto + 1;
                         vpnminute++;
@@ -169,6 +169,13 @@ namespace PS
                         System.Threading.Thread.Sleep(400);
                         //System.Threading.Thread.Sleep(1500);
 
+                        //agora vejo se o ip for igual
+                        if (ipinicial.Equals(new Utils().getipinternet()))
+                        {
+                            new Utils().detectApps("PokerStars");
+                        }
+
+                        //aqui o ciclo de antes
                         if (vpnminute >= 5)
                         {
                             vpnminute = 0;
