@@ -98,12 +98,12 @@ namespace StopLoss
             Double wininter = new Utils().stringtoDouble(textBoxStopWinIntermediate.Text);
             Double lossinter = new Utils().stringtoDouble(textBoxStopLossIntermediate.Text);
             Boolean continu = true;
-            if (wininter >= win)
+            if (wininter >= win && wininter != 0)
             {
                 labelAlertIntermediate.Text = "Stopwin intermediate don't superior at stopwin final";
                 continu = false;
             }
-            if (lossinter >= loss)
+            if (lossinter >= loss && lossinter != 0 && continu)
             {
                 labelAlertIntermediate.Text = "StopLoss intermediate don't superior at stopLoss final";
                 continu = false;

@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.63;
+        private Double version = 1.66;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -36,7 +36,10 @@ namespace TiltStopLoss
         private Int32 histhands = 0;
         private Int32 histtime = 0;
         private Double histbbsmax = 0;
-        private Boolean repeat = true;
+        private Boolean repeatstoploss = true;
+        private Boolean repeatstophand = true;
+        private Boolean repeatstoptime = true;
+        private Boolean repeatstopwin = true;
         //mouse
         private String help;
         
@@ -223,7 +226,17 @@ namespace TiltStopLoss
                         //em vez de mandar só string crio um array do que preciso
                         String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text };
                         String[] sounds = { soundloss, soundtime, soundwin, soundhands, soundinternediateloss, soundinternediatewin };
-                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, repeat, checkBoxSnoozeSound.Checked };
+                        //check
+                        //0 - hidebb
+                        //1 - button set
+                        //2 - verify app
+                        //3 - rage quit
+                        //4 - snooze
+                        //5 - repeatwin
+                        //6 - repeatloss
+                        //7 - repeathand
+                        //8 - repeattime 
+                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime};
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -512,14 +525,44 @@ namespace TiltStopLoss
                         checkBoxRageQuit.Checked = false;
                     }
                     break;
-                case "repeatsound":
+                case "repeatstoploss":
                     if (line[1].ToString().Equals("True"))
                     {
-                        repeat = true;
+                        repeatstoploss = true;
                     }
                     else
                     {
-                        repeat = false;
+                        repeatstoploss = false;
+                    }
+                    break;
+                case "repeatstophand":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        repeatstophand = true;
+                    }
+                    else
+                    {
+                        repeatstophand = false;
+                    }
+                    break;
+                case "repeatstoptime":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        repeatstoptime = true;
+                    }
+                    else
+                    {
+                        repeatstoptime = false;
+                    }
+                    break;
+                case "repeatstopwin":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        repeatstopwin = true;
+                    }
+                    else
+                    {
+                        repeatstopwin = false;
                     }
                     break;
                 case "Snooze":
@@ -619,12 +662,18 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("Ragequit=" + checkBoxRageQuit.Checked.ToString());
             w.WriteLine();
-            w.Write("repeatsound=" + repeat.ToString());
-            w.WriteLine();
             w.Write("Snooze=" + checkBoxSnoozeSound.Checked.ToString());
             w.WriteLine();
             w.Write("Snoozeminute=" + comboBoxSnoozeMinute.SelectedIndex);
-            w.WriteLine();            
+            w.WriteLine();   
+            w.Write("repeatstoploss=" + repeatstoploss.ToString());
+            w.WriteLine();
+            w.Write("repeatstophand=" + repeatstophand.ToString());
+            w.WriteLine();
+            w.Write("repeatstoptime=" + repeatstoptime.ToString());
+            w.WriteLine();
+            w.Write("repeatstopwin=" + repeatstopwin.ToString());
+            w.WriteLine();
             w.Close();
             //test
         }
@@ -773,7 +822,7 @@ namespace TiltStopLoss
                     textBoxbb100.ForeColor = Color.Green;
                     labelbb100.ForeColor = Color.Green;
                 }
-                tabControlMain.SelectedIndex = 2;
+                tabControlMain.SelectedTab = tabResumeSession;
             }
             //mas faço na mesma o history
             Int32 handsession = new Utils().stringtoInt32(hand);
@@ -975,6 +1024,7 @@ namespace TiltStopLoss
         {
             this.Visible = false;
             String[] sound = new String[] { soundloss, soundtime, soundwin, soundhands };
+            Boolean[] repeat = new Boolean[] { repeatstoploss, repeatstoptime, repeatstopwin, repeatstophand };
             FormSounds fs = new FormSounds(this, sound, repeat);
             fs.Show();
         }
@@ -986,13 +1036,16 @@ namespace TiltStopLoss
         /// <param name="hands"></param>
         /// <param name="time"></param>
         /// <param name="win"></param>
-        public void setSounds(String loss, String hands, String time, String win, Boolean repeatsounds)
+        public void setSounds(String loss, String hands, String time, String win, Boolean[] repeatsounds)
         {
             soundloss = loss;
             soundtime = time;
             soundwin = win;
             soundhands = hands;
-            repeat = repeatsounds;
+            repeatstoploss = repeatsounds[0];
+            repeatstoptime = repeatsounds[1];
+            repeatstopwin = repeatsounds[2];
+            repeatstophand = repeatsounds[3];
         }
 
         /// <summary>

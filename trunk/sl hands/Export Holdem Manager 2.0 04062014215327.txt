@@ -1,0 +1,47 @@
+***** Hand History for Game 12278756280 *****
+€10 EUR NL Texas Hold'em - Saturday, November 03, 10:24:00 CET 2012
+Table Toulon (Real Money)
+Seat 3 is the button
+Total number of players : 6/6 
+Seat 3: DooomBFG ( €10 EUR )
+Seat 1: Drazounet ( €10.67 EUR )
+Seat 2: KAVIVA ( €8.49 EUR )
+Seat 5: YLIESSS ( €20.91 EUR )
+Seat 4: cachris ( €9.80 EUR )
+Seat 6: zozo62 ( €9.92 EUR )
+cachris posts small blind [€0.05 EUR].
+YLIESSS posts big blind [€0.10 EUR].
+** Dealing down cards **
+Dealt to Drazounet [  Kc Ah ]
+zozo62 calls [€0.10 EUR]
+Drazounet raises [€0.40 EUR]
+KAVIVA folds
+DooomBFG folds
+cachris calls [€0.35 EUR]
+YLIESSS calls [€0.30 EUR]
+zozo62 calls [€0.30 EUR]
+** Dealing Flop ** [ Qc, Jd, Ts ]
+cachris checks
+YLIESSS checks
+zozo62 bets [€0.75 EUR]
+Drazounet calls [€0.75 EUR]
+cachris folds
+YLIESSS calls [€0.75 EUR]
+** Dealing Turn ** [ Ac ]
+YLIESSS checks
+zozo62 checks
+Drazounet bets [€2.40 EUR]
+YLIESSS calls [€2.40 EUR]
+zozo62 calls [€2.40 EUR]
+** Dealing River ** [ 3s ]
+YLIESSS checks
+zozo62 checks
+Drazounet bets [€5.16 EUR]
+YLIESSS calls [€5.16 EUR]
+zozo62 folds
+Drazounet shows [ Kc, Ah ]a straight, Ten to Ace.
+YLIESSS doesn't show [ 8s, Ad ]a pair of Aces.
+Drazounet wins €19.95 EUR from the main pot with a straight, Ten to Ace.
+Game #12278758419 starts.
+
+#Game No : 12278758419 

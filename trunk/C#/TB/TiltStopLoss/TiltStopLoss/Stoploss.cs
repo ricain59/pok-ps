@@ -47,7 +47,10 @@ namespace TiltStopLoss
         private Boolean sitout = true;
         private Int32 blocklimit;
         private Boolean hidebb;
-        private Boolean repeat;
+        private Boolean repeatwin;
+        private Boolean repeatloss;
+        private Boolean repeathand;
+        private Boolean repeattime;
         private Double winintermediate;
         private Double lossintermediate;
         private Boolean snoozeb;
@@ -71,6 +74,16 @@ namespace TiltStopLoss
             this.tracker = tracker;
             sounds = sound;
             blocklimit = limit;
+            //check
+            //0 - hidebb
+            //1 - button set
+            //2 - verify app
+            //3 - rage quit
+            //4 - snooze
+            //5 - repeatwin
+            //6 - repeatloss
+            //7 - repeathand
+            //8 - repeattime 
             this.hidebb = checkb[0];
             if (hidebb)
             {
@@ -93,8 +106,11 @@ namespace TiltStopLoss
                 startapp.Start();
             }
             buttonRageQuit.Visible = checkb[3];
-            repeat = checkb[4];
-            snoozeb = checkb[5];
+            repeatwin = checkb[5];
+            repeatloss = checkb[6];
+            repeathand = checkb[7];
+            repeattime = checkb[8];
+            snoozeb = checkb[4];
             snoozeminute = snooze;
             buttonSnooze.Visible = false;
         }
@@ -255,7 +271,7 @@ namespace TiltStopLoss
                         {
                             if (!stop)
                             {
-                                player = new Utils().playsound(sounds[0], repeat);
+                                player = new Utils().playsound(sounds[0], repeatloss);
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopLoss !!!!", Color.Red);
@@ -269,7 +285,7 @@ namespace TiltStopLoss
                         {
                             if (!stop)
                             {
-                                player = new Utils().playsound(sounds[2], repeat);
+                                player = new Utils().playsound(sounds[2], repeatwin);
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopWin !!!!", Color.Green);
@@ -289,7 +305,7 @@ namespace TiltStopLoss
                             {
                                 if (!stop)
                                 {
-                                    player = new Utils().playsound(sounds[0], repeat);
+                                    player = new Utils().playsound(sounds[0], repeatloss);
                                     stop = true;
                                     //buttonSoundStop.Visible = true;
                                     labelStopSet("!!!! StopPeak !!!!", Color.Red);
@@ -431,7 +447,7 @@ namespace TiltStopLoss
                         {
                             if (!stop)
                             {
-                                player = new Utils().playsound(sounds[3], repeat);
+                                player = new Utils().playsound(sounds[3], repeathand);
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopHand !!!!", Color.Blue);
@@ -481,7 +497,7 @@ namespace TiltStopLoss
                                 //aqui apita e change le text du label
                                 if (!stop)
                                 {
-                                    player = new Utils().playsound(sounds[0], repeat);                                    
+                                    player = new Utils().playsound(sounds[0], repeatloss);                                    
                                 }
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
@@ -492,7 +508,7 @@ namespace TiltStopLoss
                         }
                     }
                     //winamax
-                    if (hand.ToLower().Contains("winamax") && !hand.ToLower().Contains("tournament"))
+                    if (hand.ToLower().Contains("winamax") && !hand.ToLower().Contains("tournament") && !stop)
                     {
                         nl = new Utils().getNlPs(hand);
                         if (nl.Equals(0))
@@ -507,7 +523,7 @@ namespace TiltStopLoss
                                 //aqui apita e change le text du label
                                 if (!stop)
                                 {
-                                    player = new Utils().playsound(sounds[0], repeat);
+                                    player = new Utils().playsound(sounds[0], repeatloss);
                                 }
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
@@ -518,7 +534,7 @@ namespace TiltStopLoss
                         }
                     }
                     //ipoker
-                    if (hand.ToLower().Contains("xml") && !hand.ToLower().Contains("tournament"))
+                    if (hand.ToLower().Contains("xml") && !hand.ToLower().Contains("tournament") && !stop)
                     {
                         nl = new Utils().getNlIpoker(hand);
                         if (nl.Equals(0))
@@ -533,13 +549,39 @@ namespace TiltStopLoss
                                 //aqui apita e change le text du label
                                 if (!stop)
                                 {
-                                    player = new Utils().playsound(sounds[0], repeat);
+                                    player = new Utils().playsound(sounds[0], repeatloss);
                                 }
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopLimit !!!!", Color.Red);
                                 //close poker stars
                                 new Utils().detectApps("casino");
+                            }
+                        }
+                    }
+                    //wpt and party poker
+                    if (hand.ToLower().Contains("* hand his") && !hand.ToLower().Contains("tournament") && !stop)
+                    {
+                        nl = new Utils().getNlpp(hand);
+                        if (nl.Equals(0))
+                        {
+                            new Debug().LogAlert("Problem limit not defined", "Problem_Limit");
+                        }
+                        else
+                        {
+                            //je vérifie si la limite rendu é supérieur a la limite accepter
+                            if (nl > blocklimit)
+                            {
+                                //aqui apita e change le text du label
+                                if (!stop)
+                                {
+                                    player = new Utils().playsound(sounds[0], repeatloss);
+                                }
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopLimit !!!!", Color.Red);
+                                //close poker stars
+                                new Utils().detectApps("wpt");
                             }
                         }
                     }
@@ -610,7 +652,7 @@ namespace TiltStopLoss
                         {
                             if (!stop)
                             {
-                                player = new Utils().playsound(sounds[1], repeat);
+                                player = new Utils().playsound(sounds[1], repeattime);
                                 stop = true;
                                 //buttonSoundStop.Visible = true;
                                 labelStopSet("!!!! StopTime !!!!", Color.Black);

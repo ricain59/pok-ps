@@ -1,0 +1,38 @@
+***** Hand History for Game 11815749193 *****
+€10 EUR NL Texas Hold'em - Thursday, June 07, 08:41:18 CEST 2012
+Table Ngulak (Real Money)
+Seat 4 is the button
+Total number of players : 6/6 
+Seat 4: AndreYves29 ( €13.74 EUR )
+Seat 2: Drazounet ( €10 EUR )
+Seat 1: JACPOWER ( €3.26 EUR )
+Seat 6: RAPAS99 ( €9.90 EUR )
+Seat 5: nobru ( €3.26 EUR )
+Seat 3: xxxfab57xxx ( €9.18 EUR )
+nobru posts small blind [€0.05 EUR].
+RAPAS99 posts big blind [€0.10 EUR].
+** Dealing down cards **
+Dealt to Drazounet [  As Qh ]
+JACPOWER folds
+Drazounet raises [€0.40 EUR]
+xxxfab57xxx folds
+AndreYves29 calls [€0.40 EUR]
+nobru folds
+RAPAS99 folds
+** Dealing Flop ** [ 8h, 2c, 9h ]
+Drazounet checks
+AndreYves29 checks
+** Dealing Turn ** [ Ah ]
+Drazounet bets [€0.59 EUR]
+AndreYves29 raises [€1.18 EUR]
+Drazounet calls [€0.59 EUR]
+** Dealing River ** [ 7s ]
+Drazounet checks
+AndreYves29 bets [€1.54 EUR]
+Drazounet calls [€1.54 EUR]
+AndreYves29 shows [ 6h, 5h ]a flush, Ace high.
+Drazounet doesn't show [ As, Qh ]a pair of Aces.
+AndreYves29 wins €5.97 EUR from the main pot with a flush, Ace high.
+Game #11815749949 starts.
+
+#Game No : 11815749949 

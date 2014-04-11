@@ -19,7 +19,7 @@ namespace PS
         ArrayList tablearray = new ArrayList();
         OperationWindow ow;
 
-        public void getClipboard(OperationWindow ow2, Boolean down, Boolean zoom, String vm)
+        public void getClipboard(OperationWindow ow2, Boolean down, Boolean zoom, String vm, String drive)
         {
             ow = ow2;
             newcopyhand = GetText();
@@ -34,7 +34,7 @@ namespace PS
                         {
                             handarray.Add(newcopyhand);
                             String date = getDate();
-                            file.AppendToFileDT(newcopyhand, date, down, zoom, vm);
+                            file.AppendToFileDT(newcopyhand, date, down, zoom, vm, drive);
                             ow.addToList(newcopyhand, false);
                             oldcopyhand = newcopyhand;
                         }
