@@ -452,6 +452,11 @@ namespace TiltStopLoss
             return 0;
         }
 
+        /// <summary>
+        /// get limit for party poker and wpt
+        /// </summary>
+        /// <param name="hand"></param>
+        /// <returns></returns>
         public Int16 getNlpp(String hand)
         {
             String[] handsplitbl = hand.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -482,6 +487,16 @@ namespace TiltStopLoss
                 default:
                     return 0;
             }            
+        }
+
+        /// <summary>
+        /// String to datetime
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public DateTime stringToDateTime(String time)
+        {
+            return Convert.ToDateTime(time);
         }
     }
 }

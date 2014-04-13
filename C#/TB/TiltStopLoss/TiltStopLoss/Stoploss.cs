@@ -334,6 +334,14 @@ namespace TiltStopLoss
                             }
                         }
                     }
+                    else
+                    {
+                        if (!intermediateloss && !stop && bb > 0)
+                        {
+                            intermediateloss = true;
+                        }
+                    }
+
                     if (winintermediate > 0.0 && intermediatewin && !stop)
                     {
                         if (bb >= winintermediate)
@@ -352,6 +360,13 @@ namespace TiltStopLoss
                                     intermediateloss = true;
                                 }
                             }
+                        }
+                    }
+                    else
+                    {
+                        if (!intermediatewin && !stop && bb < 0)
+                        {
+                            intermediatewin = true;
                         }
                     }
 

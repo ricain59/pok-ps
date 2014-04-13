@@ -40,6 +40,7 @@ namespace TiltStopLoss
         private Boolean repeatstophand = true;
         private Boolean repeatstoptime = true;
         private Boolean repeatstopwin = true;
+        private DateTime lastsession = Convert.ToDateTime("01-01-2001 01:01:01");
         //mouse
         private String help;
         
@@ -56,7 +57,9 @@ namespace TiltStopLoss
             comboBoxBRM.SelectedIndex = 0;
             comboBoxLanguage.SelectedIndex = 0;
             comboBoxSnoozeMinute.SelectedIndex = 0;
+            comboBoxTimeSession.SelectedIndex = 0;
             comboBoxSnoozeMinute.Enabled = false;
+            comboBoxTimeSession.Enabled = false;
             //depois disso volto ao soft caso diz que não
             loadconfig();
             //abro no separador conf stop se já foi configurado a DB
@@ -152,12 +155,14 @@ namespace TiltStopLoss
         private void buttonStart_Click(object sender, EventArgs e)
         {
             Boolean stop = false;
+            //verifico erro a ligação a DB
             String con = db.connectDb();
             if (!con.Equals(""))
             {
                 MessageBox.Show(con.ToString());
                 stop = true;
             }
+            //os erros dos intermediate
             Double intwin = new Utils().stringtoDouble(textBoxStopWinIntermediate.Text);
             if (intwin != 0 && intwin >= new Utils().stringtoDouble(textBoxStopWin.Text))
             {
@@ -192,7 +197,28 @@ namespace TiltStopLoss
                 }
                 stop = true;
             }
-            //se dá erro a me ligar a DB não faço mais nada
+            //o tempo entre sessões
+            if (checkBoxtimebetweenSession.Checked)
+            {
+                DateTime now = DateTime.Now;
+                if ((comboBoxTimeSession.SelectedIndex + 5) > (now - lastsession).TotalMinutes && DateTime.Compare(lastsession, Convert.ToDateTime("01-01-2001 01:01:01")) != 0)
+                {
+                    if (comboBoxLanguage.SelectedIndex == 0)
+                    {
+                        MessageBox.Show("Time beteween session isn't elapsed");
+                    }
+                    if (comboBoxLanguage.SelectedIndex == 1)
+                    {
+                        MessageBox.Show("Le temps entre session ne s'est pas s'écoulé");
+                    }
+                    if (comboBoxLanguage.SelectedIndex == 2)
+                    {
+                        MessageBox.Show("Não passou tempo suficiente entre sessões");
+                    }
+                    stop = true;
+                }
+            }
+            
             //aqui tenho de abrir a outra janela que vai ficar a funcar em paralela dessa
             try
             {
@@ -580,6 +606,27 @@ namespace TiltStopLoss
                 case "Snoozeminute":
                     comboBoxSnoozeMinute.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
                     break;
+                case "lastsession":
+                    if (!line[1].ToString().Equals(""))
+                    {
+                        lastsession = new Utils().stringToDateTime(line[1].ToString());
+                    }
+                    break;
+                case "lastsessioncheckbox":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxtimebetweenSession.Checked = true;
+                        comboBoxTimeSession.Enabled = true;
+                    }
+                    else
+                    {
+                        checkBoxtimebetweenSession.Checked = false;
+                        comboBoxTimeSession.Enabled = false;
+                    }
+                    break;
+                case "lastsessioncombobox":
+                    comboBoxTimeSession.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
+                    break;
                 default:
                     break;
             }
@@ -674,7 +721,13 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("repeatstopwin=" + repeatstopwin.ToString());
             w.WriteLine();
-            w.Close();
+            w.Write("lastsession=" + lastsession.ToString());
+            w.WriteLine();
+            w.Write("lastsessioncheckbox=" + checkBoxtimebetweenSession.Checked.ToString());
+            w.WriteLine();
+            w.Write("lastsessioncombobox=" + comboBoxTimeSession.SelectedIndex);
+            w.WriteLine();
+             w.Close();
             //test
         }
 
@@ -847,6 +900,8 @@ namespace TiltStopLoss
                 histbbsmax = bbs;
                 textBoxHistoryBbsMax.Text = bbs.ToString();
             }
+            //aqui recuperar a hora e data.
+            lastsession = DateTime.Now;
         }
 
         /// <summary>
@@ -1104,12 +1159,14 @@ namespace TiltStopLoss
                 labelInfo2.Text = "View help please";
                 labelInfo3.Text = "View help please";
                 labelInfo4.Text = "View help please";
+                labelInfo5.Text = "View help please";
                 labelResumeSession.Text = "Resume Session";
                 labelHistoryMax.Text = "History";
                 labelStoplossIntermediate.Text = "Intermediate";
                 labelStopWinIntermediate.Text = "Intermediate";
                 labelVerifyApp.Text = "Verify application?";
                 labelSnoozeSounds.Text = "Snooze Sound";
+                labelTimebetweenSession.Text = "Pause Session";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
@@ -1139,12 +1196,14 @@ namespace TiltStopLoss
                 labelInfo2.Text = "Voir l'aide svp";
                 labelInfo3.Text = "Voir l'aide svp";
                 labelInfo4.Text = "Voir l'aide svp";
+                labelInfo5.Text = "Voir l'aide svp";
                 labelResumeSession.Text = "Résumé de Session";
                 labelHistoryMax.Text = "Historique";
                 labelStoplossIntermediate.Text = "Intermédiaire";
                 labelStopWinIntermediate.Text = "Intermédiaire";
                 labelVerifyApp.Text = "Vérifier Applications?";
                 labelSnoozeSounds.Text = "Snooze Son";
+                labelTimebetweenSession.Text = "Temps entre session";
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
@@ -1174,12 +1233,14 @@ namespace TiltStopLoss
                 labelInfo2.Text = "Ver a ajuda sff";
                 labelInfo3.Text = "Ver a ajuda sff";
                 labelInfo4.Text = "Ver a ajuda sff";
+                labelInfo5.Text = "Ver a ajuda sff";
                 labelResumeSession.Text = "Resumo da Sessão";
                 labelHistoryMax.Text = "Histórico";
                 labelStoplossIntermediate.Text = "Intermédio";
                 labelStopWinIntermediate.Text = "Intermédio";
                 labelVerifyApp.Text = "Verificar Applicações?";
                 labelSnoozeSounds.Text = "Snooze Som";
+                labelTimebetweenSession.Text = "Tempo entre sessões";
             }
         }
 
@@ -1240,6 +1301,21 @@ namespace TiltStopLoss
             }
         }
 
-        
+        /// <summary>
+        /// Para ativar a combobox entre sessões
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxtimebetweenSession_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxtimebetweenSession.Checked)
+            {
+                comboBoxTimeSession.Enabled = true;
+            }
+            else
+            {
+                comboBoxTimeSession.Enabled = false;
+            }
+        }        
     }
 }
