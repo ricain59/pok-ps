@@ -170,10 +170,10 @@ namespace PS
                         //System.Threading.Thread.Sleep(1500);
 
                         //agora vejo se o ip for igual
-                        if (ipinicial.Equals(new Utils().getipinternet()))
-                        {
-                            new Utils().detectApps("PokerStars");
-                        }
+                        //if (ipinicial.Equals(new Utils().getipinternet()))
+                        //{
+                        //    new Utils().detectApps("PokerStars");
+                        //}
 
                         //aqui o ciclo de antes
                         if (vpnminute >= 5)
@@ -268,6 +268,8 @@ namespace PS
             w.WriteLine();
             w.Write("Vpn3=" + textBoxVpn3.Text);
             w.WriteLine();
+            w.Write("drive=" + textBoxDrive.Text);
+            w.WriteLine();            
             w.Close();
         }
 
@@ -319,6 +321,9 @@ namespace PS
                     break;
                 case "Vpn3":
                     textBoxVpn3.Text = line[1].ToString();
+                    break;
+                case "drive":
+                    textBoxDrive.Text = line[1].ToString();
                     break;                    
                 default:
                     break;

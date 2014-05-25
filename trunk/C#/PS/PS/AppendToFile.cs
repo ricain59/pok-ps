@@ -68,7 +68,7 @@ namespace PS
             {
                 return "16";
             }
-            if (hand.Contains("0.10/") && hand.Contains("0.20"))
+            if (temp2[0].Contains("0.10/") && temp2[0].Contains("0.20"))
             {
                 return "20";
             }

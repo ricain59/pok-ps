@@ -806,9 +806,33 @@ namespace TiltStopLoss
         /// <param name="time"></param>
         public void setNewValue(Int64 hand, Double loss, Int32 time, Double win, Double losspeak, Double peakover, Boolean hidebb, Double wininter, Double lossinter)
         {
+            if (time > timestop && labelStop.Text.Equals("!!!! StopTime !!!!"))
+            {
+                stop = false;
+                labelStopSet("__________________", Color.White);
+                player.controls.stop();
+            }
             this.timestop = time;
+            if (hand > handstop && labelStop.Text.Equals("!!!! StopHand !!!!"))
+            {
+                stop = false;
+                labelStopSet("__________________", Color.White);
+                player.controls.stop();
+            }
             this.handstop = hand;
+            if (bb > (0 - loss) && labelStop.Text.Equals("!!!! StopLoss !!!!"))
+            {
+                stop = false;
+                labelStopSet("__________________", Color.White);
+                player.controls.stop();
+            }
             this.stoploss = loss;
+            if (bb < win && labelStop.Text.Equals("!!!! StopWin !!!!"))
+            {
+                stop = false;
+                labelStopSet("__________________", Color.White);
+                player.controls.stop();
+            }
             this.stopwin = win;
             this.bbpeak = losspeak;
             this.peakover = peakover;
