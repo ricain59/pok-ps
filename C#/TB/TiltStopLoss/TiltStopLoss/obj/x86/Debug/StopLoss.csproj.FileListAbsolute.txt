@@ -24,3 +24,4 @@ M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\St
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\Interop.WMPLib.dll
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.csproj.ResolveComReference.cache
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormInit.resources
+M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.csprojResolveAssemblyReference.cache

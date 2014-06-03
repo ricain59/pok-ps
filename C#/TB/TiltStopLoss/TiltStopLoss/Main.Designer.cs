@@ -54,14 +54,14 @@
             this.label16 = new System.Windows.Forms.Label();
             this.labelSessionBBs = new System.Windows.Forms.Label();
             this.tabConfStop2 = new System.Windows.Forms.TabPage();
+            this.comboBoxTimeSession = new System.Windows.Forms.ComboBox();
+            this.checkBoxtimebetweenSession = new System.Windows.Forms.CheckBox();
+            this.labelTimebetweenSession = new System.Windows.Forms.Label();
             this.comboBoxSnoozeMinute = new System.Windows.Forms.ComboBox();
-            this.labelInfo4 = new System.Windows.Forms.Label();
             this.checkBoxSnoozeSound = new System.Windows.Forms.CheckBox();
             this.labelSnoozeSounds = new System.Windows.Forms.Label();
-            this.labelInfo3 = new System.Windows.Forms.Label();
             this.checkBoxRageQuit = new System.Windows.Forms.CheckBox();
             this.labelRageQuit = new System.Windows.Forms.Label();
-            this.labelInfo2 = new System.Windows.Forms.Label();
             this.checkBoxVerifyApplication = new System.Windows.Forms.CheckBox();
             this.labelVerifyApp = new System.Windows.Forms.Label();
             this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
@@ -127,10 +127,8 @@
             this.labelTitleDB = new System.Windows.Forms.Label();
             this.labelPlayer = new System.Windows.Forms.Label();
             this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.comboBoxTimeSession = new System.Windows.Forms.ComboBox();
-            this.labelInfo5 = new System.Windows.Forms.Label();
-            this.checkBoxtimebetweenSession = new System.Windows.Forms.CheckBox();
-            this.labelTimebetweenSession = new System.Windows.Forms.Label();
+            this.checkBoxStartTimer = new System.Windows.Forms.CheckBox();
+            this.labelStartTimer = new System.Windows.Forms.Label();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -427,18 +425,16 @@
             // 
             // tabConfStop2
             // 
+            this.tabConfStop2.Controls.Add(this.checkBoxStartTimer);
+            this.tabConfStop2.Controls.Add(this.labelStartTimer);
             this.tabConfStop2.Controls.Add(this.comboBoxTimeSession);
-            this.tabConfStop2.Controls.Add(this.labelInfo5);
             this.tabConfStop2.Controls.Add(this.checkBoxtimebetweenSession);
             this.tabConfStop2.Controls.Add(this.labelTimebetweenSession);
             this.tabConfStop2.Controls.Add(this.comboBoxSnoozeMinute);
-            this.tabConfStop2.Controls.Add(this.labelInfo4);
             this.tabConfStop2.Controls.Add(this.checkBoxSnoozeSound);
             this.tabConfStop2.Controls.Add(this.labelSnoozeSounds);
-            this.tabConfStop2.Controls.Add(this.labelInfo3);
             this.tabConfStop2.Controls.Add(this.checkBoxRageQuit);
             this.tabConfStop2.Controls.Add(this.labelRageQuit);
-            this.tabConfStop2.Controls.Add(this.labelInfo2);
             this.tabConfStop2.Controls.Add(this.checkBoxVerifyApplication);
             this.tabConfStop2.Controls.Add(this.labelVerifyApp);
             this.tabConfStop2.Controls.Add(this.checkBoxCloseSkype);
@@ -451,6 +447,91 @@
             this.tabConfStop2.Text = "Conf. Stop 2";
             this.tabConfStop2.UseVisualStyleBackColor = true;
             // 
+            // comboBoxTimeSession
+            // 
+            this.comboBoxTimeSession.FormattingEnabled = true;
+            this.comboBoxTimeSession.Items.AddRange(new object[] {
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59",
+            "60"});
+            this.comboBoxTimeSession.Location = new System.Drawing.Point(184, 114);
+            this.comboBoxTimeSession.Name = "comboBoxTimeSession";
+            this.comboBoxTimeSession.Size = new System.Drawing.Size(45, 21);
+            this.comboBoxTimeSession.TabIndex = 71;
+            // 
+            // checkBoxtimebetweenSession
+            // 
+            this.checkBoxtimebetweenSession.AutoSize = true;
+            this.checkBoxtimebetweenSession.Location = new System.Drawing.Point(151, 117);
+            this.checkBoxtimebetweenSession.Name = "checkBoxtimebetweenSession";
+            this.checkBoxtimebetweenSession.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxtimebetweenSession.TabIndex = 69;
+            this.checkBoxtimebetweenSession.UseVisualStyleBackColor = true;
+            this.checkBoxtimebetweenSession.CheckedChanged += new System.EventHandler(this.checkBoxtimebetweenSession_CheckedChanged);
+            // 
+            // labelTimebetweenSession
+            // 
+            this.labelTimebetweenSession.AutoSize = true;
+            this.labelTimebetweenSession.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTimebetweenSession.Location = new System.Drawing.Point(6, 118);
+            this.labelTimebetweenSession.Name = "labelTimebetweenSession";
+            this.labelTimebetweenSession.Size = new System.Drawing.Size(90, 13);
+            this.labelTimebetweenSession.TabIndex = 68;
+            this.labelTimebetweenSession.Text = "Pause Session";
+            // 
             // comboBoxSnoozeMinute
             // 
             this.comboBoxSnoozeMinute.FormattingEnabled = true;
@@ -460,25 +541,15 @@
             "3",
             "4",
             "5"});
-            this.comboBoxSnoozeMinute.Location = new System.Drawing.Point(175, 87);
+            this.comboBoxSnoozeMinute.Location = new System.Drawing.Point(184, 87);
             this.comboBoxSnoozeMinute.Name = "comboBoxSnoozeMinute";
             this.comboBoxSnoozeMinute.Size = new System.Drawing.Size(45, 21);
             this.comboBoxSnoozeMinute.TabIndex = 67;
             // 
-            // labelInfo4
-            // 
-            this.labelInfo4.AutoSize = true;
-            this.labelInfo4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInfo4.Location = new System.Drawing.Point(226, 91);
-            this.labelInfo4.Name = "labelInfo4";
-            this.labelInfo4.Size = new System.Drawing.Size(87, 13);
-            this.labelInfo4.TabIndex = 66;
-            this.labelInfo4.Text = "View help please";
-            // 
             // checkBoxSnoozeSound
             // 
             this.checkBoxSnoozeSound.AutoSize = true;
-            this.checkBoxSnoozeSound.Location = new System.Drawing.Point(142, 90);
+            this.checkBoxSnoozeSound.Location = new System.Drawing.Point(151, 90);
             this.checkBoxSnoozeSound.Name = "checkBoxSnoozeSound";
             this.checkBoxSnoozeSound.Size = new System.Drawing.Size(15, 14);
             this.checkBoxSnoozeSound.TabIndex = 65;
@@ -495,20 +566,10 @@
             this.labelSnoozeSounds.TabIndex = 64;
             this.labelSnoozeSounds.Text = "Snooze Sound";
             // 
-            // labelInfo3
-            // 
-            this.labelInfo3.AutoSize = true;
-            this.labelInfo3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInfo3.Location = new System.Drawing.Point(226, 65);
-            this.labelInfo3.Name = "labelInfo3";
-            this.labelInfo3.Size = new System.Drawing.Size(87, 13);
-            this.labelInfo3.TabIndex = 63;
-            this.labelInfo3.Text = "View help please";
-            // 
             // checkBoxRageQuit
             // 
             this.checkBoxRageQuit.AutoSize = true;
-            this.checkBoxRageQuit.Location = new System.Drawing.Point(142, 65);
+            this.checkBoxRageQuit.Location = new System.Drawing.Point(151, 65);
             this.checkBoxRageQuit.Name = "checkBoxRageQuit";
             this.checkBoxRageQuit.Size = new System.Drawing.Size(15, 14);
             this.checkBoxRageQuit.TabIndex = 62;
@@ -524,20 +585,10 @@
             this.labelRageQuit.TabIndex = 61;
             this.labelRageQuit.Text = "Rage Quit";
             // 
-            // labelInfo2
-            // 
-            this.labelInfo2.AutoSize = true;
-            this.labelInfo2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInfo2.Location = new System.Drawing.Point(226, 42);
-            this.labelInfo2.Name = "labelInfo2";
-            this.labelInfo2.Size = new System.Drawing.Size(87, 13);
-            this.labelInfo2.TabIndex = 60;
-            this.labelInfo2.Text = "View help please";
-            // 
             // checkBoxVerifyApplication
             // 
             this.checkBoxVerifyApplication.AutoSize = true;
-            this.checkBoxVerifyApplication.Location = new System.Drawing.Point(142, 42);
+            this.checkBoxVerifyApplication.Location = new System.Drawing.Point(151, 42);
             this.checkBoxVerifyApplication.Name = "checkBoxVerifyApplication";
             this.checkBoxVerifyApplication.Size = new System.Drawing.Size(15, 14);
             this.checkBoxVerifyApplication.TabIndex = 59;
@@ -556,7 +607,7 @@
             // checkBoxCloseSkype
             // 
             this.checkBoxCloseSkype.AutoSize = true;
-            this.checkBoxCloseSkype.Location = new System.Drawing.Point(142, 18);
+            this.checkBoxCloseSkype.Location = new System.Drawing.Point(151, 18);
             this.checkBoxCloseSkype.Name = "checkBoxCloseSkype";
             this.checkBoxCloseSkype.Size = new System.Drawing.Size(15, 14);
             this.checkBoxCloseSkype.TabIndex = 57;
@@ -1264,100 +1315,24 @@
             this.tabControlMain.Size = new System.Drawing.Size(334, 351);
             this.tabControlMain.TabIndex = 0;
             // 
-            // comboBoxTimeSession
+            // checkBoxStartTimer
             // 
-            this.comboBoxTimeSession.FormattingEnabled = true;
-            this.comboBoxTimeSession.Items.AddRange(new object[] {
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "33",
-            "34",
-            "35",
-            "36",
-            "37",
-            "38",
-            "39",
-            "40",
-            "41",
-            "42",
-            "43",
-            "44",
-            "45",
-            "46",
-            "47",
-            "48",
-            "49",
-            "50",
-            "51",
-            "52",
-            "53",
-            "54",
-            "55",
-            "56",
-            "57",
-            "58",
-            "59",
-            "60"});
-            this.comboBoxTimeSession.Location = new System.Drawing.Point(175, 114);
-            this.comboBoxTimeSession.Name = "comboBoxTimeSession";
-            this.comboBoxTimeSession.Size = new System.Drawing.Size(45, 21);
-            this.comboBoxTimeSession.TabIndex = 71;
+            this.checkBoxStartTimer.AutoSize = true;
+            this.checkBoxStartTimer.Location = new System.Drawing.Point(151, 144);
+            this.checkBoxStartTimer.Name = "checkBoxStartTimer";
+            this.checkBoxStartTimer.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxStartTimer.TabIndex = 73;
+            this.checkBoxStartTimer.UseVisualStyleBackColor = true;
             // 
-            // labelInfo5
+            // labelStartTimer
             // 
-            this.labelInfo5.AutoSize = true;
-            this.labelInfo5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelInfo5.Location = new System.Drawing.Point(226, 118);
-            this.labelInfo5.Name = "labelInfo5";
-            this.labelInfo5.Size = new System.Drawing.Size(87, 13);
-            this.labelInfo5.TabIndex = 70;
-            this.labelInfo5.Text = "View help please";
-            // 
-            // checkBoxtimebetweenSession
-            // 
-            this.checkBoxtimebetweenSession.AutoSize = true;
-            this.checkBoxtimebetweenSession.Location = new System.Drawing.Point(142, 117);
-            this.checkBoxtimebetweenSession.Name = "checkBoxtimebetweenSession";
-            this.checkBoxtimebetweenSession.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxtimebetweenSession.TabIndex = 69;
-            this.checkBoxtimebetweenSession.UseVisualStyleBackColor = true;
-            this.checkBoxtimebetweenSession.CheckedChanged += new System.EventHandler(this.checkBoxtimebetweenSession_CheckedChanged);
-            // 
-            // labelTimebetweenSession
-            // 
-            this.labelTimebetweenSession.AutoSize = true;
-            this.labelTimebetweenSession.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimebetweenSession.Location = new System.Drawing.Point(6, 118);
-            this.labelTimebetweenSession.Name = "labelTimebetweenSession";
-            this.labelTimebetweenSession.Size = new System.Drawing.Size(90, 13);
-            this.labelTimebetweenSession.TabIndex = 68;
-            this.labelTimebetweenSession.Text = "Pause Session";
+            this.labelStartTimer.AutoSize = true;
+            this.labelStartTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStartTimer.Location = new System.Drawing.Point(6, 145);
+            this.labelStartTimer.Name = "labelStartTimer";
+            this.labelStartTimer.Size = new System.Drawing.Size(136, 13);
+            this.labelStartTimer.TabIndex = 72;
+            this.labelStartTimer.Text = "Start timer on 1st hand";
             // 
             // Main
             // 
@@ -1416,10 +1391,8 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label labelSessionBBs;
         private System.Windows.Forms.TabPage tabConfStop2;
-        private System.Windows.Forms.Label labelInfo3;
         private System.Windows.Forms.CheckBox checkBoxRageQuit;
         private System.Windows.Forms.Label labelRageQuit;
-        private System.Windows.Forms.Label labelInfo2;
         private System.Windows.Forms.CheckBox checkBoxVerifyApplication;
         private System.Windows.Forms.Label labelVerifyApp;
         private System.Windows.Forms.CheckBox checkBoxCloseSkype;
@@ -1485,14 +1458,14 @@
         public System.Windows.Forms.Label labelTitleDB;
         public System.Windows.Forms.Label labelPlayer;
         public System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.Label labelInfo4;
         private System.Windows.Forms.CheckBox checkBoxSnoozeSound;
         private System.Windows.Forms.Label labelSnoozeSounds;
         private System.Windows.Forms.ComboBox comboBoxSnoozeMinute;
         private System.Windows.Forms.ComboBox comboBoxTimeSession;
-        private System.Windows.Forms.Label labelInfo5;
         private System.Windows.Forms.CheckBox checkBoxtimebetweenSession;
         private System.Windows.Forms.Label labelTimebetweenSession;
+        private System.Windows.Forms.CheckBox checkBoxStartTimer;
+        private System.Windows.Forms.Label labelStartTimer;
     }
 }
 
