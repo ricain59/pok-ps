@@ -56,6 +56,7 @@ namespace TiltStopLoss
         private Boolean snoozeb;
         private Int32 snoozeminute;
         private Boolean activesnooze = false;
+        private Boolean starttime;
         
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, Int32 snooze, String[] sound, int tracker)
         {
@@ -74,7 +75,7 @@ namespace TiltStopLoss
             this.tracker = tracker;
             sounds = sound;
             blocklimit = limit;
-            //check
+            //checkb
             //0 - hidebb
             //1 - button set
             //2 - verify app
@@ -83,7 +84,8 @@ namespace TiltStopLoss
             //5 - repeatwin
             //6 - repeatloss
             //7 - repeathand
-            //8 - repeattime 
+            //8 - repeattime
+            //9 - timerstart 1ª mão
             this.hidebb = checkb[0];
             if (hidebb)
             {
@@ -93,8 +95,13 @@ namespace TiltStopLoss
             buttonSet.Visible = checkb[1];
             loadconfig();
             //cronometro
-            startcrono = new Thread(new ThreadStart(this.stoptimer));
-            startcrono.Start();
+            starttime = checkb[9];
+            if (!checkb[9])
+            {
+                startcrono = new Thread(new ThreadStart(this.stoptimer));
+                startcrono.Start();
+            }
+            
             //calculo dos BB e hands
             startbb = new Thread(new ThreadStart(this.calculateBB));
             startbb.Start();  
@@ -470,6 +477,13 @@ namespace TiltStopLoss
                             }                            
                         }
                     }
+                    //para começar a contar mãos.
+                    if (starttime && handnumber > 0)
+                    {
+                        startcrono = new Thread(new ThreadStart(this.stoptimer));
+                        startcrono.Start();
+                        starttime = false;
+                    }
                     //stoplimit
                     if (blocklimit != 0)
                     {
@@ -810,13 +824,48 @@ namespace TiltStopLoss
             {
                 stop = false;
                 labelStopSet("__________________", Color.White);
+                if (snoozeb)
+                {
+                    if (this.buttonSnooze.InvokeRequired)
+                    {
+                        SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
+                        this.Invoke(d, new object[] { false });
+                    }
+                    else
+                    {
+                        // It's on the same thread, no need for Invoke
+                        this.buttonSnooze.Visible = false;
+                    }
+                    if(activesnooze)
+                    {
+                        startcronosnooze.Abort();
+                    }
+                }
                 player.controls.stop();
+                
             }
             this.timestop = time;
             if (hand > handstop && labelStop.Text.Equals("!!!! StopHand !!!!"))
             {
                 stop = false;
                 labelStopSet("__________________", Color.White);
+                if (snoozeb)
+                {
+                    if (this.buttonSnooze.InvokeRequired)
+                    {
+                        SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
+                        this.Invoke(d, new object[] { false });
+                    }
+                    else
+                    {
+                        // It's on the same thread, no need for Invoke
+                        this.buttonSnooze.Visible = false;
+                    }
+                    if (activesnooze)
+                    {
+                        startcronosnooze.Abort();
+                    }
+                }
                 player.controls.stop();
             }
             this.handstop = hand;
@@ -824,6 +873,23 @@ namespace TiltStopLoss
             {
                 stop = false;
                 labelStopSet("__________________", Color.White);
+                if (snoozeb)
+                {
+                    if (this.buttonSnooze.InvokeRequired)
+                    {
+                        SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
+                        this.Invoke(d, new object[] { false });
+                    }
+                    else
+                    {
+                        // It's on the same thread, no need for Invoke
+                        this.buttonSnooze.Visible = false;
+                    }
+                    if (activesnooze)
+                    {
+                        startcronosnooze.Abort();
+                    }
+                }
                 player.controls.stop();
             }
             this.stoploss = loss;
@@ -831,6 +897,23 @@ namespace TiltStopLoss
             {
                 stop = false;
                 labelStopSet("__________________", Color.White);
+                if (snoozeb)
+                {
+                    if (this.buttonSnooze.InvokeRequired)
+                    {
+                        SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
+                        this.Invoke(d, new object[] { false });
+                    }
+                    else
+                    {
+                        // It's on the same thread, no need for Invoke
+                        this.buttonSnooze.Visible = false;
+                    }
+                    if (activesnooze)
+                    {
+                        startcronosnooze.Abort();
+                    }
+                }
                 player.controls.stop();
             }
             this.stopwin = win;
@@ -987,7 +1070,7 @@ namespace TiltStopLoss
                 // It's on the same thread, no need for Invoke
                 this.buttonSnooze.Visible = true;
             }
-            activesnooze = false;
+            //activesnooze = false;
         }
 
 

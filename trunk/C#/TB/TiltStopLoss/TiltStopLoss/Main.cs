@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.68;
+        private Double version = 1.70;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -262,7 +262,8 @@ namespace TiltStopLoss
                         //6 - repeatloss
                         //7 - repeathand
                         //8 - repeattime 
-                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime};
+                        //9 - timerstart 1ª mão
+                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime, checkBoxStartTimer.Checked};
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -627,6 +628,16 @@ namespace TiltStopLoss
                 case "lastsessioncombobox":
                     comboBoxTimeSession.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
                     break;
+                case "checkBoxStartTimer":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxStartTimer.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxStartTimer.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -727,7 +738,9 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("lastsessioncombobox=" + comboBoxTimeSession.SelectedIndex);
             w.WriteLine();
-             w.Close();
+            w.Write("checkBoxStartTimer=" + checkBoxStartTimer.Checked.ToString());
+            w.WriteLine();            
+            w.Close();
             //test
         }
 
@@ -1156,10 +1169,6 @@ namespace TiltStopLoss
                 labelBrm.Text = "Block Limit Above";
                 buttonChoiceSounds.Text = "Sounds";
                 labelInfo.Text = "View help please";
-                labelInfo2.Text = "View help please";
-                labelInfo3.Text = "View help please";
-                labelInfo4.Text = "View help please";
-                labelInfo5.Text = "View help please";
                 labelResumeSession.Text = "Resume Session";
                 labelHistoryMax.Text = "History";
                 labelStoplossIntermediate.Text = "Intermediate";
@@ -1167,6 +1176,7 @@ namespace TiltStopLoss
                 labelVerifyApp.Text = "Verify application?";
                 labelSnoozeSounds.Text = "Snooze Sound";
                 labelTimebetweenSession.Text = "Pause Session";
+                labelStartTimer.Text = "Start timer on 1st hand";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
@@ -1193,10 +1203,6 @@ namespace TiltStopLoss
                 labelBrm.Text = "Bloquer limite au dessus";
                 buttonChoiceSounds.Text = "Sons";
                 labelInfo.Text = "Voir l'aide svp";
-                labelInfo2.Text = "Voir l'aide svp";
-                labelInfo3.Text = "Voir l'aide svp";
-                labelInfo4.Text = "Voir l'aide svp";
-                labelInfo5.Text = "Voir l'aide svp";
                 labelResumeSession.Text = "Résumé de Session";
                 labelHistoryMax.Text = "Historique";
                 labelStoplossIntermediate.Text = "Intermédiaire";
@@ -1204,6 +1210,7 @@ namespace TiltStopLoss
                 labelVerifyApp.Text = "Vérifier Applications?";
                 labelSnoozeSounds.Text = "Snooze Son";
                 labelTimebetweenSession.Text = "Temps entre session";
+                labelStartTimer.Text = "Start timer 1ere main";
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
@@ -1230,10 +1237,6 @@ namespace TiltStopLoss
                 labelBrm.Text = "Bloquear limite acima";
                 buttonChoiceSounds.Text = "Sons";
                 labelInfo.Text = "Ver a ajuda sff";
-                labelInfo2.Text = "Ver a ajuda sff";
-                labelInfo3.Text = "Ver a ajuda sff";
-                labelInfo4.Text = "Ver a ajuda sff";
-                labelInfo5.Text = "Ver a ajuda sff";
                 labelResumeSession.Text = "Resumo da Sessão";
                 labelHistoryMax.Text = "Histórico";
                 labelStoplossIntermediate.Text = "Intermédio";
@@ -1241,6 +1244,7 @@ namespace TiltStopLoss
                 labelVerifyApp.Text = "Verificar Applicações?";
                 labelSnoozeSounds.Text = "Snooze Som";
                 labelTimebetweenSession.Text = "Tempo entre sessões";
+                labelStartTimer.Text = "Start timer na 1ª mão";
             }
         }
 
