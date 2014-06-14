@@ -144,11 +144,14 @@ namespace TiltStopLoss
             String path = Directory.GetCurrentDirectory();
             StreamWriter w = new StreamWriter(path + "/config/config_stoploss.txt", false);
             w.Write("Location=" + location);
-            w.WriteLine();
+            w.WriteLine(); 
             w.Close();
             //fecho as minhas threads
-            startbb.Abort();
-            startcrono.Abort();
+            if (handnumber > 0 || !starttime)
+            {
+                startbb.Abort();
+                startcrono.Abort();
+            }
             if (verapp)
             {
                 startapp.Abort();
