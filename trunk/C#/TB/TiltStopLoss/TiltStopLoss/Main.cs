@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.71;
+        private Double version = 1.72;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -41,8 +41,10 @@ namespace TiltStopLoss
         private Boolean repeatstoptime = true;
         private Boolean repeatstopwin = true;
         private DateTime lastsession = Convert.ToDateTime("01-01-2001 01:01:01");
+        private DateTime daysupdate = Convert.ToDateTime("01-01-2001 01:01:01");
         //mouse
         private String help;
+        private String textDb;
         
         public Main()
         {
@@ -51,17 +53,18 @@ namespace TiltStopLoss
             //como mudei os sound elimino onde estava o original inicialmente
             new Utils().deleteSound();
             new Utils().changeFileConfig();
-            //aqui vou ver se existe update ou não
-            checkupdate();
             //por defeito a combobox no NO
             comboBoxBRM.SelectedIndex = 0;
             comboBoxLanguage.SelectedIndex = 0;
             comboBoxSnoozeMinute.SelectedIndex = 0;
             comboBoxTimeSession.SelectedIndex = 0;
+            comboBoxUpdate.SelectedIndex = 0;
             comboBoxSnoozeMinute.Enabled = false;
             comboBoxTimeSession.Enabled = false;
             //depois disso volto ao soft caso diz que não
             loadconfig();
+            //aqui vou ver se existe update ou não
+            checkupdate();
             //abro no separador conf stop se já foi configurado a DB
             if (!textBoxPlayer.Text.Equals(""))
             {
@@ -84,49 +87,61 @@ namespace TiltStopLoss
         /// <returns></returns>
         private void checkupdate()
         {
-            Double newversion = version;
-            String log = "";
-            try
+            DateTime now = DateTime.Now;
+            if ((comboBoxUpdate.SelectedIndex + 1) <= (now - daysupdate).TotalDays && DateTime.Compare(daysupdate, Convert.ToDateTime("01-01-2001 01:01:01")) != 0)
             {
-                using (XmlReader reader = XmlReader.Create(urlxml))
+                daysupdate = now;
+                Double newversion = version;
+                String log = "";
+                try
                 {
-                    while (reader.Read())
+                    using (XmlReader reader = XmlReader.Create(urlxml))
                     {
-                        // Only detect start elements.
-                        if (reader.IsStartElement())
+                        while (reader.Read())
                         {
-                            // Get element name and switch on it.
-                            switch (reader.Name)
+                            // Only detect start elements.
+                            if (reader.IsStartElement())
                             {
-                                case "number":
-                                    if (reader.Read())
-                                    {
-                                        newversion = Convert.ToDouble(reader.Value.Trim().ToString().Replace('.', ','));
-                                    }
-                                    break;
-                                case "log":
-                                    if (reader.Read())
-                                    {
-                                        log += reader.Value.Trim().ToString()+ "\r\n";
-                                    }
-                                    break;
+                                // Get element name and switch on it.
+                                switch (reader.Name)
+                                {
+                                    case "number":
+                                        if (reader.Read())
+                                        {
+                                            newversion = Convert.ToDouble(reader.Value.Trim().ToString().Replace('.', ','));
+                                        }
+                                        break;
+                                    case "log":
+                                        if (reader.Read())
+                                        {
+                                            log += reader.Value.Trim().ToString() + "\r\n";
+                                        }
+                                        break;
+                                }
                             }
                         }
                     }
-                }
-                if (version < newversion)
-                {
-                    DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\n\r\nNew:\r\n"+ log +"\r\nGo to download page?", "Update", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
+                    if (version < newversion)
                     {
-                        //do something
-                        Process.Start(urldownload);
+                        DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\n\r\nNew:\r\n" + log + "\r\nGo to download page?", "Update", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            //do something
+                            Process.Start(urldownload);
+                        }
                     }
                 }
+                catch (Exception e)
+                {
+                    new Debug().LogMessage(e.ToString());
+                }
             }
-            catch (Exception e)
+            else
             {
-                new Debug().LogMessage(e.ToString());
+                if (DateTime.Compare(daysupdate, Convert.ToDateTime("01-01-2001 01:01:01")) == 0)
+                {
+                    daysupdate = now;
+                }
             }
         }
 
@@ -613,6 +628,12 @@ namespace TiltStopLoss
                         lastsession = new Utils().stringToDateTime(line[1].ToString());
                     }
                     break;
+                case "daysupdate":
+                    if (!line[1].ToString().Equals(""))
+                    {
+                        daysupdate = new Utils().stringToDateTime(line[1].ToString());
+                    }
+                    break;                    
                 case "lastsessioncheckbox":
                     if (line[1].ToString().Equals("True"))
                     {
@@ -637,6 +658,9 @@ namespace TiltStopLoss
                     {
                         checkBoxStartTimer.Checked = false;
                     }
+                    break;
+                case "comboBoxUpdate":
+                    comboBoxUpdate.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
                     break;
                 default:
                     break;
@@ -740,6 +764,10 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("checkBoxStartTimer=" + checkBoxStartTimer.Checked.ToString());
             w.WriteLine();            
+            w.Write("comboBoxUpdate=" + comboBoxUpdate.SelectedIndex);
+            w.WriteLine();
+            w.Write("daysupdate=" + daysupdate.ToString());
+            w.WriteLine();
             w.Close();
             //test
         }
@@ -1177,6 +1205,8 @@ namespace TiltStopLoss
                 labelSnoozeSounds.Text = "Snooze Sound";
                 labelTimebetweenSession.Text = "Pause Session";
                 labelStartTimer.Text = "Start timer on 1st hand";
+                labelUpdate.Text = "Check Update";
+                labelDaysUpdate.Text = "Days";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
@@ -1211,6 +1241,8 @@ namespace TiltStopLoss
                 labelSnoozeSounds.Text = "Snooze Son";
                 labelTimebetweenSession.Text = "Temps entre session";
                 labelStartTimer.Text = "Start timer 1ere main";
+                labelUpdate.Text = "Vérifier Update";
+                labelDaysUpdate.Text = "Jours";
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
@@ -1245,6 +1277,8 @@ namespace TiltStopLoss
                 labelSnoozeSounds.Text = "Snooze Som";
                 labelTimebetweenSession.Text = "Tempo entre sessões";
                 labelStartTimer.Text = "Start timer na 1ª mão";
+                labelUpdate.Text = "Verificar Update";
+                labelDaysUpdate.Text = "Dias";
             }
         }
 
@@ -1320,6 +1354,29 @@ namespace TiltStopLoss
             {
                 comboBoxTimeSession.Enabled = false;
             }
-        }        
+        }
+
+        /// <summary>
+        /// Vai permitir quando se muda o nome da DB tambem mudar o nome do jogador obrigatorio.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxDb_Enter(object sender, EventArgs e)
+        {
+            textDb = textBoxDb.Text;
+        }
+
+        /// <summary>
+        /// Aqui se a DB muda limpa o campo jogador.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxDb_Leave(object sender, EventArgs e)
+        {
+            if (!textDb.Equals(textBoxDb.Text))
+            {
+                textBoxPlayer.Text = "";
+            }
+        }
     }
 }
