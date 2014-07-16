@@ -1,0 +1,5 @@
+System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'Stoploss'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at TiltStopLoss.Stoploss.calculateBB() in M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 269

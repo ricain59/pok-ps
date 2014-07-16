@@ -54,6 +54,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.labelSessionBBs = new System.Windows.Forms.Label();
             this.tabConfStop2 = new System.Windows.Forms.TabPage();
+            this.checkBoxStartTimer = new System.Windows.Forms.CheckBox();
+            this.labelStartTimer = new System.Windows.Forms.Label();
             this.comboBoxTimeSession = new System.Windows.Forms.ComboBox();
             this.checkBoxtimebetweenSession = new System.Windows.Forms.CheckBox();
             this.labelTimebetweenSession = new System.Windows.Forms.Label();
@@ -127,8 +129,9 @@
             this.labelTitleDB = new System.Windows.Forms.Label();
             this.labelPlayer = new System.Windows.Forms.Label();
             this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.checkBoxStartTimer = new System.Windows.Forms.CheckBox();
-            this.labelStartTimer = new System.Windows.Forms.Label();
+            this.comboBoxUpdate = new System.Windows.Forms.ComboBox();
+            this.labelUpdate = new System.Windows.Forms.Label();
+            this.labelDaysUpdate = new System.Windows.Forms.Label();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -425,6 +428,9 @@
             // 
             // tabConfStop2
             // 
+            this.tabConfStop2.Controls.Add(this.labelDaysUpdate);
+            this.tabConfStop2.Controls.Add(this.comboBoxUpdate);
+            this.tabConfStop2.Controls.Add(this.labelUpdate);
             this.tabConfStop2.Controls.Add(this.checkBoxStartTimer);
             this.tabConfStop2.Controls.Add(this.labelStartTimer);
             this.tabConfStop2.Controls.Add(this.comboBoxTimeSession);
@@ -446,6 +452,25 @@
             this.tabConfStop2.TabIndex = 4;
             this.tabConfStop2.Text = "Conf. Stop 2";
             this.tabConfStop2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxStartTimer
+            // 
+            this.checkBoxStartTimer.AutoSize = true;
+            this.checkBoxStartTimer.Location = new System.Drawing.Point(151, 144);
+            this.checkBoxStartTimer.Name = "checkBoxStartTimer";
+            this.checkBoxStartTimer.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxStartTimer.TabIndex = 73;
+            this.checkBoxStartTimer.UseVisualStyleBackColor = true;
+            // 
+            // labelStartTimer
+            // 
+            this.labelStartTimer.AutoSize = true;
+            this.labelStartTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStartTimer.Location = new System.Drawing.Point(6, 145);
+            this.labelStartTimer.Name = "labelStartTimer";
+            this.labelStartTimer.Size = new System.Drawing.Size(136, 13);
+            this.labelStartTimer.TabIndex = 72;
+            this.labelStartTimer.Text = "Start timer on 1st hand";
             // 
             // comboBoxTimeSession
             // 
@@ -1205,6 +1230,8 @@
             this.textBoxDb.Name = "textBoxDb";
             this.textBoxDb.Size = new System.Drawing.Size(177, 20);
             this.textBoxDb.TabIndex = 6;
+            this.textBoxDb.Enter += new System.EventHandler(this.textBoxDb_Enter);
+            this.textBoxDb.Leave += new System.EventHandler(this.textBoxDb_Leave);
             // 
             // textBoxPort
             // 
@@ -1315,24 +1342,41 @@
             this.tabControlMain.Size = new System.Drawing.Size(334, 351);
             this.tabControlMain.TabIndex = 0;
             // 
-            // checkBoxStartTimer
+            // comboBoxUpdate
             // 
-            this.checkBoxStartTimer.AutoSize = true;
-            this.checkBoxStartTimer.Location = new System.Drawing.Point(151, 144);
-            this.checkBoxStartTimer.Name = "checkBoxStartTimer";
-            this.checkBoxStartTimer.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxStartTimer.TabIndex = 73;
-            this.checkBoxStartTimer.UseVisualStyleBackColor = true;
+            this.comboBoxUpdate.FormattingEnabled = true;
+            this.comboBoxUpdate.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.comboBoxUpdate.Location = new System.Drawing.Point(151, 165);
+            this.comboBoxUpdate.Name = "comboBoxUpdate";
+            this.comboBoxUpdate.Size = new System.Drawing.Size(49, 21);
+            this.comboBoxUpdate.TabIndex = 75;
             // 
-            // labelStartTimer
+            // labelUpdate
             // 
-            this.labelStartTimer.AutoSize = true;
-            this.labelStartTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStartTimer.Location = new System.Drawing.Point(6, 145);
-            this.labelStartTimer.Name = "labelStartTimer";
-            this.labelStartTimer.Size = new System.Drawing.Size(136, 13);
-            this.labelStartTimer.TabIndex = 72;
-            this.labelStartTimer.Text = "Start timer on 1st hand";
+            this.labelUpdate.AutoSize = true;
+            this.labelUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUpdate.Location = new System.Drawing.Point(7, 169);
+            this.labelUpdate.Name = "labelUpdate";
+            this.labelUpdate.Size = new System.Drawing.Size(88, 13);
+            this.labelUpdate.TabIndex = 74;
+            this.labelUpdate.Text = "Check Update";
+            // 
+            // labelDaysUpdate
+            // 
+            this.labelDaysUpdate.AutoSize = true;
+            this.labelDaysUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDaysUpdate.Location = new System.Drawing.Point(206, 169);
+            this.labelDaysUpdate.Name = "labelDaysUpdate";
+            this.labelDaysUpdate.Size = new System.Drawing.Size(35, 13);
+            this.labelDaysUpdate.TabIndex = 76;
+            this.labelDaysUpdate.Text = "Days";
             // 
             // Main
             // 
@@ -1466,6 +1510,9 @@
         private System.Windows.Forms.Label labelTimebetweenSession;
         private System.Windows.Forms.CheckBox checkBoxStartTimer;
         private System.Windows.Forms.Label labelStartTimer;
+        private System.Windows.Forms.Label labelDaysUpdate;
+        private System.Windows.Forms.ComboBox comboBoxUpdate;
+        private System.Windows.Forms.Label labelUpdate;
     }
 }
 
