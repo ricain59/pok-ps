@@ -21,7 +21,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.72;
+        private Double version = 1.73;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -265,7 +265,7 @@ namespace TiltStopLoss
                         Stoploss sl;
                         List<Tuple<String, String>> playeralias;
                         //em vez de mandar só string crio um array do que preciso
-                        String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text };
+                        String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text, textBoxStopVPP.Text, textBoxStopRake.Text };
                         String[] sounds = { soundloss, soundtime, soundwin, soundhands, soundinternediateloss, soundinternediatewin };
                         //check
                         //0 - hidebb
@@ -662,6 +662,12 @@ namespace TiltStopLoss
                 case "comboBoxUpdate":
                     comboBoxUpdate.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
                     break;
+                case "stoprake":
+                    textBoxStopRake.Text = line[1].ToString();
+                    break;
+                case "stopvpp":
+                    textBoxStopVPP.Text = line[1].ToString();
+                    break;
                 default:
                     break;
             }
@@ -767,6 +773,10 @@ namespace TiltStopLoss
             w.Write("comboBoxUpdate=" + comboBoxUpdate.SelectedIndex);
             w.WriteLine();
             w.Write("daysupdate=" + daysupdate.ToString());
+            w.WriteLine();
+            w.Write("stoprake=" + textBoxStopRake.Text.ToString());
+            w.WriteLine();
+            w.Write("stopvpp=" + textBoxStopVPP.Text.ToString());
             w.WriteLine();
             w.Close();
             //test

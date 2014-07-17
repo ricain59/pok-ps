@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using Npgsql;
 using System.Windows.Forms;
+using System.Net;
+using Newtonsoft.Json;
+using System.Web;
 
 namespace TiltStopLoss
 {
@@ -279,6 +282,12 @@ namespace TiltStopLoss
             return playeralias;
         }
 
+        /// <summary>
+        /// get hand for pt4
+        /// </summary>
+        /// <param name="idplayer"></param>
+        /// <param name="lastid"></param>
+        /// <returns></returns>
         public Int64 getHandPt4(String idplayer, Int64 lastid)
         {
             string sql = "select sum(cnt_hands) as hands from cash_table_session_summary where id_player = "+idplayer+" and id_session >= "+lastid;
@@ -296,5 +305,24 @@ namespace TiltStopLoss
             dr.Close();
             return numhand;
         }
+
+
+        public T getRakeVpp<T>(String query) where T : new()
+        {
+            using (var w = new WebClient())
+            {
+                var json_data = string.Empty;
+                // attempt to download JSON data as a string
+                try
+                {
+                    json_data = w.DownloadString("http://127.0.0.1:8001/query?q=" + HttpUtility.UrlEncode(query));
+                    //json_data = w.DownloadString("http://127.0.0.1:8001/query?q=select%20StatRakeAmount,%20StatNewStarsVPP%20from%20stats");
+                }
+                catch (Exception) { }
+                // if string with JSON data is not empty, deserialize it to class and return its instance 
+                return !string.IsNullOrEmpty(json_data) ? JsonConvert.DeserializeObject<T>(json_data) : new T();
+            }
+        }
+
     }
 }

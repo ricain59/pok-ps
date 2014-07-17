@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.IO;
 using TiltStopLoss;
+using StopLoss.Json;
 using System.Runtime.InteropServices;
 
 namespace TiltStopLoss
@@ -57,6 +58,10 @@ namespace TiltStopLoss
         private Int32 snoozeminute;
         private Boolean activesnooze = false;
         private Boolean starttime;
+        private Double stoprake;
+        private Double stopvpp;
+        private Double rake = 0.0;
+        private Double vpp = 0.0;
         
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, Int32 snooze, String[] sound, int tracker)
         {
@@ -72,6 +77,8 @@ namespace TiltStopLoss
             this.peakover = new Utils().stringtoDouble(data[5]);
             lossintermediate = new Utils().stringtoDouble(data[6]);
             winintermediate = new Utils().stringtoDouble(data[7]);
+            stopvpp = new Utils().stringtoDouble(data[8]);
+            stoprake = new Utils().stringtoDouble(data[9]);
             this.tracker = tracker;
             sounds = sound;
             blocklimit = limit;
@@ -225,11 +232,52 @@ namespace TiltStopLoss
                 lastidhand = dbase.getLastValue("cash_hand_histories", "id_hand") + 1;
             }
 
+            //aqui o calculo do rake e dos vpps
+            Boolean rakevpp = true;
+            if (tracker == 1 || tracker == 2)
+            {
+                if (tracker == 2)//2 = hem2
+                {
+                    try
+                    {
+                        var json = dbase.getRakeVpp<Stats>("select StatRakeAmount, StatNewStarsVPP from stats");
+                        if (json.Results.Capacity > 0)
+                        {
+                            vpp = new Utils().stringtoDouble(json.Results[0].NewStarsVPP);
+                            rake = new Utils().stringtoDouble(json.Results[0].Rake);
+                        }
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        new Debug().LogMessage("Error VPP and rake:" + e.ToString());
+                        rakevpp = false;
+                    }
+                }
+                //else
+                //{
+                //    for (int i = 0; i < playeridname.Count; i++)
+                //    {
+                //        bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                //    }
+                //}
+            }
+            //else //pt4
+            //{
+            //    yearmonth = new Utils().yearweek();
+            //    for (int i = 0; i < playeridname.Count; i++)
+            //    {
+            //        bb += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
+            //    }
+            //}
+
             //aqui é feito o resto dos calculos e das diferenças
             
             bbmax = 0.0;
             Boolean intermediatewin = true;
             Boolean intermediateloss = true;
+            Double vpptemp = 0.0;
+            Double raketemp = 0.0;
+
             while (continu)
             {
                 try
@@ -492,6 +540,58 @@ namespace TiltStopLoss
                     {
                         stopLimit(hand);
                     }
+
+                    //rake e vpp
+                    if (rakevpp)
+                    {
+                        if (tracker == 1 || tracker == 2)
+                        {
+                            if (tracker == 2)//2 = hem2
+                            {
+                                var json = dbase.getRakeVpp<Stats>("select StatRakeAmount, StatNewStarsVPP from stats");
+                                vpptemp = new Utils().stringtoDouble(json.Results[0].NewStarsVPP);
+                                raketemp = new Utils().stringtoDouble(json.Results[0].Rake);
+                            }
+                            //else
+                            //{
+                            //    for (int i = 0; i < playeridname.Count; i++)
+                            //    {
+                            //        bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                            //    }
+                            //}
+                        }
+
+                        if (stoprake > 0.0)
+                        {
+                            if (stoprake < (raketemp - rake))
+                            {
+                                if (!stop)
+                                {
+                                    player = new Utils().playsound(sounds[5], false);
+                                    labelStopSet("!!!! StopRake !!!!", Color.Green);
+                                    Thread.Sleep(5000);
+                                    labelStopSet("", Color.White);
+                                    stoprake = 99999;
+                                }
+                            }
+                        }
+
+                        if (stopvpp > 0.0)
+                        {
+                            if (stopvpp < (vpptemp - vpp))
+                            {
+                                if (!stop)
+                                {
+                                    player = new Utils().playsound(sounds[5], false);
+                                    labelStopSet("!!!! StopVPP !!!!", Color.Green);
+                                    Thread.Sleep(5000);
+                                    labelStopSet("", Color.White);
+                                    stopvpp = 99999;
+                                }
+                            }
+                        }
+                    }
+
                     Thread.Sleep(250);
                 }
                 catch (Exception ex)
