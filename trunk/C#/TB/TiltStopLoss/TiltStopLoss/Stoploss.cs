@@ -12,6 +12,7 @@ using System.IO;
 using TiltStopLoss;
 using StopLoss.Json;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace TiltStopLoss
 {
@@ -65,68 +66,75 @@ namespace TiltStopLoss
         
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, Int32 snooze, String[] sound, int tracker)
         {
-            InitializeComponent();
-            this.wmain = wmain;
-            playeridname = playerid;
-            dbase = db;
-            this.stoploss = new Utils().stringtoDouble(data[0]);
-            handstop = new Utils().stringtoInt64(data[1]);
-            timestop = new Utils().stringtoInt32(data[2]);
-            stopwin = new Utils().stringtoDouble(data[3]);
-            bbpeak = new Utils().stringtoDouble(data[4]);
-            this.peakover = new Utils().stringtoDouble(data[5]);
-            lossintermediate = new Utils().stringtoDouble(data[6]);
-            winintermediate = new Utils().stringtoDouble(data[7]);
-            stopvpp = new Utils().stringtoDouble(data[8]);
-            stoprake = new Utils().stringtoDouble(data[9]);
-            this.tracker = tracker;
-            sounds = sound;
-            blocklimit = limit;
-            //checkb
-            //0 - hidebb
-            //1 - button set
-            //2 - verify app
-            //3 - rage quit
-            //4 - snooze
-            //5 - repeatwin
-            //6 - repeatloss
-            //7 - repeathand
-            //8 - repeattime
-            //9 - timerstart 1ª mão
-            this.hidebb = checkb[0];
-            if (hidebb)
+            try
             {
-                labelBb.Enabled = false;
-                labelBb.Visible = false;
+                InitializeComponent();
+                this.wmain = wmain;
+                playeridname = playerid;
+                dbase = db;
+                this.stoploss = new Utils().stringtoDouble(data[0]);
+                handstop = new Utils().stringtoInt64(data[1]);
+                timestop = new Utils().stringtoInt32(data[2]);
+                stopwin = new Utils().stringtoDouble(data[3]);
+                bbpeak = new Utils().stringtoDouble(data[4]);
+                this.peakover = new Utils().stringtoDouble(data[5]);
+                lossintermediate = new Utils().stringtoDouble(data[6]);
+                winintermediate = new Utils().stringtoDouble(data[7]);
+                stopvpp = new Utils().stringtoDouble(data[8]);
+                stoprake = new Utils().stringtoDouble(data[9]);
+                this.tracker = tracker;
+                sounds = sound;
+                blocklimit = limit;
+                //checkb
+                //0 - hidebb
+                //1 - button set
+                //2 - verify app
+                //3 - rage quit
+                //4 - snooze
+                //5 - repeatwin
+                //6 - repeatloss
+                //7 - repeathand
+                //8 - repeattime
+                //9 - timerstart 1ª mão
+                this.hidebb = checkb[0];
+                if (hidebb)
+                {
+                    labelBb.Enabled = false;
+                    labelBb.Visible = false;
+                }
+                buttonSet.Visible = checkb[1];
+                loadconfig();
+                //cronometro
+                starttime = checkb[9];
+                if (!checkb[9])
+                {
+                    startcrono = new Thread(new ThreadStart(this.stoptimer));
+                    startcrono.Start();
+                }
+
+                //calculo dos BB e hands
+                startbb = new Thread(new ThreadStart(this.calculateBB));
+                startbb.Start();
+                //verify app
+                verapp = checkb[2];
+                if (verapp)
+                {
+                    startapp = new Thread(new ThreadStart(this.verifyApp));
+                    startapp.Start();
+                }
+                buttonRageQuit.Visible = checkb[3];
+                repeatwin = checkb[5];
+                repeatloss = checkb[6];
+                repeathand = checkb[7];
+                repeattime = checkb[8];
+                snoozeb = checkb[4];
+                snoozeminute = snooze;
+                buttonSnooze.Visible = false;
             }
-            buttonSet.Visible = checkb[1];
-            loadconfig();
-            //cronometro
-            starttime = checkb[9];
-            if (!checkb[9])
+            catch (Exception e)
             {
-                startcrono = new Thread(new ThreadStart(this.stoptimer));
-                startcrono.Start();
+                new Debug().LogMessage("method main stoploss: " + e.ToString());
             }
-            
-            //calculo dos BB e hands
-            startbb = new Thread(new ThreadStart(this.calculateBB));
-            startbb.Start();  
-            //verify app
-            verapp = checkb[2];
-            if (verapp)
-            {
-                startapp = new Thread(new ThreadStart(this.verifyApp));
-                startapp.Start();
-            }
-            buttonRageQuit.Visible = checkb[3];
-            repeatwin = checkb[5];
-            repeatloss = checkb[6];
-            repeathand = checkb[7];
-            repeattime = checkb[8];
-            snoozeb = checkb[4];
-            snoozeminute = snooze;
-            buttonSnooze.Visible = false;
         }
 
         /// <summary>
@@ -233,26 +241,60 @@ namespace TiltStopLoss
             }
 
             //aqui o calculo do rake e dos vpps
-            Boolean rakevpp = true;
+            Boolean rakeb = true;
+            Boolean vppb = true;
+
             if (tracker == 1 || tracker == 2)
             {
                 if (tracker == 2)//2 = hem2
                 {
-                    try
+                    //rake
+                    if (stoprake > 0.00)
                     {
-                        var json = dbase.getRakeVpp<Stats>("select StatRakeAmount, StatNewStarsVPP from stats");
-                        if (json.Results.Capacity > 0)
+                        try
                         {
-                            vpp = new Utils().stringtoDouble(json.Results[0].NewStarsVPP);
-                            rake = new Utils().stringtoDouble(json.Results[0].Rake);
+                            var json = dbase.getRakeVpp<Stats>("select StatRakeAmount from stats");
+                            if (json.Results.Capacity > 0)
+                            {
+                                String rakefinal = new Utils().resolveStringRake(json.Results[0].Rake);
+                                //rake = new Utils().stringtoDouble(json.Results[0].Rake);
+                                rake = new Utils().stringtoDouble(rakefinal);
+                            }
+                        }catch (Exception e)
+                        {
+                            new Debug().LogMessage("Error Rake:" + e.ToString());
+                            rakeb = false;    
                         }
                     }
-                    catch (NullReferenceException e)
+                    else
                     {
-                        new Debug().LogMessage("Error VPP and rake:" + e.ToString());
-                        rakevpp = false;
+                        rakeb = false;
                     }
+                    //vpp
+                    if (stopvpp > 0.00)
+                    {
+                        try
+                        {
+                            var json = dbase.getRakeVpp<Stats>("select StatNewStarsVPP from stats");
+                            if (json.Results.Capacity > 0)
+                            {
+                                vpp = new Utils().stringtoDouble(json.Results[0].NewStarsVPP);                                
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            new Debug().LogMessage("Error VPP:" + e.ToString());
+                            vppb = false;
+                        }
+                    }
+                    else
+                    {
+                        vppb = false;
+                    }                       
+                        
                 }
+                    
+                
                 //else
                 //{
                 //    for (int i = 0; i < playeridname.Count; i++)
@@ -541,55 +583,71 @@ namespace TiltStopLoss
                         stopLimit(hand);
                     }
 
-                    //rake e vpp
-                    if (rakevpp)
+                    //rake
+                    if (rakeb)
                     {
                         if (tracker == 1 || tracker == 2)
                         {
                             if (tracker == 2)//2 = hem2
                             {
-                                var json = dbase.getRakeVpp<Stats>("select StatRakeAmount, StatNewStarsVPP from stats");
-                                vpptemp = new Utils().stringtoDouble(json.Results[0].NewStarsVPP);
-                                raketemp = new Utils().stringtoDouble(json.Results[0].Rake);
-                            }
-                            //else
-                            //{
-                            //    for (int i = 0; i < playeridname.Count; i++)
-                            //    {
-                            //        bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
-                            //    }
-                            //}
-                        }
-
-                        if (stoprake > 0.0)
-                        {
-                            if (stoprake < (raketemp - rake))
-                            {
-                                if (!stop)
+                                var json = dbase.getRakeVpp<Stats>("select StatRakeAmount from stats");
+                                try
                                 {
-                                    player = new Utils().playsound(sounds[5], false);
-                                    labelStopSet("!!!! StopRake !!!!", Color.Green);
-                                    Thread.Sleep(5000);
-                                    labelStopSet("", Color.White);
-                                    stoprake = 99999;
+                                    String raketempfinal = new Utils().resolveStringRake(json.Results[0].Rake);
+                                    raketemp = new Utils().stringtoDouble(raketempfinal);
+                                    //raketemp = new Utils().stringtoDouble(json.Results[0].Rake);
+                                }
+                                catch (Exception e)
+                                {
+                                    new Debug().LogMessage("Error rake : "+ e.ToString());
+                                }
+                            }
+                        }
+                        if (stoprake < (raketemp - rake))
+                        {
+                            if (!stop)
+                            {
+                                player = new Utils().playsound(sounds[5], false);
+                                labelStopSet("!!!! StopRake !!!!", Color.Green);
+                                Thread.Sleep(5000);
+                                labelStopSet("", Color.White);
+                                stoprake = 99999;
+                            }
+                        }
+                    }
+                    //vpp
+                    if (vppb)
+                    {
+                        if (tracker == 1 || tracker == 2)
+                        {
+                            if (tracker == 2)//2 = hem2
+                            {
+                                var json = dbase.getRakeVpp<Stats>("select StatNewStarsVPP from stats");
+                                try
+                                {
+                                    vpptemp = new Utils().stringtoDouble(json.Results[0].NewStarsVPP);
+                                    
+                                }
+                                catch (Exception e)
+                                {
+                                    new Debug().LogMessage("Error vpp : " + e.ToString());
                                 }
                             }
                         }
 
-                        if (stopvpp > 0.0)
+                        
+                        if (stopvpp < (vpptemp - vpp))
                         {
-                            if (stopvpp < (vpptemp - vpp))
+                            if (!stop)
                             {
-                                if (!stop)
-                                {
-                                    player = new Utils().playsound(sounds[5], false);
-                                    labelStopSet("!!!! StopVPP !!!!", Color.Green);
-                                    Thread.Sleep(5000);
-                                    labelStopSet("", Color.White);
-                                    stopvpp = 99999;
-                                }
+                                player = new Utils().playsound(sounds[5], false);
+                                labelStopSet("!!!! StopVPP !!!!", Color.Green);
+                                Thread.Sleep(5000);
+                                labelStopSet("", Color.White);
+                                stopvpp = 99999;
                             }
                         }
+                        
                     }
 
                     Thread.Sleep(250);

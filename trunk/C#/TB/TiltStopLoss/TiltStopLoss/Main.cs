@@ -53,6 +53,7 @@ namespace TiltStopLoss
             //como mudei os sound elimino onde estava o original inicialmente
             new Utils().deleteSound();
             new Utils().changeFileConfig();
+            new Utils().deletefileerrors();
             //por defeito a combobox no NO
             comboBoxBRM.SelectedIndex = 0;
             comboBoxLanguage.SelectedIndex = 0;
@@ -134,6 +135,7 @@ namespace TiltStopLoss
                 catch (Exception e)
                 {
                     new Debug().LogMessage(e.ToString());
+                    //new Debug().LogMessage("Message: " + e.Message.ToString());
                 }
             }
             else

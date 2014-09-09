@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Net;
 using Newtonsoft.Json;
 using System.Web;
+using System.Net.Sockets;
 
 namespace TiltStopLoss
 {
@@ -311,17 +312,43 @@ namespace TiltStopLoss
         {
             using (var w = new WebClient())
             {
+                //String ip = LocalIPAddress();
+                String ip = "localhost";
                 var json_data = string.Empty;
                 // attempt to download JSON data as a string
                 try
                 {
-                    json_data = w.DownloadString("http://127.0.0.1:8001/query?q=" + HttpUtility.UrlEncode(query));
+                    json_data = w.DownloadString("http://" + ip + ":8001/query?q=" + HttpUtility.UrlEncode(query));
                     //json_data = w.DownloadString("http://127.0.0.1:8001/query?q=select%20StatRakeAmount,%20StatNewStarsVPP%20from%20stats");
                 }
-                catch (Exception) { }
+                catch (Exception e) 
+                {
+                    new Debug().LogMessage("method getrakevpp: " + e.ToString());
+                    //new Debug().LogMessage("Message: " + e.Message.ToString());
+                }
                 // if string with JSON data is not empty, deserialize it to class and return its instance 
                 return !string.IsNullOrEmpty(json_data) ? JsonConvert.DeserializeObject<T>(json_data) : new T();
             }
+        }
+
+        /// <summary>
+        /// Not in use
+        /// </summary>
+        /// <returns></returns>
+        public string LocalIPAddress()
+        {
+            IPHostEntry host;
+            string localIP = "";
+            host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    localIP = ip.ToString();
+                    break;
+                }
+            }
+            return localIP;
         }
 
     }

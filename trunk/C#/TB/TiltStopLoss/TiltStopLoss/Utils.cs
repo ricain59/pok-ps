@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace TiltStopLoss
 {
@@ -119,8 +120,10 @@ namespace TiltStopLoss
         /// <returns></returns>
         public Double stringtoDouble(String value)
         {
-            if (value.Equals(""))
+            int alphaCounter = Regex.Matches(value, @"[a-zA-Z]").Count;
+            if (value.Equals("") || alphaCounter > 0)
             {
+                //new Debug().LogMessage("Valeur de string to double:" + value);
                 return 0.0;
             }
             else
@@ -213,6 +216,22 @@ namespace TiltStopLoss
             {
                 File.Move(@filepath, pathfinal2 + "\\config_setnewvalue.txt");
                 File.Delete(@filepath);
+            }
+        }
+
+        /// <summary>
+        /// Para eliminar os ficheiro de erros com mais de 3 dias
+        /// </summary>
+        public void deletefileerrors()
+        {
+            String pathfinal = Directory.GetCurrentDirectory();
+            string[] files = Directory.GetFiles(pathfinal + "\\error");
+
+            foreach (string file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                if (fi.LastWriteTime < DateTime.Now.AddDays(-3))
+                    fi.Delete();
             }
         }
 
@@ -497,6 +516,18 @@ namespace TiltStopLoss
         public DateTime stringToDateTime(String time)
         {
             return Convert.ToDateTime(time);
+        }
+
+        /// <summary>
+        /// Reiutra caracteres speciais da string devlvida pelo hem2
+        /// </summary>
+        /// <param name="rakejson"></param>
+        /// <returns></returns>
+        public String resolveStringRake(String rakejson)
+        {
+            String[] tempspli = rakejson.Split('.');
+            Regex rgx = new Regex("[^0-9]");
+            return rgx.Replace(tempspli[0], "") + "." + tempspli[1];
         }
     }
 }
