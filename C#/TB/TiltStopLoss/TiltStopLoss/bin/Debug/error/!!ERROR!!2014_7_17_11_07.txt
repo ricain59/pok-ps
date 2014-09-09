@@ -1,6 +1,0 @@
-Error VPP and rake:System.NullReferenceException: Object reference not set to an instance of an object.
-   at TiltStopLoss.Stoploss.calculateBB() in M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 244
-System.Threading.ThreadAbortException: Thread was being aborted.
-   at System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
-   at System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
-   at TiltStopLoss.Stoploss.calculateBB() in M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 595
