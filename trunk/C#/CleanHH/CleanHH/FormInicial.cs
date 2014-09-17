@@ -14,7 +14,7 @@ namespace CleanHH
     {
         private String folder;
         private String nickname;
-        private String site;
+        private String site = "";
         private int handnickname = 0;
         
         public FormInicial()
@@ -60,7 +60,10 @@ namespace CleanHH
                     break;
                 case "comboBoxSite":
                     comboBoxSite.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
-                    site = comboBoxSite.SelectedItem.ToString();
+                    if (comboBoxSite.SelectedIndex != -1)
+                    {
+                        site = comboBoxSite.SelectedItem.ToString();
+                    }                    
                     break;
                 case "textBoxFolder":
                     textBoxFolder.Text = line[1].ToString();
@@ -101,17 +104,37 @@ namespace CleanHH
         /// <param name="e"></param>
         private void buttonClean_Click(object sender, EventArgs e)
         {
+            Boolean continu = true;
             if (textBoxFolder.Text.Equals(""))
             {
                 MessageBox.Show("Choose folder files hands");
+                continu = false;
             }
-            else
+            if (textBoxNickName.Text.Equals("") && continu)
+            {
+                MessageBox.Show("Write your nickname");
+                continu = false;
+            }
+            if (comboBoxSite.SelectedIndex == -1 && site == "" && continu)
+            {
+                MessageBox.Show("Choose the site");
+                continu = false;
+            }
+
+            if(continu)
             {
                 //criar a pasta new
                 if (!Directory.Exists(folder + "/new"))
                 {
                     // Try to create the directory.
-                    DirectoryInfo di = Directory.CreateDirectory(folder + "/new");
+                    try
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(folder + "/new");
+                    }
+                    catch (IOException ex)
+                    {
+                        new Debug().LogMessage("Erro na criação da pasta new: " + ex.ToString());
+                    }
                 }
 
                 //obter todos a lista de ficheiro
@@ -171,9 +194,13 @@ namespace CleanHH
             folder = folderBrowserDialogHand.SelectedPath.ToString();
         }
 
-        
-
-
+        private void comboBoxSite_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxSite.SelectedIndex != -1)
+            {
+                site = comboBoxSite.SelectedItem.ToString();
+            }
+        }
 
     }
 }
