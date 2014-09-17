@@ -104,6 +104,7 @@
             this.comboBoxSite.Name = "comboBoxSite";
             this.comboBoxSite.Size = new System.Drawing.Size(248, 21);
             this.comboBoxSite.TabIndex = 6;
+            this.comboBoxSite.SelectedIndexChanged += new System.EventHandler(this.comboBoxSite_SelectedIndexChanged);
             // 
             // buttonClean
             // 
@@ -122,7 +123,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "v0.1";
+            this.label3.Text = "v0.2";
             // 
             // progressBarHand
             // 
@@ -146,6 +147,7 @@
             this.Controls.Add(this.buttonChooseFolder);
             this.Controls.Add(this.labelFolder);
             this.Controls.Add(this.textBoxFolder);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormInicial";
             this.Text = "CleanHH";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
