@@ -115,6 +115,10 @@ namespace CleanHH
                 MessageBox.Show("Write your nickname");
                 continu = false;
             }
+            else
+            {
+                nickname = textBoxNickName.Text;
+            }
             if (comboBoxSite.SelectedIndex == -1 && site == "" && continu)
             {
                 MessageBox.Show("Choose the site");
