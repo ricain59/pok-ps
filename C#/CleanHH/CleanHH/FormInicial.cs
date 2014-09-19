@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace CleanHH
 {
@@ -16,6 +17,9 @@ namespace CleanHH
         private String nickname;
         private String site = "";
         private int handnickname = 0;
+        private Boolean continu = true;
+        private int i = 0;
+        private string[] filePaths;
         
         public FormInicial()
         {
@@ -60,18 +64,12 @@ namespace CleanHH
                     break;
                 case "comboBoxSite":
                     comboBoxSite.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
-                    if (comboBoxSite.SelectedIndex != -1)
-                    {
-                        site = comboBoxSite.SelectedItem.ToString();
-                    }                    
                     break;
                 case "textBoxFolder":
                     textBoxFolder.Text = line[1].ToString();
-                    folder = line[1].ToString();
                     break;
                 case "textBoxNickName":
                     textBoxNickName.Text = line[1].ToString();
-                    nickname = line[1].ToString();
                     break;                    
                 default:
                     break;
@@ -104,12 +102,18 @@ namespace CleanHH
         /// <param name="e"></param>
         private void buttonClean_Click(object sender, EventArgs e)
         {
-            Boolean continu = true;
+            continu = true;
+            //folder
             if (textBoxFolder.Text.Equals(""))
             {
                 MessageBox.Show("Choose folder files hands");
                 continu = false;
             }
+            else
+            {
+                folder = textBoxFolder.Text;
+            }
+            //nickname
             if (textBoxNickName.Text.Equals("") && continu)
             {
                 MessageBox.Show("Write your nickname");
@@ -119,49 +123,77 @@ namespace CleanHH
             {
                 nickname = textBoxNickName.Text;
             }
+            //site
             if (comboBoxSite.SelectedIndex == -1 && site == "" && continu)
             {
                 MessageBox.Show("Choose the site");
                 continu = false;
             }
+            else
+            {
+                site = comboBoxSite.SelectedItem.ToString();
+            }
 
+            //ciclo
             if(continu)
             {
-                //criar a pasta new
-                if (!Directory.Exists(folder + "/new"))
-                {
-                    // Try to create the directory.
-                    try
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(folder + "/new");
-                    }
-                    catch (IOException ex)
-                    {
-                        new Debug().LogMessage("Erro na criação da pasta new: " + ex.ToString());
-                    }
-                }
+                Thread startapp = new Thread(new ThreadStart(this.getFiles));
+                startapp.Start();
 
-                //obter todos a lista de ficheiro
-                string[] filePaths = Directory.GetFiles(@"" + folder, "*.txt");
-                progressBarHand.TabIndex = filePaths.Count();
-                String textfile = "";
-                //int i = 1;
-                foreach (String fi in filePaths)
+                filePaths = Directory.GetFiles(@"" + folder, "*.txt");
+                progressBarHand.Maximum = filePaths.Count();
+
+                while (continu)
                 {
-                    using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
-                    {
-                        textfile = streamReader.ReadToEnd();
-                    }
-                    cleanfile(textfile, Path.GetFileName(fi));
-                    textfile = "";
-                    progressBarHand.Value = progressBarHand.Value + 1;
-                    //i++;                    
+                    progressBarHand.Value = i;
                 }
-                progressBarHand.Value = progressBarHand.TabIndex;
-                MessageBox.Show("Finish Clean HH, Have " + handnickname + " hands with nickname");
             }
+            progressBarHand.Value = progressBarHand.Maximum;
+            MessageBox.Show("Finish Clean HH, Have " + handnickname + " hands with nickname");
         }
 
+        private void getFiles()
+        {
+            //criar a pasta new
+            if (!Directory.Exists(folder + "/new"))
+            {
+                // Try to create the directory.
+                try
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(folder + "/new");
+                }
+                catch (IOException ex)
+                {
+                    new Debug().LogMessage("Erro na criação da pasta new: " + ex.ToString());
+                }
+            }
+
+            //obter todos a lista de ficheiro
+            //string[] filePaths = Directory.GetFiles(@"" + folder, "*.txt");
+            //progressBarHand.Maximum = filePaths.Count();
+            String textfile = "";
+            //int i = 1;
+            foreach (String fi in filePaths)
+            {
+                using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
+                {
+                    textfile = streamReader.ReadToEnd();
+                }
+                cleanfile(textfile, Path.GetFileName(fi));
+                textfile = "";
+                //progressBarHand.Value = progressBarHand.Value + 1;
+                i++;                    
+            }
+            continu = false;
+            //progressBarHand.Value = progressBarHand.TabIndex;
+            //MessageBox.Show("Finish Clean HH, Have " + handnickname + " hands with nickname");
+        }
+
+        /// <summary>
+        /// limpeza das hands
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="filename"></param>
         private void cleanfile(String file, String filename)
         {
             String[] splitfile = file.Split(new string[] { site }, StringSplitOptions.RemoveEmptyEntries);
@@ -198,6 +230,11 @@ namespace CleanHH
             folder = folderBrowserDialogHand.SelectedPath.ToString();
         }
 
+        /// <summary>
+        /// quando se muda a selecção na combobox site
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxSite_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxSite.SelectedIndex != -1)
