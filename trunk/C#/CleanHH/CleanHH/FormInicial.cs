@@ -20,6 +20,7 @@ namespace CleanHH
         private Boolean continu = true;
         private int i = 0;
         private string[] filePaths;
+        private int numfile;
         
         public FormInicial()
         {
@@ -28,6 +29,9 @@ namespace CleanHH
             new Utils().deletefileerrors();
             //depois disso volto ao soft caso diz que não
             loadConfig();
+            //progress bar
+            backgroundWorkerProgressBar.WorkerReportsProgress = true;
+            backgroundWorkerProgressBar.WorkerSupportsCancellation = true;
         }
 
         #region Save and load config
@@ -140,18 +144,17 @@ namespace CleanHH
                 Thread startapp = new Thread(new ThreadStart(this.getFiles));
                 startapp.Start();
 
-                filePaths = Directory.GetFiles(@"" + folder, "*.txt");
-                progressBarHand.Maximum = filePaths.Count();
-
-                while (continu)
+                if (backgroundWorkerProgressBar.IsBusy != true)
                 {
-                    progressBarHand.Value = i;
+                    // Start the asynchronous operation.
+                    backgroundWorkerProgressBar.RunWorkerAsync();
                 }
             }
-            progressBarHand.Value = progressBarHand.Maximum;
-            MessageBox.Show("Finish Clean HH, Have " + handnickname + " hands with nickname");
         }
 
+        /// <summary>
+        /// obtenho a lista de ficheiros
+        /// </summary>
         private void getFiles()
         {
             //criar a pasta new
@@ -169,10 +172,9 @@ namespace CleanHH
             }
 
             //obter todos a lista de ficheiro
-            //string[] filePaths = Directory.GetFiles(@"" + folder, "*.txt");
-            //progressBarHand.Maximum = filePaths.Count();
+            filePaths = Directory.GetFiles(@"" + folder, "*.txt");
+            numfile = filePaths.Count();
             String textfile = "";
-            //int i = 1;
             foreach (String fi in filePaths)
             {
                 using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
@@ -181,12 +183,9 @@ namespace CleanHH
                 }
                 cleanfile(textfile, Path.GetFileName(fi));
                 textfile = "";
-                //progressBarHand.Value = progressBarHand.Value + 1;
                 i++;                    
             }
-            continu = false;
-            //progressBarHand.Value = progressBarHand.TabIndex;
-            //MessageBox.Show("Finish Clean HH, Have " + handnickname + " hands with nickname");
+            continu = false;            
         }
 
         /// <summary>
@@ -241,6 +240,35 @@ namespace CleanHH
             {
                 site = comboBoxSite.SelectedItem.ToString();
             }
+        }
+
+        private void backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            
+            int tempi = i;
+            while (continu)
+            {
+                if (tempi != i)
+                {
+                    worker.ReportProgress(i);
+                    tempi = i;
+                }
+
+            }
+            backgroundWorkerProgressBar.CancelAsync();
+        }
+
+        private void backgroundWorkerProgressBar_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBarHand.Maximum = numfile;
+            progressBarHand.Value = i;
+        }
+
+        private void backgroundWorkerProgressBar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBarHand.Value = progressBarHand.Maximum;
+            MessageBox.Show("Finish Clean HH, Have " + handnickname + " hands with nickname");
         }
 
     }

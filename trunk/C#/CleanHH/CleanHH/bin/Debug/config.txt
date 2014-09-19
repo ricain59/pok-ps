@@ -1,4 +1,4 @@
-Location=1063,411
+Location=303,387
 textBoxFolder=C:\datamining
 textBoxNickName=hulkric59
 comboBoxSite=0
