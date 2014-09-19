@@ -1,0 +1,4 @@
+Location=1063,411
+textBoxFolder=C:\datamining
+textBoxNickName=hulkric59
+comboBoxSite=0
