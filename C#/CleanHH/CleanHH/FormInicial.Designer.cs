@@ -40,6 +40,7 @@
             this.buttonClean = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.progressBarHand = new System.Windows.Forms.ProgressBar();
+            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // textBoxFolder
@@ -123,7 +124,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "v0.4";
+            this.label3.Text = "v0.5";
             // 
             // progressBarHand
             // 
@@ -131,6 +132,12 @@
             this.progressBarHand.Name = "progressBarHand";
             this.progressBarHand.Size = new System.Drawing.Size(410, 23);
             this.progressBarHand.TabIndex = 9;
+            // 
+            // backgroundWorkerProgressBar
+            // 
+            this.backgroundWorkerProgressBar.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProgressBar_DoWork);
+            this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
+            this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
             // 
             // FormInicial
             // 
@@ -169,6 +176,7 @@
         private System.Windows.Forms.Button buttonClean;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ProgressBar progressBarHand;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
     }
 }
 
