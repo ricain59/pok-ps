@@ -25,6 +25,7 @@ namespace CleanHH
         public FormInicial()
         {
             InitializeComponent();
+            labelWaiting.Visible = false;
             //eliminar ficheiros de erro com mais de 3 dias
             new Utils().deletefileerrors();
             //depois disso volto ao soft caso diz que não
@@ -137,7 +138,8 @@ namespace CleanHH
             {
                 site = comboBoxSite.SelectedItem.ToString();
             }
-
+            buttonClean.Enabled = false;
+            labelWaiting.Visible = true;
             //ciclo
             if(continu)
             {
@@ -185,7 +187,9 @@ namespace CleanHH
                 textfile = "";
                 i++;                    
             }
-            continu = false;            
+            continu = false;
+            //buttonClean.Enabled = true;
+            //labelWaiting.Visible = false;
         }
 
         /// <summary>
@@ -269,6 +273,7 @@ namespace CleanHH
         {
             progressBarHand.Value = progressBarHand.Maximum;
             MessageBox.Show("Finish Clean HH, Have " + handnickname + " hands with nickname");
+            this.Close();
         }
 
     }
