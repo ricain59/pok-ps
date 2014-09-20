@@ -41,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.progressBarHand = new System.Windows.Forms.ProgressBar();
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
+            this.labelWaiting = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxFolder
@@ -124,7 +125,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "v0.5";
+            this.label3.Text = "v0.6";
             // 
             // progressBarHand
             // 
@@ -139,11 +140,22 @@
             this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
             this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
             // 
+            // labelWaiting
+            // 
+            this.labelWaiting.AutoSize = true;
+            this.labelWaiting.ForeColor = System.Drawing.Color.Red;
+            this.labelWaiting.Location = new System.Drawing.Point(301, 171);
+            this.labelWaiting.Name = "labelWaiting";
+            this.labelWaiting.Size = new System.Drawing.Size(78, 13);
+            this.labelWaiting.TabIndex = 10;
+            this.labelWaiting.Text = "Waiting Please";
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 201);
+            this.Controls.Add(this.labelWaiting);
             this.Controls.Add(this.progressBarHand);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonClean);
@@ -177,6 +189,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ProgressBar progressBarHand;
         private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
+        private System.Windows.Forms.Label labelWaiting;
     }
 }
 
