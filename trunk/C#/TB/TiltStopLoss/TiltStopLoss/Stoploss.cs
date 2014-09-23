@@ -256,9 +256,12 @@ namespace TiltStopLoss
                             var json = dbase.getRakeVpp<Stats>("select StatRakeAmount from stats");
                             if (json.Results.Capacity > 0)
                             {
+                                //new Debug().LogMessage("Rake que vem do json : " + json.Results[0].Rake);
                                 String rakefinal = new Utils().resolveStringRake(json.Results[0].Rake);
+                                //new Debug().LogMessage("Rake que vai para conv to double : " + rakefinal);
                                 //rake = new Utils().stringtoDouble(json.Results[0].Rake);
                                 rake = new Utils().stringtoDouble(rakefinal);
+                                //new Debug().LogMessage("Rake : " + rake);
                             }
                         }catch (Exception e)
                         {
@@ -593,8 +596,11 @@ namespace TiltStopLoss
                                 var json = dbase.getRakeVpp<Stats>("select StatRakeAmount from stats");
                                 try
                                 {
+                                    //new Debug().LogMessage("Rake que vem do json do temp : " + json.Results[0].Rake);
                                     String raketempfinal = new Utils().resolveStringRake(json.Results[0].Rake);
+                                    //new Debug().LogMessage("Rake que vai conv to double do temp : " + raketempfinal);
                                     raketemp = new Utils().stringtoDouble(raketempfinal);
+                                    //new Debug().LogMessage("Rake Temp : " + raketemp);
                                     //raketemp = new Utils().stringtoDouble(json.Results[0].Rake);
                                 }
                                 catch (Exception e)
