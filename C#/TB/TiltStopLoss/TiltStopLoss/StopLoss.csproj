@@ -62,6 +62,9 @@
     <Reference Include="policy.2.0.Npgsql">
       <HintPath>..\..\..\..\Npgsql2.0.14.3-bin-ms.net4.0\policy.2.0.Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="StarRatingControl">
+      <HintPath>..\..\StarRatingControl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -75,6 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormCoolDown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCoolDown.Designer.cs">
+      <DependentUpon>FormCoolDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDonate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +110,12 @@
     <Compile Include="FormSounds.Designer.cs">
       <DependentUpon>FormSounds.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormWarmup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWarmup.Designer.cs">
+      <DependentUpon>FormWarmup.cs</DependentUpon>
+    </Compile>
     <Compile Include="HandPs_obsolete.cs" />
     <Compile Include="Json\Results.cs" />
     <Compile Include="Json\Stats.cs" />
@@ -119,6 +134,9 @@
       <DependentUpon>Stoploss.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="FormCoolDown.resx">
+      <DependentUpon>FormCoolDown.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormDonate.resx">
       <DependentUpon>FormDonate.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSounds.resx">
       <DependentUpon>FormSounds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWarmup.resx">
+      <DependentUpon>FormWarmup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

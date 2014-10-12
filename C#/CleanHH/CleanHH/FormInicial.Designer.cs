@@ -125,7 +125,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "v0.6";
+            this.label3.Text = "v0.7";
             // 
             // progressBarHand
             // 
