@@ -72,6 +72,7 @@
             this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
             this.labelCloseSkype = new System.Windows.Forms.Label();
             this.tabConfStop = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxStopVPP = new System.Windows.Forms.TextBox();
@@ -692,6 +693,7 @@
             // 
             // tabConfStop
             // 
+            this.tabConfStop.Controls.Add(this.button1);
             this.tabConfStop.Controls.Add(this.label5);
             this.tabConfStop.Controls.Add(this.label3);
             this.tabConfStop.Controls.Add(this.textBoxStopVPP);
@@ -740,6 +742,16 @@
             this.tabConfStop.TabIndex = 2;
             this.tabConfStop.Text = "Conf. Stop";
             this.tabConfStop.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(235, 151);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 61;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label5
             // 
@@ -1459,7 +1471,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(341, 402);
+            this.ClientSize = new System.Drawing.Size(342, 402);
             this.Controls.Add(this.tabControlMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
@@ -1595,6 +1607,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
     }
 }
 

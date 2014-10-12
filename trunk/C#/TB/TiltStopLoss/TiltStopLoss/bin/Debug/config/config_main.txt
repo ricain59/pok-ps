@@ -45,6 +45,6 @@ lastsessioncheckbox=False
 lastsessioncombobox=2
 checkBoxStartTimer=True
 comboBoxUpdate=6
-daysupdate=01-09-2014 14:25:41
+daysupdate=28-09-2014 16:13:43
 stoprake=0
 stopvpp=0

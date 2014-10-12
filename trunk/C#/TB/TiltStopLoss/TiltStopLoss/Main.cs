@@ -1390,5 +1390,11 @@ namespace TiltStopLoss
                 textBoxPlayer.Text = "";
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormCoolDown fcd = new FormCoolDown();
+            fcd.Show();
+        }
     }
 }

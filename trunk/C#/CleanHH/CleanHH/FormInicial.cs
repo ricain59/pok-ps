@@ -183,7 +183,19 @@ namespace CleanHH
                 {
                     textfile = streamReader.ReadToEnd();
                 }
-                cleanfile(textfile, Path.GetFileName(fi));
+                if (textfile.Contains(nickname))
+                {
+                    cleanfile(textfile, Path.GetFileName(fi));
+                }
+                else
+                {
+                    String icon_path = new Uri(folder + "/new").LocalPath;
+                    String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
+                    StreamWriter w = new StreamWriter(pathfinal, true);
+                    w.Write(textfile);
+                    w.WriteLine();
+                    w.Close();
+                }
                 textfile = "";
                 i++;                    
             }
