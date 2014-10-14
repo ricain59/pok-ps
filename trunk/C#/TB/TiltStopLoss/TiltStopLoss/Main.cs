@@ -12,12 +12,16 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Diagnostics;
 using StopLoss;
+using StopLoss.DB;
 
 namespace TiltStopLoss
 {
     public partial class Main : Form
     {
+        //db
         private Db db = new Db();
+        private SQLiteDatabase dbsqlite = new SQLiteDatabase();
+        //other
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
@@ -1391,10 +1395,30 @@ namespace TiltStopLoss
             }
         }
 
+        /// <summary>
+        /// pour tester le cooldown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             FormCoolDown fcd = new FormCoolDown();
             fcd.Show();
         }
+
+        /// <summary>
+        /// open windows config warmup e cooldown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonConfigWc_Click(object sender, EventArgs e)
+        {
+            FormWCConfig fwc = new FormWCConfig(dbsqlite);
+            fwc.Show();
+        }
+
+        
+
+
     }
 }
