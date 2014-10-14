@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace CleanHH
 {
@@ -75,7 +76,15 @@ namespace CleanHH
                     break;
                 case "textBoxNickName":
                     textBoxNickName.Text = line[1].ToString();
-                    break;                    
+                    break; 
+                case "multithread":
+                    if(line[1].ToString().Equals("True"))
+                    {
+                        checkBoxMultiThread.Checked = true;
+                    }else{
+                        checkBoxMultiThread.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -93,6 +102,8 @@ namespace CleanHH
             w.Write("textBoxNickName=" + textBoxNickName.Text.ToString());
             w.WriteLine();
             w.Write("comboBoxSite=" + comboBoxSite.SelectedIndex);
+            w.WriteLine();
+            w.Write("multithread=" + checkBoxMultiThread.Checked.ToString());
             w.WriteLine();
             w.Close();
             //test
@@ -177,28 +188,57 @@ namespace CleanHH
             filePaths = Directory.GetFiles(@"" + folder, "*.txt");
             numfile = filePaths.Count();
             String textfile = "";
-            foreach (String fi in filePaths)
+            //multithread
+            if (checkBoxMultiThread.Checked)
             {
-                using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
+                Parallel.ForEach(filePaths, fi =>
                 {
-                    textfile = streamReader.ReadToEnd();
-                }
-                if (textfile.Contains(nickname))
-                {
-                    cleanfile(textfile, Path.GetFileName(fi));
-                }
-                else
-                {
-                    String icon_path = new Uri(folder + "/new").LocalPath;
-                    String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
-                    StreamWriter w = new StreamWriter(pathfinal, true);
-                    w.Write(textfile);
-                    w.WriteLine();
-                    w.Close();
-                }
-                textfile = "";
-                i++;                    
+                    using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
+                    {
+                        textfile = streamReader.ReadToEnd();
+                    }
+                    if (textfile.Contains(nickname))
+                    {
+                        cleanfile(textfile, Path.GetFileName(fi));
+                    }
+                    else
+                    {
+                        String icon_path = new Uri(folder + "/new").LocalPath;
+                        String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
+                        StreamWriter w = new StreamWriter(pathfinal, true);
+                        w.Write(textfile);
+                        w.WriteLine();
+                        w.Close();
+                    }
+                    textfile = "";
+                    i++;
+                });
             }
+            else
+            {
+                foreach (String fi in filePaths)
+                {
+                    using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
+                    {
+                        textfile = streamReader.ReadToEnd();
+                    }
+                    if (textfile.Contains(nickname))
+                    {
+                        cleanfile(textfile, Path.GetFileName(fi));
+                    }
+                    else
+                    {
+                        String icon_path = new Uri(folder + "/new").LocalPath;
+                        String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
+                        StreamWriter w = new StreamWriter(pathfinal, true);
+                        w.Write(textfile);
+                        w.WriteLine();
+                        w.Close();
+                    }
+                    textfile = "";
+                    i++;
+                }
+            }            
             continu = false;
             //buttonClean.Enabled = true;
             //labelWaiting.Visible = false;

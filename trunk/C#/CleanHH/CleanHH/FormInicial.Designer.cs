@@ -42,6 +42,8 @@
             this.progressBarHand = new System.Windows.Forms.ProgressBar();
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.labelWaiting = new System.Windows.Forms.Label();
+            this.checkBoxMultiThread = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxFolder
@@ -110,7 +112,7 @@
             // 
             // buttonClean
             // 
-            this.buttonClean.Location = new System.Drawing.Point(220, 166);
+            this.buttonClean.Location = new System.Drawing.Point(220, 194);
             this.buttonClean.Name = "buttonClean";
             this.buttonClean.Size = new System.Drawing.Size(75, 23);
             this.buttonClean.TabIndex = 7;
@@ -121,15 +123,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(473, 179);
+            this.label3.Location = new System.Drawing.Point(473, 207);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "v0.7";
+            this.label3.Text = "v0.8";
             // 
             // progressBarHand
             // 
-            this.progressBarHand.Location = new System.Drawing.Point(74, 130);
+            this.progressBarHand.Location = new System.Drawing.Point(74, 158);
             this.progressBarHand.Name = "progressBarHand";
             this.progressBarHand.Size = new System.Drawing.Size(410, 23);
             this.progressBarHand.TabIndex = 9;
@@ -144,17 +146,41 @@
             // 
             this.labelWaiting.AutoSize = true;
             this.labelWaiting.ForeColor = System.Drawing.Color.Red;
-            this.labelWaiting.Location = new System.Drawing.Point(301, 171);
+            this.labelWaiting.Location = new System.Drawing.Point(301, 199);
             this.labelWaiting.Name = "labelWaiting";
             this.labelWaiting.Size = new System.Drawing.Size(78, 13);
             this.labelWaiting.TabIndex = 10;
             this.labelWaiting.Text = "Waiting Please";
             // 
+            // checkBoxMultiThread
+            // 
+            this.checkBoxMultiThread.AutoSize = true;
+            this.checkBoxMultiThread.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxMultiThread.Location = new System.Drawing.Point(4, 132);
+            this.checkBoxMultiThread.Name = "checkBoxMultiThread";
+            this.checkBoxMultiThread.Size = new System.Drawing.Size(85, 17);
+            this.checkBoxMultiThread.TabIndex = 11;
+            this.checkBoxMultiThread.Text = "Multi-Thread";
+            this.checkBoxMultiThread.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(96, 133);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(208, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "*If checked, more fast but more cpu usage";
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 201);
+            this.ClientSize = new System.Drawing.Size(513, 228);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.checkBoxMultiThread);
             this.Controls.Add(this.labelWaiting);
             this.Controls.Add(this.progressBarHand);
             this.Controls.Add(this.label3);
@@ -190,6 +216,8 @@
         private System.Windows.Forms.ProgressBar progressBarHand;
         private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
         private System.Windows.Forms.Label labelWaiting;
+        private System.Windows.Forms.CheckBox checkBoxMultiThread;
+        private System.Windows.Forms.Label label4;
     }
 }
 
