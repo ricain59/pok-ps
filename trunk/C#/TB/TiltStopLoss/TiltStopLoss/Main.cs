@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.Diagnostics;
 using StopLoss;
 using StopLoss.DB;
+using System.Data.SQLite;
 
 namespace TiltStopLoss
 {
@@ -49,6 +50,8 @@ namespace TiltStopLoss
         //mouse
         private String help;
         private String textDb;
+        //form
+        FormWarmup fw;
         
         public Main()
         {
@@ -83,7 +86,20 @@ namespace TiltStopLoss
             {
                 textBoxPlayer.Enabled = true;
                 fillTextboxPlayer();
-            }            
+            }
+            if (checkBoxAutoStartWarmup.Checked)
+            {
+                DataTable dt = dbsqlite.GetDataTable("select * from questionwc where enabled = 1 AND type != 'cooldown'");
+                if (dt.Rows.Count > 0)
+                {
+                    fw = new FormWarmup(dbsqlite);
+                    fw.Show();
+                }
+                else
+                {
+                    MessageBox.Show("You haven't configure warmup");
+                }
+            }
         }
 
         /// <summary>
@@ -674,6 +690,16 @@ namespace TiltStopLoss
                 case "stopvpp":
                     textBoxStopVPP.Text = line[1].ToString();
                     break;
+                case "autostartwarmup":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxAutoStartWarmup.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxAutoStartWarmup.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -784,6 +810,8 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("stopvpp=" + textBoxStopVPP.Text.ToString());
             w.WriteLine();
+            w.Write("autostartwarmup=" + checkBoxAutoStartWarmup.Checked.ToString());
+            w.WriteLine();            
             w.Close();
             //test
         }
@@ -1417,7 +1445,24 @@ namespace TiltStopLoss
             fwc.Show();
         }
 
-        
+        /// <summary>
+        /// start manually warmup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonStartWarmup_Click(object sender, EventArgs e)
+        {
+            DataTable dt = dbsqlite.GetDataTable("select * from questionwc where enabled = 1 AND type != 'cooldown'");
+            if (dt.Rows.Count > 0)
+            {
+                fw = new FormWarmup(dbsqlite);
+                fw.Show();
+            }
+            else
+            {
+                MessageBox.Show("You haven't configure warmup");
+            }
+        }        
 
 
     }

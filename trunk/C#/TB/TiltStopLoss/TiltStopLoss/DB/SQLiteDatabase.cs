@@ -11,7 +11,7 @@ namespace StopLoss.DB
 {
     public class SQLiteDatabase
     {
-
+        SQLiteConnection cnnmeu;
         String dbConnection;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace StopLoss.DB
                 //criar as tabela e colunas aqui no soft
                 //ExecuteNonQuery("create table configframe (id INTEGER PRIMARY KEY, nameframe varchar(40), nameobject varchar(40), valueobject varchar(40))");
                 ExecuteNonQuery("create table questionwc (id INTEGER PRIMARY KEY, type varchar(40), subtype varchar(40), questions text(300), enabled BOOLEAN, deleted BOOLEAN DEFAULT 0)");
-                ExecuteNonQuery("create table warmup (id INTEGER PRIMARY KEY, date DATETIME, median DECIMAL(8,2))");
+                ExecuteNonQuery("create table warmup (id INTEGER PRIMARY KEY, subtype varchar(40), datequestions DATETIME, questionsdone INT, questionstotal INT)");
             }                        
         }
 
@@ -83,6 +83,38 @@ namespace StopLoss.DB
                 throw new Exception(e.Message);
             }
             return dt;
+        }
+
+        /// <summary>
+        /// return the reader for insert in datatable
+        /// reader tem de ser fechado depois de carregar
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public SQLiteDataReader GetDataReaderTable(string sql)
+        {
+            SQLiteDataReader reader;
+            try
+            {
+                cnnmeu = new SQLiteConnection(dbConnection);
+                cnnmeu.Open();
+                SQLiteCommand mycommand = new SQLiteCommand(cnnmeu);
+                mycommand.CommandText = sql;
+                reader = mycommand.ExecuteReader();
+                //dt.Load(reader);
+                //reader.Close();
+                //cnn.Close();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return reader;
+        }
+
+        public void CloseCnnmeu()
+        {
+            cnnmeu.Close();
         }
 
         /// <summary>

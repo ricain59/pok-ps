@@ -32,15 +32,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormWCConfig));
             this.tabControlWarmup = new System.Windows.Forms.TabControl();
             this.tabPagePhysical = new System.Windows.Forms.TabPage();
+            this.labelActivatep = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonQuestionPhysical = new System.Windows.Forms.Button();
             this.tabPageMental = new System.Windows.Forms.TabPage();
+            this.labelActivatem = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonQuestionMental = new System.Windows.Forms.Button();
             this.tabPageTechnical = new System.Windows.Forms.TabPage();
+            this.labelActivatet = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonQuestionTechnical = new System.Windows.Forms.Button();
             this.tabPagePractice = new System.Windows.Forms.TabPage();
+            this.labelActivatepr = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonQuestionPractice = new System.Windows.Forms.Button();
             this.tabControlWarmupCooldown = new System.Windows.Forms.TabControl();
@@ -50,6 +54,9 @@
             this.buttonSaveExit = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.labelActivateCooldown = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.buttonQuestionCooldown = new System.Windows.Forms.Button();
             this.tabControlWarmup.SuspendLayout();
             this.tabPagePhysical.SuspendLayout();
             this.tabPageMental.SuspendLayout();
@@ -57,6 +64,7 @@
             this.tabPagePractice.SuspendLayout();
             this.tabControlWarmupCooldown.SuspendLayout();
             this.tabPageWarmup.SuspendLayout();
+            this.tabPageCooldown.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlWarmup
@@ -74,6 +82,7 @@
             // tabPagePhysical
             // 
             this.tabPagePhysical.AutoScroll = true;
+            this.tabPagePhysical.Controls.Add(this.labelActivatep);
             this.tabPagePhysical.Controls.Add(this.label1);
             this.tabPagePhysical.Controls.Add(this.buttonQuestionPhysical);
             this.tabPagePhysical.Location = new System.Drawing.Point(4, 22);
@@ -83,6 +92,16 @@
             this.tabPagePhysical.TabIndex = 0;
             this.tabPagePhysical.Text = "Physical";
             this.tabPagePhysical.UseVisualStyleBackColor = true;
+            // 
+            // labelActivatep
+            // 
+            this.labelActivatep.AutoSize = true;
+            this.labelActivatep.Location = new System.Drawing.Point(725, 17);
+            this.labelActivatep.Name = "labelActivatep";
+            this.labelActivatep.Size = new System.Drawing.Size(46, 13);
+            this.labelActivatep.TabIndex = 2;
+            this.labelActivatep.Text = "Activate";
+            this.labelActivatep.Visible = false;
             // 
             // label1
             // 
@@ -108,6 +127,7 @@
             // tabPageMental
             // 
             this.tabPageMental.AutoScroll = true;
+            this.tabPageMental.Controls.Add(this.labelActivatem);
             this.tabPageMental.Controls.Add(this.label2);
             this.tabPageMental.Controls.Add(this.buttonQuestionMental);
             this.tabPageMental.Location = new System.Drawing.Point(4, 22);
@@ -117,6 +137,16 @@
             this.tabPageMental.TabIndex = 1;
             this.tabPageMental.Text = "Mental";
             this.tabPageMental.UseVisualStyleBackColor = true;
+            // 
+            // labelActivatem
+            // 
+            this.labelActivatem.AutoSize = true;
+            this.labelActivatem.Location = new System.Drawing.Point(725, 17);
+            this.labelActivatem.Name = "labelActivatem";
+            this.labelActivatem.Size = new System.Drawing.Size(46, 13);
+            this.labelActivatem.TabIndex = 3;
+            this.labelActivatem.Text = "Activate";
+            this.labelActivatem.Visible = false;
             // 
             // label2
             // 
@@ -142,6 +172,7 @@
             // tabPageTechnical
             // 
             this.tabPageTechnical.AutoScroll = true;
+            this.tabPageTechnical.Controls.Add(this.labelActivatet);
             this.tabPageTechnical.Controls.Add(this.label3);
             this.tabPageTechnical.Controls.Add(this.buttonQuestionTechnical);
             this.tabPageTechnical.Location = new System.Drawing.Point(4, 22);
@@ -150,6 +181,16 @@
             this.tabPageTechnical.TabIndex = 2;
             this.tabPageTechnical.Text = "Technical";
             this.tabPageTechnical.UseVisualStyleBackColor = true;
+            // 
+            // labelActivatet
+            // 
+            this.labelActivatet.AutoSize = true;
+            this.labelActivatet.Location = new System.Drawing.Point(725, 17);
+            this.labelActivatet.Name = "labelActivatet";
+            this.labelActivatet.Size = new System.Drawing.Size(46, 13);
+            this.labelActivatet.TabIndex = 4;
+            this.labelActivatet.Text = "Activate";
+            this.labelActivatet.Visible = false;
             // 
             // label3
             // 
@@ -175,6 +216,7 @@
             // tabPagePractice
             // 
             this.tabPagePractice.AutoScroll = true;
+            this.tabPagePractice.Controls.Add(this.labelActivatepr);
             this.tabPagePractice.Controls.Add(this.label4);
             this.tabPagePractice.Controls.Add(this.buttonQuestionPractice);
             this.tabPagePractice.Location = new System.Drawing.Point(4, 22);
@@ -183,6 +225,16 @@
             this.tabPagePractice.TabIndex = 3;
             this.tabPagePractice.Text = "Practice";
             this.tabPagePractice.UseVisualStyleBackColor = true;
+            // 
+            // labelActivatepr
+            // 
+            this.labelActivatepr.AutoSize = true;
+            this.labelActivatepr.Location = new System.Drawing.Point(725, 17);
+            this.labelActivatepr.Name = "labelActivatepr";
+            this.labelActivatepr.Size = new System.Drawing.Size(46, 13);
+            this.labelActivatepr.TabIndex = 4;
+            this.labelActivatepr.Text = "Activate";
+            this.labelActivatepr.Visible = false;
             // 
             // label4
             // 
@@ -228,6 +280,9 @@
             // 
             // tabPageCooldown
             // 
+            this.tabPageCooldown.Controls.Add(this.labelActivateCooldown);
+            this.tabPageCooldown.Controls.Add(this.label6);
+            this.tabPageCooldown.Controls.Add(this.buttonQuestionCooldown);
             this.tabPageCooldown.Location = new System.Drawing.Point(4, 22);
             this.tabPageCooldown.Name = "tabPageCooldown";
             this.tabPageCooldown.Padding = new System.Windows.Forms.Padding(3);
@@ -272,6 +327,37 @@
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             this.buttonSave.MouseHover += new System.EventHandler(this.buttonSave_MouseHover);
             // 
+            // labelActivateCooldown
+            // 
+            this.labelActivateCooldown.AutoSize = true;
+            this.labelActivateCooldown.Location = new System.Drawing.Point(725, 17);
+            this.labelActivateCooldown.Name = "labelActivateCooldown";
+            this.labelActivateCooldown.Size = new System.Drawing.Size(46, 13);
+            this.labelActivateCooldown.TabIndex = 5;
+            this.labelActivateCooldown.Text = "Activate";
+            this.labelActivateCooldown.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(123, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(281, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "*Only Save the fields fill. Leave in blank for delete on save";
+            // 
+            // buttonQuestionCooldown
+            // 
+            this.buttonQuestionCooldown.Location = new System.Drawing.Point(6, 6);
+            this.buttonQuestionCooldown.Name = "buttonQuestionCooldown";
+            this.buttonQuestionCooldown.Size = new System.Drawing.Size(111, 29);
+            this.buttonQuestionCooldown.TabIndex = 3;
+            this.buttonQuestionCooldown.Text = "Create Questions";
+            this.buttonQuestionCooldown.UseVisualStyleBackColor = true;
+            this.buttonQuestionCooldown.Click += new System.EventHandler(this.buttonQuestionCooldown_Click);
+            // 
             // FormWCConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,6 +384,8 @@
             this.tabPagePractice.PerformLayout();
             this.tabControlWarmupCooldown.ResumeLayout(false);
             this.tabPageWarmup.ResumeLayout(false);
+            this.tabPageCooldown.ResumeLayout(false);
+            this.tabPageCooldown.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -324,6 +412,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolTip toolTipHelp;
+        private System.Windows.Forms.Label labelActivatep;
+        private System.Windows.Forms.Label labelActivatem;
+        private System.Windows.Forms.Label labelActivatet;
+        private System.Windows.Forms.Label labelActivatepr;
+        private System.Windows.Forms.Label labelActivateCooldown;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttonQuestionCooldown;
 
     }
 }

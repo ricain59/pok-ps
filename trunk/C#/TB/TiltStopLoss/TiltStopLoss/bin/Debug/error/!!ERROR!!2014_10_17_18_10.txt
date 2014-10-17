@@ -1,0 +1,2 @@
+Problem sqlite (insert): SQL logic error or missing database
+table warmup has no column named date

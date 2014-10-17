@@ -141,6 +141,9 @@
             this.labelPlayer = new System.Windows.Forms.Label();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageWc = new System.Windows.Forms.TabPage();
+            this.buttonStartWarmup = new System.Windows.Forms.Button();
+            this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -165,6 +168,7 @@
             // 
             // tabStart
             // 
+            this.tabStart.Controls.Add(this.label7);
             this.tabStart.Controls.Add(this.linkLabelFeedback);
             this.tabStart.Controls.Add(this.buttonDonate);
             this.tabStart.Controls.Add(this.buttonStart);
@@ -1482,6 +1486,8 @@
             // 
             // tabPageWc
             // 
+            this.tabPageWc.Controls.Add(this.buttonStartWarmup);
+            this.tabPageWc.Controls.Add(this.checkBoxAutoStartWarmup);
             this.tabPageWc.Controls.Add(this.buttonConfigWc);
             this.tabPageWc.Location = new System.Drawing.Point(4, 22);
             this.tabPageWc.Name = "tabPageWc";
@@ -1489,6 +1495,39 @@
             this.tabPageWc.TabIndex = 5;
             this.tabPageWc.Text = "WarmupCooldown";
             this.tabPageWc.UseVisualStyleBackColor = true;
+            // 
+            // buttonStartWarmup
+            // 
+            this.buttonStartWarmup.Location = new System.Drawing.Point(155, 121);
+            this.buttonStartWarmup.Name = "buttonStartWarmup";
+            this.buttonStartWarmup.Size = new System.Drawing.Size(114, 34);
+            this.buttonStartWarmup.TabIndex = 64;
+            this.buttonStartWarmup.Text = "Start Manually";
+            this.buttonStartWarmup.UseVisualStyleBackColor = true;
+            this.buttonStartWarmup.Click += new System.EventHandler(this.buttonStartWarmup_Click);
+            // 
+            // checkBoxAutoStartWarmup
+            // 
+            this.checkBoxAutoStartWarmup.AutoSize = true;
+            this.checkBoxAutoStartWarmup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.checkBoxAutoStartWarmup.Location = new System.Drawing.Point(153, 86);
+            this.checkBoxAutoStartWarmup.Name = "checkBoxAutoStartWarmup";
+            this.checkBoxAutoStartWarmup.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxAutoStartWarmup.Size = new System.Drawing.Size(116, 17);
+            this.checkBoxAutoStartWarmup.TabIndex = 63;
+            this.checkBoxAutoStartWarmup.Text = "Auto Start Warmup";
+            this.checkBoxAutoStartWarmup.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Green;
+            this.label7.Location = new System.Drawing.Point(18, 164);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(388, 16);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Stoploss prevent spew buy-in and more, please donate";
             // 
             // Main
             // 
@@ -1513,6 +1552,7 @@
             this.tabDatabase.PerformLayout();
             this.tabControlMain.ResumeLayout(false);
             this.tabPageWc.ResumeLayout(false);
+            this.tabPageWc.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1635,6 +1675,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonConfigWc;
         private System.Windows.Forms.TabPage tabPageWc;
+        private System.Windows.Forms.CheckBox checkBoxAutoStartWarmup;
+        private System.Windows.Forms.Button buttonStartWarmup;
+        private System.Windows.Forms.Label label7;
     }
 }
 
