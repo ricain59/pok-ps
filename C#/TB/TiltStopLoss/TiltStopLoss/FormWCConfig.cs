@@ -20,14 +20,17 @@ namespace StopLoss
         private TextBox[] tboxmental = new TextBox[0];
         private TextBox[] tboxtechnical = new TextBox[0];
         private TextBox[] tboxpractice = new TextBox[0];
+        private TextBox[] tboxcooldown = new TextBox[0];
         private CheckBox[] checkphysical = new CheckBox[0];
         private CheckBox[] checkmental = new CheckBox[0];
         private CheckBox[] checktechnical = new CheckBox[0];
         private CheckBox[] checkpractice = new CheckBox[0];
+        private CheckBox[] checkcooldown = new CheckBox[0];
         private Int32[] idphysical = new Int32[0];
         private Int32[] idmental = new Int32[0];
         private Int32[] idtechnical = new Int32[0];
         private Int32[] idpractice = new Int32[0];
+        private Int32[] idcooldown = new Int32[0];
         //databse
         SQLiteDatabase dbsqlite;
         //boolean
@@ -69,6 +72,11 @@ namespace StopLoss
         private void buttonQuestionPractice_Click(object sender, EventArgs e)
         {
             createQuestions("practice", tboxpractice, tabPagePractice, checkpractice, idpractice);
+        }
+
+        private void buttonQuestionCooldown_Click(object sender, EventArgs e)
+        {
+            createQuestions("cooldown", tboxcooldown, tabPageCooldown, checkcooldown, idcooldown);
         }
 
         #endregion
@@ -328,6 +336,66 @@ namespace StopLoss
                 }
                 i++;
             }
+            //cooldown
+            i = 0;
+            foreach (TextBox tb in tboxcooldown)
+            {
+                if (tb.Text != "")
+                {
+                    if (i <= (idcooldown.Length - 1))
+                    {
+                        data = new Dictionary<String, String>();
+                        data.Add("type", "cooldown");
+                        data.Add("subtype", "cooldown");
+                        data.Add("questions", tb.Text);
+                        if (checkcooldown[i].Checked)
+                        {
+                            data.Add("enabled", "1");
+                        }
+                        else
+                        {
+                            data.Add("enabled", "0");
+                        }
+                        Boolean results = dbsqlite.Update("questionwc", data, "id = " + idcooldown[i].ToString());
+                        if (!results && resultinsert) resultinsert = false;
+                    }
+                    else
+                    {
+                        data = new Dictionary<String, String>();
+                        data.Add("type", "cooldown");
+                        data.Add("subtype", "cooldown");
+                        data.Add("questions", tb.Text);
+                        if (checkcooldown[i].Checked)
+                        {
+                            data.Add("enabled", "1");
+                        }
+                        else
+                        {
+                            data.Add("enabled", "0");
+                        }
+                        Boolean results = dbsqlite.Insert("questionwc", data);
+                        String lastid = dbsqlite.ExecuteScalar("select max(id) from questionwc");
+                        //add in checkbox
+                        Array.Resize(ref idcooldown, idcooldown.Length + 1);
+                        int j = idcooldown.Length - 1;
+                        idcooldown[j] = new Utils().stringtoInt32(lastid);
+                        if (!results && resultinsert) resultinsert = false;
+                    }
+                }
+                else
+                {
+                    if (i <= (idcooldown.Length - 1))
+                    {
+                        data = new Dictionary<String, String>();
+                        data.Add("deleted", "1");
+                        Boolean results = dbsqlite.Update("questionwc", data, "id = " + idcooldown[i].ToString());
+                        if (!results && resultinsert) resultinsert = false;
+                        tb.Visible = false;
+                        checkcooldown[i].Visible = false;
+                    }
+                }
+                i++;
+            }
             //if error
             if (!resultinsert)
             {
@@ -465,6 +533,22 @@ namespace StopLoss
                     }
                 }
             }
+            //cooldown
+            dt = dbsqlite.GetDataTable("select * from questionwc where type = 'cooldown' and deleted = 0");
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow rows in dt.Rows)
+                {
+                    if (rows.ItemArray[4].ToString() == "True")
+                    {
+                        createQuestions("cooldown", tboxcooldown, tabPageCooldown, checkcooldown, idcooldown, rows.ItemArray[3].ToString(), true, new Utils().stringtoInt32(rows.ItemArray[0].ToString()));
+                    }
+                    else
+                    {
+                        createQuestions("cooldown", tboxcooldown, tabPageCooldown, checkcooldown, idcooldown, rows.ItemArray[3].ToString(), false, new Utils().stringtoInt32(rows.ItemArray[0].ToString()));
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -485,7 +569,7 @@ namespace StopLoss
             }
             tb[i].Top = 40 * (i + 1);
             tb[i].Left = 20;
-            tb[i].MaxLength = 280;
+            tb[i].MaxLength = 150;
             tb[i].Margin = new Padding(20);
             tb[i].Size = new Size(700, 20);
             Controls.Add(tb[i]);
@@ -519,25 +603,35 @@ namespace StopLoss
             switch (type)
             {
                 case "physical":
+                    labelActivatep.Visible = true;
                     tboxphysical = tb;
                     checkphysical = cb;
                     idphysical = idarray;
                     break;
                 case "mental":
+                    labelActivatem.Visible = true;
                     tboxmental = tb;
                     checkmental = cb;
                     idmental = idarray;
                     break;
                 case "technical":
+                    labelActivatet.Visible = true;
                     tboxtechnical = tb;
                     checktechnical = cb;
                     idtechnical = idarray;
                     break;
                 case "practice":
+                    labelActivatepr.Visible = true;
                     tboxpractice = tb;
                     checkpractice = cb;
                     idpractice = idarray;
                     break;
+                case "cooldown":
+                    labelActivateCooldown.Visible = true;
+                    tboxcooldown = tb;
+                    checkcooldown = cb;
+                    idcooldown = idarray;
+                    break;                    
                 default:
                     break;
             }
@@ -562,6 +656,8 @@ namespace StopLoss
         }
 
         #endregion
+
+        
 
     }
 }

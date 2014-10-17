@@ -1,0 +1,4 @@
+Problem sqlite (insert): SQL logic error or missing database
+table questionwc has no column named date
+Problem sqlite (insert): SQL logic error or missing database
+table questionwc has no column named date
