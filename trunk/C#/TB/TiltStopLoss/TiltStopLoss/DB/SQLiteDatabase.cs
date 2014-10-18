@@ -32,6 +32,7 @@ namespace StopLoss.DB
                 //ExecuteNonQuery("create table configframe (id INTEGER PRIMARY KEY, nameframe varchar(40), nameobject varchar(40), valueobject varchar(40))");
                 ExecuteNonQuery("create table questionwc (id INTEGER PRIMARY KEY, type varchar(40), subtype varchar(40), questions text(300), enabled BOOLEAN, deleted BOOLEAN DEFAULT 0)");
                 ExecuteNonQuery("create table warmup (id INTEGER PRIMARY KEY, subtype varchar(40), datequestions DATETIME, questionsdone INT, questionstotal INT)");
+                ExecuteNonQuery("create table cooldown (id INTEGER PRIMARY KEY, datequestions DATETIME, idquestions INT, rating DECIMAL(8,2))");
             }                        
         }
 

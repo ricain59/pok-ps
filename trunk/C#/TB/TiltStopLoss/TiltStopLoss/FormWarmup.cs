@@ -29,6 +29,7 @@ namespace StopLoss
         {
             InitializeComponent();
             dbsqlite = db;
+            loadconfig();
             //load from DB
             LoadPhysical();            
         }

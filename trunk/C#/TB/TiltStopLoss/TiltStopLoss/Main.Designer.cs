@@ -29,6 +29,7 @@
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
             this.tabStart = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
             this.linkLabelFeedback = new System.Windows.Forms.LinkLabel();
             this.buttonDonate = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
@@ -72,7 +73,6 @@
             this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
             this.labelCloseSkype = new System.Windows.Forms.Label();
             this.tabConfStop = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxStopVPP = new System.Windows.Forms.TextBox();
@@ -143,7 +143,8 @@
             this.tabPageWc = new System.Windows.Forms.TabPage();
             this.buttonStartWarmup = new System.Windows.Forms.Button();
             this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.buttonStartCooldown = new System.Windows.Forms.Button();
+            this.checkBoxCooldown = new System.Windows.Forms.CheckBox();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -179,6 +180,17 @@
             this.tabStart.TabIndex = 1;
             this.tabStart.Text = "Start";
             this.tabStart.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Green;
+            this.label7.Location = new System.Drawing.Point(18, 164);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(388, 16);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Stoploss prevent spew buy-in and more, please donate";
             // 
             // linkLabelFeedback
             // 
@@ -700,7 +712,6 @@
             // 
             // tabConfStop
             // 
-            this.tabConfStop.Controls.Add(this.button1);
             this.tabConfStop.Controls.Add(this.label5);
             this.tabConfStop.Controls.Add(this.label3);
             this.tabConfStop.Controls.Add(this.textBoxStopVPP);
@@ -749,16 +760,6 @@
             this.tabConfStop.TabIndex = 2;
             this.tabConfStop.Text = "Conf. Stop";
             this.tabConfStop.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(273, 151);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 61;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label5
             // 
@@ -1223,7 +1224,7 @@
             // 
             // buttonConfigWc
             // 
-            this.buttonConfigWc.Location = new System.Drawing.Point(155, 26);
+            this.buttonConfigWc.Location = new System.Drawing.Point(155, 50);
             this.buttonConfigWc.Name = "buttonConfigWc";
             this.buttonConfigWc.Size = new System.Drawing.Size(114, 36);
             this.buttonConfigWc.TabIndex = 62;
@@ -1486,6 +1487,8 @@
             // 
             // tabPageWc
             // 
+            this.tabPageWc.Controls.Add(this.buttonStartCooldown);
+            this.tabPageWc.Controls.Add(this.checkBoxCooldown);
             this.tabPageWc.Controls.Add(this.buttonStartWarmup);
             this.tabPageWc.Controls.Add(this.checkBoxAutoStartWarmup);
             this.tabPageWc.Controls.Add(this.buttonConfigWc);
@@ -1498,11 +1501,11 @@
             // 
             // buttonStartWarmup
             // 
-            this.buttonStartWarmup.Location = new System.Drawing.Point(155, 121);
+            this.buttonStartWarmup.Location = new System.Drawing.Point(155, 145);
             this.buttonStartWarmup.Name = "buttonStartWarmup";
-            this.buttonStartWarmup.Size = new System.Drawing.Size(114, 34);
+            this.buttonStartWarmup.Size = new System.Drawing.Size(114, 46);
             this.buttonStartWarmup.TabIndex = 64;
-            this.buttonStartWarmup.Text = "Start Manually";
+            this.buttonStartWarmup.Text = "Start Manually Warmup";
             this.buttonStartWarmup.UseVisualStyleBackColor = true;
             this.buttonStartWarmup.Click += new System.EventHandler(this.buttonStartWarmup_Click);
             // 
@@ -1510,7 +1513,7 @@
             // 
             this.checkBoxAutoStartWarmup.AutoSize = true;
             this.checkBoxAutoStartWarmup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkBoxAutoStartWarmup.Location = new System.Drawing.Point(153, 86);
+            this.checkBoxAutoStartWarmup.Location = new System.Drawing.Point(153, 110);
             this.checkBoxAutoStartWarmup.Name = "checkBoxAutoStartWarmup";
             this.checkBoxAutoStartWarmup.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxAutoStartWarmup.Size = new System.Drawing.Size(116, 17);
@@ -1518,16 +1521,27 @@
             this.checkBoxAutoStartWarmup.Text = "Auto Start Warmup";
             this.checkBoxAutoStartWarmup.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // buttonStartCooldown
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Green;
-            this.label7.Location = new System.Drawing.Point(18, 164);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(388, 16);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Stoploss prevent spew buy-in and more, please donate";
+            this.buttonStartCooldown.Location = new System.Drawing.Point(155, 253);
+            this.buttonStartCooldown.Name = "buttonStartCooldown";
+            this.buttonStartCooldown.Size = new System.Drawing.Size(114, 43);
+            this.buttonStartCooldown.TabIndex = 66;
+            this.buttonStartCooldown.Text = "Start Manually Cooldown";
+            this.buttonStartCooldown.UseVisualStyleBackColor = true;
+            this.buttonStartCooldown.Click += new System.EventHandler(this.buttonStartCooldown_Click);
+            // 
+            // checkBoxCooldown
+            // 
+            this.checkBoxCooldown.AutoSize = true;
+            this.checkBoxCooldown.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.checkBoxCooldown.Location = new System.Drawing.Point(153, 218);
+            this.checkBoxCooldown.Name = "checkBoxCooldown";
+            this.checkBoxCooldown.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxCooldown.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxCooldown.TabIndex = 65;
+            this.checkBoxCooldown.Text = "Auto Start Cooldown";
+            this.checkBoxCooldown.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -1672,12 +1686,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonConfigWc;
         private System.Windows.Forms.TabPage tabPageWc;
         private System.Windows.Forms.CheckBox checkBoxAutoStartWarmup;
         private System.Windows.Forms.Button buttonStartWarmup;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button buttonStartCooldown;
+        private System.Windows.Forms.CheckBox checkBoxCooldown;
     }
 }
 

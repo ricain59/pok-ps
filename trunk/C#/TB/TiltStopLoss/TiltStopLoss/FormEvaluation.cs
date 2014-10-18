@@ -22,6 +22,7 @@ namespace StopLoss
         public FormEvaluation(SQLiteDatabase db, String[] time)
         {
             InitializeComponent();
+            loadconfig();
             dbsqlite = db;
             timesql = time;
             //physical
