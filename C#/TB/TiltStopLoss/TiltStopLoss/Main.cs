@@ -700,6 +700,16 @@ namespace TiltStopLoss
                         checkBoxAutoStartWarmup.Checked = false;
                     }
                     break;
+                case "autostartcooldown":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxCooldown.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxCooldown.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -811,7 +821,9 @@ namespace TiltStopLoss
             w.Write("stopvpp=" + textBoxStopVPP.Text.ToString());
             w.WriteLine();
             w.Write("autostartwarmup=" + checkBoxAutoStartWarmup.Checked.ToString());
-            w.WriteLine();            
+            w.WriteLine();
+            w.Write("autostartcooldown=" + checkBoxCooldown.Checked.ToString());
+            w.WriteLine();              
             w.Close();
             //test
         }
@@ -987,6 +999,17 @@ namespace TiltStopLoss
             }
             //aqui recuperar a hora e data.
             lastsession = DateTime.Now;
+            //aqui para o cooldown
+            DataTable dt = dbsqlite.GetDataTable("select * from questionwc where enabled = 1 AND type = 'cooldown'");
+            if (dt.Rows.Count > 0)
+            {
+                FormCoolDown fc = new FormCoolDown(dbsqlite);
+                fc.Show();
+            }
+            else
+            {
+                MessageBox.Show("You haven't configure cooldown");
+            }
         }
 
         /// <summary>
@@ -1424,17 +1447,6 @@ namespace TiltStopLoss
         }
 
         /// <summary>
-        /// pour tester le cooldown
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            FormCoolDown fcd = new FormCoolDown();
-            fcd.Show();
-        }
-
-        /// <summary>
         /// open windows config warmup e cooldown
         /// </summary>
         /// <param name="sender"></param>
@@ -1461,6 +1473,25 @@ namespace TiltStopLoss
             else
             {
                 MessageBox.Show("You haven't configure warmup");
+            }
+        }
+
+        /// <summary>
+        /// Start manually cooldown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonStartCooldown_Click(object sender, EventArgs e)
+        {
+            DataTable dt = dbsqlite.GetDataTable("select * from questionwc where enabled = 1 AND type = 'cooldown'");
+            if (dt.Rows.Count > 0)
+            {
+                FormCoolDown fc = new FormCoolDown(dbsqlite);
+                fc.Show();
+            }
+            else
+            {
+                MessageBox.Show("You haven't configure cooldown");
             }
         }        
 

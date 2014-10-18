@@ -49,3 +49,4 @@ daysupdate=12-10-2014 17:17:13
 stoprake=0
 stopvpp=0
 autostartwarmup=False
+autostartcooldown=False

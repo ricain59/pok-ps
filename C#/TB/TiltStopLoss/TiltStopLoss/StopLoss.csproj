@@ -155,6 +155,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RatingBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Stoploss.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +218,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\iconHeartEmpty.png" />
+    <None Include="Resources\iconHeartFull.png" />
+    <None Include="Resources\iconHeartHalf.png" />
+    <None Include="Resources\iconMiscEmpty.png" />
+    <None Include="Resources\iconMiscFull.png" />
+    <None Include="Resources\iconMiscHalf.png" />
+    <None Include="Resources\iconStarEmpty.png" />
+    <None Include="Resources\iconStarFull.png" />
+    <None Include="Resources\iconStartHalf.png" />
     <Content Include="SL.ico" />
   </ItemGroup>
   <ItemGroup>

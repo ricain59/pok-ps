@@ -50,13 +50,14 @@
             this.tabControlWarmupCooldown = new System.Windows.Forms.TabControl();
             this.tabPageWarmup = new System.Windows.Forms.TabPage();
             this.tabPageCooldown = new System.Windows.Forms.TabPage();
+            this.labelActivateCooldown = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.buttonQuestionCooldown = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonSaveExit = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.labelActivateCooldown = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.buttonQuestionCooldown = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControlWarmup.SuspendLayout();
             this.tabPagePhysical.SuspendLayout();
             this.tabPageMental.SuspendLayout();
@@ -280,6 +281,7 @@
             // 
             // tabPageCooldown
             // 
+            this.tabPageCooldown.AutoScroll = true;
             this.tabPageCooldown.Controls.Add(this.labelActivateCooldown);
             this.tabPageCooldown.Controls.Add(this.label6);
             this.tabPageCooldown.Controls.Add(this.buttonQuestionCooldown);
@@ -290,6 +292,37 @@
             this.tabPageCooldown.TabIndex = 1;
             this.tabPageCooldown.Text = "Cooldown";
             this.tabPageCooldown.UseVisualStyleBackColor = true;
+            // 
+            // labelActivateCooldown
+            // 
+            this.labelActivateCooldown.AutoSize = true;
+            this.labelActivateCooldown.Location = new System.Drawing.Point(725, 17);
+            this.labelActivateCooldown.Name = "labelActivateCooldown";
+            this.labelActivateCooldown.Size = new System.Drawing.Size(46, 13);
+            this.labelActivateCooldown.TabIndex = 5;
+            this.labelActivateCooldown.Text = "Activate";
+            this.labelActivateCooldown.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(123, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(281, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "*Only Save the fields fill. Leave in blank for delete on save";
+            // 
+            // buttonQuestionCooldown
+            // 
+            this.buttonQuestionCooldown.Location = new System.Drawing.Point(6, 6);
+            this.buttonQuestionCooldown.Name = "buttonQuestionCooldown";
+            this.buttonQuestionCooldown.Size = new System.Drawing.Size(111, 29);
+            this.buttonQuestionCooldown.TabIndex = 3;
+            this.buttonQuestionCooldown.Text = "Create Questions";
+            this.buttonQuestionCooldown.UseVisualStyleBackColor = true;
+            this.buttonQuestionCooldown.Click += new System.EventHandler(this.buttonQuestionCooldown_Click);
             // 
             // buttonClose
             // 
@@ -327,36 +360,17 @@
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             this.buttonSave.MouseHover += new System.EventHandler(this.buttonSave_MouseHover);
             // 
-            // labelActivateCooldown
+            // label5
             // 
-            this.labelActivateCooldown.AutoSize = true;
-            this.labelActivateCooldown.Location = new System.Drawing.Point(725, 17);
-            this.labelActivateCooldown.Name = "labelActivateCooldown";
-            this.labelActivateCooldown.Size = new System.Drawing.Size(46, 13);
-            this.labelActivateCooldown.TabIndex = 5;
-            this.labelActivateCooldown.Text = "Activate";
-            this.labelActivateCooldown.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(123, 14);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(281, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "*Only Save the fields fill. Leave in blank for delete on save";
-            // 
-            // buttonQuestionCooldown
-            // 
-            this.buttonQuestionCooldown.Location = new System.Drawing.Point(6, 6);
-            this.buttonQuestionCooldown.Name = "buttonQuestionCooldown";
-            this.buttonQuestionCooldown.Size = new System.Drawing.Size(111, 29);
-            this.buttonQuestionCooldown.TabIndex = 3;
-            this.buttonQuestionCooldown.Text = "Create Questions";
-            this.buttonQuestionCooldown.UseVisualStyleBackColor = true;
-            this.buttonQuestionCooldown.Click += new System.EventHandler(this.buttonQuestionCooldown_Click);
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Green;
+            this.label5.Location = new System.Drawing.Point(220, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(530, 15);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Is preferable no change questions and create new for the database and future upda" +
+                "te, thank you.";
             // 
             // FormWCConfig
             // 
@@ -365,6 +379,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(906, 498);
             this.ControlBox = false;
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonSaveExit);
             this.Controls.Add(this.buttonClose);
@@ -387,6 +402,7 @@
             this.tabPageCooldown.ResumeLayout(false);
             this.tabPageCooldown.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -419,6 +435,7 @@
         private System.Windows.Forms.Label labelActivateCooldown;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonQuestionCooldown;
+        private System.Windows.Forms.Label label5;
 
     }
 }
