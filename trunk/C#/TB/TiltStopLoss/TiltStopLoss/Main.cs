@@ -26,7 +26,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.74;
+        private Double version = 1.76;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -1000,15 +1000,18 @@ namespace TiltStopLoss
             //aqui recuperar a hora e data.
             lastsession = DateTime.Now;
             //aqui para o cooldown
-            DataTable dt = dbsqlite.GetDataTable("select * from questionwc where enabled = 1 AND type = 'cooldown'");
-            if (dt.Rows.Count > 0)
+            if (checkBoxCooldown.Checked)
             {
-                FormCoolDown fc = new FormCoolDown(dbsqlite);
-                fc.Show();
-            }
-            else
-            {
-                MessageBox.Show("You haven't configure cooldown");
+                DataTable dt = dbsqlite.GetDataTable("select * from questionwc where enabled = 1 AND type = 'cooldown'");
+                if (dt.Rows.Count > 0)
+                {
+                    FormCoolDown fc = new FormCoolDown(dbsqlite);
+                    fc.Show();
+                }
+                else
+                {
+                    MessageBox.Show("You haven't configure cooldown");
+                }
             }
         }
 
@@ -1493,6 +1496,23 @@ namespace TiltStopLoss
             {
                 MessageBox.Show("You haven't configure cooldown");
             }
+        }
+
+        /// <summary>
+        /// view form eva cooldown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonViewEvaCooldown_Click(object sender, EventArgs e)
+        {
+            FormEvaCoolDown fecd = new FormEvaCoolDown(dbsqlite);
+            fecd.Show();
+        }
+
+        private void buttonEvaWarmup_Click(object sender, EventArgs e)
+        {
+            FormViewEvaluation fev = new FormViewEvaluation(dbsqlite);
+            fev.Show();
         }        
 
 

@@ -133,6 +133,25 @@ namespace TiltStopLoss
         }
 
         /// <summary>
+        /// String to double
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public float StringTofloat(String value)
+        {
+            int alphaCounter = Regex.Matches(value, @"[a-zA-Z]").Count;
+            if (value.Equals("") || alphaCounter > 0)
+            {
+                //new Debug().LogMessage("Valeur de string to double:" + value);
+                return 0.0f;
+            }
+            else
+            {
+                return float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
+            }
+        }
+
+        /// <summary>
         /// String to int32
         /// </summary>
         /// <param name="value"></param>

@@ -220,7 +220,7 @@ namespace StopLoss
         {
             Dictionary<String, String> data;
             DateTime hh = DateTime.Now;
-            String hhfinal = String.Format("{0:yyyy-MM-dd H:mm:ss}", hh);
+            String hhfinal = String.Format("{0:yyyy-MM-dd HH:mm:ss}", hh);
             //aqui tenho que guardar e já que tenho o switch aproveitar            
             switch (labelTitle.Text)
             {
