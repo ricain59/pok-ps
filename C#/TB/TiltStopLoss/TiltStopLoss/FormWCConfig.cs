@@ -107,7 +107,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "warmup");
                         data.Add("subtype", "physical");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checkphysical[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -124,7 +124,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "warmup");
                         data.Add("subtype", "physical");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checkphysical[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -167,7 +167,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "warmup");
                         data.Add("subtype", "mental");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checkmental[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -184,7 +184,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "warmup");
                         data.Add("subtype", "mental");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checkmental[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -227,7 +227,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "warmup");
                         data.Add("subtype", "technical");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checktechnical[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -244,7 +244,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "warmup");
                         data.Add("subtype", "technical");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checktechnical[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -287,7 +287,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "warmup");
                         data.Add("subtype", "practice");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checkpractice[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -304,7 +304,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "warmup");
                         data.Add("subtype", "practice");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checkpractice[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -347,7 +347,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "cooldown");
                         data.Add("subtype", "cooldown");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checkcooldown[i].Checked)
                         {
                             data.Add("enabled", "1");
@@ -364,7 +364,7 @@ namespace StopLoss
                         data = new Dictionary<String, String>();
                         data.Add("type", "cooldown");
                         data.Add("subtype", "cooldown");
-                        data.Add("questions", tb.Text);
+                        data.Add("questions", tb.Text.Replace("'", "''"));
                         if (checkcooldown[i].Checked)
                         {
                             data.Add("enabled", "1");

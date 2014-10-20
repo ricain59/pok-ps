@@ -58,7 +58,6 @@ M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\St
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.exe
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.pdb
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormCoolDown.resources
-E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\StarRatingControl.dll
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\EntityFramework.dll
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\EntityFramework.SqlServer.dll
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\System.Data.SQLite.dll
@@ -71,4 +70,19 @@ M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\St
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormWarmup.resources
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormWCConfig.resources
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormEvaluation.resources
+M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormEvaCoolDown.resources
+M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormViewEvaluation.resources
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.csprojResolveAssemblyReference.cache
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\EntityFramework.dll
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\EntityFramework.SqlServer.dll
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\System.Data.SQLite.dll
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\System.Data.SQLite.EF6.dll
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\System.Data.SQLite.Linq.dll
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\EntityFramework.xml
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\EntityFramework.SqlServer.xml
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\System.Data.SQLite.xml
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormViewEvaluation.resources
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormEvaCoolDown.resources
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormEvaluation.resources
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormWarmup.resources
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormWCConfig.resources

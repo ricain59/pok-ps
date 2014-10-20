@@ -1,0 +1,2 @@
+Problem sqlite (insert): SQL logic error or missing database
+near "ai": syntax error

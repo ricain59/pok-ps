@@ -141,10 +141,12 @@
             this.labelPlayer = new System.Windows.Forms.Label();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageWc = new System.Windows.Forms.TabPage();
-            this.buttonStartWarmup = new System.Windows.Forms.Button();
-            this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
             this.buttonStartCooldown = new System.Windows.Forms.Button();
             this.checkBoxCooldown = new System.Windows.Forms.CheckBox();
+            this.buttonStartWarmup = new System.Windows.Forms.Button();
+            this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
+            this.buttonViewEvaCooldown = new System.Windows.Forms.Button();
+            this.buttonEvaWarmup = new System.Windows.Forms.Button();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -1224,7 +1226,7 @@
             // 
             // buttonConfigWc
             // 
-            this.buttonConfigWc.Location = new System.Drawing.Point(155, 50);
+            this.buttonConfigWc.Location = new System.Drawing.Point(155, 49);
             this.buttonConfigWc.Name = "buttonConfigWc";
             this.buttonConfigWc.Size = new System.Drawing.Size(114, 36);
             this.buttonConfigWc.TabIndex = 62;
@@ -1487,6 +1489,8 @@
             // 
             // tabPageWc
             // 
+            this.tabPageWc.Controls.Add(this.buttonEvaWarmup);
+            this.tabPageWc.Controls.Add(this.buttonViewEvaCooldown);
             this.tabPageWc.Controls.Add(this.buttonStartCooldown);
             this.tabPageWc.Controls.Add(this.checkBoxCooldown);
             this.tabPageWc.Controls.Add(this.buttonStartWarmup);
@@ -1499,31 +1503,9 @@
             this.tabPageWc.Text = "WarmupCooldown";
             this.tabPageWc.UseVisualStyleBackColor = true;
             // 
-            // buttonStartWarmup
-            // 
-            this.buttonStartWarmup.Location = new System.Drawing.Point(155, 145);
-            this.buttonStartWarmup.Name = "buttonStartWarmup";
-            this.buttonStartWarmup.Size = new System.Drawing.Size(114, 46);
-            this.buttonStartWarmup.TabIndex = 64;
-            this.buttonStartWarmup.Text = "Start Manually Warmup";
-            this.buttonStartWarmup.UseVisualStyleBackColor = true;
-            this.buttonStartWarmup.Click += new System.EventHandler(this.buttonStartWarmup_Click);
-            // 
-            // checkBoxAutoStartWarmup
-            // 
-            this.checkBoxAutoStartWarmup.AutoSize = true;
-            this.checkBoxAutoStartWarmup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkBoxAutoStartWarmup.Location = new System.Drawing.Point(153, 110);
-            this.checkBoxAutoStartWarmup.Name = "checkBoxAutoStartWarmup";
-            this.checkBoxAutoStartWarmup.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxAutoStartWarmup.Size = new System.Drawing.Size(116, 17);
-            this.checkBoxAutoStartWarmup.TabIndex = 63;
-            this.checkBoxAutoStartWarmup.Text = "Auto Start Warmup";
-            this.checkBoxAutoStartWarmup.UseVisualStyleBackColor = true;
-            // 
             // buttonStartCooldown
             // 
-            this.buttonStartCooldown.Location = new System.Drawing.Point(155, 253);
+            this.buttonStartCooldown.Location = new System.Drawing.Point(75, 252);
             this.buttonStartCooldown.Name = "buttonStartCooldown";
             this.buttonStartCooldown.Size = new System.Drawing.Size(114, 43);
             this.buttonStartCooldown.TabIndex = 66;
@@ -1535,13 +1517,55 @@
             // 
             this.checkBoxCooldown.AutoSize = true;
             this.checkBoxCooldown.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkBoxCooldown.Location = new System.Drawing.Point(153, 218);
+            this.checkBoxCooldown.Location = new System.Drawing.Point(153, 217);
             this.checkBoxCooldown.Name = "checkBoxCooldown";
             this.checkBoxCooldown.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxCooldown.Size = new System.Drawing.Size(123, 17);
             this.checkBoxCooldown.TabIndex = 65;
             this.checkBoxCooldown.Text = "Auto Start Cooldown";
             this.checkBoxCooldown.UseVisualStyleBackColor = true;
+            // 
+            // buttonStartWarmup
+            // 
+            this.buttonStartWarmup.Location = new System.Drawing.Point(75, 144);
+            this.buttonStartWarmup.Name = "buttonStartWarmup";
+            this.buttonStartWarmup.Size = new System.Drawing.Size(114, 46);
+            this.buttonStartWarmup.TabIndex = 64;
+            this.buttonStartWarmup.Text = "Start Manually Warmup";
+            this.buttonStartWarmup.UseVisualStyleBackColor = true;
+            this.buttonStartWarmup.Click += new System.EventHandler(this.buttonStartWarmup_Click);
+            // 
+            // checkBoxAutoStartWarmup
+            // 
+            this.checkBoxAutoStartWarmup.AutoSize = true;
+            this.checkBoxAutoStartWarmup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.checkBoxAutoStartWarmup.Location = new System.Drawing.Point(153, 109);
+            this.checkBoxAutoStartWarmup.Name = "checkBoxAutoStartWarmup";
+            this.checkBoxAutoStartWarmup.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxAutoStartWarmup.Size = new System.Drawing.Size(116, 17);
+            this.checkBoxAutoStartWarmup.TabIndex = 63;
+            this.checkBoxAutoStartWarmup.Text = "Auto Start Warmup";
+            this.checkBoxAutoStartWarmup.UseVisualStyleBackColor = true;
+            // 
+            // buttonViewEvaCooldown
+            // 
+            this.buttonViewEvaCooldown.Location = new System.Drawing.Point(226, 252);
+            this.buttonViewEvaCooldown.Name = "buttonViewEvaCooldown";
+            this.buttonViewEvaCooldown.Size = new System.Drawing.Size(114, 45);
+            this.buttonViewEvaCooldown.TabIndex = 67;
+            this.buttonViewEvaCooldown.Text = "View Evaluation Cooldown";
+            this.buttonViewEvaCooldown.UseVisualStyleBackColor = true;
+            this.buttonViewEvaCooldown.Click += new System.EventHandler(this.buttonViewEvaCooldown_Click);
+            // 
+            // buttonEvaWarmup
+            // 
+            this.buttonEvaWarmup.Location = new System.Drawing.Point(226, 144);
+            this.buttonEvaWarmup.Name = "buttonEvaWarmup";
+            this.buttonEvaWarmup.Size = new System.Drawing.Size(114, 45);
+            this.buttonEvaWarmup.TabIndex = 68;
+            this.buttonEvaWarmup.Text = "View Evaluation Warmup";
+            this.buttonEvaWarmup.UseVisualStyleBackColor = true;
+            this.buttonEvaWarmup.Click += new System.EventHandler(this.buttonEvaWarmup_Click);
             // 
             // Main
             // 
@@ -1693,6 +1717,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonStartCooldown;
         private System.Windows.Forms.CheckBox checkBoxCooldown;
+        private System.Windows.Forms.Button buttonViewEvaCooldown;
+        private System.Windows.Forms.Button buttonEvaWarmup;
     }
 }
 

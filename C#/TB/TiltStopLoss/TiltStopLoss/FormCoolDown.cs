@@ -45,6 +45,7 @@ namespace StopLoss
                     rate[i].Location = new System.Drawing.Point(900, 25 * (i + 1));
                     rate[i].Size = new System.Drawing.Size(185, 18);
                     rate[i].IconsCount = ((byte)(5));
+                    //rate[i].Rate = 3;
                     panelQuestions.Controls.Add(rate[i]);
                     //id
                     idquestions[i] = row.ItemArray[0].ToString();
@@ -125,7 +126,8 @@ namespace StopLoss
                 data = new Dictionary<String, String>();
                 data.Add("datequestions", hhfinal);
                 data.Add("idquestions", id.ToString());
-                data.Add("rating", rate[i].Rate.ToString());
+                String temprate = rate[i].Rate.ToString();
+                data.Add("rating", temprate.Replace(",", "."));
                 if (!dbsqlite.Insert("cooldown", data))
                 {
                     MessageBox.Show("Warmup: Error, not insert in database");

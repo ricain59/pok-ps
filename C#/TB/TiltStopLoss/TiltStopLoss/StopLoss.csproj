@@ -94,6 +94,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormViewEvaluation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormViewEvaluation.Designer.cs">
+      <DependentUpon>FormViewEvaluation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEvaCoolDown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEvaCoolDown.Designer.cs">
+      <DependentUpon>FormEvaCoolDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\SQLiteDatabase.cs" />
     <Compile Include="FormCoolDown.cs">
       <SubType>Form</SubType>
@@ -165,6 +177,12 @@
       <DependentUpon>Stoploss.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="FormViewEvaluation.resx">
+      <DependentUpon>FormViewEvaluation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEvaCoolDown.resx">
+      <DependentUpon>FormEvaCoolDown.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCoolDown.resx">
       <DependentUpon>FormCoolDown.cs</DependentUpon>
     </EmbeddedResource>
