@@ -26,7 +26,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.76;
+        private Double version = 1.78;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -52,6 +52,10 @@ namespace TiltStopLoss
         private String textDb;
         //form
         FormWarmup fw;
+        //brm
+        private Double bbbrm;
+        private Double bbbrmup;
+        private Double bbbrmdown;
         
         public Main()
         {
@@ -99,6 +103,23 @@ namespace TiltStopLoss
                 {
                     MessageBox.Show("You haven't configure warmup");
                 }
+            }
+            //brm management
+            checkBrm();
+        }
+
+        /// <summary>
+        /// Message para o BRM management
+        /// </summary>
+        private void checkBrm()
+        {
+            if (bbbrm > (100 * bbbrmup) && bbbrmup > 0)
+            {
+                MessageBox.Show("Felicitations, Go to Limit superior :)");
+            }
+            if (bbbrm < (0 - (100 * bbbrmdown)) && bbbrmdown > 0)
+            {
+                MessageBox.Show("Sorry but go to Limit inferior :(");
             }
         }
 
@@ -710,6 +731,17 @@ namespace TiltStopLoss
                         checkBoxCooldown.Checked = false;
                     }
                     break;
+                case "brmup":
+                    bbbrmup = new Utils().stringtoDouble(line[1].ToString());
+                    textBoxBrmUp.Text = bbbrmup.ToString();
+                    break;
+                case "brmdown":
+                    bbbrmdown = new Utils().stringtoDouble(line[1].ToString());
+                    textBoxBrmDown.Text = bbbrmdown.ToString();
+                    break;
+                case "brm":
+                    bbbrm = new Utils().stringtoDouble(line[1].ToString());                    
+                    break;                     
                 default:
                     break;
             }
@@ -823,7 +855,13 @@ namespace TiltStopLoss
             w.Write("autostartwarmup=" + checkBoxAutoStartWarmup.Checked.ToString());
             w.WriteLine();
             w.Write("autostartcooldown=" + checkBoxCooldown.Checked.ToString());
-            w.WriteLine();              
+            w.WriteLine(); 
+            w.Write("brmup=" + textBoxBrmUp.Text.ToString());
+            w.WriteLine();
+            w.Write("brmdown=" + textBoxBrmDown.Text.ToString());
+            w.WriteLine();
+            w.Write("brm=" + bbbrm.ToString());
+            w.WriteLine();
             w.Close();
             //test
         }
@@ -1013,6 +1051,9 @@ namespace TiltStopLoss
                     MessageBox.Show("You haven't configure cooldown");
                 }
             }
+            //brm management
+            bbbrm += bbs;
+            checkBrm();            
         }
 
         /// <summary>
@@ -1513,6 +1554,34 @@ namespace TiltStopLoss
         {
             FormViewEvaluation fev = new FormViewEvaluation(dbsqlite);
             fev.Show();
+        }
+
+        /// <summary>
+        /// Change value store in variable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxBrmDown_TextChanged(object sender, EventArgs e)
+        {
+            bbbrmdown = new Utils().stringtoDouble(textBoxBrmDown.Text.ToString());
+        }
+
+        private void textBoxBrmUp_TextChanged(object sender, EventArgs e)
+        {
+            bbbrmup = new Utils().stringtoDouble(textBoxBrmUp.Text.ToString());
+        }
+
+
+        /// <summary>
+        /// Reset Values for BRM
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonResetValuesBrm_Click(object sender, EventArgs e)
+        {
+            bbbrm = 0.0;
+            textBoxBrmDown.Text = "";
+            textBoxBrmUp.Text = "";
         }        
 
 
