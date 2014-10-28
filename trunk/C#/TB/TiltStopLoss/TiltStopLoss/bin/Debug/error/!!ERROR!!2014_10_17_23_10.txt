@@ -1,8 +1,0 @@
-Problem sqlite (insert): database is locked
-database is locked
-Problem sqlite (insert): database is locked
-database is locked
-Problem sqlite (insert): database is locked
-database is locked
-Problem sqlite (insert): database is locked
-database is locked

@@ -26,7 +26,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.78;
+        private Double version = 1.79;
         private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
@@ -78,9 +78,9 @@ namespace TiltStopLoss
             //aqui vou ver se existe update ou não
             checkupdate();
             //abro no separador conf stop se já foi configurado a DB
-            if (!textBoxPlayer.Text.Equals(""))
+            if (comboBoxAutoStarttab.SelectedIndex != -1)
             {
-                tabControlMain.SelectedIndex = 1;
+                tabControlMain.SelectedIndex = comboBoxAutoStarttab.SelectedIndex;
             }
             //o resto
             start = false;
@@ -741,7 +741,10 @@ namespace TiltStopLoss
                     break;
                 case "brm":
                     bbbrm = new Utils().stringtoDouble(line[1].ToString());                    
-                    break;                     
+                    break;
+                case "ComboboxAutoStartTab":
+                    comboBoxAutoStarttab.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
+                    break;
                 default:
                     break;
             }
@@ -862,6 +865,8 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("brm=" + bbbrm.ToString());
             w.WriteLine();
+            w.Write("ComboboxAutoStartTab=" + comboBoxAutoStarttab.SelectedIndex);
+            w.WriteLine();            
             w.Close();
             //test
         }
@@ -1318,6 +1323,7 @@ namespace TiltStopLoss
                 labelStartTimer.Text = "Start timer on 1st hand";
                 labelUpdate.Text = "Check Update";
                 labelDaysUpdate.Text = "Days";
+                labelPleaseDonate.Text = "Stoploss prevent spew buy-in and more, please donate";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
@@ -1354,6 +1360,7 @@ namespace TiltStopLoss
                 labelStartTimer.Text = "Start timer 1ere main";
                 labelUpdate.Text = "Vérifier Update";
                 labelDaysUpdate.Text = "Jours";
+                labelPleaseDonate.Text = "Stoploss vous aide a ne pas spew. Svp un petit don";
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
@@ -1390,6 +1397,7 @@ namespace TiltStopLoss
                 labelStartTimer.Text = "Start timer na 1ª mão";
                 labelUpdate.Text = "Verificar Update";
                 labelDaysUpdate.Text = "Dias";
+                labelPleaseDonate.Text = "Stoploss ajuda-vos a não spewar. Por Favor um donativo";
             }
         }
 
