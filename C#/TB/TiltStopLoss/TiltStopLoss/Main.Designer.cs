@@ -29,7 +29,7 @@
             this.openFileDialogSound = new System.Windows.Forms.OpenFileDialog();
             this.toolTipHelpText = new System.Windows.Forms.ToolTip(this.components);
             this.tabStart = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelPleaseDonate = new System.Windows.Forms.Label();
             this.linkLabelFeedback = new System.Windows.Forms.LinkLabel();
             this.buttonDonate = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
@@ -55,6 +55,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.labelSessionBBs = new System.Windows.Forms.Label();
             this.tabConfStop2 = new System.Windows.Forms.TabPage();
+            this.labelResetValues = new System.Windows.Forms.Label();
+            this.buttonResetValuesBrm = new System.Windows.Forms.Button();
             this.labelBrmUp = new System.Windows.Forms.Label();
             this.textBoxBrmUp = new System.Windows.Forms.TextBox();
             this.textBoxBrmDown = new System.Windows.Forms.TextBox();
@@ -153,8 +155,9 @@
             this.checkBoxCooldown = new System.Windows.Forms.CheckBox();
             this.buttonStartWarmup = new System.Windows.Forms.Button();
             this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
-            this.buttonResetValuesBrm = new System.Windows.Forms.Button();
-            this.labelResetValues = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxAutoStarttab = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -179,7 +182,7 @@
             // 
             // tabStart
             // 
-            this.tabStart.Controls.Add(this.label7);
+            this.tabStart.Controls.Add(this.labelPleaseDonate);
             this.tabStart.Controls.Add(this.linkLabelFeedback);
             this.tabStart.Controls.Add(this.buttonDonate);
             this.tabStart.Controls.Add(this.buttonStart);
@@ -191,16 +194,16 @@
             this.tabStart.Text = "Start";
             this.tabStart.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // labelPleaseDonate
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Green;
-            this.label7.Location = new System.Drawing.Point(18, 164);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(388, 16);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Stoploss prevent spew buy-in and more, please donate";
+            this.labelPleaseDonate.AutoSize = true;
+            this.labelPleaseDonate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPleaseDonate.ForeColor = System.Drawing.Color.Green;
+            this.labelPleaseDonate.Location = new System.Drawing.Point(18, 164);
+            this.labelPleaseDonate.Name = "labelPleaseDonate";
+            this.labelPleaseDonate.Size = new System.Drawing.Size(388, 16);
+            this.labelPleaseDonate.TabIndex = 3;
+            this.labelPleaseDonate.Text = "Stoploss prevent spew buy-in and more, please donate";
             // 
             // linkLabelFeedback
             // 
@@ -464,6 +467,9 @@
             // 
             // tabConfStop2
             // 
+            this.tabConfStop2.Controls.Add(this.label9);
+            this.tabConfStop2.Controls.Add(this.comboBoxAutoStarttab);
+            this.tabConfStop2.Controls.Add(this.label7);
             this.tabConfStop2.Controls.Add(this.labelResetValues);
             this.tabConfStop2.Controls.Add(this.buttonResetValuesBrm);
             this.tabConfStop2.Controls.Add(this.labelBrmUp);
@@ -496,6 +502,27 @@
             this.tabConfStop2.TabIndex = 4;
             this.tabConfStop2.Text = "Conf. Stop 2";
             this.tabConfStop2.UseVisualStyleBackColor = true;
+            // 
+            // labelResetValues
+            // 
+            this.labelResetValues.AutoSize = true;
+            this.labelResetValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResetValues.ForeColor = System.Drawing.Color.Red;
+            this.labelResetValues.Location = new System.Drawing.Point(41, 295);
+            this.labelResetValues.Name = "labelResetValues";
+            this.labelResetValues.Size = new System.Drawing.Size(340, 13);
+            this.labelResetValues.TabIndex = 84;
+            this.labelResetValues.Text = "*when windows appear for up or down limit, is important click on button";
+            // 
+            // buttonResetValuesBrm
+            // 
+            this.buttonResetValuesBrm.Location = new System.Drawing.Point(219, 235);
+            this.buttonResetValuesBrm.Name = "buttonResetValuesBrm";
+            this.buttonResetValuesBrm.Size = new System.Drawing.Size(93, 23);
+            this.buttonResetValuesBrm.TabIndex = 83;
+            this.buttonResetValuesBrm.Text = "Reset Values";
+            this.buttonResetValuesBrm.UseVisualStyleBackColor = true;
+            this.buttonResetValuesBrm.Click += new System.EventHandler(this.buttonResetValuesBrm_Click);
             // 
             // labelBrmUp
             // 
@@ -1650,26 +1677,40 @@
             this.checkBoxAutoStartWarmup.Text = "Auto Start Warmup";
             this.checkBoxAutoStartWarmup.UseVisualStyleBackColor = true;
             // 
-            // buttonResetValuesBrm
+            // label7
             // 
-            this.buttonResetValuesBrm.Location = new System.Drawing.Point(219, 235);
-            this.buttonResetValuesBrm.Name = "buttonResetValuesBrm";
-            this.buttonResetValuesBrm.Size = new System.Drawing.Size(93, 23);
-            this.buttonResetValuesBrm.TabIndex = 83;
-            this.buttonResetValuesBrm.Text = "Reset Values";
-            this.buttonResetValuesBrm.UseVisualStyleBackColor = true;
-            this.buttonResetValuesBrm.Click += new System.EventHandler(this.buttonResetValuesBrm_Click);
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 2.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(57, 314);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(311, 4);
+            this.label7.TabIndex = 85;
+            this.label7.Text = "_________________________________________________________________________________" +
+                "_________________________________________________________________________";
             // 
-            // labelResetValues
+            // comboBoxAutoStarttab
             // 
-            this.labelResetValues.AutoSize = true;
-            this.labelResetValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelResetValues.ForeColor = System.Drawing.Color.Red;
-            this.labelResetValues.Location = new System.Drawing.Point(62, 301);
-            this.labelResetValues.Name = "labelResetValues";
-            this.labelResetValues.Size = new System.Drawing.Size(340, 13);
-            this.labelResetValues.TabIndex = 84;
-            this.labelResetValues.Text = "*when windows appear for up or down limit, is important click on button";
+            this.comboBoxAutoStarttab.FormattingEnabled = true;
+            this.comboBoxAutoStarttab.Items.AddRange(new object[] {
+            "Database",
+            "Conf. Stop",
+            "Conf. Stop2",
+            "Resume Session",
+            "WarmupCooldown",
+            "Start"});
+            this.comboBoxAutoStarttab.Location = new System.Drawing.Point(164, 332);
+            this.comboBoxAutoStarttab.Name = "comboBoxAutoStarttab";
+            this.comboBoxAutoStarttab.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxAutoStarttab.TabIndex = 86;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(61, 335);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(76, 13);
+            this.label9.TabIndex = 87;
+            this.label9.Text = "Auto Start Tab";
             // 
             // Main
             // 
@@ -1818,7 +1859,7 @@
         private System.Windows.Forms.TabPage tabPageWc;
         private System.Windows.Forms.CheckBox checkBoxAutoStartWarmup;
         private System.Windows.Forms.Button buttonStartWarmup;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelPleaseDonate;
         private System.Windows.Forms.Button buttonStartCooldown;
         private System.Windows.Forms.CheckBox checkBoxCooldown;
         private System.Windows.Forms.Button buttonViewEvaCooldown;
@@ -1831,6 +1872,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label labelResetValues;
         private System.Windows.Forms.Button buttonResetValuesBrm;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBoxAutoStarttab;
+        private System.Windows.Forms.Label label7;
     }
 }
 

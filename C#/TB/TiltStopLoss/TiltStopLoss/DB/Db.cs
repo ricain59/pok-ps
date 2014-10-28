@@ -233,7 +233,8 @@ namespace TiltStopLoss
                 break;
             }
             dr.Close();
-            return bb / 100;
+            //return bb / 100;
+            return bb;
         }
 
         /// <summary>
