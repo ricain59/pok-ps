@@ -15,7 +15,7 @@ namespace CleanHH
     public partial class FormInicial : Form
     {
         private String folder;
-        private String nickname;
+        private String[] nickname;
         private String site = "";
         private int handnickname = 0;
         private Boolean continu = true;
@@ -137,7 +137,15 @@ namespace CleanHH
             }
             else
             {
-                nickname = textBoxNickName.Text;
+                if (textBoxNickName.Text.Contains(","))
+                {
+                    nickname = textBoxNickName.Text.Split(',');                    
+                }
+                else
+                {
+                    nickname = new String[] { textBoxNickName.Text };
+                }
+                
             }
             //site
             if (comboBoxSite.SelectedIndex == -1 && site == "" && continu)
@@ -187,55 +195,97 @@ namespace CleanHH
             //obter todos a lista de ficheiro
             filePaths = Directory.GetFiles(@"" + folder, "*.txt");
             numfile = filePaths.Count();
-            String textfile = "";
+            
             //multithread
             if (checkBoxMultiThread.Checked)
             {
+                String textfile = "";
                 Parallel.ForEach(filePaths, fi =>
                 {
                     using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
                     {
                         textfile = streamReader.ReadToEnd();
                     }
-                    if (textfile.Contains(nickname))
+                    if (nickname.Length > 1)
                     {
-                        cleanfile(textfile, Path.GetFileName(fi));
+                        if (textfile.Contains(nickname[0]) || textfile.Contains(nickname[1]))
+                        {
+                            cleanfile(textfile, Path.GetFileName(fi));
+                        }
+                        else
+                        {
+                            String icon_path = new Uri(folder + "/new").LocalPath;
+                            String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
+                            StreamWriter w = new StreamWriter(pathfinal, true);
+                            w.Write(textfile);
+                            w.WriteLine();
+                            w.Close();
+                        }
                     }
                     else
                     {
-                        String icon_path = new Uri(folder + "/new").LocalPath;
-                        String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
-                        StreamWriter w = new StreamWriter(pathfinal, true);
-                        w.Write(textfile);
-                        w.WriteLine();
-                        w.Close();
+                        if (textfile.Contains(nickname[0]))
+                        {
+                            cleanfile(textfile, Path.GetFileName(fi));
+                        }
+                        else
+                        {
+                            String icon_path = new Uri(folder + "/new").LocalPath;
+                            String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
+                            StreamWriter w = new StreamWriter(pathfinal, true);
+                            w.Write(textfile);
+                            w.WriteLine();
+                            w.Close();
+                        }
                     }
+                    
                     textfile = "";
                     i++;
                 });
             }
             else
             {
+                String textfile2 = "";
                 foreach (String fi in filePaths)
                 {
                     using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
                     {
-                        textfile = streamReader.ReadToEnd();
+                        textfile2 = streamReader.ReadToEnd();
                     }
-                    if (textfile.Contains(nickname))
+                    if (nickname.Length > 1)
                     {
-                        cleanfile(textfile, Path.GetFileName(fi));
+                        if (textfile2.Contains(nickname[0]) || textfile2.Contains(nickname[1]))
+                        {
+                            cleanfile(textfile2, Path.GetFileName(fi));
+                        }
+                        else
+                        {
+                            String icon_path = new Uri(folder + "/new").LocalPath;
+                            String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
+                            StreamWriter w = new StreamWriter(pathfinal, true);
+                            w.Write(textfile2);
+                            w.WriteLine();
+                            w.Close();
+                        }
                     }
                     else
                     {
-                        String icon_path = new Uri(folder + "/new").LocalPath;
-                        String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
-                        StreamWriter w = new StreamWriter(pathfinal, true);
-                        w.Write(textfile);
-                        w.WriteLine();
-                        w.Close();
+                        if (textfile2.Contains(nickname[0]))
+                        {
+                            cleanfile(textfile2, Path.GetFileName(fi));
+                        }
+                        else
+                        {
+                            String icon_path = new Uri(folder + "/new").LocalPath;
+                            String pathfinal = icon_path + "\\" + Path.GetFileName(fi);
+                            StreamWriter w = new StreamWriter(pathfinal, true);
+                            w.Write(textfile2);
+                            w.WriteLine();
+                            w.Close();
+                        }
                     }
-                    textfile = "";
+
+                    textfile2 = "";
                     i++;
                 }
             }            
@@ -255,13 +305,34 @@ namespace CleanHH
             String filefinal = "";
             foreach (String fi in splitfile)
             {
-                if (!fi.Contains(nickname))
+                if (nickname.Length > 1)
                 {
-                    filefinal += site + fi;
+                    if (!fi.Contains(nickname[0]))
+                    {
+                        if (!fi.Contains(nickname[1]))
+                        {
+                            filefinal += site + fi;
+                        }
+                        else
+                        {
+                            handnickname++;
+                        }                        
+                    }
+                    else
+                    {
+                        handnickname++;
+                    }
                 }
                 else
                 {
-                    handnickname++;
+                    if (!fi.Contains(nickname[0]))
+                    {
+                        filefinal += site + fi;
+                    }
+                    else
+                    {
+                        handnickname++;
+                    }
                 }
             }
             //aqui crio o novo ficheiro
