@@ -1,1 +1,1 @@
-Location=2468,364
+Location=250,250

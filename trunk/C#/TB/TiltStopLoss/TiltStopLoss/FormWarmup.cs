@@ -124,7 +124,7 @@ namespace StopLoss
             DataTable reader = dbsqlite.GetDataTable("select questions from questionwc where type = 'warmup' and subtype = 'practice' and deleted = 0 and enabled = 1");
             if (reader.Rows.Count > 0)
             {
-                //LoadDgv(reader);
+                LoadDgv(reader);
                 //reader.Close();
                 //dbsqlite.CloseCnnmeu();
                 havequestions = true;

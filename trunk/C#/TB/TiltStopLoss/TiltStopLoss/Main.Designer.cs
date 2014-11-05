@@ -55,6 +55,9 @@
             this.label16 = new System.Windows.Forms.Label();
             this.labelSessionBBs = new System.Windows.Forms.Label();
             this.tabConfStop2 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.comboBoxAutoStarttab = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.labelResetValues = new System.Windows.Forms.Label();
             this.buttonResetValuesBrm = new System.Windows.Forms.Button();
             this.labelBrmUp = new System.Windows.Forms.Label();
@@ -155,9 +158,6 @@
             this.checkBoxCooldown = new System.Windows.Forms.CheckBox();
             this.buttonStartWarmup = new System.Windows.Forms.Button();
             this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboBoxAutoStarttab = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -502,6 +502,41 @@
             this.tabConfStop2.TabIndex = 4;
             this.tabConfStop2.Text = "Conf. Stop 2";
             this.tabConfStop2.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(61, 335);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(76, 13);
+            this.label9.TabIndex = 87;
+            this.label9.Text = "Auto Start Tab";
+            // 
+            // comboBoxAutoStarttab
+            // 
+            this.comboBoxAutoStarttab.FormattingEnabled = true;
+            this.comboBoxAutoStarttab.Items.AddRange(new object[] {
+            "Database",
+            "Conf. Stop",
+            "Conf. Stop2",
+            "Resume Session",
+            "WarmupCooldown",
+            "Start"});
+            this.comboBoxAutoStarttab.Location = new System.Drawing.Point(164, 332);
+            this.comboBoxAutoStarttab.Name = "comboBoxAutoStarttab";
+            this.comboBoxAutoStarttab.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxAutoStarttab.TabIndex = 86;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 2.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(57, 314);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(311, 4);
+            this.label7.TabIndex = 85;
+            this.label7.Text = "_________________________________________________________________________________" +
+                "_________________________________________________________________________";
             // 
             // labelResetValues
             // 
@@ -1677,41 +1712,6 @@
             this.checkBoxAutoStartWarmup.Text = "Auto Start Warmup";
             this.checkBoxAutoStartWarmup.UseVisualStyleBackColor = true;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 2.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(57, 314);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(311, 4);
-            this.label7.TabIndex = 85;
-            this.label7.Text = "_________________________________________________________________________________" +
-                "_________________________________________________________________________";
-            // 
-            // comboBoxAutoStarttab
-            // 
-            this.comboBoxAutoStarttab.FormattingEnabled = true;
-            this.comboBoxAutoStarttab.Items.AddRange(new object[] {
-            "Database",
-            "Conf. Stop",
-            "Conf. Stop2",
-            "Resume Session",
-            "WarmupCooldown",
-            "Start"});
-            this.comboBoxAutoStarttab.Location = new System.Drawing.Point(164, 332);
-            this.comboBoxAutoStarttab.Name = "comboBoxAutoStarttab";
-            this.comboBoxAutoStarttab.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxAutoStarttab.TabIndex = 86;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(61, 335);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(76, 13);
-            this.label9.TabIndex = 87;
-            this.label9.Text = "Auto Start Tab";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1721,7 +1721,7 @@
             this.Controls.Add(this.tabControlMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.Text = "StopLoss";
+            this.Text = "Poker BRM";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.tabStart.ResumeLayout(false);
             this.tabStart.PerformLayout();

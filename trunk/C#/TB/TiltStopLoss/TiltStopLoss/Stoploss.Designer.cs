@@ -160,7 +160,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Stoploss";
-            this.Text = "Stoploss";
+            this.Text = "Poker BRM";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Stoploss_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,10 +1,5 @@
-E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\StopLoss.exe.config
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\Interop.WMPLib.dll
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.csproj.ResolveComReference.cache
-E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.exe
-E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.pdb
-E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\StopLoss.exe
-E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\StopLoss.pdb
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\Newtonsoft.Json.dll
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\Npgsql.dll
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\policy.2.0.Npgsql.dll
@@ -19,7 +14,6 @@ E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\Tilt
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\ja\Npgsql.resources.dll
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\zh-CN\Npgsql.resources.dll
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\policy.2.0.Npgsql.config
-E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.csprojResolveAssemblyReference.cache
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormDonate.resources
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormInit.resources
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormSet.resources
@@ -85,3 +79,8 @@ E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\Tilt
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormEvaluation.resources
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormWarmup.resources
 E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormWCConfig.resources
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\Poker BRM.exe.config
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\Poker BRM.exe
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\bin\Debug\Poker BRM.pdb
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\Poker BRM.exe
+E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\Poker BRM.pdb
