@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StopLoss</RootNamespace>
-    <AssemblyName>StopLoss</AssemblyName>
+    <AssemblyName>Poker BRM</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>SL.ico</ApplicationIcon>
+    <ApplicationIcon>pbrm.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -245,6 +245,7 @@
     <None Include="Resources\iconStarEmpty.png" />
     <None Include="Resources\iconStarFull.png" />
     <None Include="Resources\iconStartHalf.png" />
+    <Content Include="pbrm.ico" />
     <Content Include="SL.ico" />
   </ItemGroup>
   <ItemGroup>

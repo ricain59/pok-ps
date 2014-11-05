@@ -65,7 +65,7 @@
             this.Controls.Add(this.comboBoxLanguage);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormInit";
-            this.Text = "StopLoss";
+            this.Text = "Poker BRM";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormInit_FormClosed);
             this.ResumeLayout(false);
 
