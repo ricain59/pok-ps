@@ -26,8 +26,8 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.80;
-        private String urldownload = "http://bit.ly/1aSxGIA";
+        private Double version = 1.81;
+        //private String urldownload = "http://bit.ly/1aSxGIA";
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
         //sounds
         private String soundloss = "alarm.wav";
@@ -135,6 +135,7 @@ namespace TiltStopLoss
                 daysupdate = now;
                 Double newversion = version;
                 String log = "";
+                Uri url = new Uri("http://bit.ly/1aSxGIA");
                 try
                 {
                     using (XmlReader reader = XmlReader.Create(urlxml))
@@ -159,17 +160,27 @@ namespace TiltStopLoss
                                             log += reader.Value.Trim().ToString() + "\r\n";
                                         }
                                         break;
+                                    case "url":
+                                        if (reader.Read())
+                                        {
+                                            url = new Uri(reader.Value.Trim().ToString());
+                                        }
+                                        break;
                                 }
                             }
                         }
                     }
                     if (version < newversion)
                     {
-                        DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\n\r\nNew:\r\n" + log + "\r\nGo to download page?", "Update", MessageBoxButtons.YesNo);
+                        DialogResult dialogResult = MessageBox.Show("Actual version: " + version.ToString().Replace(',', '.') + "\r\nNew Version: " + newversion.ToString().Replace(',', '.') + "\r\n\r\nNew:\r\n" + log + "\r\nUpdate to version " + newversion.ToString().Replace(',', '.') + " ?", "Update", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
                             //do something
-                            Process.Start(urldownload);
+                            //Process.Start(urldownload);
+                            //abro o updater e ao fim do download fecho o e faço o start ao update.
+                            this.Visible = false;
+                            FormDownloadUpdate fdu = new FormDownloadUpdate(this, url, newversion, version);
+                            fdu.Show();                            
                         }
                     }
                 }
@@ -321,7 +332,8 @@ namespace TiltStopLoss
                         //7 - repeathand
                         //8 - repeattime 
                         //9 - timerstart 1ª mão
-                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime, checkBoxStartTimer.Checked};
+                        //10 - always visible bb
+                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime, checkBoxStartTimer.Checked, checkBoxAlwaysVisible.Checked};
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -524,6 +536,16 @@ namespace TiltStopLoss
                     {
                         resumesession = false;
                         checkBoxResumeSession.Checked = false;
+                    }
+                    break;
+                case "Alwaysbb":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxAlwaysVisible.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxAlwaysVisible.Checked = false;
                     }
                     break;
                 case "Hidebbs":
@@ -791,6 +813,8 @@ namespace TiltStopLoss
             w.WriteLine();
             w.Write("StopLossPeak=" + textBoxStopLossPeak.Text.ToString());
             w.WriteLine();
+            w.Write("Alwaysbb=" + checkBoxAlwaysVisible.Checked.ToString());
+            w.WriteLine();            
             w.Write("Hidebbs=" + checkBoxHideBbbs.Checked.ToString());
             w.WriteLine();
             w.Write("StopLossPeakOver=" + textBoxPeakOver.Text.ToString());
@@ -1324,6 +1348,7 @@ namespace TiltStopLoss
                 labelUpdate.Text = "Check Update";
                 labelDaysUpdate.Text = "Days";
                 labelPleaseDonate.Text = "Stoploss prevent spew buy-in and more, please donate";
+                labelVisibleAlBb.Text = "Always Visible";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
             {
@@ -1361,6 +1386,8 @@ namespace TiltStopLoss
                 labelUpdate.Text = "Vérifier Update";
                 labelDaysUpdate.Text = "Jours";
                 labelPleaseDonate.Text = "Stoploss vous aide a ne pas spew. Svp un petit don";
+                labelVisibleAlBb.Text = "Toujours Visible";
+                
             }
             if (comboBoxLanguage.SelectedIndex == 2)//portugues
             {
@@ -1398,6 +1425,7 @@ namespace TiltStopLoss
                 labelUpdate.Text = "Verificar Update";
                 labelDaysUpdate.Text = "Dias";
                 labelPleaseDonate.Text = "Stoploss ajuda-vos a não spewar. Por Favor um donativo";
+                labelVisibleAlBb.Text = "Sempre Visível";
             }
         }
 
@@ -1590,7 +1618,62 @@ namespace TiltStopLoss
             bbbrm = 0.0;
             textBoxBrmDown.Text = "";
             textBoxBrmUp.Text = "";
-        }        
+        }
+
+        /// <summary>
+        /// Para desativar a checkbox always visible se ativamos o hide
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxHideBbbs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHideBbbs.Checked)
+            {
+                checkBoxAlwaysVisible.Checked = false;
+                checkBoxAlwaysVisible.Enabled = false;
+            }
+            else
+            {
+                checkBoxAlwaysVisible.Enabled = true;
+            }
+        }
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    chooseFile();
+        //    String pathexe = "";
+        //    if (!openFileDialogApp.FileName.Equals(""))
+        //    {
+        //        //String pathexe = System.IO.Path.GetFileName(openFileDialogApp.FileName);
+        //        pathexe = openFileDialogApp.FileName;
+        //        Icon ico = Icon.ExtractAssociatedIcon(pathexe);
+                
+        //        labeltest.Image = ico.ToBitmap();
+        //    }
+        //    ProcessStartInfo info = new ProcessStartInfo(pathexe);
+        //    info.UseShellExecute = true;
+        //    info.Verb = "runas";
+        //    const int ERROR_CANCELLED = 1223;
+        //    try
+        //    {
+        //        Process.Start(info);
+        //    }
+        //    catch (Win32Exception ex)
+        //    {
+        //        if (ex.NativeErrorCode == ERROR_CANCELLED)
+        //            MessageBox.Show("Why you no select Yes?");
+        //        else
+        //            throw;
+        //    }
+
+        //}
+
+        //private void chooseFile()
+        //{
+        //    openFileDialogApp.Filter = "Executable, EXE|*.exe";
+        //    openFileDialogApp.FileName = "";
+        //    openFileDialogApp.ShowDialog();
+        //}
 
 
     }
