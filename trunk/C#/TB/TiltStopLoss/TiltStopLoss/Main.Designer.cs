@@ -84,6 +84,8 @@
             this.checkBoxCloseSkype = new System.Windows.Forms.CheckBox();
             this.labelCloseSkype = new System.Windows.Forms.Label();
             this.tabConfStop = new System.Windows.Forms.TabPage();
+            this.checkBoxAlwaysVisible = new System.Windows.Forms.CheckBox();
+            this.labelVisibleAlBb = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxStopVPP = new System.Windows.Forms.TextBox();
@@ -158,6 +160,7 @@
             this.checkBoxCooldown = new System.Windows.Forms.CheckBox();
             this.buttonStartWarmup = new System.Windows.Forms.Button();
             this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
+            this.openFileDialogApp = new System.Windows.Forms.OpenFileDialog();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -525,7 +528,7 @@
             this.comboBoxAutoStarttab.Location = new System.Drawing.Point(164, 332);
             this.comboBoxAutoStarttab.Name = "comboBoxAutoStarttab";
             this.comboBoxAutoStarttab.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxAutoStarttab.TabIndex = 86;
+            this.comboBoxAutoStarttab.TabIndex = 12;
             // 
             // label7
             // 
@@ -554,7 +557,7 @@
             this.buttonResetValuesBrm.Location = new System.Drawing.Point(219, 235);
             this.buttonResetValuesBrm.Name = "buttonResetValuesBrm";
             this.buttonResetValuesBrm.Size = new System.Drawing.Size(93, 23);
-            this.buttonResetValuesBrm.TabIndex = 83;
+            this.buttonResetValuesBrm.TabIndex = 11;
             this.buttonResetValuesBrm.Text = "Reset Values";
             this.buttonResetValuesBrm.UseVisualStyleBackColor = true;
             this.buttonResetValuesBrm.Click += new System.EventHandler(this.buttonResetValuesBrm_Click);
@@ -577,7 +580,8 @@
             this.textBoxBrmUp.Location = new System.Drawing.Point(164, 235);
             this.textBoxBrmUp.Name = "textBoxBrmUp";
             this.textBoxBrmUp.Size = new System.Drawing.Size(35, 20);
-            this.textBoxBrmUp.TabIndex = 81;
+            this.textBoxBrmUp.TabIndex = 9;
+            this.textBoxBrmUp.Text = "0";
             this.textBoxBrmUp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxBrmUp.TextChanged += new System.EventHandler(this.textBoxBrmUp_TextChanged);
             // 
@@ -589,7 +593,8 @@
             this.textBoxBrmDown.Name = "textBoxBrmDown";
             this.textBoxBrmDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBoxBrmDown.Size = new System.Drawing.Size(35, 20);
-            this.textBoxBrmDown.TabIndex = 79;
+            this.textBoxBrmDown.TabIndex = 10;
+            this.textBoxBrmDown.Text = "0";
             this.textBoxBrmDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxBrmDown.TextChanged += new System.EventHandler(this.textBoxBrmDown_TextChanged);
             // 
@@ -650,7 +655,7 @@
             this.comboBoxUpdate.Location = new System.Drawing.Point(204, 172);
             this.comboBoxUpdate.Name = "comboBoxUpdate";
             this.comboBoxUpdate.Size = new System.Drawing.Size(49, 21);
-            this.comboBoxUpdate.TabIndex = 75;
+            this.comboBoxUpdate.TabIndex = 8;
             // 
             // labelUpdate
             // 
@@ -668,7 +673,7 @@
             this.checkBoxStartTimer.Location = new System.Drawing.Point(204, 151);
             this.checkBoxStartTimer.Name = "checkBoxStartTimer";
             this.checkBoxStartTimer.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxStartTimer.TabIndex = 73;
+            this.checkBoxStartTimer.TabIndex = 7;
             this.checkBoxStartTimer.UseVisualStyleBackColor = true;
             // 
             // labelStartTimer
@@ -744,7 +749,7 @@
             this.comboBoxTimeSession.Location = new System.Drawing.Point(237, 121);
             this.comboBoxTimeSession.Name = "comboBoxTimeSession";
             this.comboBoxTimeSession.Size = new System.Drawing.Size(45, 21);
-            this.comboBoxTimeSession.TabIndex = 71;
+            this.comboBoxTimeSession.TabIndex = 6;
             // 
             // checkBoxtimebetweenSession
             // 
@@ -752,7 +757,7 @@
             this.checkBoxtimebetweenSession.Location = new System.Drawing.Point(204, 124);
             this.checkBoxtimebetweenSession.Name = "checkBoxtimebetweenSession";
             this.checkBoxtimebetweenSession.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxtimebetweenSession.TabIndex = 69;
+            this.checkBoxtimebetweenSession.TabIndex = 5;
             this.checkBoxtimebetweenSession.UseVisualStyleBackColor = true;
             this.checkBoxtimebetweenSession.CheckedChanged += new System.EventHandler(this.checkBoxtimebetweenSession_CheckedChanged);
             // 
@@ -778,7 +783,7 @@
             this.comboBoxSnoozeMinute.Location = new System.Drawing.Point(237, 94);
             this.comboBoxSnoozeMinute.Name = "comboBoxSnoozeMinute";
             this.comboBoxSnoozeMinute.Size = new System.Drawing.Size(45, 21);
-            this.comboBoxSnoozeMinute.TabIndex = 67;
+            this.comboBoxSnoozeMinute.TabIndex = 4;
             // 
             // checkBoxSnoozeSound
             // 
@@ -786,7 +791,7 @@
             this.checkBoxSnoozeSound.Location = new System.Drawing.Point(204, 97);
             this.checkBoxSnoozeSound.Name = "checkBoxSnoozeSound";
             this.checkBoxSnoozeSound.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxSnoozeSound.TabIndex = 65;
+            this.checkBoxSnoozeSound.TabIndex = 3;
             this.checkBoxSnoozeSound.UseVisualStyleBackColor = true;
             this.checkBoxSnoozeSound.CheckedChanged += new System.EventHandler(this.checkBoxSnoozeSound_CheckedChanged);
             // 
@@ -806,7 +811,7 @@
             this.checkBoxRageQuit.Location = new System.Drawing.Point(204, 72);
             this.checkBoxRageQuit.Name = "checkBoxRageQuit";
             this.checkBoxRageQuit.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxRageQuit.TabIndex = 62;
+            this.checkBoxRageQuit.TabIndex = 2;
             this.checkBoxRageQuit.UseVisualStyleBackColor = true;
             // 
             // labelRageQuit
@@ -825,7 +830,7 @@
             this.checkBoxVerifyApplication.Location = new System.Drawing.Point(204, 49);
             this.checkBoxVerifyApplication.Name = "checkBoxVerifyApplication";
             this.checkBoxVerifyApplication.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxVerifyApplication.TabIndex = 59;
+            this.checkBoxVerifyApplication.TabIndex = 1;
             this.checkBoxVerifyApplication.UseVisualStyleBackColor = true;
             // 
             // labelVerifyApp
@@ -844,7 +849,7 @@
             this.checkBoxCloseSkype.Location = new System.Drawing.Point(204, 25);
             this.checkBoxCloseSkype.Name = "checkBoxCloseSkype";
             this.checkBoxCloseSkype.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxCloseSkype.TabIndex = 57;
+            this.checkBoxCloseSkype.TabIndex = 0;
             this.checkBoxCloseSkype.UseVisualStyleBackColor = true;
             // 
             // labelCloseSkype
@@ -859,6 +864,8 @@
             // 
             // tabConfStop
             // 
+            this.tabConfStop.Controls.Add(this.checkBoxAlwaysVisible);
+            this.tabConfStop.Controls.Add(this.labelVisibleAlBb);
             this.tabConfStop.Controls.Add(this.label5);
             this.tabConfStop.Controls.Add(this.label3);
             this.tabConfStop.Controls.Add(this.textBoxStopVPP);
@@ -908,6 +915,25 @@
             this.tabConfStop.Text = "Conf. Stop";
             this.tabConfStop.UseVisualStyleBackColor = true;
             // 
+            // checkBoxAlwaysVisible
+            // 
+            this.checkBoxAlwaysVisible.AutoSize = true;
+            this.checkBoxAlwaysVisible.Location = new System.Drawing.Point(333, 274);
+            this.checkBoxAlwaysVisible.Name = "checkBoxAlwaysVisible";
+            this.checkBoxAlwaysVisible.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxAlwaysVisible.TabIndex = 12;
+            this.checkBoxAlwaysVisible.UseVisualStyleBackColor = true;
+            // 
+            // labelVisibleAlBb
+            // 
+            this.labelVisibleAlBb.AutoSize = true;
+            this.labelVisibleAlBb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisibleAlBb.Location = new System.Drawing.Point(224, 275);
+            this.labelVisibleAlBb.Name = "labelVisibleAlBb";
+            this.labelVisibleAlBb.Size = new System.Drawing.Size(87, 13);
+            this.labelVisibleAlBb.TabIndex = 62;
+            this.labelVisibleAlBb.Text = "Always Visible";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -937,7 +963,8 @@
             this.textBoxStopVPP.Location = new System.Drawing.Point(148, 226);
             this.textBoxStopVPP.Name = "textBoxStopVPP";
             this.textBoxStopVPP.Size = new System.Drawing.Size(34, 20);
-            this.textBoxStopVPP.TabIndex = 58;
+            this.textBoxStopVPP.TabIndex = 9;
+            this.textBoxStopVPP.Text = "0";
             this.textBoxStopVPP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxStopRake
@@ -947,7 +974,8 @@
             this.textBoxStopRake.Location = new System.Drawing.Point(147, 198);
             this.textBoxStopRake.Name = "textBoxStopRake";
             this.textBoxStopRake.Size = new System.Drawing.Size(35, 20);
-            this.textBoxStopRake.TabIndex = 54;
+            this.textBoxStopRake.TabIndex = 8;
+            this.textBoxStopRake.Text = "0";
             this.textBoxStopRake.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
@@ -990,7 +1018,8 @@
             this.textBoxStopWinIntermediate.Location = new System.Drawing.Point(147, 81);
             this.textBoxStopWinIntermediate.Name = "textBoxStopWinIntermediate";
             this.textBoxStopWinIntermediate.Size = new System.Drawing.Size(35, 20);
-            this.textBoxStopWinIntermediate.TabIndex = 51;
+            this.textBoxStopWinIntermediate.TabIndex = 2;
+            this.textBoxStopWinIntermediate.Text = "0";
             this.textBoxStopWinIntermediate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxStopWinIntermediate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopWinIntermediate_KeyPress);
             // 
@@ -1002,7 +1031,8 @@
             this.textBoxStopLossIntermediate.Name = "textBoxStopLossIntermediate";
             this.textBoxStopLossIntermediate.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBoxStopLossIntermediate.Size = new System.Drawing.Size(35, 20);
-            this.textBoxStopLossIntermediate.TabIndex = 46;
+            this.textBoxStopLossIntermediate.TabIndex = 0;
+            this.textBoxStopLossIntermediate.Text = "0";
             this.textBoxStopLossIntermediate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxStopLossIntermediate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopLossIntermediate_KeyPress);
             // 
@@ -1014,7 +1044,8 @@
             this.textBoxPeakOver.Name = "textBoxPeakOver";
             this.textBoxPeakOver.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBoxPeakOver.Size = new System.Drawing.Size(35, 20);
-            this.textBoxPeakOver.TabIndex = 31;
+            this.textBoxPeakOver.TabIndex = 5;
+            this.textBoxPeakOver.Text = "0";
             this.textBoxPeakOver.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxPeakOver.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPeakOver_KeyPress);
             // 
@@ -1026,7 +1057,8 @@
             this.textBoxStopLossPeak.Name = "textBoxStopLossPeak";
             this.textBoxStopLossPeak.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBoxStopLossPeak.Size = new System.Drawing.Size(34, 20);
-            this.textBoxStopLossPeak.TabIndex = 25;
+            this.textBoxStopLossPeak.TabIndex = 4;
+            this.textBoxStopLossPeak.Text = "0";
             this.textBoxStopLossPeak.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxStopLossPeak.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopLossPeak_KeyPress);
             // 
@@ -1037,7 +1069,8 @@
             this.textBoxStopWin.Location = new System.Drawing.Point(291, 81);
             this.textBoxStopWin.Name = "textBoxStopWin";
             this.textBoxStopWin.Size = new System.Drawing.Size(35, 20);
-            this.textBoxStopWin.TabIndex = 14;
+            this.textBoxStopWin.TabIndex = 3;
+            this.textBoxStopWin.Text = "0";
             this.textBoxStopWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxStopWin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopWin_KeyPress);
             // 
@@ -1048,7 +1081,8 @@
             this.textBoxStopTime.Location = new System.Drawing.Point(148, 172);
             this.textBoxStopTime.Name = "textBoxStopTime";
             this.textBoxStopTime.Size = new System.Drawing.Size(34, 20);
-            this.textBoxStopTime.TabIndex = 11;
+            this.textBoxStopTime.TabIndex = 7;
+            this.textBoxStopTime.Text = "0";
             this.textBoxStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxStopTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopTime_KeyPress);
             // 
@@ -1058,7 +1092,8 @@
             this.textBoxStopHand.Location = new System.Drawing.Point(148, 144);
             this.textBoxStopHand.Name = "textBoxStopHand";
             this.textBoxStopHand.Size = new System.Drawing.Size(34, 20);
-            this.textBoxStopHand.TabIndex = 7;
+            this.textBoxStopHand.TabIndex = 6;
+            this.textBoxStopHand.Text = "0";
             this.textBoxStopHand.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxStopHand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopHand_KeyPress);
             // 
@@ -1070,7 +1105,8 @@
             this.textBoxStopLoss.Name = "textBoxStopLoss";
             this.textBoxStopLoss.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.textBoxStopLoss.Size = new System.Drawing.Size(35, 20);
-            this.textBoxStopLoss.TabIndex = 3;
+            this.textBoxStopLoss.TabIndex = 1;
+            this.textBoxStopLoss.Text = "0";
             this.textBoxStopLoss.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxStopLoss.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxStopLoss_KeyPress);
             // 
@@ -1136,7 +1172,7 @@
             this.linkLabelHelp2.Location = new System.Drawing.Point(316, 11);
             this.linkLabelHelp2.Name = "linkLabelHelp2";
             this.linkLabelHelp2.Size = new System.Drawing.Size(37, 16);
-            this.linkLabelHelp2.TabIndex = 44;
+            this.linkLabelHelp2.TabIndex = 16;
             this.linkLabelHelp2.TabStop = true;
             this.linkLabelHelp2.Text = "Help";
             this.linkLabelHelp2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelHelp2_LinkClicked);
@@ -1160,7 +1196,7 @@
             this.comboBoxBRM.Location = new System.Drawing.Point(199, 319);
             this.comboBoxBRM.Name = "comboBoxBRM";
             this.comboBoxBRM.Size = new System.Drawing.Size(45, 21);
-            this.comboBoxBRM.TabIndex = 43;
+            this.comboBoxBRM.TabIndex = 14;
             // 
             // labelBrm
             // 
@@ -1185,10 +1221,10 @@
             // checkBoxButtonSet
             // 
             this.checkBoxButtonSet.AutoSize = true;
-            this.checkBoxButtonSet.Location = new System.Drawing.Point(229, 297);
+            this.checkBoxButtonSet.Location = new System.Drawing.Point(201, 297);
             this.checkBoxButtonSet.Name = "checkBoxButtonSet";
             this.checkBoxButtonSet.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxButtonSet.TabIndex = 39;
+            this.checkBoxButtonSet.TabIndex = 13;
             this.checkBoxButtonSet.UseVisualStyleBackColor = true;
             // 
             // labelActiveSet
@@ -1206,7 +1242,7 @@
             this.buttonChoiceSounds.Location = new System.Drawing.Point(57, 346);
             this.buttonChoiceSounds.Name = "buttonChoiceSounds";
             this.buttonChoiceSounds.Size = new System.Drawing.Size(75, 23);
-            this.buttonChoiceSounds.TabIndex = 33;
+            this.buttonChoiceSounds.TabIndex = 15;
             this.buttonChoiceSounds.Text = "Sounds";
             this.buttonChoiceSounds.UseVisualStyleBackColor = true;
             this.buttonChoiceSounds.Click += new System.EventHandler(this.buttonChoiceSounds_Click);
@@ -1225,11 +1261,12 @@
             // checkBoxHideBbbs
             // 
             this.checkBoxHideBbbs.AutoSize = true;
-            this.checkBoxHideBbbs.Location = new System.Drawing.Point(229, 275);
+            this.checkBoxHideBbbs.Location = new System.Drawing.Point(201, 275);
             this.checkBoxHideBbbs.Name = "checkBoxHideBbbs";
             this.checkBoxHideBbbs.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxHideBbbs.TabIndex = 29;
+            this.checkBoxHideBbbs.TabIndex = 11;
             this.checkBoxHideBbbs.UseVisualStyleBackColor = true;
+            this.checkBoxHideBbbs.CheckedChanged += new System.EventHandler(this.checkBoxHideBbbs_CheckedChanged);
             // 
             // labelHideBbs
             // 
@@ -1276,10 +1313,10 @@
             // checkBoxResumeSession
             // 
             this.checkBoxResumeSession.AutoSize = true;
-            this.checkBoxResumeSession.Location = new System.Drawing.Point(229, 253);
+            this.checkBoxResumeSession.Location = new System.Drawing.Point(201, 253);
             this.checkBoxResumeSession.Name = "checkBoxResumeSession";
             this.checkBoxResumeSession.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxResumeSession.TabIndex = 15;
+            this.checkBoxResumeSession.TabIndex = 10;
             this.checkBoxResumeSession.UseVisualStyleBackColor = true;
             this.checkBoxResumeSession.CheckedChanged += new System.EventHandler(this.checkBoxResumeSession_CheckedChanged);
             // 
@@ -1374,7 +1411,7 @@
             this.buttonConfigWc.Location = new System.Drawing.Point(155, 49);
             this.buttonConfigWc.Name = "buttonConfigWc";
             this.buttonConfigWc.Size = new System.Drawing.Size(114, 36);
-            this.buttonConfigWc.TabIndex = 62;
+            this.buttonConfigWc.TabIndex = 0;
             this.buttonConfigWc.Text = "Configuration";
             this.buttonConfigWc.UseVisualStyleBackColor = true;
             this.buttonConfigWc.Click += new System.EventHandler(this.buttonConfigWc_Click);
@@ -1504,21 +1541,21 @@
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(177, 20);
-            this.textBoxPass.TabIndex = 8;
+            this.textBoxPass.TabIndex = 4;
             // 
             // textBoxUser
             // 
             this.textBoxUser.Location = new System.Drawing.Point(169, 225);
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(177, 20);
-            this.textBoxUser.TabIndex = 7;
+            this.textBoxUser.TabIndex = 3;
             // 
             // textBoxDb
             // 
             this.textBoxDb.Location = new System.Drawing.Point(169, 198);
             this.textBoxDb.Name = "textBoxDb";
             this.textBoxDb.Size = new System.Drawing.Size(177, 20);
-            this.textBoxDb.TabIndex = 6;
+            this.textBoxDb.TabIndex = 2;
             this.textBoxDb.Enter += new System.EventHandler(this.textBoxDb_Enter);
             this.textBoxDb.Leave += new System.EventHandler(this.textBoxDb_Leave);
             // 
@@ -1527,21 +1564,21 @@
             this.textBoxPort.Location = new System.Drawing.Point(169, 171);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(177, 20);
-            this.textBoxPort.TabIndex = 5;
+            this.textBoxPort.TabIndex = 1;
             // 
             // textBoxServer
             // 
             this.textBoxServer.Location = new System.Drawing.Point(169, 144);
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(177, 20);
-            this.textBoxServer.TabIndex = 4;
+            this.textBoxServer.TabIndex = 0;
             // 
             // textBoxPlayer
             // 
             this.textBoxPlayer.Location = new System.Drawing.Point(214, 51);
             this.textBoxPlayer.Name = "textBoxPlayer";
             this.textBoxPlayer.Size = new System.Drawing.Size(132, 20);
-            this.textBoxPlayer.TabIndex = 0;
+            this.textBoxPlayer.TabIndex = 6;
             this.textBoxPlayer.Leave += new System.EventHandler(this.textBoxPlayer_Leave);
             // 
             // buttonTestDb
@@ -1549,7 +1586,7 @@
             this.buttonTestDb.Location = new System.Drawing.Point(190, 287);
             this.buttonTestDb.Name = "buttonTestDb";
             this.buttonTestDb.Size = new System.Drawing.Size(75, 23);
-            this.buttonTestDb.TabIndex = 13;
+            this.buttonTestDb.TabIndex = 5;
             this.buttonTestDb.Text = "Test";
             this.buttonTestDb.UseVisualStyleBackColor = true;
             this.buttonTestDb.Click += new System.EventHandler(this.buttonTestDb_Click);
@@ -1653,7 +1690,7 @@
             this.buttonEvaWarmup.Location = new System.Drawing.Point(226, 144);
             this.buttonEvaWarmup.Name = "buttonEvaWarmup";
             this.buttonEvaWarmup.Size = new System.Drawing.Size(114, 45);
-            this.buttonEvaWarmup.TabIndex = 68;
+            this.buttonEvaWarmup.TabIndex = 3;
             this.buttonEvaWarmup.Text = "View Evaluation Warmup";
             this.buttonEvaWarmup.UseVisualStyleBackColor = true;
             this.buttonEvaWarmup.Click += new System.EventHandler(this.buttonEvaWarmup_Click);
@@ -1663,7 +1700,7 @@
             this.buttonViewEvaCooldown.Location = new System.Drawing.Point(226, 252);
             this.buttonViewEvaCooldown.Name = "buttonViewEvaCooldown";
             this.buttonViewEvaCooldown.Size = new System.Drawing.Size(114, 45);
-            this.buttonViewEvaCooldown.TabIndex = 67;
+            this.buttonViewEvaCooldown.TabIndex = 6;
             this.buttonViewEvaCooldown.Text = "View Evaluation Cooldown";
             this.buttonViewEvaCooldown.UseVisualStyleBackColor = true;
             this.buttonViewEvaCooldown.Click += new System.EventHandler(this.buttonViewEvaCooldown_Click);
@@ -1673,7 +1710,7 @@
             this.buttonStartCooldown.Location = new System.Drawing.Point(75, 252);
             this.buttonStartCooldown.Name = "buttonStartCooldown";
             this.buttonStartCooldown.Size = new System.Drawing.Size(114, 43);
-            this.buttonStartCooldown.TabIndex = 66;
+            this.buttonStartCooldown.TabIndex = 5;
             this.buttonStartCooldown.Text = "Start Manually Cooldown";
             this.buttonStartCooldown.UseVisualStyleBackColor = true;
             this.buttonStartCooldown.Click += new System.EventHandler(this.buttonStartCooldown_Click);
@@ -1686,7 +1723,7 @@
             this.checkBoxCooldown.Name = "checkBoxCooldown";
             this.checkBoxCooldown.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxCooldown.Size = new System.Drawing.Size(123, 17);
-            this.checkBoxCooldown.TabIndex = 65;
+            this.checkBoxCooldown.TabIndex = 4;
             this.checkBoxCooldown.Text = "Auto Start Cooldown";
             this.checkBoxCooldown.UseVisualStyleBackColor = true;
             // 
@@ -1695,7 +1732,7 @@
             this.buttonStartWarmup.Location = new System.Drawing.Point(75, 144);
             this.buttonStartWarmup.Name = "buttonStartWarmup";
             this.buttonStartWarmup.Size = new System.Drawing.Size(114, 46);
-            this.buttonStartWarmup.TabIndex = 64;
+            this.buttonStartWarmup.TabIndex = 2;
             this.buttonStartWarmup.Text = "Start Manually Warmup";
             this.buttonStartWarmup.UseVisualStyleBackColor = true;
             this.buttonStartWarmup.Click += new System.EventHandler(this.buttonStartWarmup_Click);
@@ -1708,9 +1745,13 @@
             this.checkBoxAutoStartWarmup.Name = "checkBoxAutoStartWarmup";
             this.checkBoxAutoStartWarmup.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxAutoStartWarmup.Size = new System.Drawing.Size(116, 17);
-            this.checkBoxAutoStartWarmup.TabIndex = 63;
+            this.checkBoxAutoStartWarmup.TabIndex = 1;
             this.checkBoxAutoStartWarmup.Text = "Auto Start Warmup";
             this.checkBoxAutoStartWarmup.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialogApp
+            // 
+            this.openFileDialogApp.FileName = "openFileDialogApp";
             // 
             // Main
             // 
@@ -1875,6 +1916,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBoxAutoStarttab;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.OpenFileDialog openFileDialogApp;
+        private System.Windows.Forms.CheckBox checkBoxAlwaysVisible;
+        private System.Windows.Forms.Label labelVisibleAlBb;
     }
 }
 

@@ -199,9 +199,10 @@ namespace CleanHH
             //multithread
             if (checkBoxMultiThread.Checked)
             {
-                String textfile = "";
+                
                 Parallel.ForEach(filePaths, fi =>
                 {
+                    String textfile = "";
                     using (StreamReader streamReader = new StreamReader(fi, Encoding.UTF8))
                     {
                         textfile = streamReader.ReadToEnd();

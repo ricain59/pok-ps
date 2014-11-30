@@ -172,6 +172,9 @@
         7+0oRPnTrXkEqU+d5f9ToN4DKJBS7l3veggIADs=
 </value>
   </data>
+  <metadata name="openFileDialogApp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>323, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAqYAAAAEAIAAoXgEAFgAAACgAAACpAAAAAAEAAAEAIAAAAAAAAFIBAMMOAADDDgAAAAAAAAAA

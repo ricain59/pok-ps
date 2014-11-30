@@ -94,6 +94,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDownloadUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDownloadUpdate.Designer.cs">
+      <DependentUpon>FormDownloadUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormViewEvaluation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +183,9 @@
       <DependentUpon>Stoploss.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="FormDownloadUpdate.resx">
+      <DependentUpon>FormDownloadUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormViewEvaluation.resx">
       <DependentUpon>FormViewEvaluation.cs</DependentUpon>
     </EmbeddedResource>

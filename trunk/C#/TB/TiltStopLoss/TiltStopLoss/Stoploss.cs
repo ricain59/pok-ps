@@ -49,6 +49,7 @@ namespace TiltStopLoss
         private Boolean sitout = true;
         private Int32 blocklimit;
         private Boolean hidebb;
+        private Boolean visiblealwaysbb;
         private Boolean repeatwin;
         private Boolean repeatloss;
         private Boolean repeathand;
@@ -96,11 +97,18 @@ namespace TiltStopLoss
                 //7 - repeathand
                 //8 - repeattime
                 //9 - timerstart 1ª mão
+                //10 - always visible bb
                 this.hidebb = checkb[0];
                 if (hidebb)
                 {
                     labelBb.Enabled = false;
                     labelBb.Visible = false;
+                }
+                //visible bb
+                this.visiblealwaysbb = checkb[10];
+                if (!hidebb && visiblealwaysbb)
+                {
+                    labelBb.Visible = true;
                 }
                 buttonSet.Visible = checkb[1];
                 loadconfig();
@@ -365,6 +373,19 @@ namespace TiltStopLoss
                     {
                         // It's on the same thread, no need for Invoke
                         this.labelBb.Text = bb.ToString();
+                        if (!hidebb && visiblealwaysbb)
+                        {
+                            if (bb > 0)
+                            {
+                                //labelBb.BackColor = Color.Green;
+                                labelBb.ForeColor = Color.Green;
+                            }
+                            else
+                            {
+                                //labelBb.BackColor = Color.Red;
+                                labelBb.ForeColor = Color.Red;
+                            }
+                        }
                     }
 
                     //stop                    
@@ -868,6 +889,20 @@ namespace TiltStopLoss
         private void SetTextBb(string text)
         {
             this.labelBb.Text = text;
+            if (!hidebb && visiblealwaysbb)
+            {
+                Double value = Convert.ToDouble(labelBb.Text.ToString());
+                if (value > 0)
+                {
+                    //labelBb.BackColor = Color.Green;
+                    labelBb.ForeColor = Color.Green;
+                }
+                else
+                {
+                    //labelBb.BackColor = Color.Red;
+                    labelBb.ForeColor = Color.Red;
+                }
+            }
         }
         private void SetTextHands(string text)
         {
@@ -908,18 +943,21 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void labelBb_MouseHover(object sender, EventArgs e)
         {
-            Double value = Convert.ToDouble(labelBb.Text.ToString());
-            if (value > 0)
+            if (!hidebb && !visiblealwaysbb)
             {
-                //labelBb.BackColor = Color.Green;
-                labelBb.ForeColor = Color.Green;
+                Double value = Convert.ToDouble(labelBb.Text.ToString());
+                if (value > 0)
+                {
+                    //labelBb.BackColor = Color.Green;
+                    labelBb.ForeColor = Color.Green;
+                }
+                else
+                {
+                    //labelBb.BackColor = Color.Red;
+                    labelBb.ForeColor = Color.Red;
+                }
+                labelBb.Visible = true;
             }
-            else
-            {
-                //labelBb.BackColor = Color.Red;
-                labelBb.ForeColor = Color.Red;
-            }
-            labelBb.Visible = true;
         }
 
         /// <summary>
@@ -929,7 +967,10 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void labelBb_MouseLeave(object sender, EventArgs e)
         {
-            labelBb.ForeColor = Color.White;
+            if (!hidebb && !visiblealwaysbb)
+            {
+                labelBb.ForeColor = Color.White;
+            }
         }
 
         #region load config

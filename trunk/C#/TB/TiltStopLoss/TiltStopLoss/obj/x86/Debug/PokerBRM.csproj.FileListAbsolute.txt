@@ -84,3 +84,4 @@ M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\Ti
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\PokerBRM.csproj.GenerateResource.Cache
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\Poker BRM.exe
 M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\Poker BRM.pdb
+M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\obj\x86\Debug\StopLoss.FormDownloadUpdate.resources
