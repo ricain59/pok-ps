@@ -1,1 +1,4 @@
-- tabindex done
+- ver topico tuga
+- ver print da full tilt
+- ter a possibilidade de gerir o stop em $ ou em €
+- rever a janela "set"

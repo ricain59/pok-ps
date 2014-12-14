@@ -26,9 +26,12 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.81;
+        private Double version = 1.82;
         //private String urldownload = "http://bit.ly/1aSxGIA";
+        //original
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
+        //test
+        //private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss_test.xml";
         //sounds
         private String soundloss = "alarm.wav";
         private String soundtime = "alarm.wav";
@@ -47,6 +50,8 @@ namespace TiltStopLoss
         private Boolean repeatstopwin = true;
         private DateTime lastsession = Convert.ToDateTime("01-01-2001 01:01:01");
         private DateTime daysupdate = Convert.ToDateTime("01-01-2001 01:01:01");
+        private Double lastbbsum = 0.0;
+        private Int64 Lastidhand = 0;
         //mouse
         private String help;
         private String textDb;
@@ -106,6 +111,14 @@ namespace TiltStopLoss
             }            
             //brm management
             checkBrm();
+            //autostart
+            if (checkBoxAutoStart.Checked)
+            {
+                autoStart();
+                this.WindowState = FormWindowState.Minimized;
+                this.ShowInTaskbar = false;
+                //this.Visible = false;
+            }            
         }
 
         /// <summary>
@@ -179,6 +192,9 @@ namespace TiltStopLoss
                             //Process.Start(urldownload);
                             //abro o updater e ao fim do download fecho o e faço o start ao update.
                             this.Visible = false;
+                            this.WindowState = FormWindowState.Minimized;
+                            this.ShowInTaskbar = false;
+                            checkBoxAutoStart.Checked = false;
                             FormDownloadUpdate fdu = new FormDownloadUpdate(this, url, newversion, version);
                             fdu.Show();                            
                         }
@@ -223,6 +239,14 @@ namespace TiltStopLoss
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            autoStart();
+        }
+
+        /// <summary>
+        /// Method qui start the stop and others
+        /// </summary>
+        private void autoStart()
+        {
             Boolean stop = false;
             //verifico erro a ligação a DB
             String con = db.connectDb();
@@ -246,8 +270,8 @@ namespace TiltStopLoss
                 if (comboBoxLanguage.SelectedIndex == 2)
                 {
                     MessageBox.Show("Stopganhos intermédios não pode ser superior a stopganhos");
-                }                
-                stop = true;            
+                }
+                stop = true;
             }
             double intloss = new Utils().stringtoDouble(textBoxStopLossIntermediate.Text);
             if (intloss != 0 && intloss >= new Utils().stringtoDouble(textBoxStopLoss.Text))
@@ -287,7 +311,7 @@ namespace TiltStopLoss
                     stop = true;
                 }
             }
-            
+
             //aqui tenho de abrir a outra janela que vai ficar a funcar em paralela dessa
             try
             {
@@ -333,7 +357,7 @@ namespace TiltStopLoss
                         //8 - repeattime 
                         //9 - timerstart 1ª mão
                         //10 - always visible bb
-                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime, checkBoxStartTimer.Checked, checkBoxAlwaysVisible.Checked};
+                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime, checkBoxStartTimer.Checked, checkBoxAlwaysVisible.Checked };
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -361,7 +385,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 1);
+                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 1, lastbbsum, Lastidhand);
                             }
                             else //hem2
                             {
@@ -376,7 +400,7 @@ namespace TiltStopLoss
                                     playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                     //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                                 }
-                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 2);
+                                sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 2, lastbbsum, Lastidhand);
                             }
                         }
                         else //pt4
@@ -391,9 +415,9 @@ namespace TiltStopLoss
                                 playeralias.Add(Tuple.Create(textBoxPlayerID.Text, textBoxPlayer.Text));
                                 //sl = new Stoploss(this, textBoxPlayerID.Text, db, textBoxPlayer.Text, textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, 2);
                             }
-                            sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 4);
+                            sl = new Stoploss(this, playeralias, db, data, checkb, limit, minutesnooze, sounds, 4, lastbbsum, Lastidhand);
                         }
-                        sl.Show();                        
+                        sl.Show();
                     }
                 }
             }
@@ -767,6 +791,22 @@ namespace TiltStopLoss
                 case "ComboboxAutoStartTab":
                     comboBoxAutoStarttab.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
                     break;
+                case "checkBoxAutoStart":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxAutoStart.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxAutoStart.Checked = false;
+                    }
+                    break;
+                case "lastbbsum":
+                    lastbbsum = new Utils().stringtoDouble(line[1].ToString());
+                    break;
+                case "Lastidhand":
+                    Lastidhand = new Utils().stringtoInt64(line[1].ToString());
+                    break;                    
                 default:
                     break;
             }
@@ -890,7 +930,13 @@ namespace TiltStopLoss
             w.Write("brm=" + bbbrm.ToString());
             w.WriteLine();
             w.Write("ComboboxAutoStartTab=" + comboBoxAutoStarttab.SelectedIndex);
-            w.WriteLine();            
+            w.WriteLine();
+            w.Write("checkBoxAutoStart=" + checkBoxAutoStart.Checked.ToString());
+            w.WriteLine();
+            w.Write("lastbbsum=" + lastbbsum.ToString());
+            w.WriteLine();
+            w.Write("Lastidhand=" + Lastidhand.ToString());
+            w.WriteLine();             
             w.Close();
             //test
         }
@@ -970,7 +1016,7 @@ namespace TiltStopLoss
         /// <param name="hand"></param>
         /// <param name="loss"></param>
         /// <param name="time"></param>
-        public void setNewValue(String hand, String loss, String time, String win, String losspeak, String peakover, Boolean hidebb, String wininter, String lossinter)
+        public void setNewValue(String hand, String loss, String time, String win, String losspeak, String peakover, Boolean hidebb, String wininter, String lossinter, Double lastbbnewsum, Int64 Lastidhandnew)
         {
             textBoxStopLoss.Text = loss;
             textBoxStopHand.Text = hand;
@@ -988,6 +1034,8 @@ namespace TiltStopLoss
             {
                 checkBoxHideBbbs.Checked = false;
             }
+            lastbbsum = lastbbnewsum;
+            Lastidhand = Lastidhandnew;
         }
 
         /// <summary>
@@ -1460,7 +1508,7 @@ namespace TiltStopLoss
                     helpstart = "Ver a ajuda?";
                     break;
             }
-            DialogResult dialogResult = MessageBox.Show(helpstart, "StopLoss", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show(helpstart, "Poker BRM", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 //do something

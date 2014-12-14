@@ -156,12 +156,13 @@ namespace TiltStopLoss
         public Double getSumBB(String playerid, String yearmonth)
         {
             //string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = "+playerid+" and playedyearandmonth >= "+yearmonth;
-            string sql = "select sum(totalbbswon) as bbtotal "+
-                         "from compiledplayerresults "+ 
-                         "where player_id = "+playerid+" and playedyearandmonth >= "+yearmonth+" and gametype_id in "+
-                         "(select gametype_id "+ 
-						  "from gametypes "+
-						  "where istourney = false)";
+            string sql = "select sum(totalbbswon) as bbtotal " +
+                         "from compiledplayerresults " +
+                         "where player_id = " + playerid + " and playedyearandmonth >= " + yearmonth + " and gametype_id in " +
+                         "(select gametype_id " +
+                          "from gametypes " +
+                          "where istourney = false)";
+            
             NpgsqlCommand command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
             Double bb = 0.0;
@@ -221,6 +222,7 @@ namespace TiltStopLoss
                             "(select gametype_id " +
                              "from gametypes " +
                              "where istourney = false)";
+            
             NpgsqlCommand command = new NpgsqlCommand(sql, conn);
             NpgsqlDataReader dr = command.ExecuteReader();
             Double bb = 0.0;
