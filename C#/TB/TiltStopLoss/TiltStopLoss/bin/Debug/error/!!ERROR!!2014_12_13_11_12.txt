@@ -1,0 +1,45 @@
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 680
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 680
+System.ObjectDisposedException: Não é possível aceder a um objecto eliminado.
+Nome do objecto: 'Stoploss'.
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 576
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 680
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 681
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 683
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 683
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 683
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 683
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 683
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.Thread.SleepInternal(Int32 millisecondsTimeout)
+   em System.Threading.Thread.Sleep(Int32 millisecondsTimeout)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\Stoploss.cs:line 683

@@ -64,8 +64,12 @@ namespace TiltStopLoss
         private Double stopvpp;
         private Double rake = 0.0;
         private Double vpp = 0.0;
+        private Double lastbbsum = 0;
+        private Double lastbbsumnew = 0;
+        private Int64 lastidhandload = 0;
+        private Int64 Lastidhandnew = 0;
         
-        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, Int32 snooze, String[] sound, int tracker)
+        public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, Int32 snooze, String[] sound, int tracker, Double lastbbsumstart, Int64 idlasthand)
         {
             try
             {
@@ -138,6 +142,8 @@ namespace TiltStopLoss
                 snoozeb = checkb[4];
                 snoozeminute = snooze;
                 buttonSnooze.Visible = false;
+                lastbbsum = lastbbsumstart;
+                lastidhandload = idlasthand;
             }
             catch (Exception e)
             {
@@ -184,7 +190,7 @@ namespace TiltStopLoss
                 startcronosnooze.Abort();
             }
             //faço o new value na janela principal
-            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString(), peakover.ToString(), hidebb, winintermediate.ToString(), lossintermediate.ToString());
+            wmain.setNewValue(handstop.ToString(), stoploss.ToString(), timestop.ToString(), stopwin.ToString(), bbpeak.ToString(), peakover.ToString(), hidebb, winintermediate.ToString(), lossintermediate.ToString(), lastbbsumnew, Lastidhandnew);
             Double  bb100;
             if(bb == 0)
             {
@@ -193,6 +199,9 @@ namespace TiltStopLoss
                 bb100 = Math.Round((bb * 100) / handnumber, 2);
             }
             wmain.setValueSession(handnumber.ToString(), time, bb, bbmax, bb100);
+            wmain.Show();
+            wmain.ShowInTaskbar = true;
+            wmain.WindowState = FormWindowState.Normal;
             wmain.Visible = true;            
         }
 
@@ -219,31 +228,63 @@ namespace TiltStopLoss
             if (tracker == 1 || tracker == 2)
             {
                 yearmonth = new Utils().yearmonth();
-                if (tracker == 2)//2 = hem2
+                if (lastbbsum == 0.0)
                 {
-                    for (int i = 0; i < playeridname.Count; i++)
+                    //yearmonth = new Utils().yearmonth();
+                    if (tracker == 2)//2 = hem2
                     {
-                        bbinit += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                        for (int i = 0; i < playeridname.Count; i++)
+                        {
+                            bbinit += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                        }
+                        lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
                     }
-                    lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
+                    else
+                    {
+                        for (int i = 0; i < playeridname.Count; i++)
+                        {
+                            bbinit += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                        }
+                        lastidhand = dbase.getLastValue("handhistories", "pokerhand_id") + 1;
+                    }
                 }
                 else
                 {
-                    for (int i = 0; i < playeridname.Count; i++)
+                    bbinit = lastbbsum;
+                    if (lastidhandload == 0)
                     {
-                        bbinit += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                        if (tracker == 2)//2 = hem2
+                        {
+                            lastidhand = dbase.getLastValue("handhistories", "handhistory_id") + 1;
+                        }
+                        else
+                        {
+                            lastidhand = dbase.getLastValue("handhistories", "pokerhand_id") + 1;
+                        }
                     }
-                    lastidhand = dbase.getLastValue("handhistories", "pokerhand_id") + 1;
+                    else
+                    {
+                        lastidhand = lastidhandload;
+                    }
                 }
             }
             else //pt4
             {
                 yearmonth = new Utils().yearweek();
-                for (int i = 0; i < playeridname.Count; i++)
+                if (lastbbsum == 0.0)
                 {
-                    bbinit += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
+                    for (int i = 0; i < playeridname.Count; i++)
+                    {
+                        bbinit += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
+                    }
+                    lastidsessionpt4 = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
                 }
-                lastidsessionpt4 = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
+                else
+                {
+                    bbinit = lastbbsum;
+                    lastidsessionpt4 = lastidhandload;
+                }
+                //lastidsessionpt4 = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
                 //vou buscar o last idhand de pt4
                 lastidhand = dbase.getLastValue("cash_hand_histories", "id_hand") + 1;
             }
@@ -345,6 +386,7 @@ namespace TiltStopLoss
                             {
                                 bb += dbase.getSumBB(playeridname[i].Item1, yearmonth);
                             }
+                            lastbbsumnew = bb;
                         }
                         else
                         {
@@ -352,6 +394,7 @@ namespace TiltStopLoss
                             {
                                 bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
                             }
+                            lastbbsumnew = bb;
                         }
                     }
                     else //pt4
@@ -360,7 +403,8 @@ namespace TiltStopLoss
                         for (int i = 0; i < playeridname.Count; i++)
                         {
                             bb += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
-                        }                       
+                        } 
+                        lastbbsumnew = bb;
                     }
 
                     bb = Math.Round((bb - bbinit), 2);
@@ -519,6 +563,7 @@ namespace TiltStopLoss
                         if (!hand.Equals(""))
                         {
                             lastidhand++;
+                            Lastidhandnew = lastidhand;
                             for (int i = 0; i < playeridname.Count; i++)
                             {
                                 if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
@@ -569,6 +614,7 @@ namespace TiltStopLoss
                         {
                             handnumber += dbase.getHandPt4(playeridname[i].Item1, lastidsessionpt4);
                         }
+                        Lastidhandnew = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
                     }
                     if (this.labelBb.InvokeRequired)
                     {

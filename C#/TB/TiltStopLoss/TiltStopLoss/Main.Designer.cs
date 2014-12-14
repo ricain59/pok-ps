@@ -161,6 +161,8 @@
             this.buttonStartWarmup = new System.Windows.Forms.Button();
             this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
             this.openFileDialogApp = new System.Windows.Forms.OpenFileDialog();
+            this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
+            this.labelAutoStart = new System.Windows.Forms.Label();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -470,6 +472,8 @@
             // 
             // tabConfStop2
             // 
+            this.tabConfStop2.Controls.Add(this.checkBoxAutoStart);
+            this.tabConfStop2.Controls.Add(this.labelAutoStart);
             this.tabConfStop2.Controls.Add(this.label9);
             this.tabConfStop2.Controls.Add(this.comboBoxAutoStarttab);
             this.tabConfStop2.Controls.Add(this.label7);
@@ -635,7 +639,7 @@
             // 
             this.labelDaysUpdate.AutoSize = true;
             this.labelDaysUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDaysUpdate.Location = new System.Drawing.Point(259, 176);
+            this.labelDaysUpdate.Location = new System.Drawing.Point(259, 160);
             this.labelDaysUpdate.Name = "labelDaysUpdate";
             this.labelDaysUpdate.Size = new System.Drawing.Size(35, 13);
             this.labelDaysUpdate.TabIndex = 76;
@@ -652,7 +656,7 @@
             "5",
             "6",
             "7"});
-            this.comboBoxUpdate.Location = new System.Drawing.Point(204, 172);
+            this.comboBoxUpdate.Location = new System.Drawing.Point(204, 156);
             this.comboBoxUpdate.Name = "comboBoxUpdate";
             this.comboBoxUpdate.Size = new System.Drawing.Size(49, 21);
             this.comboBoxUpdate.TabIndex = 8;
@@ -661,7 +665,7 @@
             // 
             this.labelUpdate.AutoSize = true;
             this.labelUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUpdate.Location = new System.Drawing.Point(60, 176);
+            this.labelUpdate.Location = new System.Drawing.Point(60, 160);
             this.labelUpdate.Name = "labelUpdate";
             this.labelUpdate.Size = new System.Drawing.Size(88, 13);
             this.labelUpdate.TabIndex = 74;
@@ -670,7 +674,7 @@
             // checkBoxStartTimer
             // 
             this.checkBoxStartTimer.AutoSize = true;
-            this.checkBoxStartTimer.Location = new System.Drawing.Point(204, 151);
+            this.checkBoxStartTimer.Location = new System.Drawing.Point(204, 135);
             this.checkBoxStartTimer.Name = "checkBoxStartTimer";
             this.checkBoxStartTimer.Size = new System.Drawing.Size(15, 14);
             this.checkBoxStartTimer.TabIndex = 7;
@@ -680,7 +684,7 @@
             // 
             this.labelStartTimer.AutoSize = true;
             this.labelStartTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStartTimer.Location = new System.Drawing.Point(59, 152);
+            this.labelStartTimer.Location = new System.Drawing.Point(59, 136);
             this.labelStartTimer.Name = "labelStartTimer";
             this.labelStartTimer.Size = new System.Drawing.Size(136, 13);
             this.labelStartTimer.TabIndex = 72;
@@ -746,7 +750,7 @@
             "58",
             "59",
             "60"});
-            this.comboBoxTimeSession.Location = new System.Drawing.Point(237, 121);
+            this.comboBoxTimeSession.Location = new System.Drawing.Point(237, 105);
             this.comboBoxTimeSession.Name = "comboBoxTimeSession";
             this.comboBoxTimeSession.Size = new System.Drawing.Size(45, 21);
             this.comboBoxTimeSession.TabIndex = 6;
@@ -754,7 +758,7 @@
             // checkBoxtimebetweenSession
             // 
             this.checkBoxtimebetweenSession.AutoSize = true;
-            this.checkBoxtimebetweenSession.Location = new System.Drawing.Point(204, 124);
+            this.checkBoxtimebetweenSession.Location = new System.Drawing.Point(204, 108);
             this.checkBoxtimebetweenSession.Name = "checkBoxtimebetweenSession";
             this.checkBoxtimebetweenSession.Size = new System.Drawing.Size(15, 14);
             this.checkBoxtimebetweenSession.TabIndex = 5;
@@ -765,7 +769,7 @@
             // 
             this.labelTimebetweenSession.AutoSize = true;
             this.labelTimebetweenSession.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimebetweenSession.Location = new System.Drawing.Point(59, 125);
+            this.labelTimebetweenSession.Location = new System.Drawing.Point(59, 109);
             this.labelTimebetweenSession.Name = "labelTimebetweenSession";
             this.labelTimebetweenSession.Size = new System.Drawing.Size(90, 13);
             this.labelTimebetweenSession.TabIndex = 68;
@@ -780,7 +784,7 @@
             "3",
             "4",
             "5"});
-            this.comboBoxSnoozeMinute.Location = new System.Drawing.Point(237, 94);
+            this.comboBoxSnoozeMinute.Location = new System.Drawing.Point(237, 78);
             this.comboBoxSnoozeMinute.Name = "comboBoxSnoozeMinute";
             this.comboBoxSnoozeMinute.Size = new System.Drawing.Size(45, 21);
             this.comboBoxSnoozeMinute.TabIndex = 4;
@@ -788,7 +792,7 @@
             // checkBoxSnoozeSound
             // 
             this.checkBoxSnoozeSound.AutoSize = true;
-            this.checkBoxSnoozeSound.Location = new System.Drawing.Point(204, 97);
+            this.checkBoxSnoozeSound.Location = new System.Drawing.Point(204, 81);
             this.checkBoxSnoozeSound.Name = "checkBoxSnoozeSound";
             this.checkBoxSnoozeSound.Size = new System.Drawing.Size(15, 14);
             this.checkBoxSnoozeSound.TabIndex = 3;
@@ -799,7 +803,7 @@
             // 
             this.labelSnoozeSounds.AutoSize = true;
             this.labelSnoozeSounds.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSnoozeSounds.Location = new System.Drawing.Point(59, 98);
+            this.labelSnoozeSounds.Location = new System.Drawing.Point(59, 82);
             this.labelSnoozeSounds.Name = "labelSnoozeSounds";
             this.labelSnoozeSounds.Size = new System.Drawing.Size(89, 13);
             this.labelSnoozeSounds.TabIndex = 64;
@@ -808,7 +812,7 @@
             // checkBoxRageQuit
             // 
             this.checkBoxRageQuit.AutoSize = true;
-            this.checkBoxRageQuit.Location = new System.Drawing.Point(204, 72);
+            this.checkBoxRageQuit.Location = new System.Drawing.Point(204, 56);
             this.checkBoxRageQuit.Name = "checkBoxRageQuit";
             this.checkBoxRageQuit.Size = new System.Drawing.Size(15, 14);
             this.checkBoxRageQuit.TabIndex = 2;
@@ -818,7 +822,7 @@
             // 
             this.labelRageQuit.AutoSize = true;
             this.labelRageQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRageQuit.Location = new System.Drawing.Point(59, 72);
+            this.labelRageQuit.Location = new System.Drawing.Point(59, 56);
             this.labelRageQuit.Name = "labelRageQuit";
             this.labelRageQuit.Size = new System.Drawing.Size(64, 13);
             this.labelRageQuit.TabIndex = 61;
@@ -827,7 +831,7 @@
             // checkBoxVerifyApplication
             // 
             this.checkBoxVerifyApplication.AutoSize = true;
-            this.checkBoxVerifyApplication.Location = new System.Drawing.Point(204, 49);
+            this.checkBoxVerifyApplication.Location = new System.Drawing.Point(204, 33);
             this.checkBoxVerifyApplication.Name = "checkBoxVerifyApplication";
             this.checkBoxVerifyApplication.Size = new System.Drawing.Size(15, 14);
             this.checkBoxVerifyApplication.TabIndex = 1;
@@ -837,7 +841,7 @@
             // 
             this.labelVerifyApp.AutoSize = true;
             this.labelVerifyApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVerifyApp.Location = new System.Drawing.Point(59, 49);
+            this.labelVerifyApp.Location = new System.Drawing.Point(59, 33);
             this.labelVerifyApp.Name = "labelVerifyApp";
             this.labelVerifyApp.Size = new System.Drawing.Size(106, 13);
             this.labelVerifyApp.TabIndex = 58;
@@ -846,7 +850,7 @@
             // checkBoxCloseSkype
             // 
             this.checkBoxCloseSkype.AutoSize = true;
-            this.checkBoxCloseSkype.Location = new System.Drawing.Point(204, 25);
+            this.checkBoxCloseSkype.Location = new System.Drawing.Point(204, 9);
             this.checkBoxCloseSkype.Name = "checkBoxCloseSkype";
             this.checkBoxCloseSkype.Size = new System.Drawing.Size(15, 14);
             this.checkBoxCloseSkype.TabIndex = 0;
@@ -856,7 +860,7 @@
             // 
             this.labelCloseSkype.AutoSize = true;
             this.labelCloseSkype.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCloseSkype.Location = new System.Drawing.Point(59, 25);
+            this.labelCloseSkype.Location = new System.Drawing.Point(59, 9);
             this.labelCloseSkype.Name = "labelCloseSkype";
             this.labelCloseSkype.Size = new System.Drawing.Size(84, 13);
             this.labelCloseSkype.TabIndex = 56;
@@ -1753,6 +1757,25 @@
             // 
             this.openFileDialogApp.FileName = "openFileDialogApp";
             // 
+            // checkBoxAutoStart
+            // 
+            this.checkBoxAutoStart.AutoSize = true;
+            this.checkBoxAutoStart.Location = new System.Drawing.Point(204, 183);
+            this.checkBoxAutoStart.Name = "checkBoxAutoStart";
+            this.checkBoxAutoStart.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxAutoStart.TabIndex = 88;
+            this.checkBoxAutoStart.UseVisualStyleBackColor = true;
+            // 
+            // labelAutoStart
+            // 
+            this.labelAutoStart.AutoSize = true;
+            this.labelAutoStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAutoStart.Location = new System.Drawing.Point(59, 184);
+            this.labelAutoStart.Name = "labelAutoStart";
+            this.labelAutoStart.Size = new System.Drawing.Size(64, 13);
+            this.labelAutoStart.TabIndex = 89;
+            this.labelAutoStart.Text = "Auto Start";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1919,6 +1942,8 @@
         private System.Windows.Forms.OpenFileDialog openFileDialogApp;
         private System.Windows.Forms.CheckBox checkBoxAlwaysVisible;
         private System.Windows.Forms.Label labelVisibleAlBb;
+        private System.Windows.Forms.CheckBox checkBoxAutoStart;
+        private System.Windows.Forms.Label labelAutoStart;
     }
 }
 
