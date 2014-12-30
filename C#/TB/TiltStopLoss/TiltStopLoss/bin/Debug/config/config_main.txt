@@ -1,4 +1,4 @@
-Location=200,200
+Location=881,472
 Player=ricain_all
 Server=127.0.0.1
 Port=5432
@@ -46,7 +46,7 @@ lastsessioncheckbox=False
 lastsessioncombobox=2
 checkBoxStartTimer=False
 comboBoxUpdate=0
-daysupdate=14-12-2014 13:48:28
+daysupdate=17-12-2014 21:14:02
 stoprake=0
 stopvpp=0
 autostartwarmup=False

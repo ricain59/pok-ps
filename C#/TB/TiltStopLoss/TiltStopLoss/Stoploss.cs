@@ -1247,7 +1247,7 @@ namespace TiltStopLoss
         /// <param name="e"></param>
         private void buttonRageQuit_Click(object sender, EventArgs e)
         {
-            String[] rooms = { "pokerstars", "winamax", "casino" };
+            String[] rooms = { "pokerstars", "winamax", "casino", "FullTiltPoker" };
             foreach (String room in rooms)
             {
                 new Utils().detectApps(room);

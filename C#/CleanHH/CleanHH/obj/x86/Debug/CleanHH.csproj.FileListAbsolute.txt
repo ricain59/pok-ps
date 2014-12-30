@@ -12,4 +12,3 @@ M:\Dropbox\taff et autre\pok-ps\C#\CleanHH\CleanHH\bin\Debug\CleanHH.pdb
 M:\Dropbox\taff et autre\pok-ps\C#\CleanHH\CleanHH\obj\x86\Debug\CleanHH.FormInicial.resources
 M:\Dropbox\taff et autre\pok-ps\C#\CleanHH\CleanHH\obj\x86\Debug\CleanHH.Properties.Resources.resources
 M:\Dropbox\taff et autre\pok-ps\C#\CleanHH\CleanHH\obj\x86\Debug\CleanHH.csproj.GenerateResource.Cache
-E:\meu\PortableApps\Dropbox\Dropbox\taff et autre\pok-ps\C#\CleanHH\CleanHH\obj\x86\Debug\CleanHH.csprojResolveAssemblyReference.cache
