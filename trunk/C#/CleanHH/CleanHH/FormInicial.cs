@@ -239,7 +239,9 @@ namespace CleanHH
                             w.Close();
                         }
                     }
-                    
+                    //elimnar o ficheiro
+                    File.Delete(fi);
+
                     textfile = "";
                     i++;
                 });
@@ -285,6 +287,8 @@ namespace CleanHH
                             w.Close();
                         }
                     }
+                    //elimnar o ficheiro
+                    File.Delete(fi);
 
                     textfile2 = "";
                     i++;
@@ -399,6 +403,8 @@ namespace CleanHH
             MessageBox.Show("Finish Clean HH, Have " + handnickname + " hands with nickname");
             this.Close();
         }
+
+       
 
     }
 }

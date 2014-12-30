@@ -1,5 +1,5 @@
 Location=893,510
-textBoxFolder=C:\Users\Utilizador\Desktop\dontpanic_PS_ZNL25_SH_2014-11-03_PYSKK_13602_hands
+textBoxFolder=C:\Users\Utilizador\Desktop\dontpanic_PS_ZNL10_SH_2014-12-29\new
 textBoxNickName=gcpasps,hulkric59
 comboBoxSite=0
 multithread=True

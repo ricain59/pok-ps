@@ -465,7 +465,11 @@ namespace TiltStopLoss
                 case "Location":
                     String[] loc = line[1].Split(',');
                     this.StartPosition = FormStartPosition.Manual;
-                    this.Location = new Point(int.Parse(loc[0]), int.Parse(loc[1]));
+                    int x = int.Parse(loc[0]);
+                    if (x > 30000 || x < 0) x = 0;
+                    int y = int.Parse(loc[1]);
+                    if (y > 30000 || y < 0) y = 0;
+                    this.Location = new Point(x, y);
                     break;
                 case "Player":
                     textBoxPlayer.Text = line[1].ToString();
