@@ -1,4 +1,4 @@
-Location=893,510
+Location=1395,0
 textBoxFolder=C:\Users\Utilizador\Desktop\dontpanic_PS_ZNL10_SH_2014-12-29\new
 textBoxNickName=gcpasps,hulkric59
 comboBoxSite=0

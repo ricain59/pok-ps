@@ -810,6 +810,7 @@ namespace TiltStopLoss
                     break;
                 case "Lastidhand":
                     Lastidhand = new Utils().stringtoInt64(line[1].ToString());
+                    //temp meter a 0 mas isso depois do tempo excluido.
                     break;                    
                 default:
                     break;
