@@ -461,6 +461,7 @@ namespace TiltStopLoss
                             }                            
                         }
                     }
+                    //loss peak
                     if (bbpeak > 0.0)
                     {
                         if (bb > bbmax)
@@ -478,10 +479,18 @@ namespace TiltStopLoss
                                     //buttonSoundStop.Visible = true;
                                     labelStopSet("!!!! StopPeak !!!!", Color.Red);
                                     snooze();
-                                }                                
+                                }
+                            }
+                            else
+                            {
+                                if (labelStop.Text.Equals("!!!! StopPeak !!!!") && stop)
+                                {
+                                    StopsoundClearLabel();
+                                }
                             }
                         }
                     }
+                    //lossintermediate
                     if (lossintermediate > 0.0 && intermediateloss && !stop)
                     {
                         if (bb <= (0 - lossintermediate))
@@ -562,8 +571,8 @@ namespace TiltStopLoss
                     {
                         if (!hand.Equals(""))
                         {
-                            lastidhand++;
                             Lastidhandnew = lastidhand;
+                            lastidhand++;
                             for (int i = 0; i < playeridname.Count; i++)
                             {
                                 if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
@@ -723,7 +732,7 @@ namespace TiltStopLoss
                         
                     }
 
-                    Thread.Sleep(250);
+                    //Thread.Sleep(250);
                 }
                 catch (Exception ex)
                 {
@@ -845,6 +854,32 @@ namespace TiltStopLoss
                                 labelStopSet("!!!! StopLimit !!!!", Color.Red);
                                 //close poker stars
                                 new Utils().detectApps("wpt");
+                            }
+                        }
+                    }
+                    //full tilt
+                    if (hand.ToLower().Contains("Full Tilt") && !hand.ToLower().Contains("tournament"))
+                    {
+                        nl = new Utils().getNlPs(hand);
+                        if (nl.Equals(0))
+                        {
+                            new Debug().LogAlert("Problem limit not defined", "Problem_Limit");
+                        }
+                        else
+                        {
+                            //je vérifie si la limite rendu é supérieur a la limite accepter
+                            if (nl > blocklimit)
+                            {
+                                //aqui apita e change le text du label
+                                if (!stop)
+                                {
+                                    player = new Utils().playsound(sounds[0], repeatloss);
+                                }
+                                stop = true;
+                                //buttonSoundStop.Visible = true;
+                                labelStopSet("!!!! StopLimit !!!!", Color.Red);
+                                //close poker stars
+                                new Utils().detectApps("FullTiltPoker");
                             }
                         }
                     }
@@ -1076,99 +1111,22 @@ namespace TiltStopLoss
         {
             if (time > timestop && labelStop.Text.Equals("!!!! StopTime !!!!"))
             {
-                stop = false;
-                labelStopSet("__________________", Color.White);
-                if (snoozeb)
-                {
-                    if (this.buttonSnooze.InvokeRequired)
-                    {
-                        SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
-                        this.Invoke(d, new object[] { false });
-                    }
-                    else
-                    {
-                        // It's on the same thread, no need for Invoke
-                        this.buttonSnooze.Visible = false;
-                    }
-                    if(activesnooze)
-                    {
-                        startcronosnooze.Abort();
-                    }
-                }
-                player.controls.stop();
-                
+                StopsoundClearLabel();
             }
             this.timestop = time;
             if (hand > handstop && labelStop.Text.Equals("!!!! StopHand !!!!"))
             {
-                stop = false;
-                labelStopSet("__________________", Color.White);
-                if (snoozeb)
-                {
-                    if (this.buttonSnooze.InvokeRequired)
-                    {
-                        SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
-                        this.Invoke(d, new object[] { false });
-                    }
-                    else
-                    {
-                        // It's on the same thread, no need for Invoke
-                        this.buttonSnooze.Visible = false;
-                    }
-                    if (activesnooze)
-                    {
-                        startcronosnooze.Abort();
-                    }
-                }
-                player.controls.stop();
+                StopsoundClearLabel();
             }
             this.handstop = hand;
             if (bb > (0 - loss) && labelStop.Text.Equals("!!!! StopLoss !!!!"))
             {
-                stop = false;
-                labelStopSet("__________________", Color.White);
-                if (snoozeb)
-                {
-                    if (this.buttonSnooze.InvokeRequired)
-                    {
-                        SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
-                        this.Invoke(d, new object[] { false });
-                    }
-                    else
-                    {
-                        // It's on the same thread, no need for Invoke
-                        this.buttonSnooze.Visible = false;
-                    }
-                    if (activesnooze)
-                    {
-                        startcronosnooze.Abort();
-                    }
-                }
-                player.controls.stop();
+                StopsoundClearLabel();
             }
             this.stoploss = loss;
             if (bb < win && labelStop.Text.Equals("!!!! StopWin !!!!"))
             {
-                stop = false;
-                labelStopSet("__________________", Color.White);
-                if (snoozeb)
-                {
-                    if (this.buttonSnooze.InvokeRequired)
-                    {
-                        SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
-                        this.Invoke(d, new object[] { false });
-                    }
-                    else
-                    {
-                        // It's on the same thread, no need for Invoke
-                        this.buttonSnooze.Visible = false;
-                    }
-                    if (activesnooze)
-                    {
-                        startcronosnooze.Abort();
-                    }
-                }
-                player.controls.stop();
+                StopsoundClearLabel();
             }
             this.stopwin = win;
             this.bbpeak = losspeak;
@@ -1187,6 +1145,33 @@ namespace TiltStopLoss
                 labelBb.Visible = true;
                 this.hidebb = false;
             }
+        }
+
+        /// <summary>
+        /// Quando volta a não estar nos critérios do stop
+        /// </summary>
+        private void StopsoundClearLabel()
+        {
+            stop = false;
+            labelStopSet("__________________", Color.White);
+            if (snoozeb)
+            {
+                if (this.buttonSnooze.InvokeRequired)
+                {
+                    SetButtonCallbacks d = new SetButtonCallbacks(SetButtonSnoozeVi);
+                    this.Invoke(d, new object[] { false });
+                }
+                else
+                {
+                    // It's on the same thread, no need for Invoke
+                    this.buttonSnooze.Visible = false;
+                }
+                if (activesnooze)
+                {
+                    startcronosnooze.Abort();
+                }
+            }
+            player.controls.stop();
         }
 
         /// <summary>

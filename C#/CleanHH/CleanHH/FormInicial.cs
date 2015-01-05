@@ -66,7 +66,11 @@ namespace CleanHH
                 case "Location":
                     String[] loc = line[1].Split(',');
                     this.StartPosition = FormStartPosition.Manual;
-                    this.Location = new Point(int.Parse(loc[0]), int.Parse(loc[1]));
+                    int x = 0;
+                    int y = 0;
+                    if (int.Parse(loc[0]) > 0) x = int.Parse(loc[0]);
+                    if (int.Parse(loc[1]) > 0) y = int.Parse(loc[1]);                    
+                    this.Location = new Point(x, y);
                     break;
                 case "comboBoxSite":
                     comboBoxSite.SelectedIndex = new Utils().stringtoInt32(line[1].ToString());
