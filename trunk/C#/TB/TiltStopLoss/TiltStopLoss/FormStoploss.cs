@@ -68,6 +68,9 @@ namespace TiltStopLoss
         private Double lastbbsumnew = 0;
         private Int64 lastidhandload = 0;
         private Int64 Lastidhandnew = 0;
+        private Boolean viewvpp;
+        //label
+        Label LabelViewVpp;
         
         public Stoploss(Main wmain, List<Tuple<String,String>> playerid, Db db, String[] data, Boolean[] checkb, Int32 limit, Int32 snooze, String[] sound, int tracker, Double lastbbsumstart, Int64 idlasthand)
         {
@@ -102,6 +105,7 @@ namespace TiltStopLoss
                 //8 - repeattime
                 //9 - timerstart 1ª mão
                 //10 - always visible bb
+                //11 - viewvpp
                 this.hidebb = checkb[0];
                 if (hidebb)
                 {
@@ -140,10 +144,26 @@ namespace TiltStopLoss
                 repeathand = checkb[7];
                 repeattime = checkb[8];
                 snoozeb = checkb[4];
+                viewvpp = checkb[11];
                 snoozeminute = snooze;
                 buttonSnooze.Visible = false;
                 lastbbsum = lastbbsumstart;
                 lastidhandload = idlasthand;
+
+                //view vpp
+                if (viewvpp)
+                {
+                    //original size 212,123
+                    this.Size = new Size(212,147);
+                    //inserir o labeltext dos vpp
+                    LabelViewVpp = new Label();
+                    LabelViewVpp.Location = new Point(9, 40);
+                    //LabelViewVpp.Text = "100vpp";
+                    LabelViewVpp.Size = new Size(90, 25);
+                    LabelViewVpp.ForeColor = Color.Blue;
+                    LabelViewVpp.Font = new Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
+                    this.Controls.Add(LabelViewVpp);
+                }
             }
             catch (Exception e)
             {
@@ -224,6 +244,8 @@ namespace TiltStopLoss
             Double bbinit = 0.0;
             Int64 lastidhand = 0;
             Int64 lastidsessionpt4 = 0;
+
+            #region define bbinit e lastidhand
             //permite definir aqui os valores iniciais de bbinit e lastidhand
             if (tracker == 1 || tracker == 2)
             {
@@ -288,6 +310,9 @@ namespace TiltStopLoss
                 //vou buscar o last idhand de pt4
                 lastidhand = dbase.getLastValue("cash_hand_histories", "id_hand") + 1;
             }
+            #endregion
+
+            #region calculo rake & vpp
 
             //aqui o calculo do rake e dos vpps
             Boolean rakeb = true;
@@ -323,7 +348,7 @@ namespace TiltStopLoss
                         rakeb = false;
                     }
                     //vpp
-                    if (stopvpp > 0.00)
+                    if (stopvpp > 0.00 || viewvpp)
                     {
                         try
                         {
@@ -345,24 +370,9 @@ namespace TiltStopLoss
                     }                       
                         
                 }
-                    
-                
-                //else
-                //{
-                //    for (int i = 0; i < playeridname.Count; i++)
-                //    {
-                //        bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
-                //    }
-                //}
             }
-            //else //pt4
-            //{
-            //    yearmonth = new Utils().yearweek();
-            //    for (int i = 0; i < playeridname.Count; i++)
-            //    {
-            //        bb += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
-            //    }
-            //}
+
+            #endregion
 
             //aqui é feito o resto dos calculos e das diferenças
             
@@ -376,6 +386,7 @@ namespace TiltStopLoss
             {
                 try
                 {
+                    #region BB
                     //bb
                     bb = 0.0;
                     if (tracker == 1 || tracker == 2)
@@ -431,8 +442,10 @@ namespace TiltStopLoss
                             }
                         }
                     }
+                    #endregion
 
-                    //stop                    
+                    #region stoploss
+                    //stoploss                    
                     if (stoploss > 0.0)
                     {
                         if (bb <= (0 - stoploss))
@@ -447,6 +460,10 @@ namespace TiltStopLoss
                             }                            
                         }
                     }
+                    #endregion
+
+                    #region stopwin
+
                     if (stopwin > 0.0)
                     {
                         if (bb >= stopwin)
@@ -461,6 +478,11 @@ namespace TiltStopLoss
                             }                            
                         }
                     }
+
+                    #endregion
+
+                    #region losspeak
+
                     //loss peak
                     if (bbpeak > 0.0)
                     {
@@ -490,6 +512,11 @@ namespace TiltStopLoss
                             }
                         }
                     }
+
+                    #endregion
+
+                    #region lossintermediate
+
                     //lossintermediate
                     if (lossintermediate > 0.0 && intermediateloss && !stop)
                     {
@@ -519,6 +546,10 @@ namespace TiltStopLoss
                         }
                     }
 
+                    #endregion
+
+                    #region winintermediate
+
                     if (winintermediate > 0.0 && intermediatewin && !stop)
                     {
                         if (bb >= winintermediate)
@@ -547,6 +578,10 @@ namespace TiltStopLoss
                         }
                     }
 
+                    #endregion
+
+                    #region count hand & start timer
+
                     //hand
                     String hand = "";
                     //aqui vou buscar a hand para depois ver os limites e contar as hands para hem1 e hem2
@@ -571,8 +606,8 @@ namespace TiltStopLoss
                     {
                         if (!hand.Equals(""))
                         {
-                            Lastidhandnew = lastidhand;
                             lastidhand++;
+                            Lastidhandnew = lastidhand;
                             for (int i = 0; i < playeridname.Count; i++)
                             {
                                 if (hand.Contains(playeridname[i].Item2) && !hand.Contains("Tournament"))
@@ -625,6 +660,7 @@ namespace TiltStopLoss
                         }
                         Lastidhandnew = dbase.getLastValue("cash_table_session_summary", "id_session") + 1;
                     }
+
                     if (this.labelBb.InvokeRequired)
                     {
                         SetTextCallback d = new SetTextCallback(SetTextHands);
@@ -649,6 +685,7 @@ namespace TiltStopLoss
                             }                            
                         }
                     }
+
                     //para começar a contar mãos.
                     if (starttime && handnumber > 0)
                     {
@@ -656,11 +693,20 @@ namespace TiltStopLoss
                         startcrono.Start();
                         starttime = false;
                     }
+
+                    #endregion
+
+                    #region stoplimit
+
                     //stoplimit
                     if (blocklimit != 0)
                     {
                         stopLimit(hand);
                     }
+
+                    #endregion
+
+                    #region stoprake
 
                     //rake
                     if (rakeb)
@@ -697,6 +743,11 @@ namespace TiltStopLoss
                             }
                         }
                     }
+
+                    #endregion
+
+                    #region vpp
+
                     //vpp
                     if (vppb)
                     {
@@ -717,8 +768,13 @@ namespace TiltStopLoss
                             }
                         }
 
-                        
-                        if (stopvpp < (vpptemp - vpp))
+                        if (viewvpp)
+                        {
+                            Double vpplabel = Math.Round(vpptemp - vpp, 2);
+                            labelViewVpp(vpplabel + " Vpp");
+                        }
+
+                        if (stopvpp < (vpptemp - vpp) && stopvpp > 0.00)
                         {
                             if (!stop)
                             {
@@ -726,11 +782,13 @@ namespace TiltStopLoss
                                 labelStopSet("!!!! StopVPP !!!!", Color.Green);
                                 Thread.Sleep(5000);
                                 labelStopSet("", Color.White);
-                                stopvpp = 99999;
+                                stopvpp = 9999999;
                             }
                         }
-                        
+
                     }
+
+                    #endregion
 
                     //Thread.Sleep(250);
                 }
@@ -967,6 +1025,7 @@ namespace TiltStopLoss
         {
             this.labelTimer.Text = text;
         }
+
         private void SetTextBb(string text)
         {
             this.labelBb.Text = text;
@@ -985,14 +1044,21 @@ namespace TiltStopLoss
                 }
             }
         }
+
         private void SetTextHands(string text)
         {
             this.labelHands.Text = text;
         }
+
         private void setLabelStop(String text, Color cor)
         {
             this.labelStop.Text = text;
             this.labelStop.ForeColor = cor;
+        }
+
+        private void setLabelViewVpp(String text)
+        {
+            this.LabelViewVpp.Text = text;            
         }
 
         private void labelStopSet(String text, Color cor)
@@ -1007,6 +1073,20 @@ namespace TiltStopLoss
                 // It's on the same thread, no need for Invoke
                 this.labelStop.Text = text;
                 this.labelStop.ForeColor = cor;
+            }
+        }
+
+        private void labelViewVpp(String text)
+        {
+            if (this.LabelViewVpp.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(setLabelViewVpp);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                // It's on the same thread, no need for Invoke
+                this.labelStop.Text = text;                
             }
         }
 

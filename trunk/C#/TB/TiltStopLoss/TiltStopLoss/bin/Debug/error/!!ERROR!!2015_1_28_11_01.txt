@@ -1,0 +1,284 @@
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 649
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 432
+method getrakevpp: System.Net.WebException: Não é possível estabelecer ligação com o servidor remoto ---> System.Net.Sockets.SocketException: Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente 127.0.0.1:8001
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- Fim do rastreio da pilha de excepção interna ---
+   em System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   em System.Net.WebClient.DownloadString(Uri address)
+   em System.Net.WebClient.DownloadString(String address)
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 324
+Error VPP:System.NullReferenceException: A referência de objecto não foi definida como uma instância de um objecto.
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 351
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 434
+method getrakevpp: System.Net.WebException: Não é possível estabelecer ligação com o servidor remoto ---> System.Net.Sockets.SocketException: Nenhuma ligação pôde ser feita porque o computador de destino
+as recusou activamente 127.0.0.1:8001
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- Fim do rastreio da pilha de excepção interna ---
+   em System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   em System.Net.WebClient.DownloadString(Uri address)
+   em System.Net.WebClient.DownloadString(String address)
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 324
+Error VPP:System.NullReferenceException: A referência de objecto não foi definida como uma instância de um objecto.
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 351
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 651
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.labelViewVpp(String text) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 1050
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 742
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.labelViewVpp(String text) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 1050
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 742
+method getrakevpp: System.Threading.ThreadAbortException: Thread abortado.
+   em System.Net.UnsafeNclNativeMethods.OSSOCK.recv(IntPtr socketHandle, Byte* pinnedBuffer, Int32 len, SocketFlags socketFlags)
+   em System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags, SocketError& errorCode)
+   em System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   em System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   em System.Net.PooledStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   em System.Net.Connection.SyncRead(HttpWebRequest request, Boolean userRetrievedStream, Boolean probeRead)
+   em System.Net.ConnectStream.ProcessWriteCallDone(ConnectionReturnResult returnResult)
+   em System.Net.HttpWebRequest.WriteCallDone(ConnectStream stream, ConnectionReturnResult returnResult)
+   em System.Net.ConnectStream.CallDone(ConnectionReturnResult returnResult)
+   em System.Net.ConnectStream.CloseInternal(Boolean internalCall, Boolean aborting)
+   em System.Net.ConnectStream.System.Net.ICloseEx.CloseEx(CloseExState closeState)
+   em System.Net.ConnectStream.CloseInternal(Boolean internalCall)
+   em System.Net.HttpWebRequest.EndWriteHeaders_Part2()
+   em System.Net.HttpWebRequest.EndWriteHeaders(Boolean async)
+   em System.Net.HttpWebRequest.WriteHeadersCallback(WebExceptionStatus errorStatus, ConnectStream stream, Boolean async)
+   em System.Net.ConnectStream.WriteHeaders(Boolean async)
+   em System.Net.HttpWebRequest.EndSubmitRequest()
+   em System.Net.HttpWebRequest.SetRequestSubmitDone(ConnectStream submitStream)
+   em System.Net.Connection.CompleteStartRequest(Boolean onSubmitThread, HttpWebRequest request, TriState needReConnect)
+   em System.Net.Connection.SubmitRequest(HttpWebRequest request, Boolean forcedsubmit)
+   em System.Net.ServicePoint.SubmitRequest(HttpWebRequest request, String connName)
+   em System.Net.HttpWebRequest.SubmitRequest(ServicePoint servicePoint)
+   em System.Net.HttpWebRequest.GetResponse()
+   em System.Net.WebClient.GetWebResponse(WebRequest request)
+   em System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream, CompletionDelegate completionDelegate, AsyncOperation asyncOp)
+   em System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   em System.Net.WebClient.DownloadString(Uri address)
+   em System.Net.WebClient.DownloadString(String address)
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 324
+System.Threading.ThreadAbortException: Thread abortado.
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 331
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 727
+method getrakevpp: System.Threading.ThreadAbortException: Thread abortado.
+   em System.Net.UnsafeNclNativeMethods.OSSOCK.recv(IntPtr socketHandle, Byte* pinnedBuffer, Int32 len, SocketFlags socketFlags)
+   em System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags, SocketError& errorCode)
+   em System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   em System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   em System.Net.PooledStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   em System.Net.Connection.SyncRead(HttpWebRequest request, Boolean userRetrievedStream, Boolean probeRead)
+   em System.Net.ConnectStream.ProcessWriteCallDone(ConnectionReturnResult returnResult)
+   em System.Net.HttpWebRequest.WriteCallDone(ConnectStream stream, ConnectionReturnResult returnResult)
+   em System.Net.ConnectStream.CallDone(ConnectionReturnResult returnResult)
+   em System.Net.ConnectStream.CloseInternal(Boolean internalCall, Boolean aborting)
+   em System.Net.ConnectStream.System.Net.ICloseEx.CloseEx(CloseExState closeState)
+   em System.Net.ConnectStream.CloseInternal(Boolean internalCall)
+   em System.Net.HttpWebRequest.EndWriteHeaders_Part2()
+   em System.Net.HttpWebRequest.EndWriteHeaders(Boolean async)
+   em System.Net.HttpWebRequest.WriteHeadersCallback(WebExceptionStatus errorStatus, ConnectStream stream, Boolean async)
+   em System.Net.ConnectStream.WriteHeaders(Boolean async)
+   em System.Net.HttpWebRequest.EndSubmitRequest()
+   em System.Net.HttpWebRequest.SetRequestSubmitDone(ConnectStream submitStream)
+   em System.Net.Connection.CompleteStartRequest(Boolean onSubmitThread, HttpWebRequest request, TriState needReConnect)
+   em System.Net.Connection.SubmitRequest(HttpWebRequest request, Boolean forcedsubmit)
+   em System.Net.ServicePoint.SubmitRequest(HttpWebRequest request, String connName)
+   em System.Net.HttpWebRequest.SubmitRequest(ServicePoint servicePoint)
+   em System.Net.HttpWebRequest.GetResponse()
+   em System.Net.WebClient.GetWebResponse(WebRequest request)
+   em System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream, CompletionDelegate completionDelegate, AsyncOperation asyncOp)
+   em System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   em System.Net.WebClient.DownloadString(Uri address)
+   em System.Net.WebClient.DownloadString(String address)
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 324
+System.Threading.ThreadAbortException: Thread abortado.
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 331
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 727
+method getrakevpp: System.Threading.ThreadAbortException: Thread abortado.
+   em System.Net.UnsafeNclNativeMethods.OSSOCK.recv(IntPtr socketHandle, Byte* pinnedBuffer, Int32 len, SocketFlags socketFlags)
+   em System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags, SocketError& errorCode)
+   em System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   em System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   em System.Net.PooledStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   em System.Net.Connection.SyncRead(HttpWebRequest request, Boolean userRetrievedStream, Boolean probeRead)
+   em System.Net.ConnectStream.ProcessWriteCallDone(ConnectionReturnResult returnResult)
+   em System.Net.HttpWebRequest.WriteCallDone(ConnectStream stream, ConnectionReturnResult returnResult)
+   em System.Net.ConnectStream.CallDone(ConnectionReturnResult returnResult)
+   em System.Net.ConnectStream.CloseInternal(Boolean internalCall, Boolean aborting)
+   em System.Net.ConnectStream.System.Net.ICloseEx.CloseEx(CloseExState closeState)
+   em System.Net.ConnectStream.CloseInternal(Boolean internalCall)
+   em System.Net.HttpWebRequest.EndWriteHeaders_Part2()
+   em System.Net.HttpWebRequest.EndWriteHeaders(Boolean async)
+   em System.Net.HttpWebRequest.WriteHeadersCallback(WebExceptionStatus errorStatus, ConnectStream stream, Boolean async)
+   em System.Net.ConnectStream.WriteHeaders(Boolean async)
+   em System.Net.HttpWebRequest.EndSubmitRequest()
+   em System.Net.HttpWebRequest.SetRequestSubmitDone(ConnectStream submitStream)
+   em System.Net.Connection.CompleteStartRequest(Boolean onSubmitThread, HttpWebRequest request, TriState needReConnect)
+   em System.Net.Connection.SubmitRequest(HttpWebRequest request, Boolean forcedsubmit)
+   em System.Net.ServicePoint.SubmitRequest(HttpWebRequest request, String connName)
+   em System.Net.HttpWebRequest.SubmitRequest(ServicePoint servicePoint)
+   em System.Net.HttpWebRequest.GetResponse()
+   em System.Net.WebClient.GetWebResponse(WebRequest request)
+   em System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream, CompletionDelegate completionDelegate, AsyncOperation asyncOp)
+   em System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   em System.Net.WebClient.DownloadString(Uri address)
+   em System.Net.WebClient.DownloadString(String address)
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 324
+System.Threading.ThreadAbortException: Thread abortado.
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 331
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 727
+method getrakevpp: System.Threading.ThreadAbortException: Thread abortado.
+   em System.Net.UnsafeNclNativeMethods.OSSOCK.recv(IntPtr socketHandle, Byte* pinnedBuffer, Int32 len, SocketFlags socketFlags)
+   em System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags, SocketError& errorCode)
+   em System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   em System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   em System.Net.PooledStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   em System.Net.Connection.SyncRead(HttpWebRequest request, Boolean userRetrievedStream, Boolean probeRead)
+   em System.Net.ConnectStream.ProcessWriteCallDone(ConnectionReturnResult returnResult)
+   em System.Net.HttpWebRequest.WriteCallDone(ConnectStream stream, ConnectionReturnResult returnResult)
+   em System.Net.ConnectStream.CallDone(ConnectionReturnResult returnResult)
+   em System.Net.ConnectStream.CloseInternal(Boolean internalCall, Boolean aborting)
+   em System.Net.ConnectStream.System.Net.ICloseEx.CloseEx(CloseExState closeState)
+   em System.Net.ConnectStream.CloseInternal(Boolean internalCall)
+   em System.Net.HttpWebRequest.EndWriteHeaders_Part2()
+   em System.Net.HttpWebRequest.EndWriteHeaders(Boolean async)
+   em System.Net.HttpWebRequest.WriteHeadersCallback(WebExceptionStatus errorStatus, ConnectStream stream, Boolean async)
+   em System.Net.ConnectStream.WriteHeaders(Boolean async)
+   em System.Net.HttpWebRequest.EndSubmitRequest()
+   em System.Net.HttpWebRequest.SetRequestSubmitDone(ConnectStream submitStream)
+   em System.Net.Connection.CompleteStartRequest(Boolean onSubmitThread, HttpWebRequest request, TriState needReConnect)
+   em System.Net.Connection.SubmitRequest(HttpWebRequest request, Boolean forcedsubmit)
+   em System.Net.ServicePoint.SubmitRequest(HttpWebRequest request, String connName)
+   em System.Net.HttpWebRequest.SubmitRequest(ServicePoint servicePoint)
+   em System.Net.HttpWebRequest.GetResponse()
+   em System.Net.WebClient.GetWebResponse(WebRequest request)
+   em System.Net.WebClient.DownloadBits(WebRequest request, Stream writeStream, CompletionDelegate completionDelegate, AsyncOperation asyncOp)
+   em System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest& request)
+   em System.Net.WebClient.DownloadString(Uri address)
+   em System.Net.WebClient.DownloadString(String address)
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 324
+System.Threading.ThreadAbortException: Thread abortado.
+   em TiltStopLoss.Db.getRakeVpp[T](String query) em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\DB\Db.cs:line 331
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 727
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 651

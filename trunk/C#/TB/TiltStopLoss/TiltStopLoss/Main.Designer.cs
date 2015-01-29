@@ -55,6 +55,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.labelSessionBBs = new System.Windows.Forms.Label();
             this.tabConfStop2 = new System.Windows.Forms.TabPage();
+            this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
+            this.labelAutoStart = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBoxAutoStarttab = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -86,7 +88,6 @@
             this.tabConfStop = new System.Windows.Forms.TabPage();
             this.checkBoxAlwaysVisible = new System.Windows.Forms.CheckBox();
             this.labelVisibleAlBb = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxStopVPP = new System.Windows.Forms.TextBox();
             this.textBoxStopRake = new System.Windows.Forms.TextBox();
@@ -161,8 +162,8 @@
             this.buttonStartWarmup = new System.Windows.Forms.Button();
             this.checkBoxAutoStartWarmup = new System.Windows.Forms.CheckBox();
             this.openFileDialogApp = new System.Windows.Forms.OpenFileDialog();
-            this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
-            this.labelAutoStart = new System.Windows.Forms.Label();
+            this.checkBoxViewVPP = new System.Windows.Forms.CheckBox();
+            this.labelViewVpp = new System.Windows.Forms.Label();
             this.tabStart.SuspendLayout();
             this.tabResumeSession.SuspendLayout();
             this.tabConfStop2.SuspendLayout();
@@ -509,6 +510,25 @@
             this.tabConfStop2.TabIndex = 4;
             this.tabConfStop2.Text = "Conf. Stop 2";
             this.tabConfStop2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAutoStart
+            // 
+            this.checkBoxAutoStart.AutoSize = true;
+            this.checkBoxAutoStart.Location = new System.Drawing.Point(204, 183);
+            this.checkBoxAutoStart.Name = "checkBoxAutoStart";
+            this.checkBoxAutoStart.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxAutoStart.TabIndex = 88;
+            this.checkBoxAutoStart.UseVisualStyleBackColor = true;
+            // 
+            // labelAutoStart
+            // 
+            this.labelAutoStart.AutoSize = true;
+            this.labelAutoStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAutoStart.Location = new System.Drawing.Point(59, 184);
+            this.labelAutoStart.Name = "labelAutoStart";
+            this.labelAutoStart.Size = new System.Drawing.Size(64, 13);
+            this.labelAutoStart.TabIndex = 89;
+            this.labelAutoStart.Text = "Auto Start";
             // 
             // label9
             // 
@@ -868,9 +888,10 @@
             // 
             // tabConfStop
             // 
+            this.tabConfStop.Controls.Add(this.checkBoxViewVPP);
+            this.tabConfStop.Controls.Add(this.labelViewVpp);
             this.tabConfStop.Controls.Add(this.checkBoxAlwaysVisible);
             this.tabConfStop.Controls.Add(this.labelVisibleAlBb);
-            this.tabConfStop.Controls.Add(this.label5);
             this.tabConfStop.Controls.Add(this.label3);
             this.tabConfStop.Controls.Add(this.textBoxStopVPP);
             this.tabConfStop.Controls.Add(this.textBoxStopRake);
@@ -922,7 +943,7 @@
             // checkBoxAlwaysVisible
             // 
             this.checkBoxAlwaysVisible.AutoSize = true;
-            this.checkBoxAlwaysVisible.Location = new System.Drawing.Point(333, 274);
+            this.checkBoxAlwaysVisible.Location = new System.Drawing.Point(322, 274);
             this.checkBoxAlwaysVisible.Name = "checkBoxAlwaysVisible";
             this.checkBoxAlwaysVisible.Size = new System.Drawing.Size(15, 14);
             this.checkBoxAlwaysVisible.TabIndex = 12;
@@ -937,17 +958,6 @@
             this.labelVisibleAlBb.Size = new System.Drawing.Size(87, 13);
             this.labelVisibleAlBb.TabIndex = 62;
             this.labelVisibleAlBb.Text = "Always Visible";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Magenta;
-            this.label5.Location = new System.Drawing.Point(190, 232);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 13);
-            this.label5.TabIndex = 60;
-            this.label5.Text = "Poker Stars";
             // 
             // label3
             // 
@@ -1757,24 +1767,25 @@
             // 
             this.openFileDialogApp.FileName = "openFileDialogApp";
             // 
-            // checkBoxAutoStart
+            // checkBoxViewVPP
             // 
-            this.checkBoxAutoStart.AutoSize = true;
-            this.checkBoxAutoStart.Location = new System.Drawing.Point(204, 183);
-            this.checkBoxAutoStart.Name = "checkBoxAutoStart";
-            this.checkBoxAutoStart.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxAutoStart.TabIndex = 88;
-            this.checkBoxAutoStart.UseVisualStyleBackColor = true;
+            this.checkBoxViewVPP.AutoSize = true;
+            this.checkBoxViewVPP.Location = new System.Drawing.Point(321, 231);
+            this.checkBoxViewVPP.Name = "checkBoxViewVPP";
+            this.checkBoxViewVPP.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxViewVPP.TabIndex = 63;
+            this.checkBoxViewVPP.UseVisualStyleBackColor = true;
             // 
-            // labelAutoStart
+            // labelViewVpp
             // 
-            this.labelAutoStart.AutoSize = true;
-            this.labelAutoStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAutoStart.Location = new System.Drawing.Point(59, 184);
-            this.labelAutoStart.Name = "labelAutoStart";
-            this.labelAutoStart.Size = new System.Drawing.Size(64, 13);
-            this.labelAutoStart.TabIndex = 89;
-            this.labelAutoStart.Text = "Auto Start";
+            this.labelViewVpp.AutoSize = true;
+            this.labelViewVpp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelViewVpp.ForeColor = System.Drawing.Color.Magenta;
+            this.labelViewVpp.Location = new System.Drawing.Point(239, 232);
+            this.labelViewVpp.Name = "labelViewVpp";
+            this.labelViewVpp.Size = new System.Drawing.Size(69, 13);
+            this.labelViewVpp.TabIndex = 64;
+            this.labelViewVpp.Text = "View VPP?";
             // 
             // Main
             // 
@@ -1918,7 +1929,6 @@
         private System.Windows.Forms.TextBox textBoxStopRake;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonConfigWc;
         private System.Windows.Forms.TabPage tabPageWc;
         private System.Windows.Forms.CheckBox checkBoxAutoStartWarmup;
@@ -1944,6 +1954,8 @@
         private System.Windows.Forms.Label labelVisibleAlBb;
         private System.Windows.Forms.CheckBox checkBoxAutoStart;
         private System.Windows.Forms.Label labelAutoStart;
+        private System.Windows.Forms.CheckBox checkBoxViewVPP;
+        private System.Windows.Forms.Label labelViewVpp;
     }
 }
 
