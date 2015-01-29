@@ -26,7 +26,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.82;
+        private Double version = 1.84;
         //private String urldownload = "http://bit.ly/1aSxGIA";
         //original
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
@@ -357,7 +357,8 @@ namespace TiltStopLoss
                         //8 - repeattime 
                         //9 - timerstart 1ª mão
                         //10 - always visible bb
-                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime, checkBoxStartTimer.Checked, checkBoxAlwaysVisible.Checked };
+                        //11 - viewvpp
+                        Boolean[] checkb = { checkBoxHideBbbs.Checked, checkBoxButtonSet.Checked, checkBoxVerifyApplication.Checked, checkBoxRageQuit.Checked, checkBoxSnoozeSound.Checked, repeatstopwin, repeatstoploss, repeatstophand, repeatstoptime, checkBoxStartTimer.Checked, checkBoxAlwaysVisible.Checked, checkBoxViewVPP.Checked };
                         //para o limit
                         Int32 limit;
                         if (comboBoxBRM.SelectedIndex == 0)
@@ -811,7 +812,17 @@ namespace TiltStopLoss
                 case "Lastidhand":
                     Lastidhand = new Utils().stringtoInt64(line[1].ToString());
                     //temp meter a 0 mas isso depois do tempo excluido.
-                    break;                    
+                    break;
+                case "checkboxviewvpp":
+                    if (line[1].ToString().Equals("True"))
+                    {
+                        checkBoxViewVPP.Checked = true;
+                    }
+                    else
+                    {
+                        checkBoxViewVPP.Checked = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -941,7 +952,10 @@ namespace TiltStopLoss
             w.Write("lastbbsum=" + lastbbsum.ToString());
             w.WriteLine();
             w.Write("Lastidhand=" + Lastidhand.ToString());
-            w.WriteLine();             
+            w.WriteLine();
+            w.Write("checkboxviewvpp=" + checkBoxViewVPP.Checked.ToString());
+            w.WriteLine();
+            
             w.Close();
             //test
         }

@@ -1,10 +1,16 @@
-- ver print da full tilt -> done
-- corrigir a location da janela principal ->done
-- ver o problema quando toca o som e não existe o som. -> nao fiz
-- stop peak quando toca e depois voltamos a subir outra vez -> done e ver para o stoploss e outros
-
 - ter a possibilidade de gerir o stop em $ ou em €
-- rever a janela "set"
+
+select StatNewStarsVPP from stats
+
+select StatNewStarsVPP from stats group by StatHandYearMonth
+
+select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = 3 and playedyearandmonth >= 201501
+
+select StatNetAmountWon from stats where PlayerID = 3
+
+select StatNetAmountWon from stats group by StatPlayerNameAndSite
+
+
 
 
 salut

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Poker BRM"
-#define MyAppVersion "Poker BRM v1.82"
+#define MyAppVersion "Poker BRM v1.84"
 #define MyAppPublisher "Poker BRM"
 #define MyAppExeName "Poker BRM.exe"
 

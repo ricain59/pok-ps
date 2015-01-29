@@ -42,8 +42,10 @@
             // 
             // buttonStop
             // 
+            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.buttonStop.Location = new System.Drawing.Point(153, 28);
+            this.buttonStop.Location = new System.Drawing.Point(153, 29);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(37, 23);
             this.buttonStop.TabIndex = 0;
@@ -64,11 +66,12 @@
             // 
             // labelBb
             // 
-            this.labelBb.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelBb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.labelBb.AutoSize = true;
             this.labelBb.Font = new System.Drawing.Font("Arial Rounded MT Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBb.ForeColor = System.Drawing.SystemColors.Window;
-            this.labelBb.Location = new System.Drawing.Point(21, 6);
+            this.labelBb.Location = new System.Drawing.Point(21, 7);
             this.labelBb.Name = "labelBb";
             this.labelBb.Size = new System.Drawing.Size(71, 24);
             this.labelBb.TabIndex = 2;
@@ -78,12 +81,11 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 36);
+            this.label1.Location = new System.Drawing.Point(5, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 16);
             this.label1.TabIndex = 3;
@@ -91,9 +93,11 @@
             // 
             // labelHands
             // 
+            this.labelHands.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.labelHands.AutoSize = true;
             this.labelHands.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHands.Location = new System.Drawing.Point(52, 36);
+            this.labelHands.Location = new System.Drawing.Point(52, 37);
             this.labelHands.Name = "labelHands";
             this.labelHands.Size = new System.Drawing.Size(15, 16);
             this.labelHands.TabIndex = 4;
@@ -101,8 +105,10 @@
             // 
             // buttonSet
             // 
+            this.buttonSet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.buttonSet.Location = new System.Drawing.Point(117, 28);
+            this.buttonSet.Location = new System.Drawing.Point(117, 29);
             this.buttonSet.Name = "buttonSet";
             this.buttonSet.Size = new System.Drawing.Size(31, 23);
             this.buttonSet.TabIndex = 5;
@@ -112,10 +118,12 @@
             // 
             // labelStop
             // 
+            this.labelStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStop.AutoSize = true;
             this.labelStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelStop.ForeColor = System.Drawing.Color.White;
-            this.labelStop.Location = new System.Drawing.Point(38, 60);
+            this.labelStop.Location = new System.Drawing.Point(38, 61);
             this.labelStop.Name = "labelStop";
             this.labelStop.Size = new System.Drawing.Size(113, 12);
             this.labelStop.TabIndex = 6;
@@ -123,8 +131,10 @@
             // 
             // buttonRageQuit
             // 
+            this.buttonRageQuit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonRageQuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRageQuit.Location = new System.Drawing.Point(2, 56);
+            this.buttonRageQuit.Location = new System.Drawing.Point(2, 57);
             this.buttonRageQuit.Name = "buttonRageQuit";
             this.buttonRageQuit.Size = new System.Drawing.Size(36, 23);
             this.buttonRageQuit.TabIndex = 7;
@@ -134,7 +144,9 @@
             // 
             // buttonSnooze
             // 
-            this.buttonSnooze.Location = new System.Drawing.Point(163, 56);
+            this.buttonSnooze.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSnooze.Location = new System.Drawing.Point(163, 57);
             this.buttonSnooze.Name = "buttonSnooze";
             this.buttonSnooze.Size = new System.Drawing.Size(27, 23);
             this.buttonSnooze.TabIndex = 8;
@@ -147,7 +159,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(196, 82);
+            this.ClientSize = new System.Drawing.Size(196, 85);
             this.Controls.Add(this.buttonSnooze);
             this.Controls.Add(this.buttonRageQuit);
             this.Controls.Add(this.labelStop);

@@ -176,11 +176,11 @@
     <Compile Include="RatingBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Stoploss.cs">
+    <Compile Include="FormStoploss.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Stoploss.Designer.cs">
-      <DependentUpon>Stoploss.cs</DependentUpon>
+    <Compile Include="FormStoploss.Designer.cs">
+      <DependentUpon>FormStoploss.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="FormDownloadUpdate.resx">
@@ -229,8 +229,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Stoploss.resx">
-      <DependentUpon>Stoploss.cs</DependentUpon>
+    <EmbeddedResource Include="FormStoploss.resx">
+      <DependentUpon>FormStoploss.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
