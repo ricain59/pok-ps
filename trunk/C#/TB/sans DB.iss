@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Poker BRM"
-#define MyAppVersion "Poker BRM v1.84"
+#define MyAppVersion "Poker BRM v1.85"
 #define MyAppPublisher "Poker BRM"
 #define MyAppExeName "Poker BRM.exe"
 
@@ -59,7 +59,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "C:\Users\ricain\Desktop\Poker BRM\Poker BRM.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; Source: "C:\Users\ricain\Desktop\Poker BRM\config\"; DestDir: "{app}\config"; Flags: ignoreversion
 ; Source: "C:\Users\ricain\Desktop\Poker BRM\error\"; DestDir: "{app}\error"; Flags: ignoreversion
 ; Source: "C:\Users\ricain\Desktop\Poker BRM\help\"; DestDir: "{app}\help"; Flags: ignoreversion
@@ -67,6 +66,7 @@ Source: "C:\Users\ricain\Desktop\Poker BRM\Poker BRM.exe"; DestDir: "{app}"; Fla
 ; Source: "C:\Users\ricain\Desktop\Poker BRM\sounds\"; DestDir: "{app}\sounds"; Flags: ignoreversion
 ; Source: "C:\Users\ricain\Desktop\Poker BRM\x64\"; DestDir: "{app}\x64"; Flags: ignoreversion
 ; Source: "C:\Users\ricain\Desktop\Poker BRM\x86\"; DestDir: "{app}\x86"; Flags: ignoreversion
+Source: "C:\Users\ricain\Desktop\Poker BRM\Poker BRM.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\ricain\Desktop\Poker BRM\EntityFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\ricain\Desktop\Poker BRM\EntityFramework.SqlServer.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\ricain\Desktop\Poker BRM\EntityFramework.SqlServer.xml"; DestDir: "{app}"; Flags: ignoreversion

@@ -326,7 +326,7 @@ namespace TiltStopLoss
                 }
                 catch (Exception e) 
                 {
-                    new Debug().LogMessage("method getrakevpp: " + e.ToString());
+                    new Debug().LogMessage("method get stats from hem2: " + e.ToString());
                     //new Debug().LogMessage("Message: " + e.Message.ToString());
                 }
                 // if string with JSON data is not empty, deserialize it to class and return its instance 
