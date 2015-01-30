@@ -330,12 +330,8 @@ namespace TiltStopLoss
                             var json = dbase.getRakeVpp<Stats>("select StatRakeAmount from stats");
                             if (json.Results.Capacity > 0)
                             {
-                                //new Debug().LogMessage("Rake que vem do json : " + json.Results[0].Rake);
-                                String rakefinal = new Utils().resolveStringRake(json.Results[0].Rake);
-                                //new Debug().LogMessage("Rake que vai para conv to double : " + rakefinal);
-                                //rake = new Utils().stringtoDouble(json.Results[0].Rake);
+                                String rakefinal = new Utils().resolveStringHem2(json.Results[0].Rake);
                                 rake = new Utils().stringtoDouble(rakefinal);
-                                //new Debug().LogMessage("Rake : " + rake);
                             }
                         }catch (Exception e)
                         {
@@ -350,16 +346,22 @@ namespace TiltStopLoss
                     //vpp
                     if (stopvpp > 0.00 || viewvpp)
                     {
+                        String error_vpp = "";
                         try
                         {
                             var json = dbase.getRakeVpp<Stats>("select StatNewStarsVPP from stats");
                             if (json.Results.Capacity > 0)
                             {
-                                vpp = new Utils().stringtoDouble(json.Results[0].NewStarsVPP);                                
+                                error_vpp = json.Results[0].NewStarsVPP.ToString();
+                                //String vppfinal = new Utils().resolveStringRake(json.Results[0].Rake);
+                                String vppfinal = new Utils().resolveStringHem2(json.Results[0].NewStarsVPP);
+                                vpp = new Utils().stringtoDouble(vppfinal);                                
                             }
                         }
                         catch (Exception e)
                         {
+
+                            new Debug().LogMessage("Error VPP:" + error_vpp);
                             new Debug().LogMessage("Error VPP:" + e.ToString());
                             vppb = false;
                         }
@@ -718,12 +720,8 @@ namespace TiltStopLoss
                                 var json = dbase.getRakeVpp<Stats>("select StatRakeAmount from stats");
                                 try
                                 {
-                                    //new Debug().LogMessage("Rake que vem do json do temp : " + json.Results[0].Rake);
-                                    String raketempfinal = new Utils().resolveStringRake(json.Results[0].Rake);
-                                    //new Debug().LogMessage("Rake que vai conv to double do temp : " + raketempfinal);
-                                    raketemp = new Utils().stringtoDouble(raketempfinal);
-                                    //new Debug().LogMessage("Rake Temp : " + raketemp);
-                                    //raketemp = new Utils().stringtoDouble(json.Results[0].Rake);
+                                    String raketempfinal = new Utils().resolveStringHem2(json.Results[0].Rake);
+                                    raketemp = new Utils().stringtoDouble(raketempfinal);                                    
                                 }
                                 catch (Exception e)
                                 {
@@ -758,7 +756,8 @@ namespace TiltStopLoss
                                 var json = dbase.getRakeVpp<Stats>("select StatNewStarsVPP from stats");
                                 try
                                 {
-                                    vpptemp = new Utils().stringtoDouble(json.Results[0].NewStarsVPP);
+                                    String vpptempfinal = new Utils().resolveStringHem2(json.Results[0].NewStarsVPP);
+                                    vpptemp = new Utils().stringtoDouble(vpptempfinal);
                                     
                                 }
                                 catch (Exception e)

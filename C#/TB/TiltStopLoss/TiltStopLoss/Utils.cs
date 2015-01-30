@@ -539,15 +539,28 @@ namespace TiltStopLoss
         }
 
         /// <summary>
-        /// Reiutra caracteres speciais da string devlvida pelo hem2
+        /// Corriga a string devolvida pelo hem2 para os vpps
         /// </summary>
         /// <param name="rakejson"></param>
         /// <returns></returns>
-        public String resolveStringRake(String rakejson)
+        public String resolveStringHem2(String rakejson)
         {
-            String[] tempspli = rakejson.Split('.');
+            Boolean continu = true;
             Regex rgx = new Regex("[^0-9]");
-            return rgx.Replace(tempspli[0], "") + "." + tempspli[1];
+            String final = "";
+            if (rakejson.Contains("."))
+            {
+                continu = false;
+                String[] tempspli = rakejson.Split('.');
+                final = rgx.Replace(tempspli[0], "") + "." + tempspli[1];
+            }
+            if (rakejson.Contains(",") && continu)
+            {
+                continu = false;
+                String[] tempspli = rakejson.Split(',');
+                final = rgx.Replace(tempspli[0], "") + "," + tempspli[1];
+            }
+            return final;
         }
     }
 }
