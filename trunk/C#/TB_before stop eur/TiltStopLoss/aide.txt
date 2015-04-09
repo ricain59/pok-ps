@@ -1,0 +1,27 @@
+- ter a possibilidade de gerir o stop em $ ou em €
+
+select StatNewStarsVPP from stats
+
+select StatNewStarsVPP from stats group by StatHandYearMonth
+
+select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = 3 and playedyearandmonth >= 201501
+
+select StatNetAmountWon from stats where PlayerID = 3
+
+select StatNetAmountWon from stats group by StatPlayerNameAndSite, statgametypedescription
+
+select StatNetAmountWon, StatNetAmountWonEUR, StatNetAmountWonUSD from stats group by StatPlayerNameAndSite, statgametypedescription
+
+salut
+
+une idée de développement par rapport à ton outil, mais ptèt super chaud à réaliser.
+
+Ce serait le faire travailler en relation avec le tracker, pour que le stoploss fonctionne en relation non pas des résultats réels, mais des résultats ajustés à l'EV.
+
+Je veux dire, on a tous ses sessions où on joue bien mais où on lâche des tonnes parce qu'on déchatte tout le temps à tapis.
+Et inversement obv, quand on joue comme des pieds mais qu'on arrive à breakeven ou perdre très peu parce qu'on box tous les allin.
+
+... surtout dans le deuxième cas d'ailleurs, où perso j'aurais bien aimé que mon tilt breaker me foute dehors malgré un résultat non (ou peu) négatif, uniquement dû au fait que je perds quasi pas un allin, mais que je jouais vraiment très mal
+
+si t'arrivais à faire ce genre de developpement ce serait vraiment nut
+
