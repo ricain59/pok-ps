@@ -1,0 +1,16 @@
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 442
+System.Threading.ThreadAbortException: Thread abortado.
+   em System.Threading.WaitHandle.WaitOneNative(SafeHandle waitableSafeHandle, UInt32 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   em System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   em System.Windows.Forms.Control.WaitForWaitHandle(WaitHandle waitHandle)
+   em System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   em System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   em TiltStopLoss.Stoploss.calculateBB() em M:\Dropbox\taff et autre\pok-ps\C#\TB\TiltStopLoss\TiltStopLoss\FormStoploss.cs:line 442

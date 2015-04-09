@@ -26,7 +26,7 @@ namespace TiltStopLoss
         private Boolean alias = false;
         private Boolean start = true;
         private Boolean resumesession = false;
-        private Double version = 1.85;
+        private Double version = 1.86;
         //private String urldownload = "http://bit.ly/1aSxGIA";
         //original
         private String urlxml = "https://dl.dropboxusercontent.com/u/24467236/versionstoploss.xml";
@@ -247,79 +247,16 @@ namespace TiltStopLoss
         /// </summary>
         private void autoStart()
         {
-            Boolean stop = false;
-            //verifico erro a ligação a DB
-            String con = db.connectDb();
-            if (!con.Equals(""))
+            Boolean stop = verifyErrorBeforeStart();
+            //fechar o skype
+            if (checkBoxCloseSkype.Checked)
             {
-                MessageBox.Show(con.ToString());
-                stop = true;
-            }
-            //os erros dos intermediate
-            Double intwin = new Utils().stringtoDouble(textBoxStopWinIntermediate.Text);
-            if (intwin != 0 && intwin >= new Utils().stringtoDouble(textBoxStopWin.Text))
-            {
-                if (comboBoxLanguage.SelectedIndex == 0)
-                {
-                    MessageBox.Show("Stopwin intermediate don't superior at stopwin");
-                }
-                if (comboBoxLanguage.SelectedIndex == 1)
-                {
-                    MessageBox.Show("Stopgain intermédiaire ne peux pas être supérieur a stopwin");
-                }
-                if (comboBoxLanguage.SelectedIndex == 2)
-                {
-                    MessageBox.Show("Stopganhos intermédios não pode ser superior a stopganhos");
-                }
-                stop = true;
-            }
-            double intloss = new Utils().stringtoDouble(textBoxStopLossIntermediate.Text);
-            if (intloss != 0 && intloss >= new Utils().stringtoDouble(textBoxStopLoss.Text))
-            {
-                if (comboBoxLanguage.SelectedIndex == 0)
-                {
-                    MessageBox.Show("StopLoss intermediate don't superior at stopLoss");
-                }
-                if (comboBoxLanguage.SelectedIndex == 1)
-                {
-                    MessageBox.Show("Stopperte intermédiaire ne peux pas être supérieur a stopperte");
-                }
-                if (comboBoxLanguage.SelectedIndex == 2)
-                {
-                    MessageBox.Show("Stoppercas intermédios não pode ser superior a stoppercas");
-                }
-                stop = true;
-            }
-            //o tempo entre sessões
-            if (checkBoxtimebetweenSession.Checked)
-            {
-                DateTime now = DateTime.Now;
-                if ((comboBoxTimeSession.SelectedIndex + 5) > (now - lastsession).TotalMinutes && DateTime.Compare(lastsession, Convert.ToDateTime("01-01-2001 01:01:01")) != 0)
-                {
-                    if (comboBoxLanguage.SelectedIndex == 0)
-                    {
-                        MessageBox.Show("Time beteween session isn't elapsed");
-                    }
-                    if (comboBoxLanguage.SelectedIndex == 1)
-                    {
-                        MessageBox.Show("Le temps entre session ne s'est pas s'écoulé");
-                    }
-                    if (comboBoxLanguage.SelectedIndex == 2)
-                    {
-                        MessageBox.Show("Não passou tempo suficiente entre sessões");
-                    }
-                    stop = true;
-                }
+                new Utils().detectApps("Skype");
             }
 
-            //aqui tenho de abrir a outra janela que vai ficar a funcar em paralela dessa
+            //aqui recolho os dados todos para o para a janela do stoploss
             try
             {
-                if (checkBoxCloseSkype.Checked)
-                {
-                    new Utils().detectApps("Skype");
-                }
-
                 if (!stop)
                 {
                     int stoplosspeak = new Utils().stringtoInt32(textBoxStopLossPeak.Text);
@@ -343,7 +280,21 @@ namespace TiltStopLoss
                         Stoploss sl;
                         List<Tuple<String, String>> playeralias;
                         //em vez de mandar só string crio um array do que preciso
-                        String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text, textBoxStopVPP.Text, textBoxStopRake.Text };
+                        //data
+                        //0 - stoploss
+                        //1- stophand
+                        //2 - stoptime
+                        //3 - stopwin
+                        //4 - stoplosspeak
+                        //5 - peakover
+                        //6 - lossintermediate
+                        //7 - winintermediate
+                        //8 - vpp
+                        //9 - rake
+                        //10 - stoplossintermediatemoney
+                        //11 - stoplossmoney
+                        //12 - 0: eur, 1: usd
+                        String[] data = { textBoxStopLoss.Text, textBoxStopHand.Text, textBoxStopTime.Text, textBoxStopWin.Text, textBoxStopLossPeak.Text, textBoxPeakOver.Text, textBoxStopLossIntermediate.Text, textBoxStopWinIntermediate.Text, textBoxStopVPP.Text, textBoxStopRake.Text, textBoxStopLossIntermediateMoney.Text, textBoxStopLossMoney.Text };
                         String[] sounds = { soundloss, soundtime, soundwin, soundhands, soundinternediateloss, soundinternediatewin };
                         //check
                         //0 - hidebb
@@ -823,6 +774,12 @@ namespace TiltStopLoss
                         checkBoxViewVPP.Checked = false;
                     }
                     break;
+                case "textBoxStopLossIntermediateMoney":
+                    textBoxStopLossIntermediateMoney.Text = line[1].ToString();
+                    break;
+                case "textBoxStopLossMoney":
+                    textBoxStopLossMoney.Text = line[1].ToString();
+                    break;
                 default:
                     break;
             }
@@ -957,7 +914,10 @@ namespace TiltStopLoss
                 w.WriteLine();
                 w.Write("checkboxviewvpp=" + checkBoxViewVPP.Checked.ToString());
                 w.WriteLine();
-
+                w.Write("textBoxStopLossIntermediateMoney=" + textBoxStopLossIntermediateMoney.Text);
+                w.WriteLine();
+                w.Write("textBoxStopLossMoney=" + textBoxStopLossMoney.Text);
+                w.WriteLine();
                 w.Close();
             }
             catch (IOException ex)
@@ -969,6 +929,115 @@ namespace TiltStopLoss
         }
 
         #endregion
+
+        /// <summary>
+        /// Esse método verifica todos os erros antes de lançar o stoploss
+        /// </summary>
+        private Boolean verifyErrorBeforeStart()
+        {
+            Boolean stop = false;
+            //verifico erro a ligação a DB
+            String con = db.connectDb();
+            if (!con.Equals(""))
+            {
+                MessageBox.Show(con.ToString());
+                stop = true;
+            }
+            //os erros dos intermediate
+            Double intwin = new Utils().stringtoDouble(textBoxStopWinIntermediate.Text);
+            if (intwin != 0 && intwin >= new Utils().stringtoDouble(textBoxStopWin.Text) && !stop)
+            {
+                if (comboBoxLanguage.SelectedIndex == 0)
+                {
+                    MessageBox.Show("Stopwin intermediate don't superior at stopwin");
+                }
+                if (comboBoxLanguage.SelectedIndex == 1)
+                {
+                    MessageBox.Show("Stopgain intermédiaire ne peux pas être supérieur a stopwin");
+                }
+                if (comboBoxLanguage.SelectedIndex == 2)
+                {
+                    MessageBox.Show("Stopganhos intermédios não pode ser superior a stopganhos");
+                }
+                stop = true;
+            }
+            Double intloss = new Utils().stringtoDouble(textBoxStopLossIntermediate.Text);
+            if (intloss != 0 && intloss >= new Utils().stringtoDouble(textBoxStopLoss.Text) && !stop)
+            {
+                if (comboBoxLanguage.SelectedIndex == 0)
+                {
+                    MessageBox.Show("StopLoss intermediate don't superior at stopLoss");
+                }
+                if (comboBoxLanguage.SelectedIndex == 1)
+                {
+                    MessageBox.Show("Stopperte intermédiaire ne peux pas être supérieur a stopperte");
+                }
+                if (comboBoxLanguage.SelectedIndex == 2)
+                {
+                    MessageBox.Show("Stoppercas intermédios não pode ser superior a stoppercas");
+                }
+                stop = true;
+            }
+            //money
+            Double intlossmoney = new Utils().stringtoDouble(textBoxStopLossIntermediateMoney.Text);
+            if (intlossmoney != 0 && intlossmoney >= new Utils().stringtoDouble(textBoxStopLossMoney.Text) && !stop)
+            {
+                if (comboBoxLanguage.SelectedIndex == 0)
+                {
+                    MessageBox.Show("StopLossMoney intermediate don't superior at stopLoss Money");
+                }
+                if (comboBoxLanguage.SelectedIndex == 1)
+                {
+                    MessageBox.Show("StopperteMoney intermédiaire ne peux pas être supérieur a stopperte Money");
+                }
+                if (comboBoxLanguage.SelectedIndex == 2)
+                {
+                    MessageBox.Show("StoppercasMoney intermédios não pode ser superior a stoppercas Money");
+                }
+                stop = true;
+            }
+            //o tempo entre sessões
+            if (checkBoxtimebetweenSession.Checked && !stop)
+            {
+                DateTime now = DateTime.Now;
+                if ((comboBoxTimeSession.SelectedIndex + 5) > (now - lastsession).TotalMinutes && DateTime.Compare(lastsession, Convert.ToDateTime("01-01-2001 01:01:01")) != 0)
+                {
+                    if (comboBoxLanguage.SelectedIndex == 0)
+                    {
+                        MessageBox.Show("Time beteween session isn't elapsed");
+                    }
+                    if (comboBoxLanguage.SelectedIndex == 1)
+                    {
+                        MessageBox.Show("Le temps entre session ne s'est pas s'écoulé");
+                    }
+                    if (comboBoxLanguage.SelectedIndex == 2)
+                    {
+                        MessageBox.Show("Não passou tempo suficiente entre sessões");
+                    }
+                    stop = true;
+                }
+            }
+            //verificar se preencheu o stoplossbb e o stoplossmoney
+            Double sltemp = new Utils().stringtoDouble(textBoxStopLoss.Text);
+            Double slmoneytemp = new Utils().stringtoDouble(textBoxStopLossMoney.Text);
+            if (slmoneytemp != 0.0 && sltemp != 0.0 && !stop)
+            {
+                if (comboBoxLanguage.SelectedIndex == 0)
+                {
+                    MessageBox.Show("You can't use stoploss and StopLossMoney simultaneous");
+                }
+                if (comboBoxLanguage.SelectedIndex == 1)
+                {
+                    MessageBox.Show("Vous ne pouvez pas utiliser Stopperte et StopperteMoney en même temps");
+                }
+                if (comboBoxLanguage.SelectedIndex == 2)
+                {
+                    MessageBox.Show("Não podem utilizar o stoppercas e StoppercasMoney em mesmo tempo");
+                }
+                stop = true;
+            }
+            return stop;
+        }
 
         /// <summary>
         /// Vou procurar o id do nome inserido no textbox do player
@@ -1240,6 +1309,16 @@ namespace TiltStopLoss
             new Utils().onlynumeric(e);
         }
 
+        private void textBoxStopLossIntermediateMoney_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
+        private void textBoxStopLossMoney_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new Utils().onlynumeric(e);
+        }
+
         private void checkBoxResumeSession_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxResumeSession.Checked)
@@ -1400,6 +1479,7 @@ namespace TiltStopLoss
                 labelTitleDB.Text = "Database Config";
                 help = "/help/header_en.html";
                 labelStoploss.Text = "StopLoss:";
+                labelStoplossMoney.Text = "StopLoss Money:";
                 labelStopLossPeak.Text = "StopLossPeak";
                 labelBbOver.Text = "BBs Over";
                 labelStophands.Text = "StopHands";
@@ -1415,6 +1495,7 @@ namespace TiltStopLoss
                 labelResumeSession.Text = "Resume Session";
                 labelHistoryMax.Text = "History";
                 labelStoplossIntermediate.Text = "Intermediate";
+                labelStoplossIntermediateMoney.Text = "Intermediate";
                 labelStopWinIntermediate.Text = "Intermediate";
                 labelVerifyApp.Text = "Verify application?";
                 labelSnoozeSounds.Text = "Snooze Sound";
@@ -1422,7 +1503,7 @@ namespace TiltStopLoss
                 labelStartTimer.Text = "Start timer on 1st hand";
                 labelUpdate.Text = "Check Update";
                 labelDaysUpdate.Text = "Days";
-                labelPleaseDonate.Text = "Stoploss prevent spew buy-in and more, please donate";
+                labelPleaseDonate.Text = "Stoploss prevent spew $$$ and more, please donate";
                 labelVisibleAlBb.Text = "Always Visible";
             }
             if (comboBoxLanguage.SelectedIndex == 1)//french
@@ -1438,6 +1519,7 @@ namespace TiltStopLoss
                 labelTitleDB.Text = "Conf. Base de Donnée";
                 help = "/help/header_fr.html";
                 labelStoploss.Text = "StopPerte:";
+                labelStoplossMoney.Text = "StopPerte Money:";
                 labelStopLossPeak.Text = "StopPertePic";
                 labelBbOver.Text = "BBs au dessus de";
                 labelStophands.Text = "StopMains";
@@ -1453,6 +1535,7 @@ namespace TiltStopLoss
                 labelResumeSession.Text = "Résumé de Session";
                 labelHistoryMax.Text = "Historique";
                 labelStoplossIntermediate.Text = "Intermédiaire";
+                labelStoplossIntermediateMoney.Text = "Intermédiaire";
                 labelStopWinIntermediate.Text = "Intermédiaire";
                 labelVerifyApp.Text = "Vérifier Applications?";
                 labelSnoozeSounds.Text = "Snooze Son";
@@ -1460,7 +1543,7 @@ namespace TiltStopLoss
                 labelStartTimer.Text = "Start timer 1ere main";
                 labelUpdate.Text = "Vérifier Update";
                 labelDaysUpdate.Text = "Jours";
-                labelPleaseDonate.Text = "Stoploss vous aide a ne pas spew. Svp un petit don";
+                labelPleaseDonate.Text = "Stoploss vous aide a ne pas spew €€€. Svp un petit don";
                 labelVisibleAlBb.Text = "Toujours Visible";
                 
             }
@@ -1476,7 +1559,8 @@ namespace TiltStopLoss
                 labePassword.Text = "Palavra passe";
                 labelTitleDB.Text = "Conf. Base Dados";
                 help = "/help/header_pt.html";
-                labelStoploss.Text = "StopPercas:";
+                labelStoploss.Text = "StopPercas";
+                labelStoplossMoney.Text = "StopPercas Money:";
                 labelStopLossPeak.Text = "StopPercasPico";
                 labelBbOver.Text = "BBs acima de";
                 labelStophands.Text = "StopMãos";
@@ -1492,6 +1576,7 @@ namespace TiltStopLoss
                 labelResumeSession.Text = "Resumo da Sessão";
                 labelHistoryMax.Text = "Histórico";
                 labelStoplossIntermediate.Text = "Intermédio";
+                labelStoplossIntermediateMoney.Text = "Intermédio";
                 labelStopWinIntermediate.Text = "Intermédio";
                 labelVerifyApp.Text = "Verificar Applicações?";
                 labelSnoozeSounds.Text = "Snooze Som";
@@ -1499,7 +1584,7 @@ namespace TiltStopLoss
                 labelStartTimer.Text = "Start timer na 1ª mão";
                 labelUpdate.Text = "Verificar Update";
                 labelDaysUpdate.Text = "Dias";
-                labelPleaseDonate.Text = "Stoploss ajuda-vos a não spewar. Por Favor um donativo";
+                labelPleaseDonate.Text = "Stoploss ajuda-vos a não spewar $$$$. Por Favor um donativo";
                 labelVisibleAlBb.Text = "Sempre Visível";
             }
         }
@@ -1713,6 +1798,7 @@ namespace TiltStopLoss
             }
         }
 
+        
         //private void button1_Click(object sender, EventArgs e)
         //{
         //    chooseFile();

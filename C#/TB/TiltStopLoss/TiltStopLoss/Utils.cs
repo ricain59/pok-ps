@@ -85,7 +85,7 @@ namespace TiltStopLoss
         {
             if (!char.IsControl(e.KeyChar)
                     && !char.IsDigit(e.KeyChar)
-                    && e.KeyChar != '.')
+                    && e.KeyChar != (char)Keys.Decimal && e.KeyChar != (char)Keys.N)
             {
                 e.Handled = true;
             }
@@ -546,7 +546,8 @@ namespace TiltStopLoss
         public String resolveStringHem2(String rakejson)
         {
             Boolean continu = true;
-            Regex rgx = new Regex("[^0-9]");
+            //Regex rgx = new Regex("[^0-9]");
+            Regex rgx = new Regex("^-?[0-9]/\\d*(/\\./\\d+)?$");
             String final = "";
             if (rakejson.Contains("."))
             {

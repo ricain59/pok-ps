@@ -69,6 +69,9 @@ namespace TiltStopLoss
         private Int64 lastidhandload = 0;
         private Int64 Lastidhandnew = 0;
         private Boolean viewvpp;
+        private Double stoplossmoney = 0.0;
+        private Double stoplossintermediatemoney = 0.0;
+        //private Int32 typemoney;
         //label
         Label LabelViewVpp;
         
@@ -80,6 +83,20 @@ namespace TiltStopLoss
                 this.wmain = wmain;
                 playeridname = playerid;
                 dbase = db;
+                //data
+                //0 - stoploss
+                //1- stophand
+                //2 - stoptime
+                //3 - stopwin
+                //4 - stoplosspeak
+                //5 - peakover
+                //6 - lossintermediate
+                //7 - winintermediate
+                //8 - vpp
+                //9 - rake
+                //10 - stoplossintermediatemoney
+                //11 - stoplossmoney
+                //12 - 0: eur, 1: usd nao utilizo mais esse
                 this.stoploss = new Utils().stringtoDouble(data[0]);
                 handstop = new Utils().stringtoInt64(data[1]);
                 timestop = new Utils().stringtoInt32(data[2]);
@@ -90,6 +107,9 @@ namespace TiltStopLoss
                 winintermediate = new Utils().stringtoDouble(data[7]);
                 stopvpp = new Utils().stringtoDouble(data[8]);
                 stoprake = new Utils().stringtoDouble(data[9]);
+                stoplossmoney = new Utils().stringtoDouble(data[11]);
+                stoplossintermediatemoney = new Utils().stringtoDouble(data[10]);
+                //typemoney = new Utils().stringtoInt32(data[12]);
                 this.tracker = tracker;
                 sounds = sound;
                 blocklimit = limit;
@@ -244,6 +264,7 @@ namespace TiltStopLoss
             Double bbinit = 0.0;
             Int64 lastidhand = 0;
             Int64 lastidsessionpt4 = 0;
+            Double moneyinit = 0.0;
 
             #region define bbinit e lastidhand
             //permite definir aqui os valores iniciais de bbinit e lastidhand
@@ -376,71 +397,139 @@ namespace TiltStopLoss
 
             #endregion
 
-            //aqui é feito o resto dos calculos e das diferenças
-            
+            #region moneyinit
+
+            if (tracker == 2)//2 = hem2
+            {
+                //rake
+                if (stoplossmoney > 0.00)
+                {
+                    //string sql = "";
+                    
+                    if (tracker == 2)
+                    {
+                        yearmonth = new Utils().yearmonth();
+                        
+                        if (tracker == 2)//2 = hem2
+                        {
+                            for (int i = 0; i < playeridname.Count; i++)
+                            {
+                                moneyinit += dbase.getSumMoney(playeridname[i].Item1, yearmonth);
+                            }                            
+                        }
+                    }
+
+
+
+                    //old by api hem2
+                    //if (typemoney == 0)
+                    //{
+                    //    sql = "select StatNetAmountWonEUR from stats group by StatPlayerNameAndSite, statgametypedescription";
+                    //}
+                    //else
+                    //{
+                    //    sql = "select StatNetAmountWonUSD from stats group by StatPlayerNameAndSite, statgametypedescription";
+                    //}
+                    
+                    //try
+                    //{
+                    //    var json = dbase.getRakeVpp<Stats>(sql);
+                    //    if (json.Results.Capacity > 0)
+                    //    {
+                    //        //String[] deleteresultjson = {",", ".", "/", "€", "$"};
+                    //        for (int i = 0; i < json.Results.Count; i++)
+                    //        {
+                    //            if (json.Results[i].GameType.IndexOfAny(new char[] { ',', '.', '/', '€', '$' }) != -1)
+                    //            {
+                    //                String moneyfinal = "";
+                    //                if (typemoney == 0)
+                    //                {
+                    //                    moneyfinal = new Utils().resolveStringHem2(json.Results[i].NetWonEUR);
+                    //                }
+                    //                else
+                    //                {
+                    //                    moneyfinal = new Utils().resolveStringHem2(json.Results[i].NetWonUSD);
+                    //                }
+                    //                moneyinit += new Utils().stringtoDouble(moneyfinal);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //catch (Exception e)
+                    //{
+                    //    new Debug().LogMessage("Error StoplossMoney:" + e.ToString());                        
+                    //}
+                }
+            }
+
+            #endregion
+
             bbmax = 0.0;
             Boolean intermediatewin = true;
             Boolean intermediateloss = true;
             Double vpptemp = 0.0;
             Double raketemp = 0.0;
-
+            
             while (continu)
             {
                 try
                 {
                     #region BB
-                    //bb
-                    bb = 0.0;
-                    if (tracker == 1 || tracker == 2)
+                    if (stoplossmoney <= 0.00)
                     {
-                        if (tracker == 2)//2 = hem2
+                        //bb
+                        bb = 0.0;
+                        if (tracker == 1 || tracker == 2)
                         {
-                            for (int i = 0; i < playeridname.Count; i++)
+                            if (tracker == 2)//2 = hem2
                             {
-                                bb += dbase.getSumBB(playeridname[i].Item1, yearmonth);
-                            }
-                            lastbbsumnew = bb;
-                        }
-                        else
-                        {
-                            for (int i = 0; i < playeridname.Count; i++)
-                            {
-                                bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
-                            }
-                            lastbbsumnew = bb;
-                        }
-                    }
-                    else //pt4
-                    {
-                        yearmonth = new Utils().yearweek();
-                        for (int i = 0; i < playeridname.Count; i++)
-                        {
-                            bb += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
-                        } 
-                        lastbbsumnew = bb;
-                    }
-
-                    bb = Math.Round((bb - bbinit), 2);
-                    if (this.labelBb.InvokeRequired)
-                    {
-                        SetTextCallback d = new SetTextCallback(SetTextBb);
-                        this.Invoke(d, new object[] { bb.ToString() });
-                    }
-                    else
-                    {
-                        // It's on the same thread, no need for Invoke
-                        this.labelBb.Text = bb.ToString();
-                        if (!hidebb && visiblealwaysbb)
-                        {
-                            if (bb > 0)
-                            {
-                                //labelBb.BackColor = Color.Green;
-                                labelBb.ForeColor = Color.Green;
+                                for (int i = 0; i < playeridname.Count; i++)
+                                {
+                                    bb += dbase.getSumBB(playeridname[i].Item1, yearmonth);
+                                }
+                                lastbbsumnew = bb;
                             }
                             else
                             {
-                                //labelBb.BackColor = Color.Red;
-                                labelBb.ForeColor = Color.Red;
+                                for (int i = 0; i < playeridname.Count; i++)
+                                {
+                                    bb += dbase.getSumBBHem1(playeridname[i].Item1, yearmonth);
+                                }
+                                lastbbsumnew = bb;
+                            }
+                        }
+                        else //pt4
+                        {
+                            yearmonth = new Utils().yearweek();
+                            for (int i = 0; i < playeridname.Count; i++)
+                            {
+                                bb += dbase.getSumBBPt4(playeridname[i].Item1, yearmonth);
+                            }
+                            lastbbsumnew = bb;
+                        }
+
+                        bb = Math.Round((bb - bbinit), 2);
+                        if (this.labelBb.InvokeRequired)
+                        {
+                            SetTextCallback d = new SetTextCallback(SetTextBb);
+                            this.Invoke(d, new object[] { bb.ToString() });
+                        }
+                        else
+                        {
+                            // It's on the same thread, no need for Invoke
+                            this.labelBb.Text = bb.ToString();
+                            if (!hidebb && visiblealwaysbb)
+                            {
+                                if (bb > 0)
+                                {
+                                    //labelBb.BackColor = Color.Green;
+                                    labelBb.ForeColor = Color.Green;
+                                }
+                                else
+                                {
+                                    //labelBb.BackColor = Color.Red;
+                                    labelBb.ForeColor = Color.Red;
+                                }
                             }
                         }
                     }
@@ -785,6 +874,141 @@ namespace TiltStopLoss
                             }
                         }
 
+                    }
+
+                    #endregion
+
+                    #region stoplossmoney
+
+                    //bb
+                    if (tracker == 2)//2 = hem2
+                    {
+                        if (stoplossmoney > 0.00)
+                        {
+                            Double moneytemp = 0.0;
+                            Double moneytempfinal = 0.0;
+
+                            if (tracker == 2)
+                            {
+                                yearmonth = new Utils().yearmonth();
+
+                                if (tracker == 2)//2 = hem2
+                                {
+                                    for (int i = 0; i < playeridname.Count; i++)
+                                    {
+                                        moneytemp += dbase.getSumMoney(playeridname[i].Item1, yearmonth);
+                                    }
+                                }
+                            }
+
+                            //old by api hem2
+                            //string sql = "";
+                            //if (typemoney == 0)//€
+                            //{
+                            //    sql = "select StatNetAmountWonEUR from stats group by StatPlayerNameAndSite, statgametypedescription";
+                            //}
+                            //else//$
+                            //{
+                            //    sql = "select StatNetAmountWonUSD from stats group by StatPlayerNameAndSite, statgametypedescription";
+                            //}
+
+                            //try
+                            //{
+                            //    var json = dbase.getRakeVpp<Stats>(sql);
+                            //    if (json.Results.Capacity > 0)
+                            //    {
+                                    
+                            //        String[] deleteresultjson = { ",", ".", "/", "€", "$" };
+                            //        for (int i = 0; i < json.Results.Count; i++)
+                            //        {
+                            //            if (json.Results[i].GameType.IndexOfAny(new char[] { ',', '.', '/', '€', '$' }) != -1)
+                            //            {
+                            //                String moneyfinal = "";
+                            //                if (typemoney == 0)
+                            //                {
+                            //                    moneyfinal = new Utils().resolveStringHem2(json.Results[i].NetWonEUR);
+                            //                }
+                            //                else
+                            //                {
+                            //                    moneyfinal = new Utils().resolveStringHem2(json.Results[i].NetWonUSD);
+                            //                }
+                            //                moneytemp += new Utils().stringtoDouble(moneyfinal);
+                            //            }
+                            //        }
+                            //    }
+                            //}
+                            //catch (Exception e)
+                            //{
+                            //    new Debug().LogMessage("Error StoplossMoney:" + e.ToString());
+                            //}
+
+
+                            moneytempfinal = Math.Round((moneytemp - moneyinit), 2);
+
+                            if (this.labelBb.InvokeRequired)
+                            {
+                                SetTextCallback d = new SetTextCallback(SetTextBb);
+                                this.Invoke(d, new object[] { moneytempfinal.ToString() });
+                            }
+                            else
+                            {
+                                // It's on the same thread, no need for Invoke
+                                this.labelBb.Text = moneytempfinal.ToString();
+                                if (!hidebb && visiblealwaysbb)
+                                {
+                                    if (moneytempfinal > 0)
+                                    {
+                                        //labelBb.BackColor = Color.Green;
+                                        labelBb.ForeColor = Color.Green;
+                                    }
+                                    else
+                                    {
+                                        //labelBb.BackColor = Color.Red;
+                                        labelBb.ForeColor = Color.Red;
+                                    }
+                                }
+                            }
+                            //stoplossmoney                          
+                            if (moneytempfinal <= (0 - stoplossmoney))
+                            {
+                                if (!stop)
+                                {
+                                    player = new Utils().playsound(sounds[0], repeatloss);
+                                    stop = true;
+                                    //buttonSoundStop.Visible = true;
+                                    labelStopSet("!!!! StopLoss !!!!", Color.Red);
+                                    snooze();
+                                }
+                            }
+                            //stoplossintermediatemoney
+                            if (stoplossintermediatemoney > 0.0 && intermediateloss && !stop)
+                            {
+                                if (moneytempfinal <= (0 - stoplossintermediatemoney))
+                                {
+                                    if (!stop)
+                                    {
+                                        player = new Utils().playsound(sounds[4], false);
+                                        //stop = true;
+                                        intermediateloss = false;
+                                        //buttonSoundStop.Visible = true;
+                                        labelStopSet("!!!! LossIntermediate !!!!", Color.Red);
+                                        Thread.Sleep(5000);
+                                        labelStopSet("", Color.White);
+                                        if (!intermediatewin)
+                                        {
+                                            intermediatewin = true;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (!intermediateloss && !stop && moneytempfinal >= 0)
+                                {
+                                    intermediateloss = true;
+                                }
+                            }
+                        }
                     }
 
                     #endregion

@@ -147,6 +147,38 @@ namespace TiltStopLoss
         }
 
         /// <summary>
+        /// Vou buscar a soma total de ganhos em money de um mês.
+        /// Hem2
+        /// </summary>
+        /// <param name="playerid"></param>
+        /// <param name="yearmonth"></param>
+        /// <returns></returns>
+        public Double getSumMoney(String playerid, String yearmonth)
+        {
+            //string sql = "select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = "+playerid+" and playedyearandmonth >= "+yearmonth;
+            string sql = "select sum(totalamountwonincents) as moneytotal " +
+                         "from compiledplayerresults " +
+                         "where player_id = " + playerid + " and playedyearandmonth >= " + yearmonth + " and gametype_id in " +
+                         "(select gametype_id " +
+                          "from gametypes " +
+                          "where istourney = false)";
+
+            NpgsqlCommand command = new NpgsqlCommand(sql, conn);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            Double money = 0.0;
+            while (dr.Read())
+            {
+                if (!dr[0].ToString().Equals(""))
+                {
+                    money = Convert.ToDouble(dr[0].ToString());
+                }
+                break;
+            }
+            dr.Close();
+            return money / 100;
+        }
+
+        /// <summary>
         /// Vou buscar a soma total da BBs de um mês.
         /// Hem2
         /// </summary>

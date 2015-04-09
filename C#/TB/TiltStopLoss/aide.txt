@@ -8,10 +8,9 @@ select sum(totalbbswon) as bbtotal from compiledplayerresults where player_id = 
 
 select StatNetAmountWon from stats where PlayerID = 3
 
-select StatNetAmountWon from stats group by StatPlayerNameAndSite
+select StatNetAmountWon from stats group by StatPlayerNameAndSite, statgametypedescription
 
-
-
+select StatNetAmountWon, StatNetAmountWonEUR, StatNetAmountWonUSD from stats group by StatPlayerNameAndSite, statgametypedescription
 
 salut
 
